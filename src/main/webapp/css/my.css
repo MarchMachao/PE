@@ -1,0 +1,117 @@
+html,
+body,
+.parent {
+	height: 100%;
+	overflow: hidden;
+}
+
+.top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 0;
+	height: 100px;
+}
+
+.content {
+	position: absolute;
+	top: 100px;
+	left: 0;
+	right: 0;
+	bottom: 30px;
+	overflow: hidden;
+}
+
+.bottom {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 30px;
+	background-color: #0081C2;
+	text-align: center;
+}
+
+.bottom a{
+	margin: 0;
+	line-height: 30px;
+	font-family: simhei;
+	color: white;
+}
+
+.title{
+	height:70px;
+	background-color: #006DCC;
+}
+.nav{
+	padding-right: 100px;
+	height: 30px;
+	background-color: #0081C2;
+}
+
+.nav a {
+	width: 100px;
+	float: right;
+	margin-left: 30px;
+	line-height: 30px;
+	font-family: simhei;
+	color: white;
+	text-decoration: none;
+}
+
+.riverd{
+	width: 100px;
+	position: absolute;
+	top: 105px;
+	right: 360px;
+}
+
+.supportd{
+	width: 100px;
+	position: absolute;
+	top: 105px;
+	right: 230px;
+}
+
+.aboutd{
+	width: 100px;
+	position: absolute;
+	top: 105px;
+	right: 100px;
+}
+
+.dialog hr{
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+}
+
+.dialog{
+	display: none;
+	margin-top: 5px;
+	position: absolute;
+	background-color:#0081C2;
+	font-family: simhei;
+	color: white;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	width: 120px;
+	height: auto;
+	border-radius: 5px;
+}
+
+.dialog a{
+	color: white;
+	text-decoration: none;
+}
+
+.lll{
+	padding: 8px;
+	border-radius: 5px;
+	width: auto;
+}
+
+.lll:hover{
+	background-color: #006DCC;
+}
