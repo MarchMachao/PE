@@ -1,5 +1,5 @@
 ﻿/**
- * jQuery EasyUI 1.5
+ * jQuery EasyUI 1.4.5
  * 
  * Copyright (c) 2009-2016 www.jeasyui.com. All rights reserved.
  *
@@ -41,9 +41,6 @@ return;
 _c.validating=true;
 _c.value=_d.val(_b);
 (function(){
-if(!$(_b).is(":visible")){
-_c.validating=false;
-}
 if(_c.validating){
 var _e=_d.val(_b);
 if(_c.value!=_e){
@@ -96,7 +93,7 @@ var t=$(_1a);
 if(_1c=="hide"||!_1b){
 t.tooltip("hide");
 }else{
-if((t.is(":focus")&&_1d.validating)||_1c=="show"){
+if(t.is(":focus")||_1c=="show"){
 t.tooltip($.extend({},_1e.tipOptions,{content:_1b,position:_1e.tipPosition,deltaX:_1e.deltaX})).tooltip("show");
 }
 }
@@ -190,7 +187,6 @@ function _34(_35,_36){
 var _37=$.data(_35,"validatebox").options;
 _37.readonly=_36==undefined?true:_36;
 if(_37.readonly||!_37.editable){
-$(_35).triggerHandler("blur.validatebox");
 $(_35).addClass("validatebox-readonly").attr("readonly","readonly");
 }else{
 $(_35).removeClass("validatebox-readonly").removeAttr("readonly");

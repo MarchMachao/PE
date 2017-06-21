@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>兰州北科维拓科技股份有限公司巡检管理平台</title>
+<title>兰州大学学生健康标准数据管理平台</title>
 <meta charset="UTF-8" />
 <meta http-equiv=\X-UA-Compatible\ content=\IE=edge,chrome=1\ />
 <meta name=\renderer\ content=\webkit\ />
@@ -22,7 +22,7 @@
 			<form action="login.do" method="POST" name="loginForm" id="loginForm">
 				<div class="control-group normal_text">
 					<h3>
-						兰州北科维拓科技股份有限公司巡检管理平台
+						兰州大学学生体质健康标准数据管理平台
 					</h3>
 				</div>
 				<div class="control-group">
@@ -62,7 +62,7 @@
 			<div class="controls">
 				<div class="main_input_box">
 					<font color="white">
-						<span id="nameerr">Copyright © 2017 兰州北科维拓科技股份有限公司</span>
+						<span id="nameerr">Copyright © 2017 兰州大学</span>
 					</font>
 				</div>
 			</div>

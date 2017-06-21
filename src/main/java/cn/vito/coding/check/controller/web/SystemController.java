@@ -55,7 +55,7 @@ public class SystemController {
 
 	@RequestMapping(value = "home", method = RequestMethod.GET)
 	public String home(ModelMap modelMap) {
-		System.out.println("当前用户:"+userService.getCurrentUserName());
+		System.out.println("当前用户::::::"+userService.getCurrentUserName());
 		modelMap.addAttribute("menulist",
 				menuService.getMenuByRoles(userService.getUserByUserName(userService.getCurrentUserName()).getRole()));
 		return "home.ftl";
