@@ -6,5 +6,15 @@
 		resultType="user">
 		select * from s_user where s_user.userName = #{value}
 	</select>
+	
+	<!-- 查询所有的用户数据 -->
+	<select id="findAllUser" parameterType="Page" resultType="user">
+		select * from s_user limit #{startNum},#{rows}
+	</select>
+	
+	<!-- 查询所有的用户数据总数量 -->
+	<select id="count" resultType="int">
+		select count(*) from s_user
+	</select>
 
 </mapper>
