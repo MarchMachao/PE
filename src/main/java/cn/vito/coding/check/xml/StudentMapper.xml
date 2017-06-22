@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vito.coding.check.mapper.StudentDao">
+	<!-- 查询学生的数据根据学号 -->
+	<select id="findStudentById" parameterType="String"
+		resultType="student">
+		select * from a_student where a_student.id = #{value}
+	</select>
+
+	<!-- 查询数据 -->	
+	
+	<select id="findAllData" resultType="data">
+		select * from a_data
+	</select>
+	
+</mapper>
