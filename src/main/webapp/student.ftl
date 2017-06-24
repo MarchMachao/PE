@@ -97,16 +97,16 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">修改密码</h4>
       </div>
-      <form method="post" action="" >
+      <form method="post" action="updateStuPassword.do" >
 	      <div class="modal-body">
 	      	<div class="form-group">
-	        	<label class="col-md-3">原密码</label><input class="form-control" name="" placeholder="请输入原密码"/>
+	        	<label class="col-md-3">原密码</label><input class="form-control" name="password" placeholder="请输入原密码"/>
 	       	</div>
 	        <div class="form-group">
-	        	<label class="col-md-3">新密码</label><input class="form-control" name="" placeholder="请输入新密码"/>
+	        	<label class="col-md-3">新密码</label><input class="form-control" name="pwd" placeholder="请输入新密码"/>
 	       	</div>
 	        <div class="form-group">
-	        	<label class="col-md-3">确认新密码</label><input class="form-control" name="" placeholder="请再输一次"/>
+	        	<label class="col-md-3">确认新密码</label><input class="form-control" name="pwd2" placeholder="请再输一次"/>
 	       	</div>
 	      </div>
 	      <div class="modal-footer">
@@ -160,14 +160,18 @@
 	
 	function changeClass2(){
 		$("#changeclass-2").css("display","none");
-//		$.post(
-//			"",
-//			{class:$("#changeclass-2-select").val},
-//			function(data){
-//				alert("");
-//			}
-//		)
-		$("#changeclass-1").css("display","inline");
+		$.post(
+			"updateClass.do",
+			{"classes":$("#changeclass-2-select").val},
+			function(data){
+				if(data.success){
+					alert(data.content);
+				}else{
+					location.href = "getStudentById.do";
+				}
+			}
+		)
+		
 	}
 </script>
 </html>

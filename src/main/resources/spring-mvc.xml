@@ -18,7 +18,7 @@
 
 	<context:annotation-config />
 	<context:component-scan base-package="cn.vito.coding.check.controller" />
-	
+	<mvc:default-servlet-handler/>
 	<mvc:resources mapping="/img/**" location="file:/home/check-admin/images/" cache-period="3155926"/>
 	
 <!-- 	<mvc:resources mapping="/img/**" location="file:F:/" cache-period="3155926"/> -->
