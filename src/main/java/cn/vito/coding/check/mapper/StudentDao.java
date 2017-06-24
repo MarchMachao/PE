@@ -27,5 +27,5 @@ public interface StudentDao {
 	 * 
 	 * @return
 	 */
-	public List<Data> findAllData();
+	public List<Data> findAllDataById(String id);
 }

@@ -9,8 +9,8 @@
 
 	<!-- 查询数据 -->	
 	
-	<select id="findAllData" resultType="data">
-		select * from a_data
+	<select id="findAllDataById" parameterType="String" resultType="data">
+		select * from a_data where a_data.id = #{value}
 	</select>
 	
 </mapper>

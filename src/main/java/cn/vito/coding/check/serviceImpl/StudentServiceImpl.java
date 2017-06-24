@@ -22,8 +22,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Data> findAllData() {
-		return studentDao.findAllData();
+	public List<Data> findAllDataById(String id) {
+		return studentDao.findAllDataById(id);
 	}
 
 }

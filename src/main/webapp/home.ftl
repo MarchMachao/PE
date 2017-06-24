@@ -52,7 +52,7 @@
 				<!-- Logo -->
 				<a href="index2.html" class="logo">
 					<!-- mini logo for sidebar mini 50x50 pixels -->
-					<span class="logo-mini"><b>VITO</b></span>
+					<span class="logo-mini"><b>LZU</b></span>
 					<!-- logo for regular state and mobile devices -->
 					<span class="logo-lg"><b>学生健康标准数据平台</b></span>
 				</a>
@@ -82,7 +82,7 @@
 					<!-- Sidebar user panel -->
 					<div class="user-panel">
 						<div class="pull-left image">
-							<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+							<img src="dist/img/user2-160x161.jpg" class="img-circle" alt="User Image">
 						</div>
 						<div class="pull-left info">
 							<p>${nickName}</p>
@@ -126,7 +126,7 @@
 				<div class="pull-right hidden-xs">
 					<b>Version</b> 1.0.0
 				</div>
-				<strong>Copyright &copy; 2014-2016 <a href="http://www.bkvito.com/">兰州北科维拓科技股份有限公司</a>.</strong> All rights reserved.
+				<strong>Copyright &copy; 兰州大学体育教研部.</strong> All rights reserved.
 			</footer>
 
 			<div class="control-sidebar-bg"></div>

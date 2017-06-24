@@ -32,9 +32,9 @@ public class StudentController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "getAllData")
-	public List<Data> findData() {
-		return studentService.findAllData();
+	@RequestMapping(value = "getAllDataById")
+	public List<Data> findDataById() {
+		return studentService.findAllDataById(userService.getCurrentUserName());
 	}
 
 }

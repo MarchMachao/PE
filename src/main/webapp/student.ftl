@@ -99,7 +99,7 @@
 <script>
 		find();
 		function find(){
-			$.get("getAllData.do",function(data){
+			$.get("getAllDataById.do",function(data){
 				var $grid = $("#grid");
 				$grid.find("tr:gt(0)").remove();
 				
