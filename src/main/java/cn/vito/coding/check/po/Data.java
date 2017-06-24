@@ -19,13 +19,16 @@ public class Data {
 	private String tenm;// 1000m
 	private double sit_ups;// 仰卧起坐
 	private double pull_up;// 引体向上
-	private String check;// 审核
+	private String score;// 第一次审核
+	private String first_check;// 第一次审核
+	private String second_check;// 第二次审核
 
 	public Data() {
 	}
 
 	public Data(String id, Integer year, Integer height, double weight, Integer vital_capacity, double fivem,
-			double long_jump, double reach, String eightm, String tenm, double sit_ups, double pull_up, String check) {
+			double long_jump, double reach, String eightm, String tenm, double sit_ups, double pull_up, String score,
+			String first_check, String second_check) {
 		this.id = id;
 		this.year = year;
 		this.height = height;
@@ -38,8 +41,11 @@ public class Data {
 		this.tenm = tenm;
 		this.sit_ups = sit_ups;
 		this.pull_up = pull_up;
-		this.check = check;
+		this.score = score;
+		this.first_check = first_check;
+		this.second_check = second_check;
 	}
+
 
 	public String getId() {
 		return id;
@@ -137,12 +143,28 @@ public class Data {
 		this.pull_up = pull_up;
 	}
 
-	public String getCheck() {
-		return check;
+	public String getScore() {
+		return score;
 	}
 
-	public void setCheck(String check) {
-		this.check = check;
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	public String getFirst_check() {
+		return first_check;
+	}
+
+	public void setFirst_check(String first_check) {
+		this.first_check = first_check;
+	}
+
+	public String getSecond_check() {
+		return second_check;
+	}
+
+	public void setSecond_check(String second_check) {
+		this.second_check = second_check;
 	}
 
 }

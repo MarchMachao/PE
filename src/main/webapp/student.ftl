@@ -84,6 +84,7 @@
 				<th>1000m</th>
 				<th>一分钟仰卧起坐</th>
 				<th>引体向上</th>
+				<th>成绩</th>
 		  </tr>
 		</table>
 	</div>
@@ -137,6 +138,7 @@
 				"   <td>" + data[i].tenm + "</td>" +
 				"   <td>" + data[i].sit_ups + "</td>" +
 				"   <td>" + data[i].pull_up + "</td>" +
+				"   <td>" + data[i].score + "</td>" +
 				"</tr>";
 		}
 		$grid.append(content);
