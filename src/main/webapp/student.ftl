@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>学生体质健康标准数据</title>
+    <title>学生体质健康数据</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <style>
         .b-wrapper{padding: 0 20px 50px; font-family: "微软雅黑";}
         .part1{padding-left: 20px;}
@@ -20,36 +22,47 @@
         .btn-wrapper{padding-right: 15%; margin-top: 50px;}
         .pro-btn{padding: 8px 40px; box-shadow: 3px 3px 3px #275f8f; margin-left: 20px;}
         .form-control{width: 110px ; display: inline-block;}
+        .modal-dialog {width: 600px; margin: 200px auto;}
+        .modal-body {position: relative; padding: 15px 15px 15px 20%;}
     </style>
 </head>
 <body>
 <div class="b-wrapper">
     <h2>
-        <p class="text-center">学生体质健康标准数据</p>
+        <p class="text-center">学生体质健康数据</p>
     </h2>
     <div class="part part3">
         <h4>学生基本信息</h4>
         <ul class="list-unstyled row">
-            <li>
-                <span class="part2-title">学号：</span><span id="land-1"></span>${item.id}
+            <li class="col-md-6">
+                <span class="part2-title">学号：</span><span>${item.id}</span>
             </li>
             <li class="col-md-6">
-                <span class="part2-title">姓名：</span><span id="land-2"></span>${item.name}
+                <span class="part2-title">姓名：</span><span>${item.name}</span>
             </li>
             <li class="col-md-6">
-                <span class="part2-title">性别：</span><span id="land-3"></span>${item.gender}
+                <span class="part2-title">性别：</span><span>${item.gender}</span>
             </li>
             <li class="col-md-6">
-                <span class="part2-title">学院：</span><span id="land-4"></span>${item.school}
+                <span class="part2-title">学院：</span><span>${item.school}</span>
             </li>
             <li class="col-md-6">
-                <span class="part2-title">年级：</span><span id="land-5"></span>${item.grade}
+                <span class="part2-title">年级：</span><span>${item.grade}</span>
+            </li>
+            <li class="col-md-6" style="height: 25px;">
+                <span class="part2-title">班级：</span><span id="changeclass-1">${item.classes}</span>
+                <span id="changeclass-2" style="display: none;">
+	                <select id="changeclass-2-select">
+					</select>
+					<a href="javascript:changeClass2()">保存</a>
+                </span>
             </li>
             <li class="col-md-6">
-                <span class="part2-title">班级：</span><span id="land-6"></span>${item.classes}
+                <span class="part2-title">年制：</span><span>${item.duration}</span>
             </li>
             <li class="col-md-6">
-                <span class="part2-title">年制：</span><span id="land-7"></span>${item.duration}
+            	<span class="part2-title"><a href="javascript:changeClass1();" >修改班级</a></span>
+            	<span class=""><a href="#" data-toggle="modal" data-target="#myModal">修改密码</a></span>
             </li>
         </ul>
         <i class="line"></i>
@@ -57,8 +70,8 @@
     <div class="part part3">
         <h4>学生体质健康标准测试</h4>
     </div>
-    <div style="width: 85%;margin: 0 auto;">
-    <table class="table table-hover" id="grid">
+    <div class="part part3">
+    <table class="table table-hover" id="grid" style="margin: 0 5%;width: 90%">
 		  <tr>
 				<th>年份</th>
 				<th>身高</th>
@@ -72,58 +85,89 @@
 				<th>一分钟仰卧起坐</th>
 				<th>引体向上</th>
 		  </tr>
-		  <#list dataList as data>
-				<tr>
-					<td>${data.year}</td>
-					<td>${data.height}</td>
-					<td>${data.weight}</td>
-					<td>${data.vital_capacity}</td>
-					<td>${data.fivem}</td>
-					<td>${data.long_jump}</td>
-					<td>${data.reach}</td>
-					<td>${data.eightm}</td>
-					<td>${data.tenm}</td>
-					<td>${data.sit_ups}</td>
-					<td>${data.pull_up}</td>
-				</tr>
-			</#list>
 		</table>
 	</div>
-    <div class="text-right btn-wrapper">
-        <button type="button" id="backToStuation" class="btn btn-primary pro-btn" onclick="javascript:location.href = 'toStuation.do?id=${projectId}'">情景设置</button>
-        <button type="button" id="toResult" class="btn btn-primary pro-btn" onclick="javascript:;">情景模拟</button>
-    </div>
 </div>
-<script src="js/jquery-1.11.0.min.js"></script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+      </div>
+      <form method="post" action="" >
+	      <div class="modal-body">
+	      	<div class="form-group">
+	        	<label class="col-md-3">原密码</label><input class="form-control" name="" placeholder="请输入原密码"/>
+	       	</div>
+	        <div class="form-group">
+	        	<label class="col-md-3">新密码</label><input class="form-control" name="" placeholder="请输入新密码"/>
+	       	</div>
+	        <div class="form-group">
+	        	<label class="col-md-3">确认新密码</label><input class="form-control" name="" placeholder="请再输一次"/>
+	       	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        <button type="submit" class="btn btn-primary">确认更改</button>
+	      </div>
+      </form>
+    </div>
+  </div>
+</div>
 </body>
 <script>
-		find();
-		function find(){
-			$.get("getAllDataById.do",function(data){
-				var $grid = $("#grid");
-				$grid.find("tr:gt(0)").remove();
-				
-				var content = "";
-				for (var i = 0; i < data.length; i++) {
-					content += "<tr>" 
-					         + "   <td>" + data[i].year + "</td>"
-					         + "   <td>" + data[i].height + "</td>"
-					         + "   <td>" + data[i].weight + "</td>"
-					         + "   <td>" + data[i].vital_capacity + "</td>"
-					         + "   <td>" + data[i].fivem + "</td>"
-					         + "   <td>" + data[i].long_jump + "</td>"
-					         + "   <td>" + data[i].reach + "</td>"
-					         + "   <td>" + data[i].eightm + "</td>"
-					         + "   <td>" + data[i].tenm + "</td>"
-					         + "   <td>" + data[i].sit_ups + "</td>"
-					         + "   <td>" + data[i].pull_up + "</td>"
-					         + "</tr>";
-				}
-				
-				$grid.append(content);
-				
-				console.log(data);
-			})
+	$.get("getAllDataById.do", function(data) {
+		var $grid = $("#grid");
+		$grid.find("tr:gt(0)").remove();
+	
+		var content = "";
+		for(var i = 0; i < data.length; i++) {
+			content += "<tr>" +
+				"   <td>" + data[i].year + "</td>" +
+				"   <td>" + data[i].height + "</td>" +
+				"   <td>" + data[i].weight + "</td>" +
+				"   <td>" + data[i].vital_capacity + "</td>" +
+				"   <td>" + data[i].fivem + "</td>" +
+				"   <td>" + data[i].long_jump + "</td>" +
+				"   <td>" + data[i].reach + "</td>" +
+				"   <td>" + data[i].eightm + "</td>" +
+				"   <td>" + data[i].tenm + "</td>" +
+				"   <td>" + data[i].sit_ups + "</td>" +
+				"   <td>" + data[i].pull_up + "</td>" +
+				"</tr>";
 		}
+		$grid.append(content);
+	})
+	
+	function changeClass1(){
+		$("#changeclass-1").css("display","none");
+//		$.get(
+//			"",
+//			{grade:${item.grade}},
+//			function(data){
+//				var options = "";
+//				for(i=0;i<data.length;i++){
+//					options += "<option>"+data[i]+"</option>"
+//				}
+//				$("#changeclass-2-select").append(optins);
+//			}
+//		)
+		$("#changeclass-2").css("display","inline");
+	}
+	
+	function changeClass2(){
+		$("#changeclass-2").css("display","none");
+//		$.post(
+//			"",
+//			{class:$("#changeclass-2-select").val},
+//			function(data){
+//				alert("");
+//			}
+//		)
+		$("#changeclass-1").css("display","inline");
+	}
 </script>
 </html>
