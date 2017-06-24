@@ -2,17 +2,54 @@
 jQuery(function()
 {
     $ = jQuery ;
-    //templatemo_banner_slide camera function
-    $('#templatemo_banner_slide > div').camera({
-        height: 'auto',
-        loader: 'bar',
-        playPause: false,
-        pagination: false,
-        thumbnails: false,
-        hover: false,
-        opacityOnGrid: false,
-        imagePath: 'images/'
-    });
+    /*==≈–∂œ‰Ø¿¿∆˜==*/
+    var ifCamera = true;
+    myBrowser();
+    function myBrowser(){
+        var userAgent = navigator.userAgent;
+        var isOpera = userAgent.indexOf("Opera") > -1;
+        var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera;
+        if (isIE) {
+            var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+            reIE.test(userAgent);
+            var fIEVersion = parseFloat(RegExp["$1"]);
+            console.log(typeof fIEVersion);
+            /*==IE9“‘œ¬==*/
+            if(fIEVersion<9){
+                ifCamera = false;
+            }
+            if(fIEVersion<10){
+                $(".placeholder-span").removeClass("hide");
+                $(".login-input").on("focus", function (){
+                   $(this).next(".placeholder-span").addClass("hide");
+                }).on("blur", function (){
+                    if($(this).val() == ""){
+                        $(this).next(".placeholder-span").removeClass("hide");
+                    }
+                });
+            }
+        }
+        if(ifCamera){
+            //templatemo_banner_slide camera function
+            /*==±≥æ∞ «∂ØÕºª√µ∆∆¨==*/
+            $('#templatemo_banner_slide > div').camera({
+                height: 'auto',
+                loader: 'bar',
+                playPause: false,
+                pagination: false,
+                thumbnails: false,
+                hover: false,
+                opacityOnGrid: false,
+                imagePath: 'images/'
+            });
+        }else{
+            /*==Œﬁª√µ∆∆¨ ÷ªœ‘ æƒ¨»œÕº==*/
+            $("#templatemo_banner_slide").hide();
+        }
+    }
+
+
+
     //banner slider height window height 
     //(top banner height + logo height + main menu height )
     
@@ -119,7 +156,7 @@ jQuery(function()
                         '-moz-transform': 'rotate(' + degree + 'deg)',
                         '-ms-transform': 'rotate(' + degree + 'deg)',
                         '-o-transform': 'rotate(' + degree + 'deg)',
-                        'transform': 'rotate(' + degree + 'deg)',
+                        'transform': 'rotate(' + degree + 'deg)'
             });
             $("#templatemo_pricing .pricing_icon_wapper").css({
                         'opacity':event_animate_alpha
@@ -130,7 +167,7 @@ jQuery(function()
                         '-moz-transform': 'rotate(' + 360 + 'deg)',
                         '-ms-transform': 'rotate(' + 360 + 'deg)',
                         '-o-transform': 'rotate(' + 360 + 'deg)',
-                        'transform': 'rotate(' + 360 + 'deg)',
+                        'transform': 'rotate(' + 360 + 'deg)'
             });
             $("#templatemo_pricing .pricing_icon_wapper").css({
                         'opacity':1
@@ -193,8 +230,8 @@ function initialize(){
         mapTypeControl: false , //hide mapTypeControl
         scaleControl: false , //hide scaleControl
         streetViewControl: false , //hide streetViewControl
-        overviewMapControl: false , //hide overviewMapControl
-    }
+        overviewMapControl: false  //hide overviewMapControl
+    };
     //adding attribute value
     map = new google.maps.Map(document.getElementById('templatemo_contact_map'), mapOptions);
     var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});
