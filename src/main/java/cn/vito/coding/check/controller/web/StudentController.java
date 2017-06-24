@@ -34,12 +34,6 @@ public class StudentController {
 	@ResponseBody
 	@RequestMapping(value = "getAllData")
 	public List<Data> findData() {
-//		List<Data> datas = studentService.findAllData();
-//		String gender = studentService.findStudentById(userService.getCurrentUserName()).getGender();
-//		List<Data> nowData = new ArrayList<>();
-//		if (gender == "男") {
-//			nowData.add();
-//		}
 		return studentService.findAllData();
 	}
 

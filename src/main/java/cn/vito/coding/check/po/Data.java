@@ -16,7 +16,7 @@ public class Data {
 	private double long_jump;// 立定跳远
 	private double reach;// 坐位体前屈
 	private String eightm;// 800m
-	private double tenm;// 1000m
+	private String tenm;// 1000m
 	private double sit_ups;// 仰卧起坐
 	private double pull_up;// 引体向上
 	private String check;// 审核
@@ -25,7 +25,7 @@ public class Data {
 	}
 
 	public Data(String id, Integer year, Integer height, double weight, Integer vital_capacity, double fivem,
-			double long_jump, double reach, String eightm, double tenm, double sit_ups, double pull_up, String check) {
+			double long_jump, double reach, String eightm, String tenm, double sit_ups, double pull_up, String check) {
 		this.id = id;
 		this.year = year;
 		this.height = height;
@@ -113,11 +113,11 @@ public class Data {
 		this.eightm = eightm;
 	}
 
-	public double getTenm() {
+	public String getTenm() {
 		return tenm;
 	}
 
-	public void setTenm(double tenm) {
+	public void setTenm(String tenm) {
 		this.tenm = tenm;
 	}
 
