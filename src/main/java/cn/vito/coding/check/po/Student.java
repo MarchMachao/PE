@@ -20,6 +20,10 @@ public class Student {
 	public Student() {
 	}
 
+	public Student(String id, String classes) {
+		this.id = id;
+		this.classes = classes;
+	}
 
 	public Student(String id, String name, String gender, String school, String grade, String classes, Integer duration,
 			String state, String teacher) {
@@ -34,16 +38,13 @@ public class Student {
 		this.teacher = teacher;
 	}
 
-
 	public String getGrade() {
 		return grade;
 	}
 
-
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-
 
 	public String getId() {
 		return id;

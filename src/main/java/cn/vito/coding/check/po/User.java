@@ -16,7 +16,12 @@ public class User {
 	private String createDate;
 
 	public User() {
-		super();
+	}
+
+	public User(String userName, String password, String createDate) {
+		this.userName = userName;
+		this.password = password;
+		this.createDate = createDate;
 	}
 
 	public User(String userName, String password, String nickName, String role, String createDate) {

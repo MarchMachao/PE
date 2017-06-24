@@ -26,4 +26,9 @@ public class StudentServiceImpl implements StudentService {
 		return studentDao.findAllDataById(id);
 	}
 
+	@Override
+	public void updateData(String id, String classes) {
+		studentDao.updateData(new Student(id, classes));
+	}
+
 }

@@ -16,5 +16,16 @@
 	<select id="count" resultType="int">
 		select count(*) from s_user
 	</select>
+	
+	<!-- 更新学生的密码 -->
+	<update id="updateStudentP" parameterType="User">
+		update s_user
+		<set>
+			<if test="password!=null">
+				password = #{password},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
 
 </mapper>

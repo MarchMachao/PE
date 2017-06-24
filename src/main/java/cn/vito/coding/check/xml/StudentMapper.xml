@@ -13,4 +13,15 @@
 		select * from a_data where a_data.id = #{value}
 	</select>
 	
+	<!-- 更新班级信息 -->
+	<update id="updateData" parameterType="Student">
+		update a_student
+		<set>
+			<if test="classes!=null">
+				classes = #{classes},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
 </mapper>

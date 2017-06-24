@@ -35,4 +35,11 @@ public interface UserDao {
 	 * @return
 	 */
 	public int count();
+
+	/**
+	 * 修改学生密码
+	 * 
+	 * @param user
+	 */
+	public void updateStudentP(User user);
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.service.StudentService;
 import cn.vito.coding.check.service.UserService;
+import cn.vito.coding.check.vo.BaseMsg;
 
 /**
  * 学生权限操作
@@ -36,5 +37,11 @@ public class StudentController {
 	public List<Data> findDataById() {
 		return studentService.findAllDataById(userService.getCurrentUserName());
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "updateClass")
+	public BaseMsg updateData(String classes) {
+		studentService.updateData(userService.getCurrentUserName(), classes);
+		return new BaseMsg(true, "修改班级信息成功!");
+	}
 }

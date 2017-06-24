@@ -37,4 +37,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.count();
 	}
 
+	@Override
+	public void updateStudentP(User user) {
+		userDao.updateStudentP(user);
+	}
+
 }

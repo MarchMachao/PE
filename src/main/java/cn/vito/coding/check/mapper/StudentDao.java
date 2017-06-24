@@ -28,4 +28,11 @@ public interface StudentDao {
 	 * @return
 	 */
 	public List<Data> findAllDataById(String id);
+
+	/**
+	 * 更新学生班级信息
+	 * 
+	 * @param student
+	 */
+	public void updateData(Student student);
 }
