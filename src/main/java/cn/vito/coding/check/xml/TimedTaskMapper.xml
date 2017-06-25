@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vito.coding.check.mapper.TimedTaskDao">
+
+	<!-- 将毕业生的状态修改为"已毕业" -->
+	<update id="updateGraduateState" parameterType="int">
+		UPDATE a_student
+		SET state = '已毕业'
+		WHERE #{value} - grade = duration
+	</update>
+	
+	<!-- 将请假生的状态修改为"正常" -->
+	<update id="updateLeaveState">
+		UPDATE a_student
+		SET state = '正常'
+		WHERE
+			state = '请假'
+	</update>
+	
+	<!-- 将大三以上的学生的老师修改为"学院" -->
+	<update id="updateStusTeacher" parameterType="int">
+		UPDATE a_student
+		SET teacher = '学院'
+		WHERE
+			#{value} - grade = 2
+	</update>
+
+	<insert id="insertNewTask" parameterType="int">
+	
+	</insert>
+</mapper>
