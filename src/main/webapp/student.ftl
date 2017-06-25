@@ -85,7 +85,6 @@
 				<th>一分钟仰卧起坐</th>
 				<th>引体向上</th>
 				<th>评分</th>
-				<th>成绩</th>
 		  </tr>
 		</table>
 	</div>
