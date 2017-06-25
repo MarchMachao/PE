@@ -71,22 +71,8 @@
 				<th>1000m</th>
 				<th>一分钟仰卧起坐</th>
 				<th>引体向上</th>
+				<th>评分</th>
 		  </tr>
-		  <#list dataList as data>
-				<tr>
-					<td>${data.year}</td>
-					<td>${data.height}</td>
-					<td>${data.weight}</td>
-					<td>${data.vital_capacity}</td>
-					<td>${data.fivem}</td>
-					<td>${data.long_jump}</td>
-					<td>${data.reach}</td>
-					<td>${data.eightm}</td>
-					<td>${data.tenm}</td>
-					<td>${data.sit_ups}</td>
-					<td>${data.pull_up}</td>
-				</tr>
-			</#list>
 		</table>
 	</div>
     <div class="text-right btn-wrapper">
@@ -117,6 +103,7 @@
 					         + "   <td>" + data[i].tenm + "</td>"
 					         + "   <td>" + data[i].sit_ups + "</td>"
 					         + "   <td>" + data[i].pull_up + "</td>"
+					         + "   <td>" + data[i].score + "</td>"
 					         + "</tr>";
 				}
 				

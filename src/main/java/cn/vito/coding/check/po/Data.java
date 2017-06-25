@@ -19,13 +19,16 @@ public class Data {
 	private String tenm;// 1000m
 	private double sit_ups;// 仰卧起坐
 	private double pull_up;// 引体向上
+	private Integer score;//成绩
 	private String check;// 审核
 
 	public Data() {
 	}
 
 	public Data(String id, Integer year, Integer height, double weight, Integer vital_capacity, double fivem,
-			double long_jump, double reach, String eightm, String tenm, double sit_ups, double pull_up, String check) {
+			double long_jump, double reach, String eightm, String tenm, double sit_ups, double pull_up, Integer score,
+			String check) {
+		super();
 		this.id = id;
 		this.year = year;
 		this.height = height;
@@ -38,6 +41,7 @@ public class Data {
 		this.tenm = tenm;
 		this.sit_ups = sit_ups;
 		this.pull_up = pull_up;
+		this.score = score;
 		this.check = check;
 	}
 
@@ -135,6 +139,14 @@ public class Data {
 
 	public void setPull_up(double pull_up) {
 		this.pull_up = pull_up;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
 	}
 
 	public String getCheck() {
