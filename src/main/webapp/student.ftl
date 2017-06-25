@@ -121,34 +121,6 @@
 </div>
 </body>
 <script>
-		find();
-		function find(){
-			$.get("getAllDataById.do",function(data){
-				var $grid = $("#grid");
-				$grid.find("tr:gt(0)").remove();
-				
-				var content = "";
-				for (var i = 0; i < data.length; i++) {
-					content += "<tr>" 
-					         + "   <td>" + data[i].year + "</td>"
-					         + "   <td>" + data[i].height + "</td>"
-					         + "   <td>" + data[i].weight + "</td>"
-					         + "   <td>" + data[i].vital_capacity + "</td>"
-					         + "   <td>" + data[i].fivem + "</td>"
-					         + "   <td>" + data[i].long_jump + "</td>"
-					         + "   <td>" + data[i].reach + "</td>"
-					         + "   <td>" + data[i].eightm + "</td>"
-					         + "   <td>" + data[i].tenm + "</td>"
-					         + "   <td>" + data[i].sit_ups + "</td>"
-					         + "   <td>" + data[i].pull_up + "</td>"
-					         + "   <td>" + data[i].score + "</td>"
-					         + "</tr>";
-				}
-				
-				$grid.append(content);
-				
-				console.log(data);
-			})
 	$.get("getAllDataById.do", function(data) {
 		var $grid = $("#grid");
 		$grid.find("tr:gt(0)").remove();
