@@ -25,7 +25,7 @@
 				password = #{password},
 			</if>
 		</set>
-		where id=#{id}
+		where userName=#{userName}
 	</update>
 
 </mapper>

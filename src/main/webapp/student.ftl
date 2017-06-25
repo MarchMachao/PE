@@ -98,21 +98,21 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">修改密码</h4>
       </div>
-      <form method="post" action="updateStuPassword.do" >
+      <form method="post" action="" >
 	      <div class="modal-body">
 	      	<div class="form-group">
-	        	<label class="col-md-3">原密码</label><input class="form-control" name="password" placeholder="请输入原密码"/>
+	        	<label class="col-md-3">原密码</label><input id="password" class="form-control" type="password" placeholder="请输入原密码"/>
 	       	</div>
 	        <div class="form-group">
-	        	<label class="col-md-3">新密码</label><input class="form-control" name="pwd" placeholder="请输入新密码"/>
+	        	<label class="col-md-3">新密码</label><input id="pwd" class="form-control" type="password" placeholder="请输入新密码"/>
 	       	</div>
 	        <div class="form-group">
-	        	<label class="col-md-3">确认新密码</label><input class="form-control" name="pwd2" placeholder="请再输一次"/>
+	        	<label class="col-md-3">确认新密码</label><input id="pwd2" class="form-control" type="password" placeholder="请再输一次"/>
 	       	</div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	        <button type="submit" class="btn btn-primary">确认更改</button>
+	        <button id="closebtn" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary" onclick="updatePassword();">确认更改</button>
 	      </div>
       </form>
     </div>
@@ -164,7 +164,7 @@
 		$("#changeclass-2").css("display","none");
 		$.post(
 			"updateClass.do",
-			{"classes":$("#changeclass-2-select").val},
+			{"classes":$("#changeclass-2-select").val()},
 			function(data){
 				if(data.success){
 					alert(data.content);
@@ -174,6 +174,23 @@
 			}
 		)
 		
+	}
+	
+	function updatePassword(){
+		$.post("updateStuPassword.do",
+			{
+			"password":$("#password").val(),
+			"pwd":$("#pwd").val(),
+			"pwd2":$("#pwd2").val()
+			},
+			function(data){
+				if(data.success){
+					alert("修改成功！ "+data.content);
+					$("#closebtn").click();
+				}else{
+					alert("修改失败！ "+data.content);
+				}
+			})
 	}
 </script>
 </html>
