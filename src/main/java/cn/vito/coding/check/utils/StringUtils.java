@@ -29,6 +29,17 @@ public class StringUtils {
 		SimpleDateFormat datetemp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return datetemp.format(date);
 	}
+
+	/**
+	 * 日期转化String 格式 yyyy
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String yearToString(Date date) {
+		SimpleDateFormat datetemp = new SimpleDateFormat("yyyy");
+		return datetemp.format(date);
+	}
 	/**
 	 * 日期转化String 格式 yyyy-MM-dd
 	 * @param date

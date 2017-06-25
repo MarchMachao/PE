@@ -25,7 +25,24 @@
 			#{value} - grade = 2
 	</update>
 
-	<insert id="insertNewTask" parameterType="int">
+	<!-- 为每个状态正常的学生增加一个年份的测试任务 第一部分 -->
+	<select id="insertNewTask_part_1" resultType="String">
+			SELECT
+				a_student.id AS id
+			FROM
+				a_student
+			WHERE
+				a_student.state = '正常' OR a_student.state = '请假'
+	</select>
 	
+	<!-- 为每个状态正常的学生增加一个年份的测试任务  第二部分 -->
+	<insert id="insertNewTask_part_2" parameterType="java.util.List">
+		INSERT INTO a_data (id,year) VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.year}
+			)
+		</foreach>
 	</insert>
 </mapper>

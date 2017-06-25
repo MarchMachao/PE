@@ -26,7 +26,10 @@ public class Data {
 	public Data() {
 	}
 
-
+	public Data(String id, Integer year) {
+		this.id = id;
+		this.year = year;
+	}
 
 	public Data(String id, Integer year, Integer height, double weight, Integer vital_capacity, double fivem,
 			double long_jump, double reach, String eightm, String tenm, double sit_ups, double pull_up, Integer score,
