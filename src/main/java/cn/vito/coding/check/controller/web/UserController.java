@@ -50,13 +50,18 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "updateStuPassword")
-	public BaseMsg updateStuPassword(String password) {
-		if (!ValidaterUtil.checkPassWord(password)) {
+	public BaseMsg updateStuPassword(String password, String pwd, String pwd2) {
+		User userpo = userService.getUserByUserName(userService.getCurrentUserName());
+		if (!userpo.getPassword().equals(ShiroUtils.passwdMD5(password))) {
+			return new BaseMsg(false, "原密码错误！");
+		} else if (!pwd.equals(pwd2)) {
+			return new BaseMsg(false, "两次密码输入不一致！");
+		} else if (!ValidaterUtil.checkPassWord(password)) {
 			return new BaseMsg(false, "密码格式不正确！");
 		}
 		// 格式化时间
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		User user = new User(userService.getCurrentUserName(), ShiroUtils.passwdMD5(password),
+		User user = new User(userService.getCurrentUserName(), ShiroUtils.passwdMD5(pwd),
 				formatter.format(new Date()));
 		userService.updateStudentP(user);
 		return new BaseMsg(true, "修改密码成功！");

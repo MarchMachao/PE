@@ -21,6 +21,7 @@ import cn.vito.coding.check.vo.BaseMsg;
  */
 @Controller
 public class StudentController {
+
 	@Autowired
 	public StudentService studentService;
 	@Autowired
