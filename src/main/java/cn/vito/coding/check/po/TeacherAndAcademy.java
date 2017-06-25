@@ -6,7 +6,7 @@ package cn.vito.coding.check.po;
  * @author 刘晓庆
  *
  */
-public class Teacher {
+public class TeacherAndAcademy {
 	private String id;// 学号
 	private String name;// 姓名
 	private String school;// 学院
@@ -25,10 +25,10 @@ public class Teacher {
 	private Integer score;// 成绩
 	private String first_check;// 第一次审核
 
-	public Teacher() {
+	public TeacherAndAcademy() {
 	}
 
-	public Teacher(String id, String name, String school, String teacher, Integer year, Integer height, double weight,
+	public TeacherAndAcademy(String id, String name, String school, String teacher, Integer year, Integer height, double weight,
 			Integer vital_capacity, double fivem, double long_jump, double reach, String eightm, String tenm,
 			double sit_ups, double pull_up, Integer score, String first_check) {
 		this.id = id;

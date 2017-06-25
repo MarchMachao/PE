@@ -1,6 +1,6 @@
 package cn.vito.coding.check.po;
 
-public class TeacherLike {
+public class TeacherAndAcademyLike {
 	private String id;// 学号
 	private String name;// 姓名
 	private String school;// 学院
@@ -9,10 +9,10 @@ public class TeacherLike {
 	private int page;
 	private int rows;
 
-	public TeacherLike() {
+	public TeacherAndAcademyLike() {
 	}
 
-	public TeacherLike(String id, String name, String school, String teacher, Integer year, int page, int rows) {
+	public TeacherAndAcademyLike(String id, String name, String school, String teacher, Integer year, int page, int rows) {
 		this.id = id;
 		this.name = name;
 		this.school = school;
