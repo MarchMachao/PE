@@ -11,7 +11,7 @@ public class Student {
 	private String name;
 	private String gender;
 	private String school;
-	private String grade;
+	private Integer grade;
 	private String classes;
 	private Integer duration;
 	private String state;
@@ -25,7 +25,7 @@ public class Student {
 		this.classes = classes;
 	}
 
-	public Student(String id, String name, String gender, String school, String grade, String classes, Integer duration,
+	public Student(String id, String name, String gender, String school, Integer grade, String classes, Integer duration,
 			String state, String teacher) {
 		this.id = id;
 		this.name = name;
@@ -38,11 +38,11 @@ public class Student {
 		this.teacher = teacher;
 	}
 
-	public String getGrade() {
+	public Integer getGrade() {
 		return grade;
 	}
 
-	public void setGrade(String grade) {
+	public void setGrade(Integer grade) {
 		this.grade = grade;
 	}
 

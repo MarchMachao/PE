@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css"
+	href="easyUI/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
+<script type="text/javascript" src="easyUI/jquery.min.js"></script>
+<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="easyUI/locale/easyui-lang-zh_CN.js"></script>
+<style>
+.paraDiv {
+	margin-top: 10px;
+	float: left;
+	margin-left: 5px;
+}
+
+#allmap {
+	width: 100%;
+	height: 100%;
+}
+</style>
+</head>
+
+<body>
+	<h2 style="text-align: center;">学生成绩(教师页面)</h2>
+	<div>
+		<div style="margin-bottom: 20px;">
+			<div class="paraDiv">
+				<span class="paraName">学生姓名:</span> <input class="easyui-textbox"
+					id="name" name="name"
+					style="width: 100px; height: 32px; marin-top: 10px;">
+			</div>
+			<div class="paraDiv">
+				<span class="paraName">学号:</span> <input class="easyui-textbox"
+					id="id" name="id"
+					style="width: 100px; height: 32px; marin-top: 10px;">
+			</div>
+			<div class="paraDiv">
+				<span class="paraName">学院:</span> <input class="easyui-textbox"
+					id="school" name="school"
+					style="width: 220px; height: 32px; marin-top: 10px;">
+			</div>
+			<div class="paraDiv">
+				<span class="paraName">教师:</span> <input class="easyui-textbox"
+					id="school" name="teacher"
+					style="width: 100px; height: 32px; marin-top: 10px;">
+			</div>
+			<div class="paraDiv">
+				<span class="paraName">学份:</span> <input class="easyui-textbox"
+					id="year" name="year"
+					style="width: 100px; height: 32px; marin-top: 10px;">
+			</div>
+		</div>
+		<a href="javascript:void(0)" id="search_btn" class="easyui-linkbutton"
+			data-options="iconCls:'icon-search'"
+			style="float: left; width: 70px; height: 30px; margin-top: 10px; margin-left: 10px;">查找</a>
+		<a href="javascript:void(0)" id="search_btn" class="easyui-linkbutton"
+			data-options="iconCls:'icon-redo'"
+			style="float: right; width: 70px; height: 30px; margin-top: 10px; margin-left: 10px;">导出</a>
+		<a href="javascript:void(0)" id="search_btn" class="easyui-linkbutton"
+			data-options="iconCls:'icon-undo'"
+			style="float: right; width: 70px; height: 30px; margin-top: 10px; margin-left: 10px;">导入</a>
+	</div>
+	<div class="hr" style="clear: both;"></div>
+	<table id="dg" style="width: 100%; height: auto;"
+		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'getAllStuData.do',method:'get'"
+		toolbar="#tb">
+		<thead>
+			<tr>
+				<th data-options="field:'id',width:100,align:'center'">学号</th>
+				<th data-options="field:'name',width:90,align:'center'">姓名</th>
+				<th data-options="field:'school',width:100,align:'center'">学院</th>
+				<th data-options="field:'teacher',width:90,align:'center'">教师</th>
+				<th data-options="field:'year',width:90,align:'center'">年份</th>
+				<th data-options="field:'height',width:90,align:'center'">身高</th>
+				<th data-options="field:'weight',width:90,align:'center'">体重</th>
+				<th data-options="field:'vital_capacity',width:90,align:'center'">肺活量</th>
+				<th data-options="field:'fivem',width:90,align:'center'">50m</th>
+				<th data-options="field:'long_jump',width:90,align:'center'">立定跳远</th>
+				<th data-options="field:'reach',width:90,align:'center'">坐位体前屈</th>
+				<th data-options="field:'eightm',width:90,align:'center'">800m</th>
+				<th data-options="field:'tenm',width:90,align:'center'">1000m</th>
+				<th data-options="field:'sit_ups',width:90,align:'center'">仰卧起坐</th>
+				<th data-options="field:'pull_up',width:90,align:'center'">引体向上</th>
+				<th data-options="field:'score',width:90,align:'center'">评分</th>
+				<th data-options="field:'first_check',width:90,align:'center'">审核</th>
+	</table>
+	<div id="tb">
+		<a href="javascript:void(0)" id="addCustomInfo" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" ">添加成绩</a>
+		<a href="javascript:void(0)" id="editCustomInfo" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true">修改成绩</a>
+	</div>
+
+	<div id="addInfo" class="easyui-dialog" closed="true"
+		buttons="#dlg-buttons" title="添加成绩" style="width: 400px; height: 500px;">
+		<form id="editInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
+			<table cellpadding="5">
+				<tr>
+					<td>学号:</td>
+					<td><input class="easyui-textbox" type="text" name="id" readonly  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>姓名:</td>
+					<td><input class="easyui-textbox" type="text" name="nickName" readonly  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>年份:</td>
+					<td><input class="easyui-textbox" type="text" name="year" readonly  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>身高:</td>
+					<td><input class="easyui-textbox" type="text" name="height"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>体重:</td>
+					<td><input class="easyui-textbox" type="text" name="weight"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>肺活量:</td>
+					<td><input class="easyui-textbox" type="text" name="vital_capacity"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>50m:</td>
+					<td><input class="easyui-textbox" type="text" name="fivem"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>立定跳远:</td>
+					<td><input class="easyui-textbox" type="text" name="long_jump"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>坐位体前屈:</td>
+					<td><input class="easyui-textbox" type="text" name="reach"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>800m:</td>
+					<td><input class="easyui-textbox" type="text" name="eightm"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>1000m:</td>
+					<td><input class="easyui-textbox" type="text" name="tenm"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>仰卧起坐:</td>
+					<td><input class="easyui-textbox" type="text" name="sit_ups"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>引体向上:</td>
+					<td><input class="easyui-textbox" type="text" name="pull_up"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="dlg-buttons">
+		<a href="#" class="easyui-linkbutton" onclick="save();">保存</a>
+	</div>
+
+	<script type="text/javascript">
+		$(function() {
+			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+		})
+		
+		$("#pic").click(function(){
+			var row = $('#dg').datagrid('getSelected');
+			if (row) {
+				searchCustomPic(row.id);
+			} else {
+				$.messager.alert('提示', "请选中要修改的客户信息", 'info');
+			}
+		})
+		
+		$("#addCustomInfo").click(function() {
+				$('#editInfoForm').form('clear');
+				$('#addInfo').dialog('open').dialog('center');
+				url = 'save_user.php';
+		})
+
+		$("#editCustomInfo").click(function() {
+			var row = $('#dg').datagrid('getSelected');
+			if (row) {
+				$('#editInfoForm').form('clear');
+				$('#editInfoForm').dialog('open');
+				$('#editInfoForm').form('load',
+						'findCustomInfoById.do?id=' + row.id);
+				loadMap();
+			} else {
+				$.messager.alert('提示', "请选中要修改的客户信息", 'info');
+			}
+		})
+
+
+		$("#search_btn").click(function() {
+			loadCustomInfo();
+		})
+
+		function loadCustomInfo() {
+			var nickName = $("#nickName").val();
+			var phoneNum = $("#phoneNum").val();
+			var district = $("#district").val();
+			var address = $("#address").val();
+			var carrieroperator = $("#carrieroperator").val();
+			var startDate = $('#startDate').datebox('getValue');
+			var endDate = $('#endDate').datebox('getValue');
+			$('#dg').datagrid('load', {
+				nickName : nickName,
+				phoneNum : phoneNum,
+				district : district,
+				address : address,
+				carrieroperator : carrieroperator,
+				startDate : startDate,
+				endDate : endDate
+			});
+		}
+
+		function save() {
+			$('#editInfoForm').form({
+				url : 'updateCustomInfo.do',
+				onSubmit : function() {
+					return $(this).form('validate');
+				},
+				success : function(data) {
+					var obj = eval("(" + data + ")");
+					$('#addInfo').dialog('close');
+					$.messager.alert('提示', obj.content);
+					loadCustomInfo();
+				}
+			});
+			$('#editInfoForm').submit();
+		}
+
+		function searchCustomPic(id) {
+			$('#CustomPicDialog').dialog('open');
+			$.get('findCustomPicById.do',{id:id},function(data){
+				$("#doorPic").attr("src",data.doorPic);
+				$("#roomPic").attr("src",data.roomPic);
+			})
+		}
+	</script>
+	</body>
+</html>
