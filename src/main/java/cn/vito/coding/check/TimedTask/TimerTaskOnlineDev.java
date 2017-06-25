@@ -20,10 +20,10 @@ public class TimerTaskOnlineDev {
 	/**
 	 * 从0秒开始，每隔五秒执行一次
 	 */
-	@Scheduled(cron = "0/5 * * * * ?")
-	public void onlineTask() {
-		System.out.println(StringUtils.yearToString(new Date()));
-	}
+	// @Scheduled(cron = "0/5 * * * * ?")
+	// public void onlineTask() {
+	// System.out.println(StringUtils.yearToString(new Date()));
+	// }
 	
 	/**
 	 * 每年8月25日修改毕业生信息，将a_student.state修改为"已毕业"
