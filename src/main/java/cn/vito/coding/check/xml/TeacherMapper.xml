@@ -8,7 +8,7 @@
 	</select>
 	
 	<!-- 查询所有的数据 -->
-	<select id="findTeacherData" parameterType="Page" resultType="teacher">
+	<select id="findTeacherData" parameterType="TeacherLike" resultType="teacher">
 		select 	a_data.id,
 				a_student.name,
 				a_student.school,
@@ -28,7 +28,10 @@
 				a_data.first_check 
 		from a_data,a_student 
 		where a_data.id = a_student.id and a_student.state != '已毕业' and a_student.teacher != '学院'
-		order by a_data.year,a_data.id limit #{startNum},#{rows}
+		order by a_data.year,a_data.id 
+		LIKE a_data.id = '%#{id}%' or a_student.name = '%#{name}%' or a_student.school = '%#{school}%' 
+		     or a_student.teacher = '%#{teacher}%' or a_data.year = '%#{year}%'
+		limit #{page},#{rows}
 	</select>
 	
 	<!-- 查询所有的用户数据总数量 -->

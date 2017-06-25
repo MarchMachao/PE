@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import cn.vito.coding.check.mapper.TeacherDao;
 import cn.vito.coding.check.po.Teacher;
+import cn.vito.coding.check.po.TeacherLike;
 import cn.vito.coding.check.service.TeacherService;
-import cn.vito.coding.check.vo.Page;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -22,8 +22,9 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	@Override
-	public List<Teacher> findTeacherData(int pageNo, int pageSize) {
-		return teacherDao.findTeacherData(new Page(pageNo, pageSize));
+	public List<Teacher> findTeacherData(String id, String name, String school, String teacher, Integer year, int page,
+			int rows) {
+		return teacherDao.findTeacherData(new TeacherLike(id, name, school, teacher, year, page, rows));
 	}
 
 }

@@ -32,8 +32,9 @@ public class TeacherController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "getAllStuData")
-	public DataGrideRow<Teacher> findStuData(@RequestParam(defaultValue = "1") int page, int rows) {
-		List<Teacher> teachers = teacherService.findTeacherData(page, rows);
+	public DataGrideRow<Teacher> findStuData(@RequestParam(defaultValue = "1") String id, String name, String school,
+			String teacher, Integer year, int page, int rows) {
+		List<Teacher> teachers = teacherService.findTeacherData(id, name, school, teacher, year, page, rows);
 		return new DataGrideRow<Teacher>(teacherService.count(), teachers);
 	}
 }

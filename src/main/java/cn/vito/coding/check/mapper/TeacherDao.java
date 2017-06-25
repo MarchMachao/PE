@@ -3,7 +3,7 @@ package cn.vito.coding.check.mapper;
 import java.util.List;
 
 import cn.vito.coding.check.po.Teacher;
-import cn.vito.coding.check.vo.Page;
+import cn.vito.coding.check.po.TeacherLike;
 
 /**
  * 教师页面操作
@@ -18,7 +18,7 @@ public interface TeacherDao {
 	 * 
 	 * @return
 	 */
-	public List<Teacher> findTeacherData(Page page);
+	public List<Teacher> findTeacherData(TeacherLike teacherLike);
 
 	/**
 	 * 获取学生数据数量

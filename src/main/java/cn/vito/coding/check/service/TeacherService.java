@@ -18,8 +18,8 @@ public interface TeacherService {
 	 * @param pageSize
 	 * @return
 	 */
-
-	public List<Teacher> findTeacherData(int pageNo, int pageSize);
+	public List<Teacher> findTeacherData(String id, String name, String school, String teacher, Integer year, int page,
+			int rows);
 
 	/**
 	 * 获取用户数量
