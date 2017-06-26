@@ -1,14 +1,24 @@
 package cn.vito.coding.check.utils;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.service.TeacherAndAcademyService;
@@ -103,4 +113,43 @@ public class ExcelUtils {
 		}
 	}
 
+	public List<Object> excelReader(MultipartFile file) {
+		try {
+			InputStream is = file.getInputStream();
+			Workbook workbook = WorkbookFactory.create(is);
+			int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
+			// 遍历每个Sheet
+			for (int s = 0; s < sheetCount; s++) {
+				Sheet sheet = workbook.getSheetAt(s);
+				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
+				// 遍历每一行
+				for (int r = 0; r < rowCount; r++) {
+					Row row = sheet.getRow(r); // 取出相应的列
+
+					Cell id = row.getCell(0);
+					if (!id.getCellTypeEnum().equals(org.apache.poi.ss.usermodel.CellType.NUMERIC))
+						continue;// 判断学号格里是不是学号，不是则下一行
+					Cell height = row.getCell(6);
+					Cell weight = row.getCell(7);
+					Cell vital_capacity = row.getCell(11);
+					Cell fivem = row.getCell(11);
+					Cell long_jump = row.getCell(11);
+					Cell reach = row.getCell(11);
+					Cell eightm = row.getCell(11);
+					Cell tenm = row.getCell(11);
+					Cell sit_ups = row.getCell(11);
+					Cell pull_up = row.getCell(11);
+
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} finally {
+			return null;
+		}
+	}
 }
