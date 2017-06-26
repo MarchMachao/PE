@@ -138,44 +138,7 @@ public class ExcelUtils {
 		}
 	}
 
-	public List<Object> excelReader(MultipartFile file) {
-		try {
-			InputStream is = file.getInputStream();
-			Workbook workbook = WorkbookFactory.create(is);
-			int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
-			// 遍历每个Sheet
-			for (int s = 0; s < sheetCount; s++) {
-				Sheet sheet = workbook.getSheetAt(s);
-				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
-				// 遍历每一行
-				for (int r = 0; r < rowCount; r++) {
-					Row row = sheet.getRow(r); // 取出相应的列
 
-					Cell id = row.getCell(0);
-					if (!id.getCellTypeEnum().equals(org.apache.poi.ss.usermodel.CellType.NUMERIC))
-						continue;// 判断学号格里是不是学号，不是则下一行
-					Cell height = row.getCell(6);
-					Cell weight = row.getCell(7);
-					Cell vital_capacity = row.getCell(11);
-					Cell fivem = row.getCell(11);
-					Cell long_jump = row.getCell(11);
-					Cell reach = row.getCell(11);
-					Cell eightm = row.getCell(11);
-					Cell tenm = row.getCell(11);
-					Cell sit_ups = row.getCell(11);
-					Cell pull_up = row.getCell(11);
-
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (EncryptedDocumentException e) {
-			e.printStackTrace();
-		} catch (InvalidFormatException e) {
-			e.printStackTrace();
-		} finally {
-			return null;
-		}
 	// 学院
 	public void outputAcademyExcel(String id, String name, String school, Integer year) {
 		// 第一步，创建一个webbook，对应一个Excel文件
@@ -277,6 +240,46 @@ public class ExcelUtils {
 			fout.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public List<Object> excelReader(MultipartFile file) {
+		try {
+			InputStream is = file.getInputStream();
+			Workbook workbook = WorkbookFactory.create(is);
+			int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
+			// 遍历每个Sheet
+			for (int s = 0; s < sheetCount; s++) {
+				Sheet sheet = workbook.getSheetAt(s);
+				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
+				// 遍历每一行
+				for (int r = 0; r < rowCount; r++) {
+					Row row = sheet.getRow(r); // 取出相应的列
+
+					Cell id = row.getCell(0);
+					if (!id.getCellTypeEnum().equals(org.apache.poi.ss.usermodel.CellType.NUMERIC))
+						continue;// 判断学号格里是不是学号，不是则下一行
+					Cell height = row.getCell(6);
+					Cell weight = row.getCell(7);
+					Cell vital_capacity = row.getCell(11);
+					Cell fivem = row.getCell(11);
+					Cell long_jump = row.getCell(11);
+					Cell reach = row.getCell(11);
+					Cell eightm = row.getCell(11);
+					Cell tenm = row.getCell(11);
+					Cell sit_ups = row.getCell(11);
+					Cell pull_up = row.getCell(11);
+
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} finally {
+			return null;
 		}
 	}
 }
