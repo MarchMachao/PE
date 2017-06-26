@@ -77,7 +77,8 @@ public class ExcelUtils {
 			row.createCell(2).setCellValue(teacherAndAcademyss.getSchool());
 			row.createCell(3).setCellValue(teacherAndAcademyss.getTeacher());
 			row.createCell(4).setCellValue(teacherAndAcademyss.getYear());
-			row.createCell(5).setCellValue(teacherAndAcademyss.getHeight());
+			row.createCell(5)
+					.setCellValue(teacherAndAcademyss.getHeight() == null ? ' ' : teacherAndAcademyss.getHeight());
 			row.createCell(6).setCellValue(teacherAndAcademyss.getWeight());
 			row.createCell(7).setCellValue(teacherAndAcademyss.getVital_capacity());
 			row.createCell(8).setCellValue(teacherAndAcademyss.getFivem());
