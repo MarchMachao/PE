@@ -27,19 +27,6 @@ public interface TeacherAndAcademyService {
 			int page, int rows);
 
 	/**
-	 * 教师页面查询出Excel的数据
-	 * 
-	 * @param id
-	 * @param name
-	 * @param school
-	 * @param teacher
-	 * @param year
-	 * @return
-	 */
-	public List<TeacherAndAcademy> findTeacherExcel(String id, String name, String school, String teacher,
-			Integer year);
-
-	/**
 	 * 学院页面查询所有学生信息
 	 * 
 	 * @param id

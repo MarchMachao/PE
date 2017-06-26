@@ -189,16 +189,16 @@
 			<table cellpadding="5">
 				<tr>
 					<td>学号:</td>
-					<td><input class="easyui-textbox" type="text" name="id"  style="width: 200px; height: 32px"></input></td>
+					<td><input class="easyui-textbox" type="text" id="ExId" name="id"  style="width: 200px; height: 32px"></input></td>
 				</tr>
 				<tr>
 					<td>姓名:</td>
-					<td><input class="easyui-textbox" type="text" name="name"  style="width: 200px; height: 32px"></input></td>
+					<td><input class="easyui-textbox" type="text" id="ExName" name="name"  style="width: 200px; height: 32px"></input></td>
 				</tr>
 				<tr>
 					<td>学院:</td>
 					<td>
-					<select class="easyui-combobox" name="school" style="width:100%;height: 32px">
+					<select class="easyui-combobox" id="ExSchool" name="school" style="width:100%;height: 32px">
 							<option value="">全部</option>
 							<option value="文学院">文学院</option>
 							<option value="新闻与传播学院">新闻与传播学院</option>
@@ -230,17 +230,18 @@
 				</tr>
 				<tr>
 					<td>教师:</td>
-					<td><input class="easyui-textbox" type="text" name="teacher"  style="width: 200px; height: 32px"></input></td>
+					<td><input class="easyui-textbox" type="text" id="Exteacher" name="teacher"  style="width: 200px; height: 32px"></input></td>
 				</tr>
 				<tr>
 					<td>年份:</td>
-					<td><input class="easyui-textbox" type="text" name="year" style="width: 200px; height: 32px"></input></td>
+					<td><input class="easyui-textbox" type="text" id="ExYear" name="year" style="width: 200px; height: 32px"></input></td>
 				</tr>
 			</table>
 		</form>
 	</div>
 	<div id="excel-button">
-		<a href="#" class="easyui-linkbutton" onclick="window.location.href='downExcel.do'">导出</a>
+		<a href="JavaScript:void(0);" id="exportExcel" class="easyui-linkbutton" onclick="exportExcel(),$('#exportInfo').dialog('close')">导出成绩单</a>
+		<a href="downTeacherExcel.do" class="easyui-linkbutton" onclick="$('#exportInfo').dialog('close')">导出名单</a>
 	</div>
 
 	<script type="text/javascript">
@@ -261,6 +262,25 @@
 			$('#exportInfoForm').form('clear');
 			$('#exportInfo').dialog('open').dialog('center');
 		})
+		
+		function exportExcel() {
+			$.get(
+				"downTeacherExcel.do",
+				{
+					"id":$("#ExId").val(),
+					"name":$("#ExName").val(),
+					"school":$("#ExSchool").combobox("getValue"),
+					"teacher":$("#Exteacher").val(),
+					"year":$("#ExYear").val(),
+				},
+				function(data){
+					if(data.success){
+						alert(data.content);
+					}else{
+						alert("修改失败！");
+					}
+			})
+		}
 		
 		
 		$("#addCustomInfo").click(function() {

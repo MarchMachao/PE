@@ -184,7 +184,7 @@
 	
 	
 	<div id="exportInfo" class="easyui-dialog" closed="true"
-		buttons="#excel-button" title="导出成绩" style="width: 400px; height: 330px;">
+		buttons="#excel-button" title="导出成绩" style="width: 400px; height: 300px;">
 		<form id="exportInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
 			<table cellpadding="5">
 				<tr>
@@ -229,10 +229,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>教师:</td>
-					<td><input class="easyui-textbox" type="text" name="teacher"  style="width: 200px; height: 32px"></input></td>
-				</tr>
-				<tr>
 					<td>年份:</td>
 					<td><input class="easyui-textbox" type="text" name="year" readonly  style="width: 200px; height: 32px"></input></td>
 				</tr>
@@ -240,7 +236,8 @@
 		</form>
 	</div>
 	<div id="excel-button">
-		<a href="#" class="easyui-linkbutton" onclick="export();">导出</a>
+		<a href="downAcademyExcel.do" class="easyui-linkbutton" onclick="$('#exportInfo').dialog('close')">导出成绩单</a>
+		<a href="downAcademyExcel.do" class="easyui-linkbutton" onclick="$('#exportInfo').dialog('close')">导出名单</a>
 	</div>
 	
 	
