@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.service.TeacherAndAcademyService;
 import cn.vito.coding.check.utils.ExcelUtils;
-import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
 
 /**
@@ -89,14 +88,13 @@ public class TeacherAndAcademyController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "downTeacherExcel")
-	public BaseMsg downTeacherExcel(HttpServletResponse response, String id, String name, String school, String teacher,
+	public void downTeacherExcel(HttpServletResponse response, String id, String name, String school, String teacher,
 			Integer year) throws FileNotFoundException, IOException {
 		excelUtils.outputTeacherExcel(id, name, school, teacher, year);
 		File file = new File("/home/pe.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
-		return new BaseMsg(true, "成功导出Excel");
 	}
 
 	/**

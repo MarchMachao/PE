@@ -240,8 +240,8 @@
 		</form>
 	</div>
 	<div id="excel-button">
-		<a href="JavaScript:void(0);" id="exportExcel" class="easyui-linkbutton" onclick="exportExcel(),$('#exportInfo').dialog('close')">导出成绩单</a>
-		<a href="downTeacherExcel.do" class="easyui-linkbutton" onclick="$('#exportInfo').dialog('close')">导出名单</a>
+		<a href="javascript:void(0)" id="exportExcel" class="easyui-linkbutton" >导出成绩单</a>
+		<a href="javascript:void(0)" id="downPdf" class="easyui-linkbutton" onclick="">导出名单</a>
 	</div>
 
 	<script type="text/javascript">
@@ -263,25 +263,18 @@
 			$('#exportInfo').dialog('open').dialog('center');
 		})
 		
-		function exportExcel() {
-			$.get(
-				"downTeacherExcel.do",
-				{
-					"id":$("#ExId").val(),
-					"name":$("#ExName").val(),
-					"school":$("#ExSchool").combobox("getValue"),
-					"teacher":$("#Exteacher").val(),
-					"year":$("#ExYear").val(),
-				},
-				function(data){
-					if(data.success){
-						alert(data.content);
-					}else{
-						alert("修改失败！");
-					}
-			})
-		}
 		
+		$("#exportExcel").click(function(){
+			var id = $("#ExId").val();
+			var name = $("#ExName").val();
+			var school = $("#ExSchool").combobox("getValue");
+			var teacher = $("#Exteacher").val();
+			var year = $("#ExYear").val();
+			location.href = "downTeacherExcel.do?id=" + id
+			+ "&name=" + name + "&school=" + school+"&teacher=" + teacher+"&year=" + year; 
+			$('#exportInfo').dialog('close');
+		})
+		/*筛选数据结束  */
 		
 		$("#addCustomInfo").click(function() {
 				$('#editInfoForm').form('clear');
