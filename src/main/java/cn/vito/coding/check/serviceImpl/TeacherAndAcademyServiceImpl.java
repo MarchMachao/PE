@@ -30,10 +30,4 @@ public class TeacherAndAcademyServiceImpl implements TeacherAndAcademyService {
 				.findAcademyData(new TeacherAndAcademyLike(id, name, school, teacher, year, page, rows));
 	}
 
-	@Override
-	public List<TeacherAndAcademy> findTeacherExcel(String id, String name, String school, String teacher,
-			Integer year) {
-		return teacherAndAcademyDao.findTeacherExcel(new TeacherAndAcademyLike(id, name, school, teacher, year));
-	}
-
 }

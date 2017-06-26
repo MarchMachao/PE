@@ -39,4 +39,16 @@ public interface TeacherAndAcademyDao {
 	 */
 	public List<TeacherAndAcademy> findAcademyData(TeacherAndAcademyLike teacherLike);
 
+	/**
+	 * 学院页面查询出Excel的数据
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAcademyExcel(TeacherAndAcademyLike teacherAndAcademyLike);
+
 }

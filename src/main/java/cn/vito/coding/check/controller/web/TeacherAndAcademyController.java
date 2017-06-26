@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.service.TeacherAndAcademyService;
 import cn.vito.coding.check.utils.ExcelUtils;
+import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
 
 /**
@@ -75,14 +76,47 @@ public class TeacherAndAcademyController {
 		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
 	}
 
-	@RequestMapping("downExcel")
-	public void downExcel(HttpServletResponse response, String id, String name, String school, String teacher,
+	/**
+	 * 教师导出成绩Excel
+	 * 
+	 * @param response
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "downTeacherExcel")
+	public BaseMsg downTeacherExcel(HttpServletResponse response, String id, String name, String school, String teacher,
 			Integer year) throws FileNotFoundException, IOException {
-		excelUtils.outputExcel(id, name, school, teacher, year);
+		excelUtils.outputTeacherExcel(id, name, school, teacher, year);
+		File file = new File("/home/pe.xls");
+		response.setContentType("application/octet-stream; charset=utf-8");
+		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+		return new BaseMsg(true, "成功导出Excel");
+	}
+
+	/**
+	 * 学院导出成绩Excel
+	 * 
+	 * @param response
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "downAcademyExcel")
+	public void downAcademyExcel(HttpServletResponse response, String id, String name, String school, Integer year)
+			throws FileNotFoundException, IOException {
+		excelUtils.outputAcademyExcel(id, name, school, year);
 		File file = new File("/home/pe.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
 	}
-
 }
