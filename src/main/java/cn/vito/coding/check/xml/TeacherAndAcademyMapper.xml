@@ -111,4 +111,51 @@
 			 and a_data.year like '%${year}%'
 		order by a_data.year,a_data.id 
 	</select>
+	
+	<!-- 修改教师页面的数据 -->
+	<update id="updateTeacherData" parameterType="Data">
+		update a_data
+			<set>
+				<if test="height!=null">
+					height = #{height},
+				</if>
+				<if test="weight!=null">
+					weight = #{weight},
+				</if>
+				<if test="vital_capacity!=null">
+					vital_capacity = #{vital_capacity},
+				</if>
+				<if test="fivem!=null">
+					fivem = #{fivem},
+				</if>
+				<if test="long_jump!=null">
+					long_jump = #{long_jump},
+				</if>
+				<if test="reach!=null">
+					reach = #{reach},
+				</if>
+				<if test="eightm!=null">
+					eightm = #{eightm},
+				</if>
+				<if test="tenm!=null">
+					tenm = #{tenm},
+				</if>
+				<if test="sit_ups!=null">
+					sit_ups = #{sit_ups},
+				</if>
+				<if test="pull_up!=null">
+					pull_up = #{pull_up},
+				</if>
+				<if test="score!=null">
+					score = #{score},
+				</if>
+				<if test="first_check!=null">
+					first_check = #{first_check},
+				</if>
+				<if test="second_check!=null">
+					second_check = #{second_check},
+				</if>
+			</set>
+			where id = ${id}
+	</update>
 </mapper>

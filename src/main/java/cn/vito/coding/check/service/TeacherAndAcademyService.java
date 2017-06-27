@@ -41,4 +41,5 @@ public interface TeacherAndAcademyService {
 	public List<TeacherAndAcademy> findAcademyData(String id, String name, String school, String teacher, Integer year,
 			int page, int rows);
 
+
 }

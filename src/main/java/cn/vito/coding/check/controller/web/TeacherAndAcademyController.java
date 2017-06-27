@@ -14,10 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.service.TeacherAndAcademyService;
 import cn.vito.coding.check.utils.ExcelUtils;
+import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
 
 /**
@@ -116,5 +118,19 @@ public class TeacherAndAcademyController {
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+	}
+
+	@ResponseBody
+	@RequestMapping("uploadTeachersAndAcademyExcel")
+	public BaseMsg uploadTeachersAndAcademyExcel(MultipartFile file) {
+		String FileName = file.getOriginalFilename();
+		String prefix = FileName.substring(FileName.lastIndexOf(".") + 1);
+		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
+			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
+		} else if (excelUtils.excelTeachersAndAcademyReader(file)) {
+			return new BaseMsg(true, "上传成绩成功！");
+		} else {
+			return new BaseMsg(false, "上传成绩失败！请检查文件格式！");
+		}
 	}
 }
