@@ -12,8 +12,8 @@ public class PullUp {
 	// 男生引体向上
 	public static int pull(int grade, int sitNum) {
 		String g = StringUtils.gradeIntToString(grade);
-		if (sitNum <= 20) {
-			if ("大一大二".contains(g)) {
+		if ("大一大二".contains(g)) {
+			if (sitNum < 20) {
 				if (sitNum < 5) {
 					return 0;
 				} else if (sitNum == 5) {
@@ -47,7 +47,14 @@ public class PullUp {
 				} else {
 					return 100;
 				}
+			} else if (sitNum >= 20 && sitNum <= 29) {
+				return 81 + sitNum;
 			} else {
+				return 110;
+			}
+
+		} else {
+			if (sitNum < 21) {
 				if (sitNum < 6) {
 					return 0;
 				} else if (sitNum == 6) {
@@ -81,11 +88,12 @@ public class PullUp {
 				} else {
 					return 100;
 				}
+			} else if (sitNum >= 21 && sitNum <= 30) {
+				return 80 + sitNum;
+			} else {
+				return 110;
 			}
-		} else if (sitNum > 20 && sitNum <= 30) {
-			return 80 + sitNum;
-		} else {
-			return 130;
+
 		}
 	}
 }
