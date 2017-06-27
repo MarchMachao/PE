@@ -156,6 +156,6 @@
 					second_check = #{second_check},
 				</if>
 			</set>
-			where id = ${id}
+			where id = ${id} and year = ${year}
 	</update>
 </mapper>

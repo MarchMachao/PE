@@ -122,12 +122,12 @@ public class TeacherAndAcademyController {
 
 	@ResponseBody
 	@RequestMapping("uploadTeachersAndAcademyExcel")
-	public BaseMsg uploadTeachersAndAcademyExcel(MultipartFile file) {
+	public BaseMsg uploadTeachersAndAcademyExcel(MultipartFile file, Integer year) {
 		String FileName = file.getOriginalFilename();
 		String prefix = FileName.substring(FileName.lastIndexOf(".") + 1);
 		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
 			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
-		} else if (excelUtils.excelTeachersAndAcademyReader(file)) {
+		} else if (excelUtils.excelTeachersAndAcademyReader(file, year)) {
 			return new BaseMsg(true, "上传成绩成功！");
 		} else {
 			return new BaseMsg(false, "上传成绩失败！请检查文件格式！");

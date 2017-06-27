@@ -244,7 +244,7 @@ public class ExcelUtils {
 		}
 	}
 
-	public boolean excelTeachersAndAcademyReader(MultipartFile file) {
+	public boolean excelTeachersAndAcademyReader(MultipartFile file, int year) {
 		try {
 			InputStream is = file.getInputStream();
 			Workbook workbook = WorkbookFactory.create(is);
@@ -271,7 +271,7 @@ public class ExcelUtils {
 					Cell sit_ups = row.getCell(14);
 					Cell pull_up = row.getCell(15);
 
-					Data data = new Data(id.toString(), null, Integer.parseInt(height.toString()),
+					Data data = new Data(id.toString(), year, Integer.parseInt(height.toString()),
 							Double.parseDouble(weight.toString()), Integer.parseInt(vital_capacity.toString()),
 							Double.parseDouble(fivem.toString()), Double.parseDouble(long_jump.toString()),
 							Double.parseDouble(reach.toString()), eightm.toString(), tenm.toString(),
