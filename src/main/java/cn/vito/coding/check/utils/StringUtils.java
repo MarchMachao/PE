@@ -1,5 +1,6 @@
 package cn.vito.coding.check.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -70,4 +71,26 @@ public class StringUtils {
 		return names[names.length-1];
 	}
 	
+	public static String gradeIntToString(int grade) throws ParseException {
+		String begin = grade + "0901";
+		SimpleDateFormat datetemp = new SimpleDateFormat("yyyyMMdd");
+		Date date1 = datetemp.parse(begin);
+		Date date2 = new Date();
+		int i=24 * 60 * 60 * 1000;
+		if ((date2.getTime() - date1.getTime()) / i < 365) {
+			return "大一";
+		} else if ((date2.getTime() - date1.getTime()) / i < 730 && 365 <= (date2.getTime() - date1.getTime())) {
+			return "大二";
+		} else if ((date2.getTime() - date1.getTime()) / i < 1095 && 730 <= (date2.getTime() - date1.getTime())) {
+			return "大三";
+		} else if ((date2.getTime() - date1.getTime()) / i < 1460 && 1095 <= (date2.getTime() - date1.getTime())) {
+			return "大四";
+		} else if ((date2.getTime() - date1.getTime()) / i < 1825 && 1460 <= (date2.getTime() - date1.getTime())) {
+			return "大五";
+		} else if ((date2.getTime() - date1.getTime()) < 0) {
+			return "年级错误";
+		}else{
+			return "?";
+		}
+	}
 }
