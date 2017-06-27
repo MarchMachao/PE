@@ -10,15 +10,15 @@ public class Data {
 	private String id;// 学号
 	private Integer year;// 年份
 	private Integer height;// 身高
-	private double weight;// 体重
+	private Double weight;// 体重
 	private Integer vital_capacity;// 肺活量
-	private double fivem;// 50m
-	private double long_jump;// 立定跳远
-	private double reach;// 坐位体前屈
+	private Double fivem;// 50m
+	private Double long_jump;// 立定跳远
+	private Double reach;// 坐位体前屈
 	private String eightm;// 800m
 	private String tenm;// 1000m
-	private double sit_ups;// 仰卧起坐
-	private double pull_up;// 引体向上
+	private Integer sit_ups;// 仰卧起坐
+	private Integer pull_up;// 引体向上
 	private Integer score;//成绩
 	private String first_check;// 第一次审核
 	private String second_check;// 第二次审核
@@ -31,8 +31,8 @@ public class Data {
 		this.year = year;
 	}
 
-	public Data(String id, Integer year, Integer height, double weight, Integer vital_capacity, double fivem,
-			double long_jump, double reach, String eightm, String tenm, double sit_ups, double pull_up, Integer score,
+	public Data(String id, Integer year, Integer height, Double weight, Integer vital_capacity, Double fivem,
+			Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups, Integer pull_up, Integer score,
 			String first_check, String second_check) {
 		this.id = id;
 		this.year = year;
@@ -89,13 +89,13 @@ public class Data {
 
 
 
-	public double getWeight() {
+	public Double getWeight() {
 		return weight;
 	}
 
 
 
-	public void setWeight(double weight) {
+	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
 
@@ -113,37 +113,37 @@ public class Data {
 
 
 
-	public double getFivem() {
+	public Double getFivem() {
 		return fivem;
 	}
 
 
 
-	public void setFivem(double fivem) {
+	public void setFivem(Double fivem) {
 		this.fivem = fivem;
 	}
 
 
 
-	public double getLong_jump() {
+	public Double getLong_jump() {
 		return long_jump;
 	}
 
 
 
-	public void setLong_jump(double long_jump) {
+	public void setLong_jump(Double long_jump) {
 		this.long_jump = long_jump;
 	}
 
 
 
-	public double getReach() {
+	public Double getReach() {
 		return reach;
 	}
 
 
 
-	public void setReach(double reach) {
+	public void setReach(Double reach) {
 		this.reach = reach;
 	}
 
@@ -173,25 +173,25 @@ public class Data {
 
 
 
-	public double getSit_ups() {
+	public Integer getSit_ups() {
 		return sit_ups;
 	}
 
 
 
-	public void setSit_ups(double sit_ups) {
+	public void setSit_ups(Integer sit_ups) {
 		this.sit_ups = sit_ups;
 	}
 
 
 
-	public double getPull_up() {
+	public Integer getPull_up() {
 		return pull_up;
 	}
 
 
 
-	public void setPull_up(double pull_up) {
+	public void setPull_up(Integer pull_up) {
 		this.pull_up = pull_up;
 	}
 
