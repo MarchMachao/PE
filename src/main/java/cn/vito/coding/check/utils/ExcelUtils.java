@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.vito.coding.check.mapper.TeacherAndAcademyDao;
+import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademyLike;
 
@@ -243,7 +244,7 @@ public class ExcelUtils {
 		}
 	}
 
-	public List<Object> excelReader(MultipartFile file) {
+	public boolean excelTeachersAndAcademyReader(MultipartFile file) {
 		try {
 			InputStream is = file.getInputStream();
 			Workbook workbook = WorkbookFactory.create(is);
@@ -261,25 +262,37 @@ public class ExcelUtils {
 						continue;// 判断学号格里是不是学号，不是则下一行
 					Cell height = row.getCell(6);
 					Cell weight = row.getCell(7);
-					Cell vital_capacity = row.getCell(11);
-					Cell fivem = row.getCell(11);
-					Cell long_jump = row.getCell(11);
+					Cell vital_capacity = row.getCell(8);
+					Cell fivem = row.getCell(9);
+					Cell long_jump = row.getCell(10);
 					Cell reach = row.getCell(11);
-					Cell eightm = row.getCell(11);
-					Cell tenm = row.getCell(11);
-					Cell sit_ups = row.getCell(11);
-					Cell pull_up = row.getCell(11);
+					Cell eightm = row.getCell(12);
+					Cell tenm = row.getCell(13);
+					Cell sit_ups = row.getCell(14);
+					Cell pull_up = row.getCell(15);
 
+					Data data = new Data(id.toString(), null, Integer.parseInt(height.toString()),
+							Double.parseDouble(weight.toString()), Integer.parseInt(vital_capacity.toString()),
+							Double.parseDouble(fivem.toString()), Double.parseDouble(long_jump.toString()),
+							Double.parseDouble(reach.toString()), eightm.toString(), tenm.toString(),
+							Integer.parseInt(sit_ups.toString()), Integer.parseInt(pull_up.toString()), null, "未审核",
+							"未审核");
+					teacherAndAcademyDao.updateTeacherData(data);
 				}
+
 			}
+
+
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		} catch (EncryptedDocumentException e) {
 			e.printStackTrace();
+			return false;
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
-		} finally {
-			return null;
+			return false;
 		}
+		return true;
 	}
 }

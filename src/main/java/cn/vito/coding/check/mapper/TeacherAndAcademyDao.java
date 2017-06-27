@@ -2,6 +2,7 @@ package cn.vito.coding.check.mapper;
 
 import java.util.List;
 
+import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademyLike;
 
@@ -50,5 +51,12 @@ public interface TeacherAndAcademyDao {
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findAcademyExcel(TeacherAndAcademyLike teacherAndAcademyLike);
+
+	/**
+	 * 修改教师页面的数据
+	 * 
+	 * @param data
+	 */
+	public void updateTeacherData(Data data);
 
 }
