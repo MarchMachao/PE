@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vito.coding.check.mapper.CheckDao">
+
+	
+	<!-- 教师页面审核所有未审核的数据的数据 -->
+	<select id="findCheckData" parameterType="page" resultType="TeacherAndAcademy">
+		select 	a_data.id,
+				a_student.name,
+				a_student.school,
+				a_student.teacher,
+				a_data.year,
+				a_data.height,
+				a_data.weight,
+				a_data.vital_capacity,
+				a_data.fivem,
+				a_data.long_jump,
+				a_data.reach,
+				a_data.eightm,
+				a_data.tenm,
+				a_data.sit_ups,
+				a_data.pull_up,
+				a_data.score,
+				a_data.first_check 
+		from a_data,a_student 
+		where a_data.id = a_student.id and a_student.state != '已毕业' and a_student.teacher != '学院'
+			  and a_data.first_check = '未审核'
+		order by a_data.year,a_data.id 
+		limit #{page},#{rows}
+	</select>
+	
+</mapper>
