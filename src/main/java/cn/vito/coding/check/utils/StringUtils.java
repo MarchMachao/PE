@@ -77,6 +77,12 @@ public class StringUtils {
 		return names[names.length - 1];
 	}
 
+	/**
+	 * 数字日期转年级
+	 * 
+	 * @param grade
+	 * @return
+	 */
 	public static String gradeIntToString(int grade) {
 		String begin = grade + "0901";
 		SimpleDateFormat datetemp = new SimpleDateFormat("yyyyMMdd");
@@ -105,5 +111,23 @@ public class StringUtils {
 		}
 		return "?";
 
+	}
+
+	/**
+	 * 800m和1000m的数值转化
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public static int timeToInt(String s) {
+		String string = "";
+		for (int i = 0; i < s.length(); i++) {
+			char sChar = s.charAt(i);
+			if (Character.isDigit(sChar)) {
+				string += String.valueOf(sChar);
+			}
+		}
+		int value = Integer.parseInt(string);
+		return value;
 	}
 }
