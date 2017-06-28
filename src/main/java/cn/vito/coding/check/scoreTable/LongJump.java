@@ -5,21 +5,21 @@ import cn.vito.coding.check.utils.StringUtils;
 public class LongJump {
 	public static void main(String[] args) {
 		int grade = 2015;
-		int sitNum = 256;
+		double sitNum = 256;
 		String gender = "男";
 		System.out.println(jump(gender, grade, sitNum));
 	}
 
-	public static int jump(String gender, int grade, int sitNum) {
+	public static int jump(String gender, int grade, double long_jump) {
 		if (gender.equals("女")) {
-			return jumpGirl(grade, sitNum);
+			return jumpGirl(grade, long_jump);
 		} else {
-			return jumpBoy(grade, sitNum);
+			return jumpBoy(grade, long_jump);
 		}
 	}
 
 	// 女生立定跳远
-	public static int jumpGirl(int grade, int sitNum) {
+	public static int jumpGirl(int grade, double sitNum) {
 		String g = StringUtils.gradeIntToString(grade);
 		if ("大一大二".contains(g)) {
 			if (sitNum < 126) {
@@ -113,7 +113,7 @@ public class LongJump {
 	}
 
 	// 男生立定跳远
-	public static int jumpBoy(int grade, int sitNum) {
+	public static int jumpBoy(int grade, double sitNum) {
 		String g = StringUtils.gradeIntToString(grade);
 		if ("大一大二".contains(g)) {
 			if (sitNum < 183) {

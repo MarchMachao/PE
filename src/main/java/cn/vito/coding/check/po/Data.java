@@ -19,7 +19,7 @@ public class Data {
 	private String tenm;// 1000m
 	private Integer sit_ups;// 仰卧起坐
 	private Integer pull_up;// 引体向上
-	private Integer score;//成绩
+	private Double score;//成绩
 	private String first_check;// 第一次审核
 	private String second_check;// 第二次审核
 
@@ -32,7 +32,7 @@ public class Data {
 	}
 
 	public Data(String id, Integer year, Integer height, Double weight, Integer vital_capacity, Double fivem,
-			Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups, Integer pull_up, Integer score,
+			Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups, Integer pull_up, Double score,
 			String first_check, String second_check) {
 		this.id = id;
 		this.year = year;
@@ -197,13 +197,13 @@ public class Data {
 
 
 
-	public Integer getScore() {
+	public Double getScore() {
 		return score;
 	}
 
 
 
-	public void setScore(Integer score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
 

@@ -6,12 +6,12 @@ public class EightMeters {
 	public static void main(String[] args) {
 		String string = "3'78";
 		int grade = 2015;
-		System.out.println(fiveGirl(grade, string));
+		System.out.println(eightGirl(grade, string));
 	}
 
 	// 女生800m
-	public static int fiveGirl(int grade, String eight) {
-		int sitNum = StringUtils.timeToInt(eight);
+	public static int eightGirl(int grade, String eightm) {
+		int sitNum = StringUtils.timeToInt(eightm);
 		String g = StringUtils.gradeIntToString(grade);
 		if ("大一大二".contains(g)) {
 			if (sitNum <= 318) {

@@ -31,7 +31,7 @@ public class ExcelUtils {
 	@Autowired
 	private TeacherAndAcademyDao teacherAndAcademyDao;
 
-	// 教师
+	// 教师导出成绩
 	public void outputTeacherExcel(String id, String name, String school, String teacher, Integer year) {
 		// 第一步，创建一个webbook，对应一个Excel文件
 		HSSFWorkbook wb = new HSSFWorkbook();
@@ -140,7 +140,7 @@ public class ExcelUtils {
 	}
 
 
-	// 学院
+	// 学院导出成绩
 	public void outputAcademyExcel(String id, String name, String school, Integer year) {
 		// 第一步，创建一个webbook，对应一个Excel文件
 		HSSFWorkbook wb = new HSSFWorkbook();
