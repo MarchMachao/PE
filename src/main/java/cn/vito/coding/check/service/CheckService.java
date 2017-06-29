@@ -33,5 +33,12 @@ public interface CheckService {
 	 * @param teacherAndAcademyLike
 	 * @return
 	 */
-	public List<TeacherAndAcademy> findCheckByTeacher(String teacher,int pageNo, int pageSize);
+	public List<TeacherAndAcademy> findCheckByTeacher(String teacher, int pageNo, int pageSize);
+
+	/**
+	 * 更新状态数据
+	 * 
+	 * @param teacher
+	 */
+	public void updateState(String teacher);
 }

@@ -71,10 +71,22 @@ public class CheckController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "fCheckByTeacher")
-	public DataGrideRow<TeacherAndAcademy> getCheckByTeacher(@RequestParam(defaultValue = "1") String teacher,
-			int page, int rows) {
+	public DataGrideRow<TeacherAndAcademy> getCheckByTeacher(@RequestParam(defaultValue = "1") String teacher, int page,
+			int rows) {
 		List<TeacherAndAcademy> checks = checkService.findCheckByTeacher(teacher, page, rows);
 		return new DataGrideRow<>(checks.size(), checks);
+	}
+
+	/**
+	 * 通过审核
+	 * 
+	 * @param teacher
+	 * @return
+	 */
+	@RequestMapping(value = "updateState")
+	public String update(String teacher) {
+		checkService.updateState(teacher);
+		return "redirect:getCheckList.do";
 	}
 
 }

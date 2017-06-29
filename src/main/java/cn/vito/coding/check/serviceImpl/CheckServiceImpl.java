@@ -32,4 +32,9 @@ public class CheckServiceImpl implements CheckService {
 		return checkDao.findCheckByTeacher(new TeacherAndAcademyLike(teacher, pageNo, pageSize));
 	}
 
+	@Override
+	public void updateState(String teacher) {
+		checkDao.updateState(teacher);
+	}
+
 }
