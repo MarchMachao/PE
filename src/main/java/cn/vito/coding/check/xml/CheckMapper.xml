@@ -4,7 +4,7 @@
 
 	
 	<!-- 教师页面审核所有未审核的数据的数据 -->
-	<select id="findCheckData" parameterType="page" resultType="TeacherAndAcademy">
+	<select id="findCheckData" parameterType="Page" resultType="TeacherAndAcademy">
 		select 	a_data.id,
 				a_student.name,
 				a_student.school,
@@ -29,4 +29,19 @@
 		limit #{page},#{rows}
 	</select>
 	
+	<!-- 教师状态列表 -->
+	<select id="findCheckList" resultType="TeacherAndAcademy">
+		SELECT
+			a_student.teacher,
+			a_data.first_check
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_student.teacher != '学院'
+		GROUP BY
+			a_student.teacher
+	</select>
 </mapper>
