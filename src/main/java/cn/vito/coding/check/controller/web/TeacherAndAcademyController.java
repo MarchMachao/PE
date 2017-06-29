@@ -120,6 +120,15 @@ public class TeacherAndAcademyController {
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
 	}
 
+	/**
+	 * 老师Excel导入成绩
+	 * 
+	 * @param file
+	 *            excel文件
+	 * @param year
+	 *            年份
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("uploadTeachersAndAcademyExcel")
 	public BaseMsg uploadTeachersAndAcademyExcel(MultipartFile file, Integer year) {
@@ -132,5 +141,34 @@ public class TeacherAndAcademyController {
 		} else {
 			return new BaseMsg(false, "上传成绩失败！请检查文件格式！");
 		}
+	}
+
+	/**
+	 * 老师修改成绩
+	 * 
+	 * @param id
+	 * @param year
+	 * @param height
+	 * @param weight
+	 * @param vital_capacity
+	 * @param fivem
+	 * @param long_jump
+	 * @param reach
+	 * @param eightm
+	 * @param tenm
+	 * @param sit_ups
+	 * @param pull_up
+	 * @param grade
+	 * @param gender
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("updateTeacherAndAcademy")
+	public BaseMsg updateTeacherAndAcademy(String id, Integer year, Integer height, Double weight,
+			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm, String tenm,
+			Integer sit_ups, Integer pull_up, Integer grade, String gender) {
+		teacherAndAcademyService.updateTeacherData(id, year, height, weight, vital_capacity, fivem, long_jump, reach,
+				eightm, tenm, sit_ups, pull_up, grade, gender);
+		return new BaseMsg(true, "成功");
 	}
 }

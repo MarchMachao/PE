@@ -41,5 +41,13 @@ public interface TeacherAndAcademyService {
 	public List<TeacherAndAcademy> findAcademyData(String id, String name, String school, String teacher, Integer year,
 			int page, int rows);
 
+	/**
+	 * 修改教师页面的数据
+	 * 
+	 * @param data
+	 */
+	public void updateTeacherData(String id, Integer year, Integer height, Double weight, Integer vital_capacity,
+			Double fivem, Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups, Integer pull_up,
+			Integer grade, String gender);
 
 }

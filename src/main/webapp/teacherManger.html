@@ -98,6 +98,8 @@
 			<tr>
 				<th data-options="field:'id',width:100,align:'center'">学号</th>
 				<th data-options="field:'name',width:90,align:'center'">姓名</th>
+				<th data-options="field:'gender',width:50,align:'center'">性别</th>
+				<th data-options="field:'grade',width:90,align:'center'">年级</th>
 				<th data-options="field:'school',width:150,align:'center'">学院</th>
 				<th data-options="field:'teacher',width:90,align:'center'">教师</th>
 				<th data-options="field:'year',width:90,align:'center'">年份</th>
@@ -130,6 +132,14 @@
 				<tr>
 					<td>姓名:</td>
 					<td><input class="easyui-textbox" type="text" name="name" readonly  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>性别:</td>
+					<td><input class="easyui-textbox" type="text" name="gender" readonly  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>年级:</td>
+					<td><input class="easyui-textbox" type="text" name="grade" readonly  style="width: 200px; height: 32px"></input></td>
 				</tr>
 				<tr>
 					<td>年份:</td>
@@ -277,21 +287,24 @@
 		/*筛选数据结束  */
 		
 		$("#addCustomInfo").click(function() {
-				$('#editInfoForm').form('clear');
+			var row = $('#dg').datagrid('getSelected');
+			if (row) {
+// 				$('#editInfoForm').form('clear');
 				$('#addInfo').dialog('open').dialog('center');
 				url = 'save_user.php';
+			} else {
+				$.messager.alert('提示', "请选中要增加成绩的学生", 'info');
+			}
 		})
 
 		$("#editCustomInfo").click(function() {
 			var row = $('#dg').datagrid('getSelected');
 			if (row) {
-				$('#editInfoForm').form('clear');
-				$('#editInfoForm').dialog('open');
-				$('#editInfoForm').form('load',
-						'findCustomInfoById.do?id=' + row.id);
-				loadMap();
+// 				$('#editInfoForm').form('clear');
+				$('#addInfo').dialog('open').dialog('center').dialog('setTitle','修改');
+				$('#editInfoForm').form('load',row);
 			} else {
-				$.messager.alert('提示', "请选中要修改的客户信息", 'info');
+				$.messager.alert('提示', "请选中要修改成绩的学生", 'info');
 			}
 		})
 
@@ -317,7 +330,7 @@
 
 		function save() {
 			$('#editInfoForm').form({
-				url : 'updateCustomInfo.do',
+				url : 'updateTeacherAndAcademy.do',
 				onSubmit : function() {
 					return $(this).form('validate');
 				},
@@ -325,7 +338,7 @@
 					var obj = eval("(" + data + ")");
 					$('#addInfo').dialog('close');
 					$.messager.alert('提示', obj.content);
-					loadCustomInfo();
+					$('#dg').datagrid('reload');
 				}
 			});
 			$('#editInfoForm').submit();
