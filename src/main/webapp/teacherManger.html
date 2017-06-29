@@ -115,6 +115,7 @@
 				<th data-options="field:'pull_up',width:90,align:'center'">引体向上</th>
 				<th data-options="field:'score',width:90,align:'center'">评分</th>
 				<th data-options="field:'first_check',width:90,align:'center'">审核</th>
+			</tr>
 	</table>
 	<div id="tb">
 		<a href="javascript:void(0)" id="addCustomInfo" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" ">添加成绩</a>
@@ -208,7 +209,7 @@
 				<tr>
 					<td>学院:</td>
 					<td>
-					<select class="easyui-combobox" id="ExSchool" name="school" style="width:100%;height: 32px">
+					<select class="easyui-combobox" id="ExSchool" name="school" style="width:100%; height: 32px">
 							<option value="">全部</option>
 							<option value="文学院">文学院</option>
 							<option value="新闻与传播学院">新闻与传播学院</option>
@@ -254,6 +255,29 @@
 		<a href="javascript:void(0)" id="downPdf" class="easyui-linkbutton" onclick="">导出名单</a>
 	</div>
 
+	<div id="importInfo" class="easyui-dialog" closed="true"
+		buttons="#import-excel-button" title="导入成绩" style="width: 400px; height: 220px;">
+		<form id="importInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
+			<table cellpadding="5">
+				<tr>
+					<td>年份:</td>
+					<td><input class="easyui-textbox" type="text"  name="year" style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>成绩表:</td>
+					<td><input class="easyui-filebox" type="text" name="file"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>样表:</td>
+					<td><a href="">下载</a></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="import-excel-button">
+		<a href="javascript:void(0)" id="importExcel" class="easyui-linkbutton" onclick="importExcel();"> 导入成绩单</a>
+	</div>
+	
 	<script type="text/javascript">
 		$(function() {
 			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
@@ -272,7 +296,11 @@
 			$('#exportInfoForm').form('clear');
 			$('#exportInfo').dialog('open').dialog('center');
 		})
-		
+		/*导入数据*/
+		$("#import_btn").click(function(){
+			$('#importInfoForm').form('clear');
+			$('#importInfo').dialog('open').dialog('center');
+		})
 		
 		$("#exportExcel").click(function(){
 			var id = $("#ExId").val();
@@ -290,8 +318,8 @@
 			var row = $('#dg').datagrid('getSelected');
 			if (row) {
 // 				$('#editInfoForm').form('clear');
-				$('#addInfo').dialog('open').dialog('center');
-				url = 'save_user.php';
+				$('#addInfo').dialog('open').dialog('center').dialog('setTitle','新增');
+				$('#editInfoForm').form('load',row);
 			} else {
 				$.messager.alert('提示', "请选中要增加成绩的学生", 'info');
 			}
@@ -350,6 +378,22 @@
 				$("#doorPic").attr("src",data.doorPic);
 				$("#roomPic").attr("src",data.roomPic);
 			})
+		}
+		
+		function importExcel(){
+			$('#importInfoForm').form({
+				url : 'uploadTeachersAndAcademyExcel.do',
+				onSubmit : function() {
+					return $(this).form('validate');
+				},
+				success : function(data) {
+					var obj = eval("(" + data + ")");
+					$('#importInfo').dialog('close');
+					$.messager.alert('提示', obj.content);
+					$('#dg').datagrid('reload');
+				}
+			});
+			$('#importInfoForm').submit();
 		}
 	</script>
 	</body>

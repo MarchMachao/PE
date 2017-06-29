@@ -39,7 +39,7 @@ public class TeacherAndAcademyServiceImpl implements TeacherAndAcademyService {
 		double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem, long_jump, reach,
 				eightm, tenm, sit_ups, pull_up);
 		teacherAndAcademyDao.updateTeacherData(new Data(id, year, height, weight, vital_capacity, fivem, long_jump,
-				reach, eightm, tenm, sit_ups, pull_up, score, "未审核", null));
+				reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核"));
 
 	}
 

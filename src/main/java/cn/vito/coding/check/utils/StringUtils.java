@@ -120,6 +120,9 @@ public class StringUtils {
 	 * @return
 	 */
 	public static int timeToInt(String s) {
+		if (isEmpty(s)) {
+			return 0;
+		}
 		String string = "";
 		for (int i = 0; i < s.length(); i++) {
 			char sChar = s.charAt(i);
@@ -130,4 +133,5 @@ public class StringUtils {
 		int value = Integer.parseInt(string);
 		return value;
 	}
+
 }

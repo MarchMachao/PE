@@ -260,30 +260,36 @@ public class ExcelUtils {
 				Sheet sheet = workbook.getSheetAt(s);
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
 				// 遍历每一行
-				for (int r = 0; r < rowCount; r++) {
-					Row row = sheet.getRow(r); // 取出相应的列
+				for (int r = 1; r < rowCount; r++) {
+						Row row = sheet.getRow(r); // 取出相应的列
 
-					Cell id = row.getCell(0);
-					if (!id.getCellTypeEnum().equals(org.apache.poi.ss.usermodel.CellType.NUMERIC))
-						continue;// 判断学号格里是不是学号，不是则下一行
-					Integer height = Integer.parseInt(row.getCell(6).toString());
-					Double weight = Double.parseDouble(row.getCell(7).toString());
-					Integer vital_capacity = Integer.parseInt(row.getCell(8).toString());
-					Double fivem = Double.parseDouble(row.getCell(9).toString());
-					Double long_jump = Double.parseDouble(row.getCell(10).toString());
-					Double reach = Double.parseDouble(row.getCell(11).toString());
-					String eightm = row.getCell(12).toString();
-					String tenm = row.getCell(13).toString();
-					Integer sit_ups = Integer.parseInt(row.getCell(14).toString());
-					Integer pull_up = Integer.parseInt(row.getCell(15).toString());
+						Cell id = row.getCell(0);
+						System.out.println(id.toString());
+						// if
+						// (!id.getCellTypeEnum().equals(org.apache.poi.ss.usermodel.CellType.NUMERIC))
+						// continue;// 判断学号格里是不是学号，不是则下一行
+						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
+						Double weight = Double.parseDouble(row.getCell(7).toString());
+						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
+						Double fivem = Double.parseDouble(row.getCell(9).toString());
+						Double long_jump = Double.parseDouble(row.getCell(10).toString());
+						Double reach = Double.parseDouble(row.getCell(11).toString());
+						String eightm = row.getCell(12).toString();
+						String tenm = row.getCell(13).toString();
+					Integer sit_ups = (int) Double.parseDouble(
+							StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
+					Integer pull_up = (int) Double.parseDouble(
+							StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
 
-					Student student = studentDao.findStudentById(id.toString());
-					double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
-							vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
+						Student student = studentDao.findStudentById(id.toString());
+
+						double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
+								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
+
+						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+								reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
+						teacherAndAcademyDao.updateTeacherData(data);
 					
-					Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump, reach,
-							eightm, tenm, sit_ups, pull_up, score, "未审核", null);
-					teacherAndAcademyDao.updateTeacherData(data);
 				}
 
 			}
@@ -298,6 +304,8 @@ public class ExcelUtils {
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
 			return false;
+		} catch (NumberFormatException e) {
+			return true;
 		}
 		return true;
 	}
