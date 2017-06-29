@@ -54,7 +54,8 @@
 				<th data-options="field:'second_check',width:90,align:'center'">上级审核</th>
 	</table>
 	<div id="tb" style="width: auto;">
-		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" plain="true">通过审核</a>
+		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" 
+		   onclick="'updateState.do?teacher='+${checkTeacher},update()" data-options="iconCls:'icon-ok'" plain="true">通过审核</a>
 		<a href="javascript:void(0)" id="noCheck" class="easyui-linkbutton" data-options="iconCls:'icon-no'" plain="true">未通过审核</a>
 	</div>
 	
@@ -87,6 +88,11 @@
 		$("#submitNo").click(function(){
 			$('#check').dialog('close');
 		})
+		
+		function update() {
+			/* window.location.href=""; */
+			$.messager.alert('提示', "请选中要增加成绩的学生", 'info');
+		}
 		
 	</script>
 	</body>

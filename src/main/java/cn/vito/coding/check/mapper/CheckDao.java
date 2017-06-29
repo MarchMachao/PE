@@ -34,4 +34,11 @@ public interface CheckDao {
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findCheckByTeacher(TeacherAndAcademyLike teacherAndAcademyLike);
+
+	/**
+	 * 更新状态数据
+	 * 
+	 * @param teacher
+	 */
+	public void updateState(String teacher);
 }

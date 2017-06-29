@@ -78,4 +78,15 @@
 			ORDER BY a_data.`year`
 			limit #{page},#{rows}
 	</select>
+	
+	<!-- 更新未审核状态 -->
+	<update id="updateState" parameterType="String">
+		UPDATE a_data,
+		 	a_student
+	 	<set>
+			a_data.first_check = '已审核'
+	 	</set>
+		WHERE a_student.teacher = #{teacher}
+			  AND a_data.first_check = '未审核'
+	</update>
 </mapper>
