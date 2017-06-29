@@ -12,6 +12,13 @@ public class TeacherAndAcademyLike {
 	public TeacherAndAcademyLike() {
 	}
 
+	public TeacherAndAcademyLike(String teacher, int page, int rows) {
+		super();
+		this.teacher = teacher;
+		this.page = (page - 1) * rows;
+		this.rows = rows;
+	}
+
 	public TeacherAndAcademyLike(String id, String name, String school, Integer year) {
 		this.id = id;
 		this.name = name;

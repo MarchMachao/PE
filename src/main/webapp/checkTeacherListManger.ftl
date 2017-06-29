@@ -20,7 +20,7 @@
         .btn-wrapper{padding-right: 15%; margin-top: 50px;}
         .pro-btn{padding: 8px 40px; box-shadow: 3px 3px 3px #275f8f; margin-left: 20px;}
         .form-control{width: 110px ; display: inline-block;}
-        .table th{
+        .table th, .table td{
         	font-size: 16px;
         	text-align: center;
         }
@@ -45,7 +45,7 @@
 				<tr>
 					<td>${check.teacher}</td>
 					<td>${check.first_check}</td>
-					<td><button onclick="openName('${check.teacher}');">打开成绩表</button></td>
+					<td><button class="btn btn-info" onclick="window.location.href='turnToCheck.do?teacher=${check.teacher}'">打开成绩表</button></td>
 				</tr>
 		 </#list>
 	</table>

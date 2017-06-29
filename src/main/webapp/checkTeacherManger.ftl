@@ -30,7 +30,7 @@
 	<h2 style="text-align: center;">审核页面(教师页面)</h2>
 	<div class="hr" style="clear: both;"></div>
 	<table id="dg" style="width: 100%; height: auto;"
-		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'getAllStuData.do',method:'get'"
+		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'fCheckByTeacher.do?teacher=${checkTeacher}',method:'get'"
 		toolbar="#tb">
 		<thead>
 			<tr>

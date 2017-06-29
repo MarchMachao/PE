@@ -44,4 +44,38 @@
 		GROUP BY
 			a_student.teacher
 	</select>
+	
+	<!-- 根据老师姓名查询学生信息 -->
+	<select id="findCheckByTeacher" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
+		SELECT
+				a_data.id,
+				a_student.name,
+				a_student.school,
+				a_student.teacher,
+				a_data.year,
+				a_data.height,
+				a_data.weight,
+				a_data.vital_capacity,
+				a_data.fivem,
+				a_data.long_jump,
+				a_data.reach,
+				a_data.eightm,
+				a_data.tenm,
+				a_data.sit_ups,
+				a_data.pull_up,
+				a_data.score,
+				a_data.first_check,
+				a_data.second_check
+			FROM
+				a_data,
+				a_student
+			WHERE
+				a_data.id = a_student.id
+				AND a_student.state != '已毕业'
+				AND a_student.teacher != '学院'
+				AND a_data.first_check = '未审核'
+			    AND a_student.teacher = #{teacher}
+			ORDER BY a_data.`year`
+			limit #{page},#{rows}
+	</select>
 </mapper>

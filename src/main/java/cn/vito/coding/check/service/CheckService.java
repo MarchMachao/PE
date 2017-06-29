@@ -19,4 +19,19 @@ public interface CheckService {
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findCheckData(int pageNo, int pageSize);
+
+	/**
+	 * 审核的教师列表
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findCheckList();
+
+	/**
+	 * 审核的教师列表的学生数据
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findCheckByTeacher(String teacher,int pageNo, int pageSize);
 }
