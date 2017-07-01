@@ -16,7 +16,7 @@ public class CheckAcademy {
 
 	public CheckAcademy(String school, int page, int rows) {
 		this.school = school;
-		this.page = page;
+		this.page = (page - 1) * rows;
 		this.rows = rows;
 	}
 
