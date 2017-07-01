@@ -30,7 +30,7 @@
 	<h2 style="text-align: center;">审核页面(学院页面)</h2>
 	<div class="hr" style="clear: both;"></div>
 	<table id="dg" style="width: 100%; height: auto;"
-		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'getAcademyData.do',method:'get'"
+		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'getCheckBySchool.do',method:'get'"
 		toolbar="#tb">
 		<thead>
 			<tr>
@@ -54,8 +54,10 @@
 				<th data-options="field:'second_check',width:90,align:'center'">上级审核</th>
 	</table>
 	<div id="tb" style="width: auto;">
-		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" plain="true">通过审核</a>
-		<a href="javascript:void(0)" id="noCheck" class="easyui-linkbutton" data-options="iconCls:'icon-no'" plain="true">未通过审核</a>
+		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
+		onclick="window.location.href='checkPass.do'" plain="true">通过审核</a>
+		<a href="javascript:void(0)" id="noCheck" class="easyui-linkbutton" data-options="iconCls:'icon-no'" 
+		onclick="window.location.href='checkNoPass.do'" plain="true">未通过审核</a>
 	</div>
 	
 	<div id="check" class="easyui-dialog" closed="true"
@@ -78,15 +80,15 @@
 		$(function() {
 			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
 		})
-		
-		$("#noCheck").click(function(){
+		//提交退回原因
+		/* $("#noCheck").click(function(){
 			$('#checkForm').form('clear');
 			$('#check').dialog('open').dialog('center');
 		})
 		
 		$("#submitNo").click(function(){
 			$('#check').dialog('close');
-		})
+		}) */
 		
 	</script>
 	</body>

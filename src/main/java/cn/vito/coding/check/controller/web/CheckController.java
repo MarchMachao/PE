@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.service.CheckService;
+import cn.vito.coding.check.service.UserService;
 import cn.vito.coding.check.vo.DataGrideRow;
 
 /**
@@ -23,23 +24,11 @@ import cn.vito.coding.check.vo.DataGrideRow;
 public class CheckController {
 	@Autowired
 	public CheckService checkService;
+	@Autowired
+	public UserService userService;
 
 	/**
-	 * 教师审核界面的数据查询
-	 * 
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "findCheckData")
-	public DataGrideRow<TeacherAndAcademy> findCheckData(@RequestParam(defaultValue = "1") int page, int rows) {
-		List<TeacherAndAcademy> checks = checkService.findCheckData(page, rows);
-		return new DataGrideRow<TeacherAndAcademy>(checks.size(), checks);
-	}
-
-	/**
-	 * 查询审核教师的列表
+	 * 教师审核，查询审核教师的列表
 	 * 
 	 * @return
 	 */
@@ -50,7 +39,7 @@ public class CheckController {
 	}
 
 	/**
-	 * 跳转页面
+	 * 教师审核，跳转页面
 	 * 
 	 * @param modelMap
 	 * @return
@@ -62,7 +51,7 @@ public class CheckController {
 	}
 
 	/**
-	 * 获取跳转页面的学生数据信息
+	 * 教师审核，获取跳转页面的学生数据信息
 	 * 
 	 * @param teacher
 	 * @param pageNo
@@ -78,7 +67,7 @@ public class CheckController {
 	}
 
 	/**
-	 * 通过审核
+	 * 教师审核，通过审核
 	 * 
 	 * @param teacher
 	 * @return
@@ -87,6 +76,58 @@ public class CheckController {
 	public String update(String teacher) {
 		checkService.updateState(teacher);
 		return "redirect:getCheckList.do";
+	}
+
+	/**
+	 * 教师审核，被退回
+	 * 
+	 * @param teacher
+	 * @return
+	 */
+	@RequestMapping(value = "updateStateNo")
+	public String updateNo(String teacher) {
+		checkService.updateStateNo(teacher);
+		return "redirect:getCheckList.do";
+	}
+
+	/**
+	 * 学院审核，根据不同学院查询不同信息
+	 * 
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getCheckBySchool")
+	public DataGrideRow<TeacherAndAcademy> getCheckBySchool(@RequestParam(defaultValue = "1") int page, int rows) {
+		String userName = userService.getCurrentUserName();
+		String school = userService.getUserByUserName(userName).getNickName();
+		List<TeacherAndAcademy> checkSchool = checkService.findCheckBySchool(school, page, rows);
+		return new DataGrideRow<>(checkSchool.size(), checkSchool);
+	}
+
+	/**
+	 * 学院审核，通过审核
+	 * 
+	 * @param school
+	 */
+	@RequestMapping(value = "checkPass")
+	public String checkPassBySchool(String school) {
+		String sc = userService.getUserByUserName(userService.getCurrentUserName()).getNickName();
+		checkService.checkPass(sc);
+		return "checkAcademyManger.ftl";
+	}
+
+	/**
+	 * 学院审核，被退回
+	 * 
+	 * @param school
+	 */
+	@RequestMapping(value = "checkNoPass")
+	public String checkNoPassBySchool(String school) {
+		String sh = userService.getUserByUserName(userService.getCurrentUserName()).getNickName();
+		checkService.checkNoPass(sh);
+		return "checkAcademyManger.ftl";
 	}
 
 }

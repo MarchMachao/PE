@@ -54,9 +54,10 @@
 				<th data-options="field:'second_check',width:90,align:'center'">上级审核</th>
 	</table>
 	<div id="tb" style="width: auto;">
-		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" 
-		   onclick="'updateState.do?teacher='+${checkTeacher},update()" data-options="iconCls:'icon-ok'" plain="true">通过审核</a>
-		<a href="javascript:void(0)" id="noCheck" class="easyui-linkbutton" data-options="iconCls:'icon-no'" plain="true">未通过审核</a>
+		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
+		   onclick="alert('已通过审核！');window.location.href='updateState.do?teacher=${checkTeacher}';"  plain="true">通过审核</a>
+		<a href="javascript:void(0)" id="noCheck" class="easyui-linkbutton" data-options="iconCls:'icon-no'" 
+		   onclick="alert('未通过审核！');window.location.href='updateStateNo.do?teacher=${checkTeacher}';" plain="true">未通过审核</a>
 	</div>
 	
 	<div id="check" class="easyui-dialog" closed="true"
@@ -79,19 +80,24 @@
 		$(function() {
 			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
 		})
-		
-		$("#noCheck").click(function(){
+		//完成退回原因
+		/* $("#noCheck").click(function(){
 			$('#checkForm').form('clear');
 			$('#check').dialog('open').dialog('center');
 		})
 		
 		$("#submitNo").click(function(){
 			$('#check').dialog('close');
-		})
+		}) */
 		
 		function update() {
 			/* window.location.href=""; */
-			$.messager.alert('提示', "请选中要增加成绩的学生", 'info');
+		/* 	$.messager.alert('提示', "请选中要增加成绩的学生", 'info'); */
+			$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){
+			    if (r){
+					alert('ok');
+			    }
+			});
 		}
 		
 	</script>

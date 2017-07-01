@@ -2,9 +2,9 @@ package cn.vito.coding.check.mapper;
 
 import java.util.List;
 
+import cn.vito.coding.check.po.CheckAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademyLike;
-import cn.vito.coding.check.vo.Page;
 
 /**
  * 审核操作
@@ -13,13 +13,7 @@ import cn.vito.coding.check.vo.Page;
  *
  */
 public interface CheckDao {
-	/**
-	 * 查询需要审核的数据
-	 * 
-	 * @return
-	 */
-	public List<TeacherAndAcademy> findCheckData(Page page);
-
+	
 	/**
 	 * 审核的教师列表
 	 * 
@@ -36,9 +30,38 @@ public interface CheckDao {
 	public List<TeacherAndAcademy> findCheckByTeacher(TeacherAndAcademyLike teacherAndAcademyLike);
 
 	/**
-	 * 更新状态数据
+	 * 教师审核，更新状态数据已审核
 	 * 
 	 * @param teacher
 	 */
 	public void updateState(String teacher);
+
+	/**
+	 * 教师审核，更新状态数据被退回
+	 * 
+	 * @param teacher
+	 */
+	public void updateStateNo(String teacher);
+
+	/**
+	 * 学院审核。根据不同学院查询不同的信息
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findCheckBySchool(CheckAcademy checkAcademy);
+
+	/**
+	 * 学院审核，更新状态数据已审核
+	 * 
+	 * @param teacher
+	 */
+	public void checkPass(String school);
+
+	/**
+	 * 学院审核，更新状态数据被退回
+	 * 
+	 * @param teacher
+	 */
+	public void checkNoPass(String school);
 }

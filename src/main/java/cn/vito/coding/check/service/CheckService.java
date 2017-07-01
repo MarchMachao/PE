@@ -11,24 +11,16 @@ import cn.vito.coding.check.po.TeacherAndAcademy;
  *
  */
 public interface CheckService {
-	/**
-	 * 查询需要审核的数据
-	 * 
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	public List<TeacherAndAcademy> findCheckData(int pageNo, int pageSize);
 
 	/**
-	 * 审核的教师列表
+	 * 教师审核，审核的教师列表
 	 * 
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findCheckList();
 
 	/**
-	 * 审核的教师列表的学生数据
+	 * 教师审核，列表的学生数据
 	 * 
 	 * @param teacherAndAcademyLike
 	 * @return
@@ -36,9 +28,40 @@ public interface CheckService {
 	public List<TeacherAndAcademy> findCheckByTeacher(String teacher, int pageNo, int pageSize);
 
 	/**
-	 * 更新状态数据
+	 * 教师审核，更新状态数据
 	 * 
 	 * @param teacher
 	 */
 	public void updateState(String teacher);
+
+	/**
+	 * 教师审核，更新状态数据被退回
+	 * 
+	 * @param teacher
+	 */
+	public void updateStateNo(String teacher);
+
+	/**
+	 * 学院审核，根据不同学院查询不同的信息
+	 * 
+	 * @param school
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findCheckBySchool(String school, int pageNo, int pageSize);
+
+	/**
+	 * 学院审核，更新状态数据已审核
+	 * 
+	 * @param teacher
+	 */
+	public void checkPass(String school);
+
+	/**
+	 * 学院审核，更新状态数据被退回
+	 * 
+	 * @param teacher
+	 */
+	public void checkNoPass(String school);
 }
