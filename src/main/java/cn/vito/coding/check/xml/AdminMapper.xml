@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vito.coding.check.mapper.AdminDao">
+
+	
+	<!-- 管理员页面查询所有的数据 -->
+	<select id="findAdminData" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
+		SELECT
+			a_data.id,
+			a_student.name,
+			a_student.gender,
+			a_student.school,
+			a_student.grade,
+			a_student.classes,
+			a_student.duration,
+			a_student.state,
+			a_student.teacher,
+			a_data.year,
+			a_data.height,
+			a_data.weight,
+			a_data.vital_capacity,
+			a_data.fivem,
+			a_data.long_jump,
+			a_data.reach,
+			a_data.eightm,
+			a_data.tenm,
+			a_data.sit_ups,
+			a_data.pull_up,
+			a_data.score,
+			a_data.first_check,
+			a_data.second_check
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_data.id LIKE '%${id}%'
+		AND a_student.name LIKE '%${name}%'
+		AND a_student.school LIKE '%${school}%'
+		AND a_student.teacher LIKE '%${teacher}%'
+		AND a_data.year LIKE '%${year}%'
+		ORDER BY
+			a_data.year DESC,
+			a_data.id
+		limit #{page},#{rows}
+	</select>
+
+	<!-- 修改管理员页面的数据 -->
+	<update id="updateAdminData" parameterType="Data">
+		update a_data
+			<set>
+				<if test="height!=null">
+					height = #{height},
+				</if>
+				<if test="weight!=null">
+					weight = #{weight},
+				</if>
+				<if test="vital_capacity!=null">
+					vital_capacity = #{vital_capacity},
+				</if>
+				<if test="fivem!=null">
+					fivem = #{fivem},
+				</if>
+				<if test="long_jump!=null">
+					long_jump = #{long_jump},
+				</if>
+				<if test="reach!=null">
+					reach = #{reach},
+				</if>
+				<if test="eightm!=null">
+					eightm = #{eightm},
+				</if>
+				<if test="tenm!=null">
+					tenm = #{tenm},
+				</if>
+				<if test="sit_ups!=null">
+					sit_ups = #{sit_ups},
+				</if>
+				<if test="pull_up!=null">
+					pull_up = #{pull_up},
+				</if>
+				<if test="score!=null">
+					score = #{score},
+				</if>
+				<if test="first_check!=null">
+					first_check = #{first_check},
+				</if>
+				<if test="second_check!=null">
+					second_check = #{second_check},
+				</if>
+			</set>
+			where id = #{id} and year = #{year}
+	</update>
+</mapper>
