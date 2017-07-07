@@ -12,7 +12,7 @@ import cn.vito.coding.check.po.TeacherAndAcademy;
  */
 public interface AdminService {
 	/**
-	 * 查询所有学生信息
+	 * 查询所有未毕业学生信息
 	 * 
 	 * @param id
 	 * @param name
@@ -25,6 +25,14 @@ public interface AdminService {
 	 */
 	public List<TeacherAndAcademy> findAdminData(String id, String name, String school, String teacher, Integer year,
 			int page, int rows);
+
+	/**
+	 * 查询所已毕业有学生的信息
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAdminGraduateData(String id, String name, String school, String teacher,
+			Integer year, int page, int rows);
 
 	/**
 	 * 修改教师页面的数据

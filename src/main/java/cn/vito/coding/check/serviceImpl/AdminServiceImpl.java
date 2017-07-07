@@ -21,19 +21,24 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<TeacherAndAcademy> findAdminData(String id, String name, String school, String teacher, Integer year,
 			int page, int rows) {
-		return adminDao
-				.findAdminData(new TeacherAndAcademyLike(id, name, school, teacher, year, page, rows));
+		return adminDao.findAdminData(new TeacherAndAcademyLike(id, name, school, teacher, year, page, rows));
 	}
 
 	@Override
 	public void updateAdminData(String id, Integer year, Integer height, Double weight, Integer vital_capacity,
-			Double fivem, Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups,
-			Integer pull_up, Integer grade, String gender) {
+			Double fivem, Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups, Integer pull_up,
+			Integer grade, String gender) {
 		double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem, long_jump, reach,
 				eightm, tenm, sit_ups, pull_up);
-		adminDao.updateAdminData(new Data(id, year, height, weight, vital_capacity, fivem, long_jump,
-				reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核"));
+		adminDao.updateAdminData(new Data(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
+				tenm, sit_ups, pull_up, score, "未审核", "未审核"));
 
+	}
+
+	@Override
+	public List<TeacherAndAcademy> findAdminGraduateData(String id, String name, String school, String teacher,
+			Integer year, int page, int rows) {
+		return adminDao.findAdminGraduateData(new TeacherAndAcademyLike(id, name, school, teacher, year, page, rows));
 	}
 
 }

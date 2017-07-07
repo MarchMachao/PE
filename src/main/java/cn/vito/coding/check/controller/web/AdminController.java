@@ -36,7 +36,7 @@ public class AdminController {
 	private ExcelUtils excelUtils;
 
 	/**
-	 * 管理员页面查询和模糊查询所有用户在表格中
+	 * 管理员页面查询和模糊查询所有未毕业数据在表格中
 	 * 
 	 * @param id
 	 * @param name
@@ -51,8 +51,27 @@ public class AdminController {
 	@RequestMapping(value = "getAdminData")
 	public DataGrideRow<TeacherAndAcademy> findStuData(@RequestParam(defaultValue = "1") String id, String name,
 			String school, String teacher, Integer year, int page, int rows) {
-		List<TeacherAndAcademy> teachers = adminService.findAdminData(id, name, school, teacher, year,
-				page, rows);
+		List<TeacherAndAcademy> teachers = adminService.findAdminData(id, name, school, teacher, year, page, rows);
+		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+	}
+
+	/**
+	 * 查询已毕业数据
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getAdminGraduateData")
+	public DataGrideRow<TeacherAndAcademy> findAdminData(@RequestParam(defaultValue = "1") String id, String name,
+			String school, String teacher, Integer year, int page, int rows) {
+		List<TeacherAndAcademy> teachers = adminService.findAdminGraduateData(id, name, school, teacher, year, page, rows);
 		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
 	}
 
@@ -125,13 +144,13 @@ public class AdminController {
 			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm, String tenm,
 			Integer sit_ups, Integer pull_up, Integer grade, String gender) {
 		try {
-			adminService.updateAdminData(id, year, height, weight, vital_capacity, fivem, long_jump, reach,
-					eightm, tenm, sit_ups, pull_up, grade, gender);
+			adminService.updateAdminData(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
+					tenm, sit_ups, pull_up, grade, gender);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new BaseMsg(false, "修改失败!");
 		}
-		
+
 		return new BaseMsg(true, "修改成功!");
 	}
 }

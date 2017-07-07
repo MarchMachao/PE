@@ -15,12 +15,18 @@ import cn.vito.coding.check.po.TeacherAndAcademyLike;
 public interface AdminDao {
 
 	/**
-	 * 查询所有学生的信息
+	 * 查询所有未毕业学生的信息
 	 * 
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findAdminData(TeacherAndAcademyLike teacherLike);
 
+	/**
+	 * 查询所已毕业有学生的信息
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAdminGraduateData(TeacherAndAcademyLike teacherLike);
 
 	/**
 	 * 修改页面的数据
