@@ -142,8 +142,39 @@ public class TeacherAndAcademyController {
 		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
 			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
 		} else {
-			excelUtils.excelTeachersAndAcademyReader(file, year);
-			return new BaseMsg(true, "上传成绩成功！");
+			if (excelUtils.excelTeachersReader(file, year)) {
+				return new BaseMsg(true, "上传成绩成功！");
+			} else {
+				return new BaseMsg(false, "上传成绩失败！");
+			}
+		}
+	}
+
+	/**
+	 * 学院Excel导入成绩
+	 * 
+	 * @param file
+	 *            excel文件
+	 * @param year
+	 *            年份
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("uploadAcademyExcel")
+	public BaseMsg uploadAcademyExcel(MultipartFile file, Integer year) {
+		String FileName = file.getOriginalFilename();
+		String prefix = FileName.substring(FileName.lastIndexOf(".") + 1);
+		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
+			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
+		} else {
+			String userName =userService.getCurrentUserName();
+			String school = userService.getUserByUserName(userName).getNickName();
+			if (excelUtils.excelAcademyReader(file, year, school)) {
+				return new BaseMsg(true, "上传成绩成功！");
+			} else {
+				return new BaseMsg(false, "上传成绩失败！");
+			}
+
 		}
 	}
 

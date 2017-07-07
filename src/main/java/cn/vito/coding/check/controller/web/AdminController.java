@@ -95,7 +95,7 @@ public class AdminController {
 		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
 			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
 		} else {
-			excelUtils.excelTeachersAndAcademyReader(file, year);
+			excelUtils.excelTeachersReader(file, year);
 			return new BaseMsg(true, "上传成绩成功！");
 		}
 	}

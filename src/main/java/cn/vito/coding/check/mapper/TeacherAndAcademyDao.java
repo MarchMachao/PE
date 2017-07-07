@@ -59,4 +59,5 @@ public interface TeacherAndAcademyDao {
 	 */
 	public void updateTeacherData(Data data);
 
+
 }
