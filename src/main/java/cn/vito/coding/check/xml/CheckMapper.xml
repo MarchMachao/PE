@@ -46,7 +46,7 @@
 	 	<set>
 			t1.first_check = '已审核'
 	 	</set>
-		WHERE t2.teacher = #{school}
+		WHERE t2.school = #{school}
 			AND t1.first_check = '未审核'
 	</update>
 	
@@ -57,7 +57,7 @@
 	 	<set>
 			t1.first_check = '被退回'
 	 	</set>
-		WHERE t2.teacher = #{school}
+		WHERE t2.school = #{school}
 			AND t1.first_check = '未审核'
 	</update>
 	
