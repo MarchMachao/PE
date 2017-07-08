@@ -207,9 +207,9 @@ public class TeacherAndAcademyController {
 					eightm, tenm, sit_ups, pull_up, grade, gender);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new BaseMsg(false, "失败");
+			return new BaseMsg(false, "修改成绩失败！");
 		}
 		
-		return new BaseMsg(true, "成功");
+		return new BaseMsg(true, "修改成绩成功！");
 	}
 }
