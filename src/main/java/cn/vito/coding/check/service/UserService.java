@@ -33,7 +33,7 @@ public interface UserService {
 	 * 
 	 * @return
 	 */
-	public List<User> getAllUser(int pageNo, int pageSize);
+	public List<User> getAllUser(String nickName, String role, int pageNo, int pageSize);
 
 	/**
 	 * 获取用户数量
@@ -47,5 +47,19 @@ public interface UserService {
 	 * 
 	 * @param user
 	 */
-	public void updateStudentP(User user);
+	public void updateUser(String userName, String password, String nickName, String role);
+
+	/**
+	 * 添加新用户
+	 * 
+	 * @param user
+	 */
+	public void addUser(String userName, String password, String nickName, String role);
+
+	/**
+	 * 删除用户
+	 * 
+	 * @param userName
+	 */
+	public void deleteUserByName(String userName);
 }

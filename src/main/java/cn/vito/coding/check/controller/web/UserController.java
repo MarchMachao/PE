@@ -1,18 +1,14 @@
 package cn.vito.coding.check.controller.web;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.vito.coding.check.po.User;
 import cn.vito.coding.check.service.UserService;
-import cn.vito.coding.check.utils.ShiroUtils;
 import cn.vito.coding.check.utils.ValidaterUtil;
 import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
@@ -37,33 +33,67 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "getAllUser")
-	public DataGrideRow<User> findAllUser(@RequestParam(defaultValue = "1") int page, int rows) {
-		List<User> users = userService.getAllUser(page, rows);
+	public DataGrideRow<User> findAllUser(String nickName, String role, int page, int rows) {
+		List<User> users = userService.getAllUser(nickName, role, page, rows);
+		for (User user : users) {
+			System.out.println(user);
+		}
 		return new DataGrideRow<User>(userService.count(), users);
 	}
 
 	/**
-	 * 修改学生密码
+	 * 添加新用户
 	 * 
+	 * @param userName
 	 * @param password
+	 * @param nickName
+	 * @param role
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "updateStuPassword")
-	public BaseMsg updateStuPassword(String password, String pwd, String pwd2) {
-		User userpo = userService.getUserByUserName(userService.getCurrentUserName());
-		if (!userpo.getPassword().equals(ShiroUtils.passwdMD5(password))) {
-			return new BaseMsg(false, "原密码错误！");
-		} else if (!pwd.equals(pwd2)) {
-			return new BaseMsg(false, "两次密码输入不一致！");
-		} else if (!ValidaterUtil.checkPassWord(password)) {
-			return new BaseMsg(false, "密码格式不正确！");
+	@RequestMapping(value = "addUser")
+	public BaseMsg addNewUser(String userName, String password, String nickName, String role) {
+		try {
+			userService.addUser(userName, password, nickName, role);
+		} catch (Exception e) {
+			return new BaseMsg(false, "用户存在!");
 		}
-		// 格式化时间
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		User user = new User(userService.getCurrentUserName(), ShiroUtils.passwdMD5(pwd),
-				formatter.format(new Date()));
-		userService.updateStudentP(user);
+		return new BaseMsg(true, "成功添加新用户!");
+	}
+
+	/**
+	 * 删除用户数据
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "deleteUserByName")
+	public BaseMsg deleteUser(String userName) {
+		userService.deleteUserByName(userName);
+		return new BaseMsg(true, "成功删除用户!");
+	}
+
+	/**
+	 * 修改用户信息
+	 * 
+	 * @param userName
+	 * @param password
+	 * @param nickName
+	 * @param role
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "updateUserByName")
+	public BaseMsg updateUser(String userName, String password, String nickName, String role) {
+		if (!ValidaterUtil.checkPassWord(password)) {
+			return new BaseMsg(false, "密码格式不正确,至少6位!");
+		}
+		try {
+			userService.updateUser(userName, password, nickName, role);
+		} catch (Exception e) {
+			return new BaseMsg(false, "用户名已存在!");
+		}
 		return new BaseMsg(true, "修改密码成功！");
 	}
 }

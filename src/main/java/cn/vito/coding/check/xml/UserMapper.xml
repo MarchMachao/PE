@@ -8,8 +8,16 @@
 	</select>
 	
 	<!-- 查询所有的用户数据 -->
-	<select id="findAllUser" parameterType="Page" resultType="user">
-		select * from s_user limit #{startNum},#{rows}
+	<select id="findAllUser" parameterType="UserLike" resultType="user">
+		SELECT
+			t.userName,t.nickName,t.role
+		FROM
+			s_user t
+		WHERE
+			t.role != '学生'
+			AND t.nickName LIKE '%${nickName}%'
+			AND t.role LIKE '%${role}%'
+		limit #{page},#{rows}
 	</select>
 	
 	<!-- 查询所有的用户数据总数量 -->
@@ -18,14 +26,35 @@
 	</select>
 	
 	<!-- 更新学生的密码 -->
-	<update id="updateStudentP" parameterType="User">
+	<update id="updateUser" parameterType="User">
 		update s_user
 		<set>
+			<if test="userName!=null">
+				userName = #{userName},
+			</if>
 			<if test="password!=null">
 				password = #{password},
+			</if>
+			<if test="nickName!=null">
+				nickName = #{nickName},
+			</if>
+			<if test="role!=null">
+				role = #{role},
 			</if>
 		</set>
 		where userName=#{userName}
 	</update>
+	
+	<!-- 增加新的数据 -->
+	<insert id="addUser" parameterType="user">
+		insert into
+			s_user(userName,password, nickName, role) 
+		VALUES(#{userName},#{password},#{nickName},#{role})
+	</insert>
+	
+	<!-- 删除用户数据 -->
+	<delete id="deleteUserByName" parameterType="String">
+		delete from s_user where userName = #{userName}
+	</delete>
 
 </mapper>

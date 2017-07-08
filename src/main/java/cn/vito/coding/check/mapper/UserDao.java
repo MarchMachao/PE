@@ -3,7 +3,7 @@ package cn.vito.coding.check.mapper;
 import java.util.List;
 
 import cn.vito.coding.check.po.User;
-import cn.vito.coding.check.vo.Page;
+import cn.vito.coding.check.po.UserLike;
 
 /**
  * 用户操作
@@ -27,7 +27,7 @@ public interface UserDao {
 	 * 
 	 * @return
 	 */
-	public List<User> findAllUser(Page page);
+	public List<User> findAllUser(UserLike userLike);
 
 	/**
 	 * 获取用户数量
@@ -37,9 +37,23 @@ public interface UserDao {
 	public int count();
 
 	/**
-	 * 修改学生密码
+	 * 修改用户
 	 * 
 	 * @param user
 	 */
-	public void updateStudentP(User user);
+	public void updateUser(User user);
+
+	/**
+	 * 添加新用户
+	 * 
+	 * @param user
+	 */
+	public void addUser(User user);
+
+	/**
+	 * 删除用户
+	 * 
+	 * @param userName
+	 */
+	public void deleteUserByName(String userName);
 }

@@ -3,7 +3,7 @@ package cn.vito.coding.check.po;
 /**
  * 用户po
  * 
- * @author baijw
+ * @author 刘晓庆
  * 
  * @date 2017年3月13日 下午8:21:19
  */
@@ -13,24 +13,21 @@ public class User {
 	private String password;
 	private String nickName;
 	private String role;
-	private String createDate;
 
 	public User() {
 	}
 
-	public User(String userName, String password, String createDate) {
+	public User(String userName, String password) {
 		this.userName = userName;
 		this.password = password;
-		this.createDate = createDate;
 	}
 
-	public User(String userName, String password, String nickName, String role, String createDate) {
+	public User(String userName, String password, String nickName, String role) {
 		super();
 		this.userName = userName;
 		this.password = password;
 		this.nickName = nickName;
 		this.role = role;
-		this.createDate = createDate;
 	}
 
 	public String getUserName() {
@@ -64,13 +61,4 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
-	public String getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-
 }
