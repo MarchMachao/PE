@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.log4j.lf5.util.StreamUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.xml.sax.SAXException;
@@ -25,11 +26,16 @@ import freemarker.template.TemplateException;
  */
 @Controller
 public class PDFController {
+
+	@Autowired
+	private PDFUtils pdfUtils;
 	
-	@RequestMapping("downPDF")
-	public void downPDF(HttpServletResponse response) throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException{
+	@RequestMapping("downTeacherPDF")
+	public void downTeacherPDF(HttpServletResponse response, String id, String name, String school, String teacher,
+			Integer year)
+			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
 		
-		PDFUtils.toPdfWithMap();
+		pdfUtils.toPdfWithMap(id, name, school, teacher, year);
 		File file = new File("/home/page/pdf/Test.pdf");
 		if (file.exists()) {
 			response.setContentType("application/octet-stream; charset=utf-8");
