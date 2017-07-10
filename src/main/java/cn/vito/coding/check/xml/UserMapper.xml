@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.vito.coding.check.mapper.UserDao">
 
+<!-- 教职工用户管理 -->
 	<select id="findUserByUserName" parameterType="String"
 		resultType="user">
 		select * from s_user where s_user.userName = #{value}
@@ -56,5 +57,102 @@
 	<delete id="deleteUserByName" parameterType="String">
 		delete from s_user where userName = #{userName}
 	</delete>
-
+	
+<!-- 学生用户管理 -->
+	
+	<!-- 查询所有的用户数据 -->
+	<select id="findStudentUser" parameterType="UserLike" resultType="UserLike">
+	
+		SELECT
+			t1.userName,
+			t2.name,
+			t1.role,
+			t2.gender,
+			t2.school,
+			t2.classes,
+			t2.grade,
+			t2.duration,
+			t2.state,
+			t2.teacher
+		FROM
+			s_user t1,
+			a_student t2
+		WHERE
+			  t1.userName = t2.id
+		  AND t1.role = '学生'
+		  AND t2.name LIKE '%${name}%'
+		  AND t2.school LIKE '%${school}%'
+		  AND t2.grade LIKE '%${grade}%'
+		  AND t2.teacher LIKE '%${teacher}%'
+		  AND t2.state LIKE '%${state}%'
+		ORDER BY
+		  t2.grade DESC,
+		  t1.userName
+		limit #{page},#{rows}
+		
+	</select>
+	
+	<!-- 插入数据 -->
+	<insert id="addStudentUser1" parameterType="user">
+		insert into
+			s_user(userName,password,nickName,role) 
+		VALUES(#{userName},#{password},#{nickName},#{role});
+	</insert>
+	
+	<insert id="addStudentUser2" parameterType="student">
+		insert into
+			a_student(id,name,gender, school, grade,classes,duration,state,teacher) 
+		VALUES(#{id},#{name},#{gender},#{school},#{grade},#{classes},#{duration},#{state},#{teacher})
+	</insert>
+	
+	<!-- 删除数据 -->
+	<delete id="deleteStudentUser" parameterType="string">
+		DELETE a_student,
+		 s_user
+		FROM
+			a_student
+		LEFT JOIN s_user ON a_student.id = s_user.userName
+		WHERE
+			s_user.userName = #{userName}
+	</delete>
+	
+	<!-- 更新数据 -->
+	<update id="updateStudentUser" parameterType="UserLike">
+		UPDATE s_user t1
+		 	LEFT JOIN a_student t2 ON t1.userName = t2.id
+			<set>
+				<if test="userName!=null">
+					userName = #{userName},
+				</if>
+				<if test="password!=null">
+					password = #{password},
+				</if>
+				<if test="name!=null">
+					name = #{name},
+				</if>
+				<if test="gender!=null">
+					gender = #{gender},
+				</if>
+				<if test="school!=null">
+					school = #{school},
+				</if>
+				<if test="grade!=null">
+					grade = #{grade},
+				</if>
+				<if test="classes!=null">
+					classes = #{classes},
+				</if>
+				<if test="duration!=null">
+					duration = #{duration},
+				</if>
+				<if test="state!=null">
+					state = #{state},
+				</if>
+				<if test="teacher!=null">
+					teacher = #{teacher},
+				</if>
+			</set>
+		where t1.userName=#{userName}
+	</update>
+	
 </mapper>

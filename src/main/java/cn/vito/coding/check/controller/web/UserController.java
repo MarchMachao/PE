@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.vito.coding.check.po.User;
+import cn.vito.coding.check.po.UserLike;
 import cn.vito.coding.check.service.UserService;
 import cn.vito.coding.check.utils.ValidaterUtil;
 import cn.vito.coding.check.vo.BaseMsg;
@@ -25,7 +26,7 @@ public class UserController {
 	public UserService userService;
 
 	/**
-	 * 查询所有用户在表格中
+	 * 教职工用户，查询所有用户在表格中
 	 * 
 	 * @param page
 	 * @param rows
@@ -35,14 +36,11 @@ public class UserController {
 	@RequestMapping(value = "getAllUser")
 	public DataGrideRow<User> findAllUser(String nickName, String role, int page, int rows) {
 		List<User> users = userService.getAllUser(nickName, role, page, rows);
-		for (User user : users) {
-			System.out.println(user);
-		}
 		return new DataGrideRow<User>(userService.count(), users);
 	}
 
 	/**
-	 * 添加新用户
+	 * 教职工用户，添加新用户
 	 * 
 	 * @param userName
 	 * @param password
@@ -62,7 +60,7 @@ public class UserController {
 	}
 
 	/**
-	 * 删除用户数据
+	 * 教职工用户，删除用户数据
 	 * 
 	 * @param userName
 	 * @return
@@ -75,7 +73,7 @@ public class UserController {
 	}
 
 	/**
-	 * 修改用户信息
+	 * 教职工用户，修改用户信息
 	 * 
 	 * @param userName
 	 * @param password
@@ -96,4 +94,90 @@ public class UserController {
 		}
 		return new BaseMsg(true, "修改密码成功！");
 	}
+
+	/**
+	 * 学生用户，查询所有数据
+	 * 
+	 * @param name
+	 * @param school
+	 * @param grade
+	 * @param state
+	 * @param teacher
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "getAllStudentUser")
+	public DataGrideRow<UserLike> getStudentUser(String name, String school, Integer grade, String state,
+			String teacher, int page, int rows) {
+		List<UserLike> list = userService.findStudentUser(name, school, grade, state, teacher, page, rows);
+		return new DataGrideRow<>(list.size(), list);
+	}
+
+	/**
+	 * 学生用户，添加新数据
+	 * 
+	 * @param userName
+	 * @param password
+	 * @param gender
+	 * @param name
+	 * @param school
+	 * @param grade
+	 * @param classes
+	 * @param duration
+	 * @param state
+	 * @param teacher
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "addNewStudent")
+	public BaseMsg addStudent(String userName, String password, String gender, String name, String school,
+			Integer grade, String classes, Integer duration, String state, String teacher) {
+		try {
+			userService.addStudentUser(userName, password, gender, name, school, grade, classes, duration, state,
+					teacher);
+		} catch (Exception e) {
+			return new BaseMsg(false, "用户名已存在!");
+		}
+		return new BaseMsg(true, "添加学生成功！");
+	}
+
+	/**
+	 * 学生用户，删除数据
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "deleteStudentUser")
+	public BaseMsg deleteStudent(String userName) {
+		userService.deleteStudentUser(userName);
+		return new BaseMsg(true, "删除学生成功！");
+	}
+
+	/**
+	 * 学生用户，更新数据
+	 * 
+	 * @param userName
+	 * @param password
+	 * @param name
+	 * @param gender
+	 * @param school
+	 * @param grade
+	 * @param classes
+	 * @param duration
+	 * @param state
+	 * @param teacher
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "updateStudentUser")
+	public BaseMsg updateStudent(String userName, String password, String name, String gender, String school,
+			Integer grade, String classes, Integer duration, String state, String teacher) {
+		userService.updateStudentUser(userName, password, name, gender, school, grade, classes, duration, state,
+				teacher);
+		return new BaseMsg(true, "更新数据成功！");
+	}
+
 }

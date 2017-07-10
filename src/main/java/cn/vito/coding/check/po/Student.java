@@ -24,7 +24,6 @@ public class Student {
 		this.id = id;
 		this.classes = classes;
 	}
-
 	public Student(String id, String name, String gender, String school, Integer grade, String classes, Integer duration,
 			String state, String teacher) {
 		this.id = id;

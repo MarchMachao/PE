@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.vito.coding.check.mapper.UserDao;
+import cn.vito.coding.check.po.Student;
 import cn.vito.coding.check.po.User;
 import cn.vito.coding.check.po.UserLike;
 import cn.vito.coding.check.service.UserService;
@@ -51,6 +52,33 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUser(String userName, String password, String nickName, String role) {
 		userDao.addUser(new User(userName, ShiroUtils.passwdMD5(password), nickName, role));
+	}
+
+	@Override
+	public List<UserLike> findStudentUser(String name, String school, Integer grade, String state, String teacher,
+			int page, int rows) {
+		return userDao.findStudentUser(new UserLike(name, school, grade, state, teacher, page, rows));
+	}
+
+	@Override
+	public void addStudentUser(String userName, String password, String name, String gender, String school,
+			Integer grade, String classes, Integer duration, String state, String teacher) {
+		String nickName = gender;
+		String id = userName;
+		userDao.addStudentUser1(new User(userName, ShiroUtils.passwdMD5(password), nickName, "学生"));
+		userDao.addStudentUser2(new Student(id, gender, name, school, grade, classes, duration, state, teacher));
+	}
+
+	@Override
+	public void deleteStudentUser(String userName) {
+		userDao.deleteStudentUser(userName);
+	}
+
+	@Override
+	public void updateStudentUser(String userName, String password, String name, String gender, String school,
+			Integer grade, String classes, Integer duration, String state, String teacher) {
+		userDao.updateStudentUser(
+				new UserLike(userName, password, name, gender, school, grade, classes, duration, state, teacher));
 	}
 
 }
