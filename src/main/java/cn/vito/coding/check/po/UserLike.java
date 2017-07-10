@@ -45,12 +45,12 @@ public class UserLike {
 		this.rows = rows;
 	}
 
-	
-	
-	public UserLike(String userName, String password, String name, String gender, String school, Integer grade,
-			String classes, Integer duration, String state, String teacher) {
+	public UserLike(String userName, String password, String nickName, String id, String name, String gender,
+			String school, Integer grade, String classes, Integer duration, String state, String teacher) {
 		this.userName = userName;
 		this.password = password;
+		this.nickName = nickName;
+		this.id = id;
 		this.name = name;
 		this.gender = gender;
 		this.school = school;
