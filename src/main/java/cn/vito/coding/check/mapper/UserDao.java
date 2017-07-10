@@ -88,4 +88,12 @@ public interface UserDao {
 	 * @param userLike
 	 */
 	public void updateStudentUser(UserLike userLike);
+
+	/**
+	 * 学生用户，导入Excel
+	 */
+	public void addExcelStudent1(List<User> user);
+
+	public void addExcelStudent2(List<Student> student);
+
 }

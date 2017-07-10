@@ -161,4 +161,26 @@
 		where t1.userName=#{userName}
 	</update>
 	
+	
+	<!-- 导入Excel表格 -->
+	
+	<insert id="addExcelStudent1" parameterType="java.util.List">
+		insert into
+			s_user(userName,password,nickName,role)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.userName},#{item.password},#{item.nickName},#{item.role})
+		</foreach>
+	</insert>
+	
+	<insert id="addExcelStudent2" parameterType="java.util.List">
+		insert into
+			a_student(id,name,gender, school, grade,classes,duration,state,teacher) 
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(#{item.id},#{item.name},#{item.gender},#{item.school},#{item.grade},
+			 #{item.classes},#{item.duration},#{item.state},#{item.teacher})
+		</foreach>
+	</insert>
+	
 </mapper>
