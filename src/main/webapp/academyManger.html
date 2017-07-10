@@ -237,6 +237,16 @@
 			+ "&name=" + name + "&school=" + school+"&year=" + year; 
 			$('#exportInfo').dialog('close');
 		})
+		
+		$("#downPdf").click(function(){
+			var id = $("#ExId").val();
+			var name = $("#ExName").val();
+			var school = $("#ExSchool").combobox("getValue");
+			var year = $("#ExYear").val();
+			location.href = "downAcademyPDF.do?id=" + id
+			+ "&name=" + name + "&school=" + school+"&year=" + year; 
+			$('#exportInfo').dialog('close');
+		})
 		/*筛选数据结束  */
 		
 		$("#addCustomInfo").click(function() {

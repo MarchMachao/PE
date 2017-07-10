@@ -35,7 +35,23 @@ public class PDFController {
 			Integer year)
 			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
 		
-		pdfUtils.toPdfWithMap(id, name, school, teacher, year);
+		pdfUtils.toTeacherPdf(id, name, school, teacher, year);
+		File file = new File("/home/page/pdf/Test.pdf");
+		if (file.exists()) {
+			response.setContentType("application/octet-stream; charset=utf-8");
+			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+			StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+		} else {
+			response.setStatus(404);
+		}
+	}
+
+	@RequestMapping("downAcademyPDF")
+	public void downAcademyPDF(HttpServletResponse response, String id, String name, String school,
+			Integer year)
+			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
+
+		pdfUtils.toAcademyPdf(id, name, school, year);
 		File file = new File("/home/page/pdf/Test.pdf");
 		if (file.exists()) {
 			response.setContentType("application/octet-stream; charset=utf-8");
