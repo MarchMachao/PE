@@ -104,7 +104,7 @@ public class TeacherAndAcademyController {
 	public void downTeacherExcel(HttpServletResponse response, String id, String name, String school, String teacher,
 			Integer year) throws FileNotFoundException, IOException {
 		excelUtils.outputTeacherExcel(id, name, school, teacher, year);
-		File file = new File("/home/pe.xls");
+		File file = new File("/home/page/excel/pe.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
@@ -125,7 +125,7 @@ public class TeacherAndAcademyController {
 	public void downAcademyExcel(HttpServletResponse response, String id, String name, String school, Integer year)
 			throws FileNotFoundException, IOException {
 		excelUtils.outputAcademyExcel(id, name, school, year);
-		File file = new File("/home/pe.xls");
+		File file = new File("/home/page/excel/pe.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
