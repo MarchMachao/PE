@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import cn.vito.coding.check.po.User;
 import cn.vito.coding.check.po.UserLike;
 import cn.vito.coding.check.service.UserService;
+import cn.vito.coding.check.utils.ExcelUtils;
 import cn.vito.coding.check.utils.ShiroUtils;
 import cn.vito.coding.check.utils.ValidaterUtil;
 import cn.vito.coding.check.vo.BaseMsg;
@@ -23,9 +25,11 @@ import cn.vito.coding.check.vo.DataGrideRow;
  */
 @Controller
 public class UserController {
-
 	@Autowired
 	public UserService userService;
+	
+	@Autowired
+	private ExcelUtils excelUtils;
 
 	/**
 	 * 管理员，查询所有教职工用户在表格中
@@ -183,6 +187,29 @@ public class UserController {
 	}
 
 	/**
+	 * 管理员Excel导入成绩
+	 * 
+	 * @param file
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("uploadStudentExcel")
+	public BaseMsg uploadTeachersAndAcademyExcel(MultipartFile file) {
+		String FileName = file.getOriginalFilename();
+		String prefix = FileName.substring(FileName.lastIndexOf(".") + 1);
+		System.out.println("-------------!!!!!-------");
+		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
+			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
+		} else {
+			if (excelUtils.excelStudentReader(file)) {
+				return new BaseMsg(true, "上传成绩成功！");
+			} else {
+				return new BaseMsg(false, "上传成绩失败！");
+			}
+		}
+	}
+
+	/**
 	 * 用户自己修改密码
 	 * 
 	 * @param password
@@ -207,5 +234,4 @@ public class UserController {
 		userService.updateUser(userService.getCurrentUserName(), ShiroUtils.passwdMD5(pwd), null, null);
 		return new BaseMsg(true, "修改密码成功！");
 	}
-
 }

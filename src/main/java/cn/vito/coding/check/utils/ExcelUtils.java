@@ -3,6 +3,7 @@ package cn.vito.coding.check.utils;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -22,10 +23,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import cn.vito.coding.check.mapper.StudentDao;
 import cn.vito.coding.check.mapper.TeacherAndAcademyDao;
+import cn.vito.coding.check.mapper.UserDao;
 import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.Student;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademyLike;
+import cn.vito.coding.check.po.User;
 import cn.vito.coding.check.scoreTable.ComputeScore;
 
 /**
@@ -42,6 +45,9 @@ public class ExcelUtils {
 
 	@Autowired
 	private StudentDao studentDao;
+
+	@Autowired
+	private UserDao userDao;
 
 	/**
 	 * 教师导出成绩
@@ -395,6 +401,64 @@ public class ExcelUtils {
 			e.printStackTrace();
 			return false;
 		}
+		return true;
+	}
+
+	/**
+	 * 学生用户管理的Excel表格的导入
+	 * 
+	 * @param file
+	 * @param year
+	 * @param school
+	 * @return
+	 */
+	public boolean excelStudentReader(MultipartFile file) {
+		try {
+			InputStream is = file.getInputStream();
+			Workbook workbook = WorkbookFactory.create(is);
+			int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
+			// 遍历每个Sheet
+			for (int s = 0; s < sheetCount; s++) {
+				Sheet sheet = workbook.getSheetAt(s);
+				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
+				// 遍历每一行
+				for (int r = 1; r < rowCount; r++) {
+					Row row = sheet.getRow(r); // 取出相应的行
+
+					String userName = row.getCell(0).toString();
+					String name = row.getCell(1).toString();
+					String gender = row.getCell(2).toString();
+					String school = row.getCell(3).toString();
+					Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
+					String classes = row.getCell(5).toString();
+					Integer duration = (int) Double.parseDouble(row.getCell(6).toString());
+					String teacher = row.getCell(7).toString();
+
+					String id = userName;
+					String nickName = name;
+
+					List<User> user = new ArrayList<>();
+					user.add(new User(userName, ShiroUtils.passwdMD5("123456"), nickName, "学生"));
+
+					List<Student> student = new ArrayList<>();
+					student.add(new Student(id, name, gender, school, grade, classes, duration, "正常", teacher));
+					System.out.println("--------------------");
+					userDao.addExcelStudent1(user);
+					userDao.addExcelStudent2(student);
+				}
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+			return false;
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+			return false;
+		} 
 		return true;
 	}
 }

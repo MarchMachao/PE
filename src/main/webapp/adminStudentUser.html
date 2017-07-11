@@ -14,7 +14,7 @@
 	<body>
 		<h2 align="center">账号管理</h2>
 		<div align="center">
-			<table id="dg" title="管理表" class="easyui-datagrid" style="width:1200px;height:500px" url="getAllStudentUser.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
+			<table id="dg" title="管理表" class="easyui-datagrid" style="width:100%;height:auto;" url="getAllStudentUser.do" toolbar="#toolbar" pagination="true" rownumbers="true" fitColumns="true" singleSelect="true">
 				<thead>
 					<tr>
 						<th field="userName" width="20" align="center">账号</th>
@@ -33,7 +33,7 @@
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">添加成员</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">修改信息</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除成员</a>
-				<label style="margin-left: 80px;">姓名:</label>
+				<label style="margin-left: 700px;">姓名:</label>
 				<input class="easyui-textbox" id="name" name="name" style="width:100px">
 				<label style="margin-left: 10px;">学院:</label>
 				<select class="easyui-combobox" id="school" name="school" style="width:120px">
@@ -77,8 +77,8 @@
 					<option value="毕业">毕业</option>
 				</select>
 				
-				<a href="javascript:void(0)" id="search_btn" class="easyui-linkbutton" iconCls="icon-search" style="margin-left: 10px;">查找</a>
-		     	<a href="javascript:void(0)" id="import_btn" class="easyui-linkbutton" iconCls="icon-undo" style="margin-left: 5px;">导入</a>
+				<a href="javascript:void(0)" id="search_btn" class="easyui-linkbutton" iconCls="icon-search" style="margin-left: 20px;">查找</a>
+		     	<a href="javascript:void(0)" id="import_btn" class="easyui-linkbutton" iconCls="icon-undo" style="margin-left: 20px;">导入名单</a>
 			</div>
 
 			<div id="dlg" class="easyui-dialog" style="width:380px" closed="true" buttons="#dlg-buttons">
@@ -163,89 +163,130 @@
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
 			</div>
 		</div>
-		<script type="text/javascript">
-			var url;
-
-			/*模糊查询*/
-			$("#search_btn").click(function() {
-				loadCustomInfo();
-			})
-
-			function loadCustomInfo() {
-				var name = $("#name").val();
-				var school = $("#school").combobox("getValue");
-				var grade = $("#grade").val();
-				var teacher = $("#teacher").val();
-				var state = $("#state").combobox("getValue");
-				$('#dg').datagrid('load', {
-					name : name,
-					school : school,
-					grade : grade,
-					teacher : teacher,
-					state : state
-				});
-			}
-			
-			function newUser() {
-				$('#dlg').dialog('open').dialog('center').dialog('setTitle', '添加成员');
-				$('#fm').form('clear');
-				url = 'addNewStudent.do';
-			}
-
-			function editUser() {
-				var row = $('#dg').datagrid('getSelected');
-				if(row) {
-					$('#dlg').dialog('open').dialog('center').dialog('setTitle', '修改信息');
-					$('#fm').form('load', row);
-					url = 'updateStudentUser.do?';
-							/* userName=' + row.userName; */
-				}else {
-					$.messager.alert('提示', "请选中要修改学生信息", 'info');
+		
+		<div id="importInfo" class="easyui-dialog" closed="true" buttons="#import-excel-button" title="导入新生信息" style="width: 400px; height: 200px;">
+			<form id="importInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:20px 40px">
+				<table cellpadding="5">
+					<tr>
+						<td>信息表:</td>
+						<td><input class="easyui-filebox" type="text" name="file"  style="width: 200px; height: 32px"></input></td>
+					</tr>
+					<tr>
+						<td>样表:</td>
+						<td><a href="">下载</a></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="import-excel-button">
+			<a href="javascript:void(0)" id="importExcel" class="easyui-linkbutton" onclick="importExcel();"> 导入成绩单</a>
+		</div>
+	<script type="text/javascript">
+		var url;
+		
+		/*导入数据*/
+		$("#import_btn").click(function(){
+			$('#importInfoForm').form('clear');
+			$('#importInfo').dialog('open').dialog('center');
+		})
+		
+		function importExcel(){
+			$('#importInfoForm').form({
+				url : 'uploadStudentExcel.do',
+				onSubmit : function() {
+					return $(this).form('validate');
+				},
+				success : function(data) {
+					var obj = eval("(" + data + ")");
+					$('#importInfo').dialog('close');
+					$.messager.alert('提示', obj.content);
+					$('#dg').datagrid('reload');
 				}
-			}
+			});
+			$('#importInfoForm').submit();
+		}
+		
 
-			function saveUser() {
-				$('#fm').form('submit', {
-					url: url,
-					onSubmit: function() {
-						return $(this).form('validate');
-					},
-					success: function(result) {
-						var result = eval('(' + result + ')');
-						console.log(result);
-						if(result.success) {
-							$('#dlg').dialog('close');
-							$.messager.alert('提示', result.content);
-							$('#dg').datagrid('reload');
-						} else {
-							$.messager.alert('提示', result.content);
-						}
+		/*模糊查询*/
+		$("#search_btn").click(function() {
+			loadCustomInfo();
+		})
+
+		function loadCustomInfo() {
+			var name = $("#name").val();
+			var school = $("#school").combobox("getValue");
+			var grade = $("#grade").val();
+			var teacher = $("#teacher").val();
+			var state = $("#state").combobox("getValue");
+			$('#dg').datagrid('load', {
+				name : name,
+				school : school,
+				grade : grade,
+				teacher : teacher,
+				state : state
+			});
+		}
+		
+		function newUser() {
+			$('#dlg').dialog('open').dialog('center').dialog('setTitle', '添加成员');
+			$('#fm').form('clear');
+			url = 'addNewStudent.do';
+		}
+
+		function editUser() {
+			var row = $('#dg').datagrid('getSelected');
+			if(row) {
+				$('#dlg').dialog('open').dialog('center').dialog('setTitle', '修改信息');
+				$('#fm').form('load', row);
+				url = 'updateStudentUser.do?';
+						/* userName=' + row.userName; */
+			}else {
+				$.messager.alert('提示', "请选中要修改学生信息", 'info');
+			}
+		}
+
+		function saveUser() {
+			$('#fm').form('submit', {
+				url: url,
+				onSubmit: function() {
+					return $(this).form('validate');
+				},
+				success: function(result) {
+					var result = eval('(' + result + ')');
+					console.log(result);
+					if(result.success) {
+						$('#dlg').dialog('close');
+						$.messager.alert('提示', result.content);
+						$('#dg').datagrid('reload');
+					} else {
+						$.messager.alert('提示', result.content);
+					}
+				}
+			});
+		}
+
+		function destroyUser() {
+			var row = $('#dg').datagrid('getSelected');
+			if(row) {
+				$.messager.confirm('删除', '您确定要删除该用户吗?', function(r) {
+					if(r) {
+						$.post('deleteStudentUser.do', {
+							userName: row.userName
+						}, function(result) {
+							if(result.success) {
+								$('#dg').datagrid('reload'); // reload the user data
+							} else {
+								$.messager.show({ // show error message
+									title: 'Error',
+									msg: result.errorMsg
+								});
+							}
+						}, 'json');
 					}
 				});
 			}
-
-			function destroyUser() {
-				var row = $('#dg').datagrid('getSelected');
-				if(row) {
-					$.messager.confirm('删除', '您确定要删除该用户吗?', function(r) {
-						if(r) {
-							$.post('deleteStudentUser.do', {
-								userName: row.userName
-							}, function(result) {
-								if(result.success) {
-									$('#dg').datagrid('reload'); // reload the user data
-								} else {
-									$.messager.show({ // show error message
-										title: 'Error',
-										msg: result.errorMsg
-									});
-								}
-							}, 'json');
-						}
-					});
-				}
-			}
-		</script>
-	</body>
+		}
+	</script>
+</body>
 
 </html>
