@@ -8,7 +8,7 @@ import cn.vito.coding.check.po.UserLike;
 /**
  * 用户相关service
  * 
- * @author baijw12
+ * @author 刘晓庆
  *
  */
 public interface UserService {
@@ -21,7 +21,7 @@ public interface UserService {
 	public String getCurrentUserName();
 
 	/**
-	 * 教职工用户，根据用户账号获取用户信息
+	 * 根据用户账号获取用户信息
 	 * 
 	 * @param userName
 	 *            用户账号
@@ -30,65 +30,102 @@ public interface UserService {
 	public User getUserByUserName(String userName);
 
 	/**
-	 * 教职工用户，获取用户的信息
+	 * 管理员，获取教职工用户的信息
 	 * 
+	 * @param nickName
+	 * @param role
+	 * @param pageNo
+	 * @param pageSize
 	 * @return
 	 */
 	public List<User> getAllUser(String nickName, String role, int pageNo, int pageSize);
 
 	/**
-	 * 教职工用户，获取用户数量
+	 * 管理员，获取教职工用户数量
 	 * 
 	 * @return
 	 */
 	public int count();
 
 	/**
-	 * 教职工用户，修改学生密码
+	 * 修改密码
 	 * 
-	 * @param user
+	 * @param userName
+	 * @param password
+	 * @param nickName
+	 * @param role
 	 */
 	public void updateUser(String userName, String password, String nickName, String role);
 
 	/**
-	 * 教职工用户，添加新用户
+	 * 管理员，添加新教职工用户
 	 * 
-	 * @param user
+	 * @param userName
+	 * @param password
+	 * @param nickName
+	 * @param role
 	 */
 	public void addUser(String userName, String password, String nickName, String role);
 
 	/**
-	 * 教职工用户，删除用户
+	 * 管理员，删除教职工用户
 	 * 
 	 * @param userName
 	 */
 	public void deleteUserByName(String userName);
 
 	/**
-	 * 学生用户，查询所有用户的信息
+	 * 管理员，查询所有学生用户的信息
 	 * 
+	 * @param name
+	 * @param school
+	 * @param grade
+	 * @param state
+	 * @param teacher
+	 * @param page
+	 * @param rows
 	 * @return
 	 */
 	public List<UserLike> findStudentUser(String name, String school, Integer grade, String state, String teacher,
 			int page, int rows);
 
 	/**
-	 * 学生用户，插入数据
+	 * 管理员，插入学生数据
+	 * 
+	 * @param userName
+	 * @param password
+	 * @param name
+	 * @param gender
+	 * @param school
+	 * @param grade
+	 * @param classes
+	 * @param duration
+	 * @param state
+	 * @param teacher
 	 */
 	public void addStudentUser(String userName, String password, String name, String gender, String school,
 			Integer grade, String classes, Integer duration, String state, String teacher);
 
 	/**
-	 * 学生用户，删除数据s
+	 * 管理员，删除学生数据
 	 * 
 	 * @param id
 	 */
 	public void deleteStudentUser(String userName);
 
 	/**
-	 * 学生用户，更新数据
+	 * 管理员，更新学生数据
 	 * 
-	 * @param userLike
+	 * @param userName
+	 * @param password
+	 * @param name
+	 * @param gender
+	 * @param school
+	 * @param grade
+	 * @param classes
+	 * @param duration
+	 * @param state
+	 * @param teacher
 	 */
 	public void updateStudentUser(String userName, String password, String name, String gender, String school,
 			Integer grade, String classes, Integer duration, String state, String teacher);

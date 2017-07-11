@@ -28,6 +28,12 @@ import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademyLike;
 import cn.vito.coding.check.scoreTable.ComputeScore;
 
+/**
+ * Excel导入导出
+ * 
+ * @author March
+ *
+ */
 @Service
 public class ExcelUtils {
 
@@ -37,7 +43,15 @@ public class ExcelUtils {
 	@Autowired
 	private StudentDao studentDao;
 
-	// 教师导出成绩
+	/**
+	 * 教师导出成绩
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 */
 	public void outputTeacherExcel(String id, String name, String school, String teacher, Integer year) {
 		// 第一步，创建一个webbook，对应一个Excel文件
 		HSSFWorkbook wb = new HSSFWorkbook();
@@ -145,7 +159,14 @@ public class ExcelUtils {
 		}
 	}
 
-	// 学院导出成绩
+	/**
+	 * 学院导出成绩
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 */
 	public void outputAcademyExcel(String id, String name, String school, Integer year) {
 		// 第一步，创建一个webbook，对应一个Excel文件
 		HSSFWorkbook wb = new HSSFWorkbook();
@@ -249,6 +270,13 @@ public class ExcelUtils {
 		}
 	}
 
+	/**
+	 * 教师导入成绩
+	 * 
+	 * @param file
+	 * @param year
+	 * @return boolean
+	 */
 	public boolean excelTeachersReader(MultipartFile file, int year) {
 		try {
 			InputStream is = file.getInputStream();
@@ -260,35 +288,36 @@ public class ExcelUtils {
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
 				// 遍历每一行
 				for (int r = 1; r < rowCount; r++) {
-					Row row = sheet.getRow(r); // 取出相应的列
+					try {
+						Row row = sheet.getRow(r); // 取出相应的列
 
-					Cell id = row.getCell(0);
-					Integer height = (int) Double.parseDouble(row.getCell(6).toString());
-					Double weight = Double.parseDouble(row.getCell(7).toString());
-					Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
-					Double fivem = Double.parseDouble(row.getCell(9).toString());
-					Double long_jump = Double.parseDouble(row.getCell(10).toString());
-					Double reach = Double.parseDouble(row.getCell(11).toString());
-					String eightm = row.getCell(12).toString();
-					String tenm = row.getCell(13).toString();
-					Integer sit_ups = (int) Double.parseDouble(
-							StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
-					Integer pull_up = (int) Double.parseDouble(
-							StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
+						Cell id = row.getCell(0);
+						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
+						Double weight = Double.parseDouble(row.getCell(7).toString());
+						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
+						Double fivem = Double.parseDouble(row.getCell(9).toString());
+						Double long_jump = Double.parseDouble(row.getCell(10).toString());
+						Double reach = Double.parseDouble(row.getCell(11).toString());
+						String eightm = row.getCell(12).toString();
+						String tenm = row.getCell(13).toString();
+						Integer sit_ups = (int) Double.parseDouble(
+								StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
+						Integer pull_up = (int) Double.parseDouble(
+								StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
 
-					Student student = studentDao.findStudentById(id.toString());
+						Student student = studentDao.findStudentById(id.toString());
 
-					double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
-							vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
+						double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
+								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
-					Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump, reach,
-							eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
-					teacherAndAcademyDao.updateTeacherData(data);
-
+						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+								reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
+						teacherAndAcademyDao.updateTeacherData(data);
+					} catch (NumberFormatException e) {
+						continue;
+					}
 				}
-
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
@@ -298,12 +327,18 @@ public class ExcelUtils {
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
 			return false;
-		} catch (NumberFormatException e) {
-			return true;
 		}
 		return true;
 	}
 
+	/**
+	 * 学院导入成绩
+	 * 
+	 * @param file
+	 * @param year
+	 * @param school
+	 * @return boolean
+	 */
 	public boolean excelAcademyReader(MultipartFile file, int year, String school) {
 		try {
 			InputStream is = file.getInputStream();
@@ -315,34 +350,37 @@ public class ExcelUtils {
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
 				// 遍历每一行
 				for (int r = 1; r < rowCount; r++) {
-					Row row = sheet.getRow(r); // 取出相应的列
+					try {
+						Row row = sheet.getRow(r); // 取出相应的列
 
-					Cell id = row.getCell(0);
-					if (!row.getCell(3).toString().equals(school)) {
+						Cell id = row.getCell(0);
+						if (!row.getCell(3).toString().equals(school)) {
+							continue;
+						}
+						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
+						Double weight = Double.parseDouble(row.getCell(7).toString());
+						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
+						Double fivem = Double.parseDouble(row.getCell(9).toString());
+						Double long_jump = Double.parseDouble(row.getCell(10).toString());
+						Double reach = Double.parseDouble(row.getCell(11).toString());
+						String eightm = row.getCell(12).toString();
+						String tenm = row.getCell(13).toString();
+						Integer sit_ups = (int) Double.parseDouble(
+								StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
+						Integer pull_up = (int) Double.parseDouble(
+								StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
+
+						Student student = studentDao.findStudentById(id.toString());
+
+						double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
+								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
+
+						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+								reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
+						teacherAndAcademyDao.updateTeacherData(data);
+					} catch (NumberFormatException e) {
 						continue;
 					}
-					Integer height = (int) Double.parseDouble(row.getCell(6).toString());
-					Double weight = Double.parseDouble(row.getCell(7).toString());
-					Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
-					Double fivem = Double.parseDouble(row.getCell(9).toString());
-					Double long_jump = Double.parseDouble(row.getCell(10).toString());
-					Double reach = Double.parseDouble(row.getCell(11).toString());
-					String eightm = row.getCell(12).toString();
-					String tenm = row.getCell(13).toString();
-					Integer sit_ups = (int) Double.parseDouble(
-							StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
-					Integer pull_up = (int) Double.parseDouble(
-							StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
-
-					Student student = studentDao.findStudentById(id.toString());
-
-					double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
-							vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
-
-					Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump, reach,
-							eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
-					teacherAndAcademyDao.updateTeacherData(data);
-
 				}
 
 			}
@@ -356,8 +394,6 @@ public class ExcelUtils {
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
 			return false;
-		} catch (NumberFormatException e) {
-			return true;
 		}
 		return true;
 	}

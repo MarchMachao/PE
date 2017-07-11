@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.log4j.lf5.util.StreamUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.xml.sax.SAXException;
+
+import com.lowagie.text.DocumentException;
 
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.service.TeacherAndAcademyService;
@@ -22,6 +26,7 @@ import cn.vito.coding.check.service.UserService;
 import cn.vito.coding.check.utils.ExcelUtils;
 import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
+import freemarker.template.TemplateException;
 
 /**
  * 用户信息的操作
@@ -31,6 +36,7 @@ import cn.vito.coding.check.vo.DataGrideRow;
  */
 @Controller
 public class TeacherAndAcademyController {
+
 	@Autowired
 	public TeacherAndAcademyService teacherAndAcademyService;
 	@Autowired
@@ -211,5 +217,28 @@ public class TeacherAndAcademyController {
 		}
 		
 		return new BaseMsg(true, "修改成绩成功！");
+	}
+
+	/**
+	 * 导入成绩模板excel
+	 * 
+	 * @param response
+	 * @throws IOException
+	 * @throws TemplateException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws DocumentException
+	 */
+	@RequestMapping("exampleTeacherAndAcademyExcel")
+	public void exampleTeacherAndAcademyExcel(HttpServletResponse response)
+			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
+		File file = new File("/home/page/excel/exampleTeacherAndAcademy.xls");
+		if (file.exists()) {
+			response.setContentType("application/octet-stream; charset=utf-8");
+			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+			StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+		} else {
+			response.setStatus(404);
+		}
 	}
 }

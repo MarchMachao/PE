@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.vito.coding.check.po.User;
 import cn.vito.coding.check.po.UserLike;
 import cn.vito.coding.check.service.UserService;
+import cn.vito.coding.check.utils.ShiroUtils;
 import cn.vito.coding.check.utils.ValidaterUtil;
 import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
@@ -22,11 +23,12 @@ import cn.vito.coding.check.vo.DataGrideRow;
  */
 @Controller
 public class UserController {
+
 	@Autowired
 	public UserService userService;
 
 	/**
-	 * 教职工用户，查询所有用户在表格中
+	 * 管理员，查询所有教职工用户在表格中
 	 * 
 	 * @param page
 	 * @param rows
@@ -40,7 +42,7 @@ public class UserController {
 	}
 
 	/**
-	 * 教职工用户，添加新用户
+	 * 管理员，添加新教职工用户
 	 * 
 	 * @param userName
 	 * @param password
@@ -60,7 +62,7 @@ public class UserController {
 	}
 
 	/**
-	 * 教职工用户，删除用户数据
+	 * 管理员，删除教职工用户数据
 	 * 
 	 * @param userName
 	 * @return
@@ -73,7 +75,7 @@ public class UserController {
 	}
 
 	/**
-	 * 教职工用户，修改用户信息
+	 * 管理员，修改教职工用户信息
 	 * 
 	 * @param userName
 	 * @param password
@@ -96,7 +98,7 @@ public class UserController {
 	}
 
 	/**
-	 * 学生用户，查询所有数据
+	 * 管理员，查询所有学生数据
 	 * 
 	 * @param name
 	 * @param school
@@ -116,7 +118,7 @@ public class UserController {
 	}
 
 	/**
-	 * 学生用户，添加新数据
+	 * 管理员，添加新学生数据
 	 * 
 	 * @param userName
 	 * @param password
@@ -144,7 +146,7 @@ public class UserController {
 	}
 
 	/**
-	 * 学生用户，删除数据
+	 * 管理员，删除学生数据
 	 * 
 	 * @param id
 	 * @return
@@ -157,7 +159,7 @@ public class UserController {
 	}
 
 	/**
-	 * 学生用户，更新数据
+	 * 管理员，更新学生数据
 	 * 
 	 * @param userName
 	 * @param password
@@ -178,6 +180,32 @@ public class UserController {
 		userService.updateStudentUser(userName, password, name, gender, school, grade, classes, duration, state,
 				teacher);
 		return new BaseMsg(true, "更新数据成功！");
+	}
+
+	/**
+	 * 用户自己修改密码
+	 * 
+	 * @param password
+	 *            原密码
+	 * @param pwd
+	 *            新密码
+	 * @param pwd2
+	 *            新密码确认
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "updateStuPassword")
+	public BaseMsg updateStuPassword(String password, String pwd, String pwd2) {
+		User userpo = userService.getUserByUserName(userService.getCurrentUserName());
+		if (!userpo.getPassword().equals(ShiroUtils.passwdMD5(password))) {
+			return new BaseMsg(false, "原密码错误！");
+		} else if (!pwd.equals(pwd2)) {
+			return new BaseMsg(false, "两次密码输入不一致！");
+		} else if (!ValidaterUtil.checkPassWord(password)) {
+			return new BaseMsg(false, "密码格式不正确！");
+		}
+		userService.updateUser(userService.getCurrentUserName(), ShiroUtils.passwdMD5(pwd), null, null);
+		return new BaseMsg(true, "修改密码成功！");
 	}
 
 }
