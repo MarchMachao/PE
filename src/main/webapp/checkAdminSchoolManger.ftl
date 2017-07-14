@@ -30,7 +30,7 @@
 	<h2 style="text-align: center;">学院审核页面(管理员页面)</h2>
 	<div class="hr" style="clear: both;"></div>
 	<table id="dg" style="width: 100%; height: auto;"
-		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'findAdminCheckBySchool.do?school=${checkAdmin}',method:'get'"
+		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'findAdminCheckBySchool.do?school=${checkAdminSchool}',method:'get'"
 		toolbar="#tb">
 		<thead>
 			<tr>
@@ -55,9 +55,9 @@
 	</table>
 	<div id="tb" style="width: auto;">
 		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
-		   onclick="alert('已通过审核！');window.location.href='updateState.do?teacher=${checkTeacher}';"  plain="true">通过审核</a>
+		   onclick="alert('已通过审核！');window.location.href='updateState.do?teacher=${checkAdminSchool}';"  plain="true">通过审核</a>
 		<a href="javascript:void(0)" id="noCheck" class="easyui-linkbutton" data-options="iconCls:'icon-no'" 
-		   onclick="alert('未通过审核！');window.location.href='updateStateNo.do?teacher=${checkTeacher}';" plain="true">未通过审核</a>
+		   onclick="alert('未通过审核！');window.location.href='updateStateNo.do?teacher=${checkAdminSchool}';" plain="true">未通过审核</a>
 	</div>
 	
 	<div id="check" class="easyui-dialog" closed="true"

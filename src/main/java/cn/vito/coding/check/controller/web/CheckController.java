@@ -150,7 +150,7 @@ public class CheckController {
 	 */
 	@RequestMapping(value = "turnToTeacherCheck")
 	public String turnToTeacherCheck(ModelMap modelMap, String teacher) {
-		modelMap.addAttribute("checkAdmin", teacher);
+		modelMap.addAttribute("checkAdminTeacher", teacher);
 		return "checkAdminTeacherManger.ftl";
 	}
 
@@ -162,7 +162,7 @@ public class CheckController {
 	 */
 	@RequestMapping(value = "turnToSchoolCheck")
 	public String turnToSchoolCheck(ModelMap modelMap, String school) {
-		modelMap.addAttribute("checkAdmin", school);
+		modelMap.addAttribute("checkAdminSchool", school);
 		return "checkAdminSchoolManger.ftl";
 	}
 
