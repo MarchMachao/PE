@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="autdor" content="March" />
+		<title></title>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	</head>
+	<style>
+		.page {
+			padding: 20px 5% 30px 5%;
+			font-family: '微软雅黑';
+			background: url("images/bg.jpg") no-repeat left center;
+			-webkit-background-size: cover;
+			background-attachment:fixed;
+			background-size: cover;
+		    width: 100%;
+		    height: 100%;
+		    -moz-box-sizing: border-box;
+		    box-sizing: border-box;
+		}
+		#box{ 
+			width:100%;
+			font-size: 1.5em;
+			padding: 5px 30px;
+			position:relative; top:0; left:0; background-color: rgba(255,255,255, 0.7);
+ 		}
+ 		#box p{
+ 			margin-bottom: 0.5em;
+ 		}
+ 		#title{
+ 			width: 14em;
+ 			font-size:1.7em;
+ 			margin: 0 auto;
+ 		}
+ 		.table{
+ 			font-size: 1em;
+ 			text-align: center;
+ 			margin-bottom: 0.5em;
+ 			border-bottom: 1px solid #ddd;
+ 		}
+ 		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+		    padding: 8px;
+		    line-height: 1.42857143;
+		    vertical-align: middle;
+	    }
+	</style>
+	<body>
+		<div class="page">
+			<div id="box">
+				<p id="title">欢迎使用学生健康标准数据平台</p>
+				<p>一、关于测试内容与等级评定的说明</p>
+				<p>
+					&emsp;&emsp;1．规定测试内容<br/>&emsp;&emsp;每个学生每学年评定一次，记入《兰州大学〈国家学生体质健康标准〉登记卡》。
+					医学专业及其他5年制学生，在填写登记卡时按规定和需求相应地增减栏目。
+					<br/>&emsp;&emsp;单项指标与权重：
+				</p>
+				<div>
+					<table class="table">
+						<tr>
+							<td>单项指标</td>
+							<td>体重指数(BMI)</td>
+							<td>肺活量</td>
+							<td>50米跑</td>
+							<td>坐位体前屈</td>
+							<td>立定跳远</td>
+							<td>引体向上(男)<br/>1分钟仰卧起坐(女)</td>
+							<td>1000米跑(男)<br/>800米跑(女)</td>
+						</tr>
+						<tr>
+							<td>权重</td>
+							<td>15</td>
+							<td>15</td>
+							<td>20</td>
+							<td>10</td>
+							<td>10</td>
+							<td>10</td>
+							<td>20</td>
+						</tr>
+					</table>
+					<p style="color: red; font-size: 0.7em; width: 19em; margin: 0 auto;">
+						注：体重指数(BMI)=体重(kg)/身高<sup>2</sup>(m<sup>2</sup>)</p>
+				</div>
+				<p>
+					&emsp;&emsp;2．等级评定与登记
+					<br/>&emsp;&emsp;《标准》学年总分由标准分与附加分之和构成，满分为120分。
+					标准分由各单项指标得分与权重乘积之和组成，满分为100分。附加分根据实测成绩确定，对成绩超过100分的加分指标进行加分，
+					满分为20分；加分指标为男生引体向上和1000米跑，女生1分钟仰卧起坐和800米跑，各指标加分幅度均为10分。
+					<br/>&emsp;&emsp;各项目评分按《标准》执行，一、二年级为一组，三、四年级为一组。
+					<br/>&emsp;&emsp;根据学生学年总分评定等级：90.0分及以上为优秀，80.0～89.9分为良好，60.0～79.9分为及格，
+						59.9分及以下为不及格。
+					<br/>&emsp;&emsp;学生毕业时的成绩和等级，按毕业当年学年总分的50%与其他学年总分平均得分的50%之和进行评定。
+				</p>
+				<p>
+					&emsp;&emsp;3.学生测试成绩评定达到良好及以上者，方可参加评优与评奖。秋季学期测试成绩评定不及格者，
+					教务处、体育教研部在春季学期安排1次补测，补测仍不及格，则学年成绩评定为不及格。学生毕业时，
+					《标准》测试的成绩达不到50分者按结业或肄业处理。
+				</p>
+				<p>
+					&emsp;&emsp;4.学生因病或残疾可向学校提交暂缓或免予执行《标准》的申请，经医疗单位证明，体育教研部核准，可暂缓或免予执行《标准》，
+					并填写《免予执行<国家学生体质健康标准>申请表》，存入学生档案。确实丧失运动能力、被免予执行《标准》的残疾学生，仍可参加评优与评奖，
+						毕业时《标准》成绩需注明免测。
+					<br/>&emsp;&emsp;学生因外出交流、毕业实习等原因确实不能参加秋季学期测试的，须由所在学院统一向体育教研部请假，按时参加补测。
+				</p>
+				<p>二、奖励与惩罚办法</p>
+				<p>&emsp;&emsp;1.学校体育运动委员会对《标准》测试中表现突出的本科生予以一定的精神奖励，设置“健康之星”、“体育锻炼先进个人”荣誉称号。</p>
+				<p>&emsp;&emsp;2.年度综合测评中，对测评学年内《标准》测试优良的学生予以附加分奖励，“优秀”等次奖励0.5分，“良好”等次奖励0.2分。（不包括高水平运动员）</p>
+				<p>
+					&emsp;&emsp;3.有以下情形之一者，年度《标准》测试成绩加5分，标准分不超过100分：
+					<br/>&emsp;&emsp;&emsp;①获得等级运动员称号者；
+					<br/>&emsp;&emsp;&emsp;②测试年度获得校运会冠军，或参加省级以上体育比赛并获得名次者；
+					<br/>&emsp;&emsp;&emsp;③担任学生干部或承担志愿服务的学生，在组织《标准》测试及其他体育活动中表现出色，经体育教研部认定工作认真负责者。
+				</p>
+				<p>
+					&emsp;&emsp;4.属下列情况之一者，该学年《标准》测试成绩不及格：
+					<br/>&emsp;&emsp;&emsp;①体育课、早操、课外体育锻炼无故缺勤，一年累计超过应出勤次数1/10者；
+					<br/>&emsp;&emsp;&emsp;②体育课、早操、课外体育锻炼因病、事假缺勤，一年累计超过1/3者；
+					<br/>&emsp;&emsp;&emsp;③《标准》测试过程中，弄虚作假、消极测试被测试工作人员确认的。
+				</p>
+				<p style="text-align: right; font-size: 0.8em;">*&nbsp;摘录自校教【2017】12号文件：《兰州大学关于<国家学生体质健康标准(2014年修订)>的实施意见》</p>
+			</div>
+		</div>
+	</body>
+</html>
