@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUser(String userName, String password, String nickName, String role) {
-		userDao.addUser(new User(userName, ShiroUtils.passwdMD5(password), nickName, role));
+		userDao.updateUser(new User(userName, ShiroUtils.passwdMD5(password), nickName, role));
 	}
 
 	@Override

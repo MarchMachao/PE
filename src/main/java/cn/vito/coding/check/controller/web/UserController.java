@@ -25,6 +25,7 @@ import cn.vito.coding.check.vo.DataGrideRow;
  */
 @Controller
 public class UserController {
+
 	@Autowired
 	public UserService userService;
 	
@@ -229,9 +230,9 @@ public class UserController {
 		} else if (!pwd.equals(pwd2)) {
 			return new BaseMsg(false, "两次密码输入不一致！");
 		} else if (!ValidaterUtil.checkPassWord(password)) {
-			return new BaseMsg(false, "密码格式不正确！");
+			return new BaseMsg(false, "密码格式不正确！\n请输入6位密码！");
 		}
-		userService.updateUser(userService.getCurrentUserName(), ShiroUtils.passwdMD5(pwd), null, null);
+		userService.updateUser(userService.getCurrentUserName(), pwd, null, null);
 		return new BaseMsg(true, "修改密码成功！");
 	}
 }
