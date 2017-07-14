@@ -18,6 +18,7 @@ public class TeacherAndAcademyLike {
 		this.rows = rows;
 	}
 	
+	
 
 	public TeacherAndAcademyLike(String id, String name, String school, Integer year) {
 		this.id = id;

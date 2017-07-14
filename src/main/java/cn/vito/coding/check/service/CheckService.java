@@ -64,4 +64,48 @@ public interface CheckService {
 	 * @param teacher
 	 */
 	public void checkNoPass(String school);
+
+	/**
+	 * 管理员审核的学院状态列表
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findSchoolCheckList();
+
+	/**
+	 * 管理员审核的教师状态列表
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findTeacherCheckList();
+
+	/**
+	 * 管理员审核的教师列表的学生数据
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAdminCheckByTeacher(String teacher, int pageNo, int pageSize);
+
+	/**
+	 * 管理员审核的学院列表的学生数据
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAdminCheckBySchool(String school, int pageNo, int pageSize);
+
+	/**
+	 * 管理员更新教师状态数据已审核
+	 * 
+	 * @param teacher
+	 */
+	public void updateAdminTeacherStateOk(String teacher);
+
+	/**
+	 * 管理员更新教师状态数据被退回
+	 * 
+	 * @param teacher
+	 */
+	public void updateAdminTeacherStateNo(String teacher);
 }

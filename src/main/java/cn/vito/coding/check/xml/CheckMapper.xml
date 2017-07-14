@@ -135,4 +135,132 @@
 			AND t1.first_check = '未审核'
 	</update>
 	
+	<!-- 管理员的学院状态列表 -->
+	<select id="findSchoolCheckList" resultType="TeacherAndAcademy">
+		SELECT
+			a_student.school,
+			a_data.second_check
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_student.teacher = '学院'
+    	AND a_data.first_check = '已审核'
+		GROUP BY
+			a_student.school
+	</select>
+	
+		<!-- 管理员的教师状态列表 -->
+	<select id="findTeacherCheckList" resultType="TeacherAndAcademy">
+		SELECT
+			a_student.teacher,
+			a_data.second_check
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_student.teacher != '学院'
+		AND a_data.first_check = '已审核'
+		GROUP BY
+			a_student.teacher
+	</select>
+	
+	<!-- 管理员根据不同的学院，查询不同的审核所有未审核的数据-->
+	<select id="findAdminCheckBySchool" parameterType="CheckAcademy" resultType="TeacherAndAcademy">
+		SELECT
+			t1.id,
+			t2. NAME,
+			t2.school,
+			t2.teacher,
+			t1. YEAR,
+			t1.height,
+			t1.weight,
+			t1.vital_capacity,
+			t1.fivem,
+			t1.long_jump,
+			t1.reach,
+			t1.eightm,
+			t1.tenm,
+			t1.sit_ups,
+			t1.pull_up,
+			t1.score,
+			t1.first_check,
+			t1.second_check
+		FROM
+			a_data t1,
+			a_student t2
+		WHERE
+			t1.id = t2.id
+		AND t2.state != '已毕业'
+		AND t2.teacher = '学院'
+		AND t1.first_check = '已审核'
+		AND t2.school = #{school}
+		ORDER BY
+			t1. YEAR,
+			t1.id
+		limit #{page},#{rows}
+	</select>
+	
+	<!-- 管理员根据老师姓名查询学生信息 -->
+	<select id="findAdminCheckByTeacher" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
+		SELECT
+				a_data.id,
+				a_student.name,
+				a_student.school,
+				a_student.teacher,
+				a_data.year,
+				a_data.height,
+				a_data.weight,
+				a_data.vital_capacity,
+				a_data.fivem,
+				a_data.long_jump,
+				a_data.reach,
+				a_data.eightm,
+				a_data.tenm,
+				a_data.sit_ups,
+				a_data.pull_up,
+				a_data.score,
+				a_data.first_check,
+				a_data.second_check
+			FROM
+				a_data,
+				a_student
+			WHERE
+				a_data.id = a_student.id
+				AND a_student.state != '已毕业'
+				AND a_student.teacher != '学院'
+				AND a_data.first_check = '已审核'
+			    AND a_student.teacher = #{teacher}
+			ORDER BY a_data.`year`
+			limit #{page},#{rows}
+	</select>
+	
+		<!-- 教师更新未审核状态已审核 -->
+	<update id="updateAdminTeacherStateOk" parameterType="String">
+		UPDATE a_data t1
+		 	LEFT JOIN a_student t2 ON t1.id = t2.id
+	 	<set>
+			t1.second_check = '已审核'
+	 	</set>
+		WHERE t2.teacher = #{teacher}
+			AND t1.second_check = '未审核'
+	</update>
+	
+	
+	<!-- 教师更新未审核状态为被退回 -->
+	<update id="updateAdminTeacherStateNo" parameterType="String">
+		UPDATE a_data t1
+		 	LEFT JOIN a_student t2 ON t1.id = t2.id
+	 	<set>
+			t1.second_check = '被退回'
+	 	</set>
+		WHERE t2.teacher = #{teacher}
+			AND t1.second_check = '未审核'
+	</update>
+	
+	
 </mapper>

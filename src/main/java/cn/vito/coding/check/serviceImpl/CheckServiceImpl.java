@@ -52,4 +52,34 @@ public class CheckServiceImpl implements CheckService {
 		checkDao.checkNoPass(school);
 	}
 
+	@Override
+	public List<TeacherAndAcademy> findSchoolCheckList() {
+		return checkDao.findSchoolCheckList();
+	}
+
+	@Override
+	public List<TeacherAndAcademy> findTeacherCheckList() {
+		return checkDao.findTeacherCheckList();
+	}
+
+	@Override
+	public List<TeacherAndAcademy> findAdminCheckByTeacher(String teacher, int pageNo, int pageSize) {
+		return checkDao.findAdminCheckByTeacher(new TeacherAndAcademyLike(teacher, pageNo, pageSize));
+	}
+
+	@Override
+	public List<TeacherAndAcademy> findAdminCheckBySchool(String school, int pageNo, int pageSize) {
+		return checkDao.findAdminCheckBySchool(new CheckAcademy(school, pageNo, pageSize));
+	}
+
+	@Override
+	public void updateAdminTeacherStateOk(String teacher) {
+		checkDao.updateAdminTeacherStateOk(teacher);
+	}
+
+	@Override
+	public void updateAdminTeacherStateNo(String teacher) {
+		checkDao.updateAdminTeacherStateNo(teacher);
+	}
+
 }

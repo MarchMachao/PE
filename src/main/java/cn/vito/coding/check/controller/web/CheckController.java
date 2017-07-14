@@ -130,4 +130,95 @@ public class CheckController {
 		return "checkAcademyManger.ftl";
 	}
 
+	/**
+	 * 管理员审核，查询审核教师的列表
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "getAdminCheckList")
+	public String findAdminCheckList(ModelMap modelMap) {
+		modelMap.addAttribute("adminTeacherList", checkService.findTeacherCheckList());
+		modelMap.addAttribute("adminSchoolList", checkService.findSchoolCheckList());
+		return "checkAdminListManger.ftl";
+	}
+
+	/**
+	 * 管理员审核，跳转页面
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping(value = "turnToTeacherCheck")
+	public String turnToTeacherCheck(ModelMap modelMap, String teacher) {
+		modelMap.addAttribute("checkAdmin", teacher);
+		return "checkAdminTeacherManger.ftl";
+	}
+
+	/**
+	 * 管理员审核，跳转页面
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping(value = "turnToSchoolCheck")
+	public String turnToSchoolCheck(ModelMap modelMap, String school) {
+		modelMap.addAttribute("checkAdmin", school);
+		return "checkAdminSchoolManger.ftl";
+	}
+
+	/**
+	 * 管理员获取跳转学院页面的学生数据信息
+	 * 
+	 * @param school
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "findAdminCheckBySchool")
+	public DataGrideRow<TeacherAndAcademy> getAdminCheckBySchool(@RequestParam(defaultValue = "1") String school,
+			int page, int rows) {
+		List<TeacherAndAcademy> checks = checkService.findAdminCheckBySchool(school, page, rows);
+		return new DataGrideRow<>(checks.size(), checks);
+	}
+
+	/**
+	 * 管理员获取跳转教师页面的学生数据信息
+	 * 
+	 * @param school
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "findAdminCheckByTeacher")
+	public DataGrideRow<TeacherAndAcademy> getAdminCheckByTeacher(@RequestParam(defaultValue = "1") String teacher,
+			int page, int rows) {
+		List<TeacherAndAcademy> checks = checkService.findAdminCheckByTeacher(teacher, page, rows);
+		return new DataGrideRow<>(checks.size(), checks);
+	}
+	/**
+	 * 管理员通过教师审核
+	 * 
+	 * @param teacher
+	 * @return
+	 */
+	@RequestMapping(value = "updateAdminTeacherStateOk")
+	public String updateTeacherOk(String teacher) {
+		checkService.updateAdminTeacherStateOk(teacher);
+		return "redirect:getAdminCheckList.do";
+	}
+
+	/**
+	 * 管理员退回教师审核
+	 * 
+	 * @param teacher
+	 * @return
+	 */
+	@RequestMapping(value = "updateAdminTeacherStateNo")
+	public String updateTeacherNo(String teacher) {
+		checkService.updateAdminTeacherStateNo(teacher);
+		return "redirect:getAdminCheckList.do";
+	}
+
 }
