@@ -4,27 +4,38 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link rel="stylesheet" type="text/css"
-	href="easyUI/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"href="easyUI/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
-<script type="text/javascript" src="easyUI/jquery.min.js"></script>
-<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="easyUI/locale/easyui-lang-zh_CN.js"></script>
+
 <style>
 .paraDiv {
 	margin-top: 10px;
 	float: left;
 	margin-left: 5px;
 }
-
-#allmap {
-	width: 100%;
-	height: 100%;
-}
 </style>
+<script>
+// 	function closes(){
+// 		$("#Loading").fadeOut("normal",function(){
+// 			$(this).remove();
+// 		});
+// 	}
+// 	var pc;
+// 	$.parser.onComplete = function(){
+// 		if(pc) clearTimeout(pc);
+// 		pc = setTimeout(closes, 1000);
+// 	}
+</script>
 </head>
 
 <body>
+<!-- 	<div id='Loading' -->
+<!-- 		style="position: absolute; z-index: 1000; top: 0px; left: 0px; width: 100%; height: 100%; background: #FFFFFF ; text-align: center; padding-top: 20%;"> -->
+<!-- 		<h1> -->
+<!-- 			<image src='images/camera-loader.gif' /> -->
+<!-- 			<font color="#15428B">加载中···</font> -->
+<!-- 		</h1> -->
+<!-- 	</div> -->
 	<h2 style="text-align: center;">学生成绩(教师页面)</h2>
 	<div>
 		<div style="margin-bottom: 20px;">
@@ -278,11 +289,11 @@
 	<div id="import-excel-button">
 		<a href="javascript:void(0)" id="importExcel" class="easyui-linkbutton" onclick="importExcel();"> 导入成绩单</a>
 	</div>
-	
+	<script type="text/javascript" src="easyUI/jquery.min.js"></script>
+	<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="easyUI/locale/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript">
-		$(function() {
 			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
-		})
 		
 		$("#pic").click(function(){
 			var row = $('#dg').datagrid('getSelected');
