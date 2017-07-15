@@ -199,6 +199,7 @@
 		AND t2.teacher = '学院'
 		AND t1.first_check = '已审核'
 		AND t2.school = #{school}
+		AND t1.second_check = '未审核'
 		ORDER BY
 			t1. YEAR,
 			t1.id
@@ -234,6 +235,7 @@
 				AND a_student.state != '已毕业'
 				AND a_student.teacher != '学院'
 				AND a_data.first_check = '已审核'
+				AND a_data.second_check = '未审核'
 			    AND a_student.teacher = #{teacher}
 			ORDER BY a_data.`year`
 			limit #{page},#{rows}

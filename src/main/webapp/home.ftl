@@ -39,7 +39,7 @@
 			}
 			.skin-blue-light .sidebar-menu>li.active {
 			    border-left:7px solid #3c8dbc
-			}
+			} 
 		</style>
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
