@@ -55,9 +55,9 @@
 	</table>
 	<div id="tb" style="width: auto;">
 		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
-		   onclick="alert('已通过审核！');window.location.href='updateState.do?teacher=${checkAdminSchool}';"  plain="true">通过审核</a>
+		   onclick="alert('已通过审核！');window.location.href='updateAdminSchoolStateOk.do?school=${checkAdminSchool}';"  plain="true">通过审核</a>
 		<a href="javascript:void(0)" id="noCheck" class="easyui-linkbutton" data-options="iconCls:'icon-no'" 
-		   onclick="alert('未通过审核！');window.location.href='updateStateNo.do?teacher=${checkAdminSchool}';" plain="true">未通过审核</a>
+		   onclick="alert('未通过审核！');window.location.href='updateAdminSchoolStateNo.do?school=${checkAdminSchool}';" plain="true">未通过审核</a>
 	</div>
 	
 	<div id="check" class="easyui-dialog" closed="true"

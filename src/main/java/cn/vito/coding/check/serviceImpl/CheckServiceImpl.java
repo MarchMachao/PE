@@ -82,4 +82,14 @@ public class CheckServiceImpl implements CheckService {
 		checkDao.updateAdminTeacherStateNo(teacher);
 	}
 
+	@Override
+	public void updateAdminSchoolStateOk(String school) {
+		checkDao.updateAdminSchoolStateOk(school);
+	}
+
+	@Override
+	public void updateAdminSchoolStateNo(String school) {
+		checkDao.updateAdminSchoolStateNo(school);
+	}
+
 }

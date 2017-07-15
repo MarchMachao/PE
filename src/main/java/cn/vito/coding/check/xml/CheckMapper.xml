@@ -239,7 +239,7 @@
 			limit #{page},#{rows}
 	</select>
 	
-		<!-- 教师更新未审核状态已审核 -->
+	<!-- 管理员更新教师未审核状态已审核 -->
 	<update id="updateAdminTeacherStateOk" parameterType="String">
 		UPDATE a_data t1
 		 	LEFT JOIN a_student t2 ON t1.id = t2.id
@@ -251,7 +251,7 @@
 	</update>
 	
 	
-	<!-- 教师更新未审核状态为被退回 -->
+	<!-- 管理员更新教师未审核状态为被退回 -->
 	<update id="updateAdminTeacherStateNo" parameterType="String">
 		UPDATE a_data t1
 		 	LEFT JOIN a_student t2 ON t1.id = t2.id
@@ -259,6 +259,29 @@
 			t1.second_check = '被退回'
 	 	</set>
 		WHERE t2.teacher = #{teacher}
+			AND t1.second_check = '未审核'
+	</update>
+	
+	<!-- 管理员更新学院未审核状态已审核 -->
+	<update id="updateAdminSchoolStateOk" parameterType="String">
+		UPDATE a_data t1
+		 	LEFT JOIN a_student t2 ON t1.id = t2.id
+	 	<set>
+			t1.second_check = '已审核'
+	 	</set>
+		WHERE t2.school = #{school}
+			AND t1.second_check = '未审核'
+	</update>
+	
+	
+	<!-- 管理员更新学院未审核状态为被退回 -->
+	<update id="updateAdminSchoolStateNo" parameterType="String">
+		UPDATE a_data t1
+		 	LEFT JOIN a_student t2 ON t1.id = t2.id
+	 	<set>
+			t1.second_check = '被退回'
+	 	</set>
+		WHERE t2.school = #{school}
 			AND t1.second_check = '未审核'
 	</update>
 	

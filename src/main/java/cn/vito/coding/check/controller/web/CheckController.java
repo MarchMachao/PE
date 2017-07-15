@@ -197,6 +197,7 @@ public class CheckController {
 		List<TeacherAndAcademy> checks = checkService.findAdminCheckByTeacher(teacher, page, rows);
 		return new DataGrideRow<>(checks.size(), checks);
 	}
+
 	/**
 	 * 管理员通过教师审核
 	 * 
@@ -218,6 +219,30 @@ public class CheckController {
 	@RequestMapping(value = "updateAdminTeacherStateNo")
 	public String updateTeacherNo(String teacher) {
 		checkService.updateAdminTeacherStateNo(teacher);
+		return "redirect:getAdminCheckList.do";
+	}
+
+	/**
+	 * 管理员通过学院审核
+	 * 
+	 * @param school
+	 * @return
+	 */
+	@RequestMapping(value = "updateAdminSchoolStateOk")
+	public String updateSchoolOk(String school) {
+		checkService.updateAdminSchoolStateOk(school);
+		return "redirect:getAdminCheckList.do";
+	}
+
+	/**
+	 * 管理员退回学院审核
+	 * 
+	 * @param school
+	 * @return
+	 */
+	@RequestMapping(value = "updateAdminSchoolStateNo")
+	public String updateSchoolNo(String school) {
+		checkService.updateAdminSchoolStateNo(school);
 		return "redirect:getAdminCheckList.do";
 	}
 

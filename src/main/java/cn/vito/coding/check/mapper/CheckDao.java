@@ -109,4 +109,18 @@ public interface CheckDao {
 	 */
 	public void updateAdminTeacherStateNo(String teacher);
 
+	/**
+	 * 管理员更新学院状态数据已审核
+	 * 
+	 * @param teacher
+	 */
+	public void updateAdminSchoolStateOk(String school);
+
+	/**
+	 * 管理员更新学院状态数据被退回
+	 * 
+	 * @param teacher
+	 */
+	public void updateAdminSchoolStateNo(String school);
+
 }
