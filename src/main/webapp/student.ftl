@@ -126,6 +126,8 @@
 	
 		var content = "";
 		for(var i = 0; i < data.length; i++) {
+			var sit_upstemp = (data[i].sit_ups == null) ? "" : data[i].sit_ups;
+			var pull_upstemp = (data[i].pull_up == null) ? "" : data[i].pull_up;
 			content += "<tr>" +
 				"   <td>" + data[i].year + "</td>" +
 				"   <td>" + data[i].height + "</td>" +
@@ -136,8 +138,8 @@
 				"   <td>" + data[i].reach + "</td>" +
 				"   <td>" + data[i].eightm + "</td>" +
 				"   <td>" + data[i].tenm + "</td>" +
-				"   <td>" + data[i].sit_ups + "</td>" +
-				"   <td>" + data[i].pull_up + "</td>" +
+				"   <td>" + sit_upstemp + "</td>" +
+				"   <td>" + pull_upstemp + "</td>" +
 				"   <td>" + data[i].score + "</td>" +
 				"</tr>";
 		}
