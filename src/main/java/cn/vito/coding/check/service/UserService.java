@@ -128,5 +128,5 @@ public interface UserService {
 	 * @param teacher
 	 */
 	public void updateStudentUser(String userName, String password, String name, String gender, String school,
-			Integer grade, String classes, Integer duration, String state, String teacher);
+			Integer grade, String classes, Integer duration, String state);
 }

@@ -46,7 +46,7 @@ public class UserLike {
 	}
 
 	public UserLike(String userName, String password, String nickName, String id, String name, String gender,
-			String school, Integer grade, String classes, Integer duration, String state, String teacher) {
+			String school, Integer grade, String classes, Integer duration, String state) {
 		this.userName = userName;
 		this.password = password;
 		this.nickName = nickName;
@@ -58,7 +58,6 @@ public class UserLike {
 		this.classes = classes;
 		this.duration = duration;
 		this.state = state;
-		this.teacher = teacher;
 	}
 
 	public String getPassword() {

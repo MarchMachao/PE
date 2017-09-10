@@ -24,6 +24,19 @@ public class Student {
 		this.id = id;
 		this.classes = classes;
 	}
+	
+	public Student(String id, String name, String gender, String school, Integer grade, String classes,
+			Integer duration, String state) {
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.school = school;
+		this.grade = grade;
+		this.classes = classes;
+		this.duration = duration;
+		this.state = state;
+	}
+
 	public Student(String id, String name, String gender, String school, Integer grade, String classes, Integer duration,
 			String state, String teacher) {
 		this.id = id;

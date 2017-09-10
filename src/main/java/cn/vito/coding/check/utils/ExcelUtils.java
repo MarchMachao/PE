@@ -432,7 +432,6 @@ public class ExcelUtils {
 					Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
 					String classes = row.getCell(5).toString();
 					Integer duration = (int) Double.parseDouble(row.getCell(6).toString());
-					String teacher = row.getCell(7).toString();
 
 					String id = userName;
 					String nickName = name;
@@ -441,7 +440,7 @@ public class ExcelUtils {
 					user.add(new User(userName, ShiroUtils.passwdMD5("123456"), nickName, "学生"));
 
 					List<Student> student = new ArrayList<>();
-					student.add(new Student(id, name, gender, school, grade, classes, duration, "正常", teacher));
+					student.add(new Student(id, name, gender, school, grade, classes, duration, "正常","老师"));
 					System.out.println("--------------------");
 					userDao.addExcelStudent1(user);
 					userDao.addExcelStudent2(student);

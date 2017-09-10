@@ -76,11 +76,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateStudentUser(String userName, String password, String name, String gender, String school,
-			Integer grade, String classes, Integer duration, String state, String teacher) {
+			Integer grade, String classes, Integer duration, String state) {
 		String nickName = gender;
 		String id = userName;
 		userDao.updateStudentUser(new UserLike(userName, ShiroUtils.passwdMD5(password), nickName, id, name, gender,
-				school, grade, classes, duration, state, teacher));
+				school, grade, classes, duration, state));
 	}
 
 }

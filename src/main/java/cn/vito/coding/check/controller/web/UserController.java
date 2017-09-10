@@ -28,7 +28,7 @@ public class UserController {
 
 	@Autowired
 	public UserService userService;
-	
+
 	@Autowired
 	private ExcelUtils excelUtils;
 
@@ -142,8 +142,7 @@ public class UserController {
 	public BaseMsg addStudent(String userName, String password, String gender, String name, String school,
 			Integer grade, String classes, Integer duration, String state, String teacher) {
 		try {
-			userService.addStudentUser(userName, password, gender, name, school, grade, classes, duration, state,
-					teacher);
+			userService.addStudentUser(userName, password, gender, name, school, grade, classes, duration, state, "老师");
 		} catch (Exception e) {
 			return new BaseMsg(false, "用户名已存在!");
 		}
@@ -182,8 +181,7 @@ public class UserController {
 	@RequestMapping(value = "updateStudentUser")
 	public BaseMsg updateStudent(String userName, String password, String name, String gender, String school,
 			Integer grade, String classes, Integer duration, String state, String teacher) {
-		userService.updateStudentUser(userName, password, name, gender, school, grade, classes, duration, state,
-				teacher);
+		userService.updateStudentUser(userName, password, name, gender, school, grade, classes, duration, state);
 		return new BaseMsg(true, "更新数据成功！");
 	}
 
