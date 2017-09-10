@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 import com.lowagie.text.DocumentException;
 
 import cn.vito.coding.check.po.TeacherAndAcademy;
+import cn.vito.coding.check.po.TeacherToStudent;
 import cn.vito.coding.check.service.AdminService;
 import cn.vito.coding.check.utils.ExcelUtils;
 import cn.vito.coding.check.vo.BaseMsg;
@@ -35,6 +36,7 @@ import freemarker.template.TemplateException;
  */
 @Controller
 public class AdminController {
+
 	@Autowired
 	public AdminService adminService;
 	@Autowired
@@ -180,5 +182,90 @@ public class AdminController {
 		} else {
 			response.setStatus(404);
 		}
+	}
+
+	/**
+	 * 查询老师和学生、课程之间的关系
+	 * 
+	 * @author March
+	 * 
+	 * @param id
+	 * @param school
+	 * @param year
+	 * @param teacher
+	 * @param subjectId
+	 * @param subjectName
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("findTeachersToStudentData")
+	public DataGrideRow<TeacherToStudent> findTeachersToStudentData(String studentId, String school, Integer year,
+			String teacher, Integer subjectId, String subjectName, @RequestParam(defaultValue = "0") int page,
+			int rows) {
+		List<TeacherToStudent> teacherToStudents = adminService.findTeachersToStudentData(studentId, school, year,
+				teacher,
+				subjectId, subjectName, page, rows);
+		return new DataGrideRow<TeacherToStudent>(teacherToStudents.size(), teacherToStudents);
+	}
+
+	/**
+	 * 学生与教师对应关系管理页面增加一条数据
+	 * 
+	 * @param id
+	 * @param year
+	 * @param teacher
+	 * @param subjectId
+	 * @param subjectName
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("addOneTeacherToStudentData")
+	public BaseMsg addOneTeacherToStudentData(String studentId, Integer year, String teacher, Integer subjectId,
+			String subjectName) {
+		try {
+			adminService.addOneTeacherToStudentData(studentId, year, teacher, subjectId, subjectName);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseMsg(false, "添加失败");
+		}
+		
+		return new BaseMsg(true, "添加成功");
+	}
+
+	/**
+	 * 学生与教师对应关系管理页面删除一条数据
+	 * 
+	 * @param id
+	 * @param year
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("deleteTeacherToStudentData")
+	public BaseMsg deleteTeacherToStudentData(String studentId, Integer year) {
+		if (studentId.isEmpty() || year.equals(null)) {
+			return new BaseMsg(false, "删除失败");
+		}
+		adminService.deleteTeacherToStudentData(studentId, year);
+		return new BaseMsg(true, "删除成功");
+	}
+
+	/**
+	 * 学生与教师对应关系管理页面修改一条数据
+	 * 
+	 * @param id
+	 * @param year
+	 * @param teacher
+	 * @param subjectId
+	 * @param subjectName
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("updateTeacherToStudentData")
+	public BaseMsg updateTeacherToStudentData(String studentId, Integer year, String teacher, Integer subjectId,
+			String subjectName) {
+		adminService.updateTeacherToStudentData(studentId, year, teacher, subjectId, subjectName);
+		return new BaseMsg(true, "更新成功");
 	}
 }

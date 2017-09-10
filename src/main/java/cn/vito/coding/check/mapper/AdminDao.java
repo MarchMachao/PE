@@ -5,6 +5,7 @@ import java.util.List;
 import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademyLike;
+import cn.vito.coding.check.po.TeacherToStudent;
 
 /**
  * 管理员页面操作
@@ -35,4 +36,39 @@ public interface AdminDao {
 	 */
 	public void updateAdminData(Data data);
 
+	/**
+	 * 老师与学生、课程之间的对应关系
+	 * 
+	 * @param teacherToStudent
+	 * @return
+	 */
+	public List<TeacherToStudent> findTeachersToStudentData(TeacherToStudent teacherToStudent);
+
+	/**
+	 * 学生与教师对应关系管理页面增加一条数据
+	 * 
+	 * @param teacherToStudent
+	 */
+	public void addOneTeacherToStudentData(TeacherToStudent teacherToStudent);
+
+	/**
+	 * 学生与教师对应关系管理页面导入数据
+	 * 
+	 * @param teacherToStudents
+	 */
+	public void addTeacherToStudentDatas(List<TeacherToStudent> teacherToStudents);
+
+	/**
+	 * 学生与教师对应关系管理页面删除一条数据
+	 * 
+	 * @param teacherToStudent
+	 */
+	public void deleteTeacherToStudentData(TeacherToStudent teacherToStudent);
+
+	/**
+	 * 学生与教师对应关系管理页面修改一条数据
+	 * 
+	 * @param teacherToStudent
+	 */
+	public void updateTeacherToStudentData(TeacherToStudent teacherToStudent);
 }

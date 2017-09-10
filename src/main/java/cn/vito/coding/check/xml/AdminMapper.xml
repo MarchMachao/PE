@@ -135,4 +135,84 @@
 			</set>
 			where id = #{id} and year = #{year}
 	</update>
+	
+	<!-- 学生与教师对应关系管理页面查询数据 -->
+	<select id="findTeachersToStudentData" parameterType="TeacherToStudent" resultType="TeacherToStudent">
+		SELECT
+			a.id AS studentId,
+			a. NAME,
+			a.gender,
+			a.grade,
+			a.school,
+			b. YEAR,
+			b.teacher,
+			b.subjectid,
+			b.subjectname
+		FROM
+			a_student a
+		LEFT JOIN a_teacher b ON a.id = b.studentid
+		WHERE
+			a.id LIKE '%${studentId}%'
+		AND a.school LIKE '%${school}%'
+		<if test="year!=null">
+			AND b.YEAR LIKE '%${year}%'
+		</if>
+		<if test="teacher!=null">
+			AND b.teacher LIKE '%${teacher}%'
+		</if>
+		<if test="subjectId!=null">
+			AND b.subjectid LIKE '%${subjectId}%'
+		</if>
+		<if test="subjectName!=null">
+			AND b.subjectname LIKE '%${subjectName}%'
+		</if>
+		ORDER BY
+			b. YEAR DESC,
+			a.id
+		LIMIT #{page},#{rows}
+	</select>
+	
+	<!-- 学生与教师对应关系管理页面增加一条数据 -->
+	<insert id="addOneTeacherToStudentData" parameterType="TeacherToStudent">
+		insert into a_teacher (studentid,year,teacher,subjectid,subjectname) 
+		values (#{studentId},#{year},#{teacher},#{subjectId},#{subjectName})
+	</insert>
+	
+	<!-- 学生与教师对应关系管理页面导入数据 -->
+	<insert id="addTeacherToStudentDatas" parameterType="java.util.List">
+		insert into a_teacher (studentid,year,teacher,subjectid,subjectname) 
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.studentId},
+			#{item.year},
+			#{item.teacher},
+			#{item.subjectid},
+			#{item.subjectname}
+			)
+		</foreach> 
+	</insert>
+	
+	<!-- 学生与教师对应关系管理页面删除数据 -->
+	<delete id="deleteTeacherToStudentData" parameterType="TeacherToStudent">
+		delete from a_teacher where studentid=#{studentId} and year=#{year}
+	</delete>
+	
+	<!-- 学生与教师对应关系管理页面修改数据 -->
+	<update id="updateTeacherToStudentData" parameterType="TeacherToStudent">
+		update a_teacher
+		<set>
+			<if test="teacher!=null">
+				teacher=#{teacher},
+			</if>
+			<if test="subjectId!=null">
+				subjectid=#{subjectId},
+			</if>
+			<if test="subjectName!=null">
+				subjectname=#{subjectName}
+			</if>
+		</set>
+		where studentid=#{studentId} and year=#{year}
+	</update>
+	
 </mapper>

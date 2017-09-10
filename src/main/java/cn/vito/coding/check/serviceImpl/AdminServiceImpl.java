@@ -9,6 +9,7 @@ import cn.vito.coding.check.mapper.AdminDao;
 import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademyLike;
+import cn.vito.coding.check.po.TeacherToStudent;
 import cn.vito.coding.check.scoreTable.ComputeScore;
 import cn.vito.coding.check.service.AdminService;
 
@@ -36,9 +37,46 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<TeacherAndAcademy> findAdminGraduateData(String id, String name, String school, String teacher,
+	public List<TeacherAndAcademy> findAdminGraduateData(String studentId, String name, String school, String teacher,
 			Integer year, int page, int rows) {
-		return adminDao.findAdminGraduateData(new TeacherAndAcademyLike(id, name, school, teacher, year, page, rows));
+		return adminDao
+				.findAdminGraduateData(new TeacherAndAcademyLike(studentId, name, school, teacher, year, page, rows));
+	}
+
+	@Override
+	public List<TeacherToStudent> findTeachersToStudentData(String studentId, String school, Integer year,
+			String teacher,
+			Integer subjectId, String subjectName, int page, int rows) {
+		return adminDao.findTeachersToStudentData(
+				new TeacherToStudent(studentId, school, year, teacher, subjectId, subjectName, page, rows));
+	}
+
+	@Override
+	public void addOneTeacherToStudentData(String studentId, Integer year, String teacher, Integer subjectId,
+			String subjectName) {
+		adminDao.addOneTeacherToStudentData(new TeacherToStudent(studentId, year, teacher, subjectId, subjectName));
+
+	}
+
+	@Override
+	public void addTeacherToStudentDatas(List<TeacherToStudent> teacherToStudents) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteTeacherToStudentData(String studentId, Integer year) {
+		TeacherToStudent teacherToStudent = new TeacherToStudent();
+		teacherToStudent.setstudentId(studentId);
+		teacherToStudent.setYear(year);
+		adminDao.deleteTeacherToStudentData(teacherToStudent);
+
+	}
+
+	@Override
+	public void updateTeacherToStudentData(String id, Integer year, String teacher, Integer subjectId,
+			String subjectName) {
+		adminDao.updateTeacherToStudentData(new TeacherToStudent(id, year, teacher, subjectId, subjectName));
 	}
 
 }
