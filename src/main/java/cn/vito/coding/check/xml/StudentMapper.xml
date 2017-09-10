@@ -10,7 +10,7 @@
 	<!-- 查询数据 -->	
 	
 	<select id="findAllDataById" parameterType="String" resultType="data">
-		select * from a_data where a_data.id = #{value} and a_data.first_check="已审核" and a_data.first_check="已审核" 
+		select * from a_data where a_data.id = #{value} and a_data.first_check="已审核" and a_data.second_check="已审核" 
 		order by a_data.year
 	</select>
 	
