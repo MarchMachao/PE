@@ -52,7 +52,7 @@ public class TeacherToStudent {
 		this.teacher = teacher;
 		this.subjectId = subjectId;
 		this.subjectName = subjectName;
-		this.page = page;
+		this.page = (page - 1) * rows;
 		this.rows = rows;
 	}
 

@@ -31,7 +31,7 @@ public class TeacherAndAcademyLike {
 		this.name = name;
 		this.school = school;
 		this.year = year;
-		this.page = page;
+		this.page = (page - 1) * rows;
 		this.rows = rows;
 	}
 
@@ -62,7 +62,7 @@ public class TeacherAndAcademyLike {
 		this.school = school;
 		this.teacher = teacher;
 		this.year = year;
-		this.page = page;
+		this.page = (page - 1) * rows;
 		this.rows = rows;
 	}
 

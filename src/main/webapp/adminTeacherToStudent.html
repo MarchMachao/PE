@@ -273,7 +273,7 @@
 					if(r) {
 						$.post('deleteTeacherToStudentData.do', {
 							studentId: row.studentId,
-							year : year
+							year : row.year
 						}, function(result) {
 							if(result.success) {
 								$('#dg').datagrid('reload'); // reload the user data
