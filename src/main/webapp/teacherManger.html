@@ -81,11 +81,6 @@
 				</select>
 			</div>
 			<div class="paraDiv">
-				<span class="paraName">教师:</span> <input class="easyui-textbox"
-					id="teacher" name="teacher"
-					style="width: 100px; height: 32px; marin-top: 10px;">
-			</div>
-			<div class="paraDiv">
 				<span class="paraName">学份:</span> <input class="easyui-textbox"
 					id="year" name="year"
 					style="width: 100px; height: 32px; marin-top: 10px;">
@@ -112,7 +107,6 @@
 				<th data-options="field:'gender',width:50,align:'center'">性别</th>
 				<th data-options="field:'grade',width:90,align:'center'">年级</th>
 				<th data-options="field:'school',width:150,align:'center'">学院</th>
-				<th data-options="field:'teacher',width:90,align:'center'">教师</th>
 				<th data-options="field:'year',width:90,align:'center'">年份</th>
 				<th data-options="field:'height',width:90,align:'center'">身高</th>
 				<th data-options="field:'weight',width:90,align:'center'">体重</th>
@@ -207,7 +201,7 @@
 	</div>
 
 	<div id="exportInfo" class="easyui-dialog" closed="true"
-		buttons="#excel-button" title="导出成绩" style="width: 400px; height: 330px;">
+		buttons="#excel-button" title="导出成绩" style="width: 400px; height: 280px;">
 		<form id="exportInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
 			<table cellpadding="5">
 				<tr>
@@ -250,10 +244,6 @@
 							<option value="药学院">药学院</option>
 						</select>
 					</td>
-				</tr>
-				<tr>
-					<td>教师:</td>
-					<td><input class="easyui-textbox" type="text" id="Exteacher" name="teacher"  style="width: 200px; height: 32px"></input></td>
 				</tr>
 				<tr>
 					<td>年份:</td>

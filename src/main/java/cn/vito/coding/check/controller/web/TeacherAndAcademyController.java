@@ -60,8 +60,7 @@ public class TeacherAndAcademyController {
 	@RequestMapping(value = "getAllStuData")
 	public DataGrideRow<TeacherAndAcademy> findStuData(@RequestParam(defaultValue = "1") String id, String name,
 			String school, String teacher, Integer year, int page, int rows) {
-		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findTeacherData(id, name, school, teacher, year,
-				page, rows);
+		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findTeacherData(id, name, school, year, page, rows);
 		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
 	}
 
@@ -80,11 +79,11 @@ public class TeacherAndAcademyController {
 	@ResponseBody
 	@RequestMapping(value = "getAcademyData")
 	public DataGrideRow<TeacherAndAcademy> findAcaData(@RequestParam(defaultValue = "1") String id, String name,
-			 Integer year, int page, int rows) {
-		String userName =userService.getCurrentUserName();
+			Integer year, int page, int rows) {
+		String userName = userService.getCurrentUserName();
 		String school = userService.getUserByUserName(userName).getNickName();
-		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findAcademyData(id, name, school, null, year,
-				page, rows);
+		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findAcademyData(id, name, school, null, year, page,
+				rows);
 		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
 	}
 
@@ -173,7 +172,7 @@ public class TeacherAndAcademyController {
 		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
 			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
 		} else {
-			String userName =userService.getCurrentUserName();
+			String userName = userService.getCurrentUserName();
 			String school = userService.getUserByUserName(userName).getNickName();
 			if (excelUtils.excelAcademyReader(file, year, school)) {
 				return new BaseMsg(true, "上传成绩成功！");
@@ -209,13 +208,13 @@ public class TeacherAndAcademyController {
 			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm, String tenm,
 			Integer sit_ups, Integer pull_up, Integer grade, String gender) {
 		try {
-			teacherAndAcademyService.updateTeacherData(id, year, height, weight, vital_capacity, fivem, long_jump, reach,
-					eightm, tenm, sit_ups, pull_up, grade, gender);
+			teacherAndAcademyService.updateTeacherData(id, year, height, weight, vital_capacity, fivem, long_jump,
+					reach, eightm, tenm, sit_ups, pull_up, grade, gender);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new BaseMsg(false, "修改成绩失败！");
 		}
-		
+
 		return new BaseMsg(true, "修改成绩成功！");
 	}
 

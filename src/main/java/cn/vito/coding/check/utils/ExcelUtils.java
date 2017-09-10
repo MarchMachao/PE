@@ -85,36 +85,33 @@ public class ExcelUtils {
 		cell.setCellValue("班级");
 		// cell.setCellStyle(style);
 		cell = row.createCell(6);
-		cell.setCellValue("教师");
-		// cell.setCellStyle(style);
-		cell = row.createCell(7);
 		cell.setCellValue("年份");
-		cell = row.createCell(8);
+		cell = row.createCell(7);
 		cell.setCellValue("身高");
-		cell = row.createCell(9);
+		cell = row.createCell(8);
 		cell.setCellValue("体重");
-		cell = row.createCell(10);
+		cell = row.createCell(9);
 		cell.setCellValue("肺活量");
-		cell = row.createCell(11);
+		cell = row.createCell(10);
 		cell.setCellValue("50m跑");
-		cell = row.createCell(12);
+		cell = row.createCell(11);
 		cell.setCellValue("立定跳远");
-		cell = row.createCell(13);
+		cell = row.createCell(12);
 		cell.setCellValue("坐位前屈");
-		cell = row.createCell(14);
+		cell = row.createCell(13);
 		cell.setCellValue("800米跑");
-		cell = row.createCell(15);
+		cell = row.createCell(14);
 		cell.setCellValue("1000m跑");
-		cell = row.createCell(16);
+		cell = row.createCell(15);
 		cell.setCellValue("一分钟仰卧起坐");
-		cell = row.createCell(17);
+		cell = row.createCell(16);
 		cell.setCellValue("引体向上");
-		cell = row.createCell(18);
+		cell = row.createCell(17);
 		cell.setCellValue("备注");
 
 		// // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
 		List<TeacherAndAcademy> teacherAndAcademys = teacherAndAcademyDao
-				.findTeacherExcel(new TeacherAndAcademyLike(id, name, school, teacher, year));
+				.findTeacherExcel(new TeacherAndAcademyLike(id, name, school, year));
 
 		for (int i = 0; i < teacherAndAcademys.size(); i++) {
 			row = sheet.createRow((int) i + 1);
@@ -127,27 +124,26 @@ public class ExcelUtils {
 			row.createCell(4)
 					.setCellValue(teacherAndAcademyss.getGrade() == null ? ' ' : teacherAndAcademyss.getGrade());
 			row.createCell(5).setCellValue(teacherAndAcademyss.getClasses());
-			row.createCell(6).setCellValue(teacherAndAcademyss.getTeacher());
-			row.createCell(7).setCellValue(teacherAndAcademyss.getYear() == null ? ' ' : teacherAndAcademyss.getYear());
-			row.createCell(8)
+			row.createCell(6).setCellValue(teacherAndAcademyss.getYear() == null ? ' ' : teacherAndAcademyss.getYear());
+			row.createCell(7)
 					.setCellValue(teacherAndAcademyss.getHeight() == null ? ' ' : teacherAndAcademyss.getHeight());
-			row.createCell(9)
+			row.createCell(8)
 					.setCellValue(teacherAndAcademyss.getWeight() == null ? ' ' : teacherAndAcademyss.getWeight());
-			row.createCell(10).setCellValue(
+			row.createCell(9).setCellValue(
 					teacherAndAcademyss.getVital_capacity() == null ? ' ' : teacherAndAcademyss.getVital_capacity());
-			row.createCell(11)
+			row.createCell(10)
 					.setCellValue(teacherAndAcademyss.getFivem() == null ? ' ' : teacherAndAcademyss.getFivem());
-			row.createCell(12).setCellValue(
+			row.createCell(11).setCellValue(
 					teacherAndAcademyss.getLong_jump() == null ? ' ' : teacherAndAcademyss.getLong_jump());
-			row.createCell(13)
+			row.createCell(12)
 					.setCellValue(teacherAndAcademyss.getReach() == null ? ' ' : teacherAndAcademyss.getReach());
-			row.createCell(14).setCellValue(teacherAndAcademyss.getEightm());
-			row.createCell(15).setCellValue(teacherAndAcademyss.getTenm());
-			row.createCell(16)
+			row.createCell(13).setCellValue(teacherAndAcademyss.getEightm());
+			row.createCell(14).setCellValue(teacherAndAcademyss.getTenm());
+			row.createCell(15)
 					.setCellValue(teacherAndAcademyss.getSit_ups() == null ? ' ' : teacherAndAcademyss.getSit_ups());
-			row.createCell(17)
+			row.createCell(16)
 					.setCellValue(teacherAndAcademyss.getPull_up() == null ? ' ' : teacherAndAcademyss.getPull_up());
-			row.createCell(18)
+			row.createCell(17)
 					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
 
 			// row.createCell((short) 2).setCellValue((double) stu.getAge());

@@ -75,7 +75,7 @@
 		from a_data,a_student 
 		where a_data.id = a_student.id and a_student.state != '已毕业' and a_student.teacher != '学院'
 			 and a_data.id like '%${id}%' and a_student.name like '%${name}%' and  a_student.school like '%${school}%' 
-			 and a_student.teacher like '%${teacher}%' and a_data.year like '%${year}%'
+			 and a_data.year like '%${year}%'
 		order by a_data.year DESC,a_data.id 
 	</select>
 	

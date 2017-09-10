@@ -19,10 +19,10 @@ public class TeacherAndAcademyServiceImpl implements TeacherAndAcademyService {
 	private TeacherAndAcademyDao teacherAndAcademyDao;
 
 	@Override
-	public List<TeacherAndAcademy> findTeacherData(String id, String name, String school, String teacher, Integer year,
+	public List<TeacherAndAcademy> findTeacherData(String id, String name, String school, Integer year,
 			int page, int rows) {
 		return teacherAndAcademyDao
-				.findTeacherData(new TeacherAndAcademyLike(id, name, school, teacher, year, page, rows));
+				.findTeacherData(new TeacherAndAcademyLike(id, name, school, year, page, rows));
 	}
 
 	@Override

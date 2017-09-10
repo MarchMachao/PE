@@ -26,6 +26,16 @@ public class TeacherAndAcademyLike {
 		this.school = school;
 		this.year = year;
 	}
+	
+
+	public TeacherAndAcademyLike(String id, String name, String school, Integer year, int page, int rows) {
+		this.id = id;
+		this.name = name;
+		this.school = school;
+		this.year = year;
+		this.page = page;
+		this.rows = rows;
+	}
 
 	public TeacherAndAcademyLike(String id, String name, String school, String teacher, Integer year) {
 		this.id = id;

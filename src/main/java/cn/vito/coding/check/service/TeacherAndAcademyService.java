@@ -23,8 +23,8 @@ public interface TeacherAndAcademyService {
 	 * @param rows
 	 * @return
 	 */
-	public List<TeacherAndAcademy> findTeacherData(String id, String name, String school, String teacher, Integer year,
-			int page, int rows);
+	public List<TeacherAndAcademy> findTeacherData(String id, String name, String school, Integer year, int page,
+			int rows);
 
 	/**
 	 * 学院页面查询所有学生信息
