@@ -37,7 +37,6 @@
 				<th data-options="field:'id',width:100,align:'center'">学号</th>
 				<th data-options="field:'name',width:80,align:'center'">姓名</th>
 				<th data-options="field:'school',width:140,align:'center'">学院</th>
-				<th data-options="field:'teacher',width:90,align:'center'">教师</th>
 				<th data-options="field:'year',width:70,align:'center'">年份</th>
 				<th data-options="field:'height',width:70,align:'center'">身高</th>
 				<th data-options="field:'weight',width:70,align:'center'">体重</th>

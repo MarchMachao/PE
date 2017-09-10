@@ -3,8 +3,81 @@
 <mapper namespace="cn.vito.coding.check.mapper.TeacherAndAcademyDao">
 
 	
-	<!-- 教师页面查询所有的数据 -->
-	<select id="findTeacherData" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
+	<!-- 教师页面查询大一、大二的数据 -->
+	<select id="findFreshmanTeacherData" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
+		SELECT
+			a_data.id,
+			teaToStu. NAME,
+			teaToStu.gender,
+			teaToStu.school,
+			teaToStu.grade,
+			teaToStu.classes,
+			teaToStu.duration,
+			teaToStu.state,
+			a_data. YEAR,
+			a_data.height,
+			a_data.weight,
+			a_data.vital_capacity,
+			a_data.fivem,
+			a_data.long_jump,
+			a_data.reach,
+			a_data.eightm,
+			a_data.tenm,
+			a_data.sit_ups,
+			a_data.pull_up,
+			a_data.score,
+			a_data.first_check,
+			a_data.second_check
+		FROM
+			a_data,
+			(SELECT
+				stu.id,
+				stu. NAME,
+				stu.gender,
+				stu.school,
+				stu.grade,
+				stu.classes,
+				stu.duration,
+				stu.state,
+				stu.teacher as flag,
+				tea.teacher,
+				tea.subjectid,
+				tea.subjectname
+			FROM
+				a_student stu
+			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+			) teaToStu
+		WHERE
+			a_data.id = teaToStu.id
+		AND teaToStu.state != '已毕业'
+		AND teaToStu.flag != '学院'
+		AND teaToStu.teacher = #{teacher}
+		AND teaToStu.subjectname = #{subjectname}
+		AND a_data.id LIKE '%${id}%'
+		AND teaToStu. NAME LIKE '%${name}%'
+		AND teaToStu.school LIKE '%${school}%'
+		AND a_data. YEAR LIKE '%${year}%'
+		ORDER BY
+			a_data. YEAR DESC,
+			a_data.id
+		limit #{page},#{rows}
+	</select>
+	
+	<!-- 根据老师姓名大一大二课程列表 -->
+	<select id="teacherFreshmanList" parameterType="String" resultType="String">
+		SELECT
+			tea.subjectname
+		FROM
+			a_student stu
+		LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+		WHERE
+			tea.teacher = #{value}
+		AND stu.teacher != '学院'
+		AND stu.state != '已毕业'
+	</select>
+	
+	<!-- 教师页面中查询大三大四的数据 -->
+	<select id="findJuniorTeacherData" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
 		SELECT
 			a_data.id,
 			a_student.name,
@@ -35,11 +108,10 @@
 		WHERE
 			a_data.id = a_student.id
 		AND a_student.state != '已毕业'
-		AND a_student.teacher != '学院'
+		AND a_student.teacher = '学院'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
 		AND a_student.school LIKE '%${school}%'
-		AND a_student.teacher LIKE '%${teacher}%'
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,

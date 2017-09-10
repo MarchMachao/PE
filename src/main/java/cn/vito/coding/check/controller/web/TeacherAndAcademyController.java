@@ -12,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.log4j.lf5.util.StreamUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,7 +46,7 @@ public class TeacherAndAcademyController {
 	private UserService userService;
 
 	/**
-	 * 教师页面查询和模糊查询所有用户在表格中
+	 * 教师页面查询和模糊查询大一、大二用户在表格中
 	 * 
 	 * @param id
 	 * @param name
@@ -57,10 +58,57 @@ public class TeacherAndAcademyController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "getAllStuData")
-	public DataGrideRow<TeacherAndAcademy> findStuData(@RequestParam(defaultValue = "1") String id, String name,
+	@RequestMapping(value = "findStuFreshmanData")
+	public DataGrideRow<TeacherAndAcademy> findStuFreshmanData(String id, String name, String school, Integer year,
+			String subjectname, int page, int rows) {
+		String teacher = userService.getUserByUserName(userService.getCurrentUserName()).getNickName();
+		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findFreshmanTeacherData(id, name, school, teacher,
+				year, subjectname, page, rows);
+		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+	}
+
+	/**
+	 * 教师输入信息，查询课程的列表
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "teacherFreshmanList")
+	public String teacherFreshmanList(ModelMap modelMap) {
+		String teacher = userService.getUserByUserName(userService.getCurrentUserName()).getNickName();
+		modelMap.addAttribute("subjuectList", teacherAndAcademyService.teacherFreshmanList(teacher));
+		return "teacherFreshmanListManger.ftl";
+	}
+
+	/**
+	 * 教师输入信息，跳转页面
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping(value = "turnToManger")
+	public String turnToCheck(ModelMap modelMap, String subjectname) {
+		modelMap.addAttribute("teacherSubject", subjectname);
+		return "teacherFreshmanManger.ftl";
+	}
+
+	/**
+	 * 教师页面查询和模糊查询大三、大四用户在表格中
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "findJuniorData")
+	public DataGrideRow<TeacherAndAcademy> findJuniorData(@RequestParam(defaultValue = "1") String id, String name,
 			String school, String teacher, Integer year, int page, int rows) {
-		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findTeacherData(id, name, school, year, page, rows);
+		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findJuniorTeacherData(id, name, school, year, page,
+				rows);
 		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
 	}
 

@@ -12,7 +12,7 @@ import cn.vito.coding.check.po.TeacherAndAcademy;
  */
 public interface TeacherAndAcademyService {
 	/**
-	 * 教师页面查询所有学生信息
+	 * 教师页面查询大一/大二学生的信息
 	 * 
 	 * @param id
 	 * @param name
@@ -23,7 +23,29 @@ public interface TeacherAndAcademyService {
 	 * @param rows
 	 * @return
 	 */
-	public List<TeacherAndAcademy> findTeacherData(String id, String name, String school, Integer year, int page,
+	public List<TeacherAndAcademy> findFreshmanTeacherData(String id, String name, String school, String teacher,
+			Integer year, String subjectname, int page, int rows);
+
+	/**
+	 * 根据老师姓名大一大二课程列表
+	 * 
+	 * @param subjectname
+	 * @return
+	 */
+	public List<String> teacherFreshmanList(String subjectname);
+
+	/**
+	 * 教师页面查询大三/大四学生的信息
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findJuniorTeacherData(String id, String name, String school, Integer year, int page,
 			int rows);
 
 	/**

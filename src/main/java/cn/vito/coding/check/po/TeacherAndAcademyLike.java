@@ -6,6 +6,7 @@ public class TeacherAndAcademyLike {
 	private String school;// 学院
 	private String teacher;// 教师
 	private Integer year;// 年份
+	private String subjectname;// 科目
 	private int page;
 	private int rows;
 
@@ -17,8 +18,6 @@ public class TeacherAndAcademyLike {
 		this.page = (page - 1) * rows;
 		this.rows = rows;
 	}
-	
-	
 
 	public TeacherAndAcademyLike(String id, String name, String school, Integer year) {
 		this.id = id;
@@ -26,7 +25,6 @@ public class TeacherAndAcademyLike {
 		this.school = school;
 		this.year = year;
 	}
-	
 
 	public TeacherAndAcademyLike(String id, String name, String school, Integer year, int page, int rows) {
 		this.id = id;
@@ -45,6 +43,18 @@ public class TeacherAndAcademyLike {
 		this.year = year;
 	}
 
+	public TeacherAndAcademyLike(String id, String name, String school, String teacher, Integer year,
+			String subjectname, int page, int rows) {
+		this.id = id;
+		this.name = name;
+		this.school = school;
+		this.teacher = teacher;
+		this.year = year;
+		this.subjectname = subjectname;
+		this.page = (page - 1) * rows;
+		this.rows = rows;
+	}
+
 	public TeacherAndAcademyLike(String id, String name, String school, String teacher, Integer year, int page,
 			int rows) {
 		this.id = id;
@@ -52,8 +62,16 @@ public class TeacherAndAcademyLike {
 		this.school = school;
 		this.teacher = teacher;
 		this.year = year;
-		this.page = (page - 1) * rows;
+		this.page = page;
 		this.rows = rows;
+	}
+
+	public String getSubjectname() {
+		return subjectname;
+	}
+
+	public void setSubjectname(String subjectname) {
+		this.subjectname = subjectname;
 	}
 
 	public String getId() {

@@ -15,11 +15,26 @@ import cn.vito.coding.check.po.TeacherAndAcademyLike;
 public interface TeacherAndAcademyDao {
 
 	/**
-	 * 教师页面查询所有学生的信息
+	 * 教师页面查询大一/大二学生的信息
 	 * 
 	 * @return
 	 */
-	public List<TeacherAndAcademy> findTeacherData(TeacherAndAcademyLike teacherLike);
+	public List<TeacherAndAcademy> findFreshmanTeacherData(TeacherAndAcademyLike teacherLike);
+
+	/**
+	 * 根据老师姓名大一大二课程列表
+	 * 
+	 * @param subjectname
+	 * @return
+	 */
+	public List<String> teacherFreshmanList(String subjectname);
+
+	/**
+	 * 教师页面查询大三/大四学生的信息
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findJuniorTeacherData(TeacherAndAcademyLike teacherLike);
 
 	/**
 	 * 教师页面查询出Excel的数据
@@ -58,6 +73,5 @@ public interface TeacherAndAcademyDao {
 	 * @param data
 	 */
 	public void updateTeacherData(Data data);
-
 
 }

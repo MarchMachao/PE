@@ -14,28 +14,9 @@
 	margin-left: 5px;
 }
 </style>
-<script>
-// 	function closes(){
-// 		$("#Loading").fadeOut("normal",function(){
-// 			$(this).remove();
-// 		});
-// 	}
-// 	var pc;
-// 	$.parser.onComplete = function(){
-// 		if(pc) clearTimeout(pc);
-// 		pc = setTimeout(closes, 1000);
-// 	}
-</script>
 </head>
 
 <body>
-<!-- 	<div id='Loading' -->
-<!-- 		style="position: absolute; z-index: 1000; top: 0px; left: 0px; width: 100%; height: 100%; background: #FFFFFF ; text-align: center; padding-top: 20%;"> -->
-<!-- 		<h1> -->
-<!-- 			<image src='images/camera-loader.gif' /> -->
-<!-- 			<font color="#15428B">加载中···</font> -->
-<!-- 		</h1> -->
-<!-- 	</div> -->
 	<h2 style="text-align: center;">学生成绩(教师页面)</h2>
 	<div>
 		<div style="margin-bottom: 20px;">
@@ -98,7 +79,7 @@
 	</div>
 	<div class="hr" style="clear: both;"></div>
 	<table id="dg" style="width: 100%; height: auto;"
-		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'getAllStuData.do',method:'get'"
+		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'findStuFreshmanData.do?subjectname=${teacherSubject}',method:'get'"
 		toolbar="#tb">
 		<thead>
 			<tr>
