@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import cn.vito.coding.check.mapper.AdminDao;
 import cn.vito.coding.check.mapper.StudentDao;
 import cn.vito.coding.check.mapper.TeacherAndAcademyDao;
 import cn.vito.coding.check.mapper.UserDao;
@@ -28,6 +29,7 @@ import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.Student;
 import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherAndAcademyLike;
+import cn.vito.coding.check.po.TeacherToStudent;
 import cn.vito.coding.check.po.User;
 import cn.vito.coding.check.scoreTable.ComputeScore;
 
@@ -48,6 +50,9 @@ public class ExcelUtils {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private AdminDao adminDao;
 
 	/**
 	 * 教师导出大一，大二成绩
@@ -641,6 +646,8 @@ public class ExcelUtils {
 			Workbook workbook = WorkbookFactory.create(is);
 			int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
 			// 遍历每个Sheet
+			List<User> user = new ArrayList<>();
+			List<Student> student = new ArrayList<>();
 			for (int s = 0; s < sheetCount; s++) {
 				Sheet sheet = workbook.getSheetAt(s);
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
@@ -659,18 +666,58 @@ public class ExcelUtils {
 					String id = userName;
 					String nickName = name;
 
-					List<User> user = new ArrayList<>();
 					user.add(new User(userName, ShiroUtils.passwdMD5("123456"), nickName, "学生"));
-
-					List<Student> student = new ArrayList<>();
 					student.add(new Student(id, name, gender, school, grade, classes, duration, "正常", "老师"));
-					System.out.println("--------------------");
-					userDao.addExcelStudent1(user);
-					userDao.addExcelStudent2(student);
+
 				}
 
 			}
+			userDao.addExcelStudent1(user);
+			userDao.addExcelStudent2(student);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+			return false;
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
+	/**
+	 * 学生与老师绑定的Excel表格的导入
+	 * 
+	 * @param file
+	 * @param year
+	 * @return
+	 */
+	public boolean excelTeacherToStudentReader(MultipartFile file, Integer year) {
+		try {
+			InputStream is = file.getInputStream();
+			Workbook workbook = WorkbookFactory.create(is);
+			int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
+			// 遍历每个Sheet
+			List<TeacherToStudent> teacherToStudents = new ArrayList<>();
+			for (int s = 0; s < sheetCount; s++) {
+				Sheet sheet = workbook.getSheetAt(s);
+				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
+				// 遍历每一行
+				for (int r = 1; r < rowCount; r++) {
+					Row row = sheet.getRow(r); // 取出相应的行
+
+					String studentId = row.getCell(0).toString();
+					String teacher = row.getCell(1).toString();
+					Integer subjectId = (int) Double.parseDouble(row.getCell(2).toString());
+					String subjectName = row.getCell(3).toString();
+
+
+					teacherToStudents.add(new TeacherToStudent(studentId, year, teacher, subjectId, subjectName));
+				}
+			}
+			adminDao.addTeacherToStudentDatas(teacherToStudents);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;

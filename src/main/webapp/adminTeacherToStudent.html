@@ -83,23 +83,23 @@
 					<div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc" align="center">成员信息</div>
 					<div style="margin-bottom:20px">
 						<label>学&nbsp;&nbsp;号:&nbsp;&nbsp;&nbsp;</label>
-						<input class="easyui-textbox" name="studentId" style="width:70%" required="true">
+						<input class="easyui-textbox" id="studentId-2" name="studentId" style="width:70%" required="true" readonly="true">
 					</div>
 					<div style="margin-bottom:20px">
 						<label>姓&nbsp;&nbsp;名:&nbsp;&nbsp;&nbsp;</label>
-						<input class="easyui-textbox" name="name" style="width:70%" required="true">
+						<input class="easyui-textbox" id="name-2" name="name" style="width:70%" required="true" readonly="true">
 					</div>
 					<div style="margin-bottom:20px">
 						<label>性&nbsp;&nbsp;别:&nbsp;&nbsp;&nbsp;</label>
-						<input class="easyui-textbox" name="gender" style="width:70%" required="true">
+						<input class="easyui-textbox" id="gender-2" name="gender" style="width:70%" required="true" readonly="true">
 					</div>
 					<div style="margin-bottom:20px">
 						<label>年&nbsp;&nbsp;级:&nbsp;&nbsp;&nbsp;</label>
-						<input class="easyui-textbox" name="grade" style="width:70%" required="true">
+						<input class="easyui-textbox" id="grade-2" name="grade" style="width:70%" required="true" readonly="true">
 					</div>
 					<div style="margin-bottom:20px">
 						<label>学&nbsp;&nbsp;院:&nbsp;&nbsp;&nbsp;</label>
-						<select class="easyui-combobox" name="school" style="width:70%;" required="true">
+						<select class="easyui-combobox" id="school-2" name="school" style="width:70%;" required="true" readonly="true">
 							<option value="文学院">文学院</option>
 							<option value="新闻与传播学院">新闻与传播学院</option>
 							<option value="历史文化学院">历史文化学院</option>
@@ -129,19 +129,19 @@
 					</div>
 					<div style="margin-bottom:20px">
 						<label>年&nbsp;&nbsp;份:&nbsp;&nbsp;&nbsp;</label>
-						<input class="easyui-textbox" name="year" style="width:70%" required="true">
+						<input class="easyui-textbox" id="year-2" name="year" style="width:70%" required="true">
 					</div>
 					<div style="margin-bottom:20px">
 						<label>教&nbsp;&nbsp;师:&nbsp;&nbsp;&nbsp;</label>
-						<input class="easyui-textbox" name="teacher" style="width:70%" required="true">
+						<input class="easyui-textbox" id="teacher-2" name="teacher" style="width:70%" required="true">
 					</div>
 					<div style="margin-bottom:20px">
 						<label>课程编号:</label>
-						<input class="easyui-textbox" name="subjectId" style="width:67%" required="true">
+						<input class="easyui-textbox" id="subjectId-2" name="subjectId" style="width:67%" required="true">
 					</div>
 					<div style="margin-bottom:20px">
 						<label>课程名称:</label>
-						<input class="easyui-textbox" name="subjectName" style="width:67%" required="true">
+						<input class="easyui-textbox" id="subjectName-2" name="subjectName" style="width:67%" required="true">
 					</div>
 				</form>
 			</div>
@@ -150,18 +150,56 @@
 				<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">保存</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
 			</div>
+			
+			
+			
+			<div id="dlg2" class="easyui-dialog" style="width:380px" closed="true" buttons="#dlg-buttons-2">
+				<form id="fm2" method="post" novalidate style="margin:0;padding:10px 50px">
+					<div style="margin-bottom:20px;font-size:14px;border-bottom:1px solid #ccc" align="center">成员信息</div>
+					<div style="margin-bottom:20px">
+						<label>学&nbsp;&nbsp;号:&nbsp;&nbsp;&nbsp;</label>
+						<input class="easyui-textbox" id="studentId-3" name="studentId" style="width:70%" required="true">
+					</div>
+					<div style="margin-bottom:20px">
+						<label>年&nbsp;&nbsp;份:&nbsp;&nbsp;&nbsp;</label>
+						<input class="easyui-textbox" id="year-3" name="year" style="width:70%" required="true">
+					</div>
+					<div style="margin-bottom:20px">
+						<label>教&nbsp;&nbsp;师:&nbsp;&nbsp;&nbsp;</label>
+						<input class="easyui-textbox" id="teacher-3" name="teacher" style="width:70%" required="true">
+					</div>
+					<div style="margin-bottom:20px">
+						<label>课程编号:</label>
+						<input class="easyui-textbox" id="subjectId-3" name="subjectId" style="width:67%" required="true">
+					</div>
+					<div style="margin-bottom:20px">
+						<label>课程名称:</label>
+						<input class="easyui-textbox" id="subjectName-3" name="subjectName" style="width:67%" required="true">
+					</div>
+				</form>
+			</div>
+			
+			<div id="dlg-buttons-2">
+				<a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser2()" style="width:90px">保存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg2').dialog('close')" style="width:90px">取消</a>
+			</div>
+			
 		</div>
 		
-		<div id="importInfo" class="easyui-dialog" closed="true" buttons="#import-excel-button" title="导入学生的教师" style="width: 400px; height: 200px;">
-			<form id="importInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:20px 40px">
+		<div id="importInfo" class="easyui-dialog" closed="true" buttons="#import-excel-button" title="导入学生与教师绑定" style="width: 400px; height: 220px;">
+			<form id="importInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
 				<table cellpadding="5">
+					<tr>
+						<td>年份:</td>
+						<td><input class="easyui-textbox" type="text" name="year" style="width: 200px; height: 32px"></input></td>
+					</tr>
 					<tr>
 						<td>信息表:</td>
 						<td><input class="easyui-filebox" type="text" name="file"  style="width: 200px; height: 32px"></input></td>
 					</tr>
 					<tr>
 						<td>样表:</td>
-						<td><a href="">下载</a></td>
+						<td><a href="exampleTeacherToStudentExcel.do">下载</a></td>
 					</tr>
 				</table>
 			</form>
@@ -180,7 +218,7 @@
 		
 		function importExcel(){
 			$('#importInfoForm').form({
-				url : '',
+				url : 'uploadTeacherToStudentExcel.do',
 				onSubmit : function() {
 					return $(this).form('validate');
 				},
@@ -219,17 +257,9 @@
 		}
 		
 		function newUser() {
-			var row = $('#dg').datagrid('getSelected');
-			if(row) {
-				if(row.year!=null){$.messager.alert('提示', "请选择'修改信息'", 'info');}
-				else{
-					$('#dlg').dialog('open').dialog('center').dialog('setTitle', '添加师生关系');
-					$('#fm').form('load', row);
-					url = 'addOneTeacherToStudentData.do';
-				}
-			}else{
-				$.messager.alert('提示', "请选中要增加的学生信息", 'info');
-			}
+			$('#dlg2').dialog('open').dialog('center').dialog('setTitle', '添加师生关系');
+			$('#fm2').form('clear');
+			url = 'addOneTeacherToStudentData.do';
 		}
 
 		function editUser() {
@@ -266,6 +296,26 @@
 			});
 		}
 
+		function saveUser2() {
+			$('#fm2').form('submit', {
+				url: url,
+				onSubmit: function() {
+					return $(this).form('validate');
+				},
+				success: function(result) {
+					var result = eval('(' + result + ')');
+					console.log(result);
+					if(result.success) {
+						$('#dlg2').dialog('close');
+						$.messager.alert('提示', result.content);
+						$('#dg').datagrid('reload');
+					} else {
+						$.messager.alert('提示', result.content);
+					}
+				}
+			});
+		}
+		
 		function destroyUser() {
 			var row = $('#dg').datagrid('getSelected');
 			if(row) {

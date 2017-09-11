@@ -267,4 +267,48 @@ public class AdminController {
 		adminService.updateTeacherToStudentData(studentId, year, teacher, subjectId, subjectName);
 		return new BaseMsg(true, "更新成功");
 	}
+
+	/**
+	 * 学生老师绑定页面导入excel
+	 * 
+	 * @param file
+	 * @param year
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("uploadTeacherToStudentExcel")
+	public BaseMsg uploadTeacherToStudentExcel(MultipartFile file, Integer year) {
+		String FileName = file.getOriginalFilename();
+		String prefix = FileName.substring(FileName.lastIndexOf(".") + 1);
+		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
+			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
+		} else if (excelUtils.excelTeacherToStudentReader(file, year)) {
+			return new BaseMsg(true, "上传成功！");
+		} else {
+			return new BaseMsg(false, "上传失败！");
+		}
+	}
+
+	/**
+	 * 学生老师绑定页面导入excel的样表
+	 * 
+	 * @param response
+	 * @throws IOException
+	 * @throws TemplateException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws DocumentException
+	 */
+	@RequestMapping("exampleTeacherToStudentExcel")
+	public void exampleTeacherToStudentExcel(HttpServletResponse response)
+			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
+		File file = new File("/home/page/excel/exampleTeacherToStudent.xls");
+		if (file.exists()) {
+			response.setContentType("application/octet-stream; charset=utf-8");
+			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+			StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+		} else {
+			response.setStatus(404);
+		}
+	}
 }

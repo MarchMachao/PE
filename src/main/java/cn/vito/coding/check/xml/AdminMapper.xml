@@ -152,7 +152,9 @@
 			a_student a
 		LEFT JOIN a_teacher b ON a.id = b.studentid
 		WHERE
-			a.id LIKE '%${studentId}%'
+			a.state != '已毕业'
+		AND a.teacher ='老师'
+		AND	a.id LIKE '%${studentId}%'
 		AND a.school LIKE '%${school}%'
 		<if test="year!=null">
 			AND b.YEAR LIKE '%${year}%'
@@ -187,8 +189,8 @@
 			#{item.studentId},
 			#{item.year},
 			#{item.teacher},
-			#{item.subjectid},
-			#{item.subjectname}
+			#{item.subjectId},
+			#{item.subjectName}
 			)
 		</foreach> 
 	</insert>
