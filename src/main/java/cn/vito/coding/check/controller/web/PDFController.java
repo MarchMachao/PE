@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 
 import com.lowagie.text.DocumentException;
 
+import cn.vito.coding.check.service.UserService;
 import cn.vito.coding.check.utils.PDFUtils;
 import freemarker.template.TemplateException;
 
@@ -29,6 +30,9 @@ public class PDFController {
 
 	@Autowired
 	private PDFUtils pdfUtils;
+
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("downTeacherPDF")
 	public void downTeacherPDF(HttpServletResponse response, String id, String name, String school, String teacher,
@@ -47,10 +51,10 @@ public class PDFController {
 	}
 
 	@RequestMapping("downAcademyPDF")
-	public void downAcademyPDF(HttpServletResponse response, String id, String name, String school,
-			Integer year)
+	public void downAcademyPDF(HttpServletResponse response, String id, String name, Integer year)
 			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
-
+		String userName = userService.getCurrentUserName();
+		String school = userService.getUserByUserName(userName).getNickName();
 		pdfUtils.toAcademyPdf(id, name, school, year);
 		File file = new File("/home/page/pdf/Test.pdf");
 		if (file.exists()) {

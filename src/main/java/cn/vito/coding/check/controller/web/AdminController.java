@@ -189,7 +189,7 @@ public class AdminController {
 	 * 
 	 * @author March
 	 * 
-	 * @param id
+	 * @param studentId
 	 * @param school
 	 * @param year
 	 * @param teacher
@@ -205,15 +205,14 @@ public class AdminController {
 			String teacher, Integer subjectId, String subjectName, @RequestParam(defaultValue = "0") int page,
 			int rows) {
 		List<TeacherToStudent> teacherToStudents = adminService.findTeachersToStudentData(studentId, school, year,
-				teacher,
-				subjectId, subjectName, page, rows);
+				teacher, subjectId, subjectName, page, rows);
 		return new DataGrideRow<TeacherToStudent>(teacherToStudents.size(), teacherToStudents);
 	}
 
 	/**
 	 * 学生与教师对应关系管理页面增加一条数据
 	 * 
-	 * @param id
+	 * @param studentId
 	 * @param year
 	 * @param teacher
 	 * @param subjectId
@@ -237,7 +236,7 @@ public class AdminController {
 	/**
 	 * 学生与教师对应关系管理页面删除一条数据
 	 * 
-	 * @param id
+	 * @param studentId
 	 * @param year
 	 * @return
 	 */
@@ -254,7 +253,7 @@ public class AdminController {
 	/**
 	 * 学生与教师对应关系管理页面修改一条数据
 	 * 
-	 * @param id
+	 * @param studentId
 	 * @param year
 	 * @param teacher
 	 * @param subjectId
