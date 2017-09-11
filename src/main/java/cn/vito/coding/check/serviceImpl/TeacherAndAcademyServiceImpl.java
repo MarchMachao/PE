@@ -55,4 +55,11 @@ public class TeacherAndAcademyServiceImpl implements TeacherAndAcademyService {
 				.findJuniorTeacherData(new TeacherAndAcademyLike(id, name, school, year, page, rows));
 	}
 
+	@Override
+	public List<TeacherAndAcademy> findAcademyFreshmanData(String id, String name, String school, Integer year,
+			int page, int rows) {
+		return teacherAndAcademyDao
+				.findAcademyFreshmanData(new TeacherAndAcademyLike(id, name, school, year, page, rows));
+	}
+
 }

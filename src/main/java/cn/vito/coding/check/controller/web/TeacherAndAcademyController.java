@@ -113,7 +113,29 @@ public class TeacherAndAcademyController {
 	}
 
 	/**
-	 * 学院页面查询和模糊查询所有用户在表格中
+	 * 学院页面查询和模糊查询大一，大二在表格中
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "findAcademyFreshmanData")
+	public DataGrideRow<TeacherAndAcademy> findAcademyFreshmanData(@RequestParam(defaultValue = "1") String id,
+			String name, Integer year, int page, int rows) {
+		String userName = userService.getCurrentUserName();
+		String school = userService.getUserByUserName(userName).getNickName();
+		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findAcademyFreshmanData(id, name, school, year,
+				page, rows);
+		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+	}
+
+	/**
+	 * 学院页面查询和模糊查询大三，大四在表格中
 	 * 
 	 * @param id
 	 * @param name

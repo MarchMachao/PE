@@ -49,11 +49,18 @@ public interface TeacherAndAcademyDao {
 	public List<TeacherAndAcademy> findTeacherExcel(TeacherAndAcademyLike teacherAndAcademyLike);
 
 	/**
-	 * 学院页面查询所有学生的信息
+	 * 学院页面查询大三，大四学生的信息
 	 * 
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findAcademyData(TeacherAndAcademyLike teacherLike);
+
+	/**
+	 * 学院页面查询大一，大二学生的信息
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAcademyFreshmanData(TeacherAndAcademyLike teacherLike);
 
 	/**
 	 * 学院页面查询出Excel的数据

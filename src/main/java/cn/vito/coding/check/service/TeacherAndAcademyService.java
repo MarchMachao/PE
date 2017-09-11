@@ -49,7 +49,22 @@ public interface TeacherAndAcademyService {
 			int rows);
 
 	/**
-	 * 学院页面查询所有学生信息
+	 * 学院页面查询大一，大二学生信息
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAcademyFreshmanData(String id, String name, String school, Integer year,
+			int page, int rows);
+
+	/**
+	 * 学院页面查询大三，大四学生信息
 	 * 
 	 * @param id
 	 * @param name

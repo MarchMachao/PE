@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css"
+	href="easyUI/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
+<script type="text/javascript" src="easyUI/jquery.min.js"></script>
+<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="easyUI/locale/easyui-lang-zh_CN.js"></script>
+<style>
+.paraDiv {
+	margin-top: 10px;
+	float: left;
+	margin-left: 5px;
+}
+.l-btn-text{
+	font-size: 15px;
+}
+.panel-body{
+	font-size: 15px;
+}
+.textbox .textbox-text{
+	font-size: 10px;
+}
+.panel-title{
+	font-size: 15px;
+}
+
+
+</style>
+</head>
+
+<body>
+	<h2 style="text-align: center;">学生成绩(学院页面)</h2>
+	<div>
+		<div style="margin-bottom: 20px;">
+			<div class="paraDiv">
+				<span class="paraName">学生姓名:</span> <input class="easyui-textbox"
+					id="name" name="name"
+					style="width: 100px; height: 32px; marin-top: 10px;">
+			</div>
+			<div class="paraDiv">
+				<span class="paraName">学号:</span> <input class="easyui-textbox"
+					id="id" name="id"
+					style="width: 100px; height: 32px; marin-top: 10px;">
+			</div>
+			<div class="paraDiv">
+				<span class="paraName">年份:</span> <input class="easyui-textbox"
+					id="year" name="year"
+					style="width: 100px; height: 32px; marin-top: 10px;">
+			</div>
+		</div>
+		<a href="javascript:void(0)" id="search_btn" class="easyui-linkbutton"
+			data-options="iconCls:'icon-search'"
+			style="float: left; width: 70px; height: 30px; margin-top: 10px; margin-left: 10px;">查找</a>
+		<a href="javascript:void(0)" id="export_btn" class="easyui-linkbutton"
+			data-options="iconCls:'icon-redo'"
+			style="float: left; width: 70px; height: 30px; margin-top: 10px; margin-left: 10px;">导出</a>
+	</div>
+	<div class="hr" style="clear: both;"></div>
+	<table id="dg" style="width: 100%; height: auto;"
+		data-options="rownumbers:true,singleSelect:true,pagination:true,url:'findAcademyFreshmanData.do',method:'get'"
+		toolbar="#tb">
+		<thead>
+			<tr>
+				<th data-options="field:'id',width:100,align:'center'">学号</th>
+				<th data-options="field:'name',width:90,align:'center'">姓名</th>
+				<th data-options="field:'gender',width:50,align:'center'">性别</th>
+				<th data-options="field:'grade',width:90,align:'center'">年级</th>
+				<th data-options="field:'school',width:150,align:'center'">学院</th>
+				<th data-options="field:'year',width:90,align:'center'">年份</th>
+				<th data-options="field:'height',width:90,align:'center'">身高</th>
+				<th data-options="field:'weight',width:90,align:'center'">体重</th>
+				<th data-options="field:'vital_capacity',width:90,align:'center'">肺活量</th>
+				<th data-options="field:'fivem',width:90,align:'center'">50m</th>
+				<th data-options="field:'long_jump',width:90,align:'center'">立定跳远</th>
+				<th data-options="field:'reach',width:90,align:'center'">坐位体前屈</th>
+				<th data-options="field:'eightm',width:90,align:'center'">800m</th>
+				<th data-options="field:'tenm',width:90,align:'center'">1000m</th>
+				<th data-options="field:'sit_ups',width:90,align:'center'">仰卧起坐</th>
+				<th data-options="field:'pull_up',width:90,align:'center'">引体向上</th>
+				<th data-options="field:'score',width:90,align:'center'">评分</th>
+				<th data-options="field:'first_check',width:90,align:'center'">第一级审核</th>
+				<th data-options="field:'second_check',width:90,align:'center'">第二级审核</th>
+	</table>
+	<div id="tb">
+		<a href="javascript:void(0)" id="addCustomInfo" class="easyui-linkbutton" data-options="iconCls:'icon-help'" plain="true" ">查看大三大四的体侧成绩</a>
+	</div>
+	
+	<div id="exportInfo" class="easyui-dialog" closed="true"
+		buttons="#excel-button" title="导出成绩" style="width: 400px; height: 260px;">
+		<form id="exportInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
+			<table cellpadding="5">
+				<tr>
+					<td>学号:</td>
+					<td><input class="easyui-textbox" type="text" id="ExId" name="id"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>姓名:</td>
+					<td><input class="easyui-textbox" type="text" id="ExName" name="name"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>年份:</td>
+					<td><input class="easyui-textbox" type="text" id="ExYear" name="year"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="excel-button">
+		<a href="javascript:void(0)" id="exportExcel" class="easyui-linkbutton" >导出成绩单</a>
+		<a href="javascript:void(0)" id="downPdf" class="easyui-linkbutton" >导出名单</a>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
+		})
+		
+		/*导出数据*/
+		$("#export_btn").click(function(){
+			$('#exportInfoForm').form('clear');
+			$('#exportInfo').dialog('open').dialog('center');
+		})
+		$("#exportExcel").click(function(){
+			var id = $("#ExId").val();
+			var name = $("#ExName").val();
+			var school = $("#ExSchool").combobox("getValue");
+			var year = $("#ExYear").val();
+			location.href = "downAcademyExcel.do?id=" + id
+			+ "&name=" + name + "&school=" + school+"&year=" + year; 
+			$('#exportInfo').dialog('close');
+		})
+		
+		$("#downPdf").click(function(){
+			var id = $("#ExId").val();
+			var name = $("#ExName").val();
+			var school = $("#ExSchool").combobox("getValue");
+			var year = $("#ExYear").val();
+			location.href = "downAcademyPDF.do?id=" + id
+			+ "&name=" + name + "&school=" + school+"&year=" + year; 
+			$('#exportInfo').dialog('close');
+		})
+		/*筛选数据结束  */
+
+
+		$("#search_btn").click(function() {
+			loadCustomInfo();
+		})
+
+		function loadCustomInfo() {
+			var name = $("#name").val();
+			var id = $("#id").val();
+			var year = $("#year").val();
+			$('#dg').datagrid('load', {
+				name : name,
+				id : id,
+				year : year
+			});
+		}
+
+		function save() {
+			$('#editInfoForm').form({
+				url : 'updateTeacherAndAcademy.do',
+				onSubmit : function() {
+					return $(this).form('validate');
+				},
+				success : function(data) {
+					var obj = eval("(" + data + ")");
+					$('#addInfo').dialog('close');
+					$.messager.alert('提示', obj.content);
+					$('#dg').datagrid('reload');
+				}
+			});
+			$('#editInfoForm').submit();
+		}
+
+		function searchCustomPic(id) {
+			$('#CustomPicDialog').dialog('open');
+			$.get('findCustomPicById.do',{id:id},function(data){
+				$("#doorPic").attr("src",data.doorPic);
+				$("#roomPic").attr("src",data.roomPic);
+			})
+		}
+		
+		function importExcel(){
+			$('#importInfoForm').form({
+				url : 'uploadAcademyExcel.do',
+				onSubmit : function() {
+					return $(this).form('validate');
+				},
+				success : function(data) {
+					var obj = eval("(" + data + ")");
+					$('#importInfo').dialog('close');
+					$.messager.alert('提示', obj.content);
+					$('#dg').datagrid('reload');
+				}
+			});
+			$('#importInfoForm').submit();
+		}
+	</script>
+	</body>
+</html>
