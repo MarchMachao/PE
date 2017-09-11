@@ -146,8 +146,61 @@ public class PDFUtils {
 		os.close();
 	}
 
+	// =====================================学院数据========================================
+
 	/**
-	 * 学院端导出PDF
+	 * 学院端导出大一、大二PDF
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 * @throws IOException
+	 * @throws TemplateException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws DocumentException
+	 */
+	public void toAcademyFreshmanPdf(String id, String name, String school, Integer year)
+			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
+		Configuration cfg = new Configuration();
+		cfg.setDefaultEncoding("UTF-8");
+		cfg.setDirectoryForTemplateLoading(new File("/home/page"));
+		Template temp = cfg.getTemplate("index.ftl");
+		List<TeacherAndAcademy> teacherAndAcademys = teacherAndAcademyDao
+				.findAcademyFreshmanExcel(new TeacherAndAcademyLike(id, name, school, year));
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("list", teacherAndAcademys);
+
+		// 合并模板和数据模型
+		String file1 = "/home/page/pdf/contractTemplate.html";
+		File file = new File(file1);
+
+		if (!file.exists())
+			file.createNewFile();
+
+		Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+		temp.process(root, out);
+		out.flush();
+		String url = new File(file1).toURI().toURL().toString();
+		String outputFile = "/home/page/pdf/Test.pdf";
+		OutputStream os = new FileOutputStream(outputFile);
+
+		ITextRenderer renderer = new ITextRenderer();
+		renderer.setDocument(url);
+
+		// 解决中文支持问题
+		ITextFontResolver fontResolver = renderer.getFontResolver();
+		fontResolver.addFont("/home/page/SIMHEI.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+		renderer.layout();
+		renderer.createPDF(os);
+
+		os.close();
+	}
+
+	/**
+	 * 学院端导出大三、大四PDF
 	 * 
 	 * @param id
 	 * @param name

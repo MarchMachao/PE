@@ -205,7 +205,30 @@ public class TeacherAndAcademyController {
 	}
 
 	/**
-	 * 学院导出成绩Excel
+	 * 学院导出大一、大二成绩Excel
+	 * 
+	 * @param response
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "downAcademyFreshmanExcel")
+	public void downAcademyFreshmanExcel(HttpServletResponse response, String id, String name, Integer year)
+			throws FileNotFoundException, IOException {
+		String userName = userService.getCurrentUserName();
+		String school = userService.getUserByUserName(userName).getNickName();
+		excelUtils.outputAcademyFreshmanExcel(id, name, school, year);
+		File file = new File("/home/page/excel/pe.xls");
+		response.setContentType("application/octet-stream; charset=utf-8");
+		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+	}
+
+	/**
+	 * 学院导出大三、大四成绩Excel
 	 * 
 	 * @param response
 	 * @param id

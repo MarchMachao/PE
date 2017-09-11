@@ -95,6 +95,50 @@ public class PDFController {
 		}
 	}
 
+	// ===============================学院数据操作===========================================
+
+	/**
+	 * 学院下载大一、大二的名单
+	 * 
+	 * @param response
+	 * @param id
+	 * @param name
+	 * @param year
+	 * @throws IOException
+	 * @throws TemplateException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws DocumentException
+	 */
+	@RequestMapping("downAcademyFreshmanPDF")
+	public void downAcademyFreshmanPDF(HttpServletResponse response, String id, String name, Integer year)
+			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
+		String userName = userService.getCurrentUserName();
+		String school = userService.getUserByUserName(userName).getNickName();
+		pdfUtils.toAcademyFreshmanPdf(id, name, school, year);
+		File file = new File("/home/page/pdf/Test.pdf");
+		if (file.exists()) {
+			response.setContentType("application/octet-stream; charset=utf-8");
+			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+			StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+		} else {
+			response.setStatus(404);
+		}
+	}
+
+	/**
+	 * 学院下载大三、大四的名单
+	 * 
+	 * @param response
+	 * @param id
+	 * @param name
+	 * @param year
+	 * @throws IOException
+	 * @throws TemplateException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws DocumentException
+	 */
 	@RequestMapping("downAcademyPDF")
 	public void downAcademyPDF(HttpServletResponse response, String id, String name, Integer year)
 			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {

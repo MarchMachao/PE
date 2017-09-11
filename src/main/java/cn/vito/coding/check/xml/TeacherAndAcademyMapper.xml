@@ -275,8 +275,40 @@
 		order by a_data.year DESC,a_data.id 
 		limit #{page},#{rows}
 	</select>
+	
+	<!-- 学院页面查询大一、大二的数据Excel -->
+	<select id="findAcademyFreshmanExcel" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
+		select 	a_data.id,
+				a_student.name,
+				a_student.gender,
+				a_student.school,
+				a_student.grade,
+				a_student.classes,
+				a_student.duration,
+				a_student.state,
+				a_student.teacher,
+				a_data.year,
+				a_data.height,
+				a_data.weight,
+				a_data.vital_capacity,
+				a_data.fivem,
+				a_data.long_jump,
+				a_data.reach,
+				a_data.eightm,
+				a_data.tenm,
+				a_data.sit_ups,
+				a_data.pull_up,
+				a_data.score,
+				a_data.first_check,
+				a_data.second_check
+		from a_data,a_student 
+		where a_data.id = a_student.id and a_student.state != '已毕业' and a_student.teacher != '学院'
+			 and a_data.id like '%${id}%' and a_student.name like '%${name}%' and  a_student.school = #{school}
+			 and a_data.year like '%${year}%'
+		order by a_data.year DESC,a_data.id 
+	</select>
 
-	<!-- 学院页面查询所有的数据Excel -->
+	<!-- 学院页面查询大三、大四的数据Excel -->
 	<select id="findAcademyExcel" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
 		select 	a_data.id,
 				a_student.name,

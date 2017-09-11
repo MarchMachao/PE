@@ -42,7 +42,7 @@ public interface TeacherAndAcademyDao {
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findTeacherFreshmanExcel(TeacherAndAcademyLike teacherLike);
-	
+
 	/**
 	 * 教师页面导出大三、大四Excel的数据
 	 * 
@@ -55,12 +55,7 @@ public interface TeacherAndAcademyDao {
 	 */
 	public List<TeacherAndAcademy> findTeacherExcel(TeacherAndAcademyLike teacherAndAcademyLike);
 
-	/**
-	 * 学院页面查询大三，大四学生的信息
-	 * 
-	 * @return
-	 */
-	public List<TeacherAndAcademy> findAcademyData(TeacherAndAcademyLike teacherLike);
+	// ==============================学院数据操作===================================================
 
 	/**
 	 * 学院页面查询大一，大二学生的信息
@@ -70,7 +65,26 @@ public interface TeacherAndAcademyDao {
 	public List<TeacherAndAcademy> findAcademyFreshmanData(TeacherAndAcademyLike teacherLike);
 
 	/**
-	 * 学院页面查询出Excel的数据
+	 * 学院页面查询大三，大四学生的信息
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAcademyData(TeacherAndAcademyLike teacherLike);
+
+	/**
+	 * 学院页面导出大一，大二Excel的数据
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findAcademyFreshmanExcel(TeacherAndAcademyLike teacherAndAcademyLike);
+
+	/**
+	 * 学院页面导出大三、大四Excel的数据
 	 * 
 	 * @param id
 	 * @param name
