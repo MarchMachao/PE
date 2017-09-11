@@ -37,7 +37,14 @@ public interface TeacherAndAcademyDao {
 	public List<TeacherAndAcademy> findJuniorTeacherData(TeacherAndAcademyLike teacherLike);
 
 	/**
-	 * 教师页面查询出Excel的数据
+	 * 教师页面导出大一/大二学生的Excel信息
+	 * 
+	 * @return
+	 */
+	public List<TeacherAndAcademy> findTeacherFreshmanExcel(TeacherAndAcademyLike teacherLike);
+	
+	/**
+	 * 教师页面导出大三、大四Excel的数据
 	 * 
 	 * @param id
 	 * @param name

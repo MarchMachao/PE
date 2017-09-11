@@ -291,8 +291,8 @@
 			var school = $("#ExSchool").combobox("getValue");
 			var teacher = $("#Exteacher").val();
 			var year = $("#ExYear").val();
-			location.href = "downTeacherExcel.do?id=" + id
-			+ "&name=" + name + "&school=" + school+"&teacher=" + teacher+"&year=" + year; 
+			location.href = "downTeacherFreshmanExcel.do?id=" + id
+			+ "&name=" + name + "&school=" + school+"&teacher=" + teacher+"&year=" + year + "&subjectname=" + '${teacherSubject}'; 
 			$('#exportInfo').dialog('close');
 		})
 		
@@ -302,8 +302,8 @@
 			var school = $("#ExSchool").combobox("getValue");
 			var teacher = $("#Exteacher").val();
 			var year = $("#ExYear").val();
-			location.href = "downTeacherPDF.do?id=" + id
-			+ "&name=" + name + "&school=" + school+"&teacher=" + teacher+"&year=" + year; 
+			location.href = "downTeacherFreshmanPDF.do?id=" + id
+			+ "&name=" + name + "&school=" + school+"&teacher=" + teacher+"&year=" + year + "&subjectname=" + '${teacherSubject}'; 
 			$('#exportInfo').dialog('close');
 		})
 		/*筛选数据结束  */

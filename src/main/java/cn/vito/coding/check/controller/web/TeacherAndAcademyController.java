@@ -158,7 +158,31 @@ public class TeacherAndAcademyController {
 	}
 
 	/**
-	 * 教师导出成绩Excel
+	 * 教师导出大一和大二成绩Excel
+	 * 
+	 * @param response
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 * @param subjectname
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "downTeacherFreshmanExcel")
+	public void downTeacherFreshmanExcel(HttpServletResponse response, String id, String name, String school,
+			Integer year, String subjectname) throws FileNotFoundException, IOException {
+		String teacher = userService.getUserByUserName(userService.getCurrentUserName()).getNickName();
+		excelUtils.outputTeacherFreshmanExcel(id, name, school, teacher, year, subjectname);
+		File file = new File("/home/page/excel/pe.xls");
+		response.setContentType("application/octet-stream; charset=utf-8");
+		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+	}
+
+	/**
+	 * 教师导出大三和大四成绩Excel
 	 * 
 	 * @param response
 	 * @param id
@@ -172,7 +196,8 @@ public class TeacherAndAcademyController {
 	@RequestMapping(value = "downTeacherExcel")
 	public void downTeacherExcel(HttpServletResponse response, String id, String name, String school, String teacher,
 			Integer year) throws FileNotFoundException, IOException {
-		excelUtils.outputTeacherExcel(id, name, school, teacher, year);
+
+		excelUtils.outputTeacherExcel(id, name, school, "学院", year);
 		File file = new File("/home/page/excel/pe.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());

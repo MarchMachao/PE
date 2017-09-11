@@ -42,7 +42,7 @@ public class PDFUtils {
 	private TeacherAndAcademyDao teacherAndAcademyDao;
 
 	/**
-	 * 老师端导出PDF
+	 * 老师端导出大一、大二的PDF
 	 * 
 	 * @param id
 	 * @param name
@@ -55,8 +55,60 @@ public class PDFUtils {
 	 * @throws ParserConfigurationException
 	 * @throws DocumentException
 	 */
-	public void toTeacherPdf(String id, String name, String school, String teacher,
-			Integer year)
+	public void toTeacherFreshmanPdf(String id, String name, String school, String teacher, Integer year,
+			String subjectname)
+			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
+		Configuration cfg = new Configuration();
+		cfg.setDefaultEncoding("UTF-8");
+		cfg.setDirectoryForTemplateLoading(new File("/home/page"));
+		Template temp = cfg.getTemplate("index.ftl");
+		List<TeacherAndAcademy> teacherAndAcademys = teacherAndAcademyDao
+				.findTeacherFreshmanExcel(new TeacherAndAcademyLike(id, name, school, teacher, year, subjectname));
+		Map<String, Object> root = new HashMap<String, Object>();
+		root.put("list", teacherAndAcademys);
+
+		// 合并模板和数据模型
+		String file1 = "/home/page/pdf/contractTemplate.html";
+		File file = new File(file1);
+
+		if (!file.exists())
+			file.createNewFile();
+
+		Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+		temp.process(root, out);
+		out.flush();
+		String url = new File(file1).toURI().toURL().toString();
+		String outputFile = "/home/page/pdf/Test.pdf";
+		OutputStream os = new FileOutputStream(outputFile);
+
+		ITextRenderer renderer = new ITextRenderer();
+		renderer.setDocument(url);
+
+		// 解决中文支持问题
+		ITextFontResolver fontResolver = renderer.getFontResolver();
+		fontResolver.addFont("/home/page/SIMHEI.TTF", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+		renderer.layout();
+		renderer.createPDF(os);
+
+		os.close();
+	}
+
+	/**
+	 * 老师端导出大三、大四的PDF
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param teacher
+	 * @param year
+	 * @throws IOException
+	 * @throws TemplateException
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws DocumentException
+	 */
+	public void toTeacherPdf(String id, String name, String school, String teacher, Integer year)
 			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
 		Configuration cfg = new Configuration();
 		cfg.setDefaultEncoding("UTF-8");
@@ -78,9 +130,9 @@ public class PDFUtils {
 		temp.process(root, out);
 		out.flush();
 		String url = new File(file1).toURI().toURL().toString();
-        String outputFile = "/home/page/pdf/Test.pdf";  
+		String outputFile = "/home/page/pdf/Test.pdf";
 		OutputStream os = new FileOutputStream(outputFile);
-		
+
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocument(url);
 

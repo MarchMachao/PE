@@ -42,6 +42,17 @@ public class TeacherAndAcademyLike {
 		this.teacher = teacher;
 		this.year = year;
 	}
+	
+
+	public TeacherAndAcademyLike(String id, String name, String school, String teacher, Integer year,
+			String subjectname) {
+		this.id = id;
+		this.name = name;
+		this.school = school;
+		this.teacher = teacher;
+		this.year = year;
+		this.subjectname = subjectname;
+	}
 
 	public TeacherAndAcademyLike(String id, String name, String school, String teacher, Integer year,
 			String subjectname, int page, int rows) {
