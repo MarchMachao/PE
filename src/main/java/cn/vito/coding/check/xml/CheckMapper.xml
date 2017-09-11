@@ -152,21 +152,34 @@
 			a_student.school
 	</select>
 	
-		<!-- 管理员的教师状态列表 -->
+	<!-- 管理员的教师状态列表 -->
 	<select id="findTeacherCheckList" resultType="TeacherAndAcademy">
 		SELECT
-			a_student.teacher,
+			teaToStu.teacher,
 			a_data.second_check
 		FROM
 			a_data,
-			a_student
+			(
+				SELECT
+					stu.id,
+					stu. NAME,
+					stu.school,
+					stu.state,
+					stu.teacher AS flag,
+					tea.teacher,
+					tea.subjectid,
+					tea.subjectname
+				FROM
+					a_student stu
+				LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+			) teaToStu
 		WHERE
-			a_data.id = a_student.id
-		AND a_student.state != '已毕业'
-		AND a_student.teacher != '学院'
+			a_data.id = teaToStu.id
+		AND teaToStu.state != '已毕业'
+		AND teaToStu.flag != '学院'
 		AND a_data.first_check = '已审核'
 		GROUP BY
-			a_student.teacher
+			teaToStu.teacher
 	</select>
 	
 	<!-- 管理员根据不同的学院，查询不同的审核所有未审核的数据-->
@@ -209,59 +222,107 @@
 	<!-- 管理员根据老师姓名查询学生信息 -->
 	<select id="findAdminCheckByTeacher" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
 		SELECT
-				a_data.id,
-				a_student.name,
-				a_student.school,
-				a_student.teacher,
-				a_data.year,
-				a_data.height,
-				a_data.weight,
-				a_data.vital_capacity,
-				a_data.fivem,
-				a_data.long_jump,
-				a_data.reach,
-				a_data.eightm,
-				a_data.tenm,
-				a_data.sit_ups,
-				a_data.pull_up,
-				a_data.score,
-				a_data.first_check,
-				a_data.second_check
-			FROM
-				a_data,
-				a_student
-			WHERE
-				a_data.id = a_student.id
-				AND a_student.state != '已毕业'
-				AND a_student.teacher != '学院'
-				AND a_data.first_check = '已审核'
-				AND a_data.second_check = '未审核'
-			    AND a_student.teacher = #{teacher}
-			ORDER BY a_data.`year`
-			limit #{page},#{rows}
+			a_data.id,
+			teaToStu. NAME,
+			teaToStu.school,
+			teaToStu.teacher,
+			a_data. YEAR,
+			a_data.height,
+			a_data.weight,
+			a_data.vital_capacity,
+			a_data.fivem,
+			a_data.long_jump,
+			a_data.reach,
+			a_data.eightm,
+			a_data.tenm,
+			a_data.sit_ups,
+			a_data.pull_up,
+			a_data.score,
+			a_data.first_check,
+			a_data.second_check
+		FROM
+			a_data,
+			(
+				SELECT
+					stu.id,
+					stu. NAME,
+					stu.school,
+					stu.state,
+					stu.teacher AS flag,
+					tea.teacher,
+					tea.subjectid,
+					tea.subjectname
+				FROM
+					a_student stu
+				LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+			) teaToStu
+		WHERE
+			a_data.id = teaToStu.id
+		AND teaToStu.state != '已毕业'
+		AND teaToStu.flag != '学院'
+		AND a_data.first_check = '已审核'
+		AND a_data.second_check = '未审核'
+		AND teaToStu.teacher = #{teacher}
+		ORDER BY
+			a_data.`year`
+		limit #{page},#{rows}
 	</select>
 	
 	<!-- 管理员更新教师未审核状态已审核 -->
 	<update id="updateAdminTeacherStateOk" parameterType="String">
-		UPDATE a_data t1
-		 	LEFT JOIN a_student t2 ON t1.id = t2.id
-	 	<set>
+		UPDATE a_data t1,
+		   (
+			SELECT
+				stu.id,
+				stu. NAME,
+				stu.school,
+				stu.state,
+				stu.teacher AS flag,
+				tea.teacher,
+				tea.subjectid,
+				tea.subjectname
+			FROM
+				a_student stu
+			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+		   ) t2
+		<set> 
 			t1.second_check = '已审核'
-	 	</set>
-		WHERE t2.teacher = #{teacher}
-			AND t1.second_check = '未审核'
+		</set>
+		WHERE
+			t1.id = t2.id
+		AND t2.teacher = #{teacher}
+		AND t2.flag = '老师'
+		AND t1.first_check = '已审核'
+		AND t1.second_check = '未审核'
 	</update>
 	
 	
 	<!-- 管理员更新教师未审核状态为被退回 -->
 	<update id="updateAdminTeacherStateNo" parameterType="String">
-		UPDATE a_data t1
-		 	LEFT JOIN a_student t2 ON t1.id = t2.id
-	 	<set>
+		UPDATE a_data t1,
+		   (
+			SELECT
+				stu.id,
+				stu. NAME,
+				stu.school,
+				stu.state,
+				stu.teacher AS flag,
+				tea.teacher,
+				tea.subjectid,
+				tea.subjectname
+			FROM
+				a_student stu
+			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+		   ) t2
+		<set> 
 			t1.second_check = '被退回'
-	 	</set>
-		WHERE t2.teacher = #{teacher}
-			AND t1.second_check = '未审核'
+		</set>
+		WHERE
+			t1.id = t2.id
+		AND t2.teacher = #{teacher}
+		AND t2.flag = '老师'
+		AND t1.first_check = '已审核'
+		AND t1.second_check = '未审核'
 	</update>
 	
 	<!-- 管理员更新学院未审核状态已审核 -->
@@ -272,6 +333,7 @@
 			t1.second_check = '已审核'
 	 	</set>
 		WHERE t2.school = #{school}
+			AND t1.first_check = '已审核'
 			AND t1.second_check = '未审核'
 	</update>
 	
@@ -284,6 +346,7 @@
 			t1.second_check = '被退回'
 	 	</set>
 		WHERE t2.school = #{school}
+			AND t1.first_check = '已审核'
 			AND t1.second_check = '未审核'
 	</update>
 	
