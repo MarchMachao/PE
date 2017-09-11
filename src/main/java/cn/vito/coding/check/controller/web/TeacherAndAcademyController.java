@@ -216,8 +216,10 @@ public class TeacherAndAcademyController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "downAcademyExcel")
-	public void downAcademyExcel(HttpServletResponse response, String id, String name, String school, Integer year)
+	public void downAcademyExcel(HttpServletResponse response, String id, String name, Integer year)
 			throws FileNotFoundException, IOException {
+		String userName = userService.getCurrentUserName();
+		String school = userService.getUserByUserName(userName).getNickName();
 		excelUtils.outputAcademyExcel(id, name, school, year);
 		File file = new File("/home/page/excel/pe.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");

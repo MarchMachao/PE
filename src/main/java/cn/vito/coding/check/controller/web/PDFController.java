@@ -96,9 +96,10 @@ public class PDFController {
 	}
 
 	@RequestMapping("downAcademyPDF")
-	public void downAcademyPDF(HttpServletResponse response, String id, String name, String school, Integer year)
+	public void downAcademyPDF(HttpServletResponse response, String id, String name, Integer year)
 			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
-
+		String userName = userService.getCurrentUserName();
+		String school = userService.getUserByUserName(userName).getNickName();
 		pdfUtils.toAcademyPdf(id, name, school, year);
 		File file = new File("/home/page/pdf/Test.pdf");
 		if (file.exists()) {
