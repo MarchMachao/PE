@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.Student;
+import cn.vito.coding.check.po.StudentAndItsTeacher;
 
 /**
  * 学生业务处理
@@ -20,7 +21,7 @@ public interface StudentDao {
 	 *            用户名
 	 * @return user对象
 	 */
-	public Student findStudentById(String id);
+	public StudentAndItsTeacher findStudentById(String id);
 
 	/**
 	 * 查询所有的data数据

@@ -3,7 +3,7 @@ package cn.vito.coding.check.service;
 import java.util.List;
 
 import cn.vito.coding.check.po.Data;
-import cn.vito.coding.check.po.Student;
+import cn.vito.coding.check.po.StudentAndItsTeacher;
 
 /**
  * 学生业务操作
@@ -20,7 +20,7 @@ public interface StudentService {
 	 *            用户账号
 	 * @return 用户信息
 	 */
-	public Student findStudentById(String id);
+	public StudentAndItsTeacher findStudentById(String id);
 
 	/**
 	 * 查询所有的data数据

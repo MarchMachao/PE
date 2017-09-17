@@ -3,8 +3,28 @@
 <mapper namespace="cn.vito.coding.check.mapper.StudentDao">
 	<!-- 查询学生的数据根据学号 -->
 	<select id="findStudentById" parameterType="String"
-		resultType="student">
-		select * from a_student where a_student.id = #{value}
+		resultType="StudentAndItsTeacher">
+		SELECT
+			a.id,
+			a.`name`,
+			a.gender,
+			a.school,
+			a.grade,
+			a.state,
+			a.classes,
+			a.duration,
+			a.state,
+			a.teacher,
+			b.subjectid,
+			b.subjectname,
+			b.teacher AS newTeacher,
+			MAX(b.`year`) AS `year`
+		FROM
+			a_student a,
+			a_teacher b
+		WHERE
+			a.id = #{id}
+		AND b.studentid = #{id}
 	</select>
 
 	<!-- 查询数据 -->	

@@ -122,4 +122,10 @@ public class Student {
 		this.teacher = teacher;
 	}
 
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", gender=" + gender + ", school=" + school + ", grade=" + grade
+				+ ", classes=" + classes + ", duration=" + duration + ", state=" + state + ", teacher=" + teacher + "]";
+	}
+
 }

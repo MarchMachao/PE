@@ -58,8 +58,17 @@
                 </span>
             </li>
             <li class="col-md-6">
-                <span class="part2-title">年制：</span><span>${item.duration}</span>
+                <span class="part2-title">学制：</span><span>${item.duration}</span>
             </li>
+            <#if item.teacher != "学院">
+				<li class="col-md-6">
+	                <span class="part2-title">课程名：</span><span>${item.subjectName}</span>
+	            </li>
+	            <li class="col-md-6">
+	                <span class="part2-title">课程教师：</span><span>${item.newTeacher}</span>
+	            </li>
+			</#if>
+            
             <li class="col-md-6">
             	<span class="part2-title"><a href="javascript:changeClass1();" >修改班级</a></span>
             	<span class=""><a href="#" data-toggle="modal" data-target="#myModal">修改密码</a></span>

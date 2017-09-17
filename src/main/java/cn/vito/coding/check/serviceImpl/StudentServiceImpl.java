@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import cn.vito.coding.check.mapper.StudentDao;
 import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.Student;
+import cn.vito.coding.check.po.StudentAndItsTeacher;
 import cn.vito.coding.check.service.StudentService;
 
 @Service
@@ -17,7 +18,7 @@ public class StudentServiceImpl implements StudentService {
 	private StudentDao studentDao;
 
 	@Override
-	public Student findStudentById(String id) {
+	public StudentAndItsTeacher findStudentById(String id) {
 		return studentDao.findStudentById(id);
 	}
 
