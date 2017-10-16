@@ -173,11 +173,17 @@
 				</tr>
 				<tr>
 					<td>800m:</td>
-					<td><input class="easyui-textbox" type="text" name="eightm"  style="width: 200px; height: 32px"></input></td>
+					<td>
+						<input class="easyui-textbox" type="text" id="eightm_minuite" name="eightm_minuite"  style="width: 85px; height: 32px">分</input>
+						<input class="easyui-textbox" type="text" id="eightm_second" name="eightm_second"  style="width: 85px; height: 32px">秒</input>
+					</td>
 				</tr>
 				<tr>
 					<td>1000m:</td>
-					<td><input class="easyui-textbox" type="text" name="tenm"  style="width: 200px; height: 32px"></input></td>
+					<td>
+						<input class="easyui-textbox" type="text" id="tenm_minuite" name="tenm_minuite"  style="width: 85px; height: 32px">分</input>
+						<input class="easyui-textbox" type="text" id="tenm_second" name="tenm_second"  style="width: 85px; height: 32px">秒</input>
+					</td>
 				</tr>
 				<tr>
 					<td>仰卧起坐:</td>
@@ -318,9 +324,34 @@
 		$("#addCustomInfo").click(function() {
 			var row = $('#dg').datagrid('getSelected');
 			if (row) {
+				var eightm = row.eightm;
+				var eightms= new Array(); //定义一数组 
+				eightms=eightm.split("'"); //字符分割
+				var tenm = row.tenm;
+				var tenms= new Array(); //定义一数组 
+				tenms=tenm.split("'"); //字符分割
 // 				$('#editInfoForm').form('clear');
 				$('#addInfo').dialog('open').dialog('center').dialog('setTitle','新增');
-				$('#editInfoForm').form('load',row);
+				$('#editInfoForm').form('load',{
+											   id:row.id,
+											   classes:row.classes,
+											   name:row.name,
+											   height:row.height,
+											   fivem:row.fivem,
+											   long_jump:row.long_jump,
+											   year:row.year,
+											   weight:row.weight,
+											   vital_capacity:row.vital_capacity,
+											   sit_ups:row.sit_ups,
+											   reach:row.reach,
+											   grade:row.grade,
+											   gender:row.gender,
+											   pull_up:row.pull_up,
+											   eightm_minuite:eightms[0],
+											   eightm_second:eightms[1],
+											   tenm_minuite:tenms[0],
+											   tenm_second:tenms[1]
+											   });
 			} else {
 				$.messager.alert('提示', "请选中要增加成绩的学生", 'info');
 			}
@@ -329,9 +360,34 @@
 		$("#editCustomInfo").click(function() {
 			var row = $('#dg').datagrid('getSelected');
 			if (row) {
+				var eightm = row.eightm;
+				var eightms= new Array(); //定义一数组 
+				eightms=eightm.split("'"); //字符分割
+				var tenm = row.tenm;
+				var tenms= new Array(); //定义一数组 
+				tenms=tenm.split("'"); //字符分割
 // 				$('#editInfoForm').form('clear');
 				$('#addInfo').dialog('open').dialog('center').dialog('setTitle','修改');
-				$('#editInfoForm').form('load',row);
+				$('#editInfoForm').form('load',{
+											   id:row.id,
+											   classes:row.classes,
+											   name:row.name,
+											   height:row.height,
+											   fivem:row.fivem,
+											   long_jump:row.long_jump,
+											   year:row.year,
+											   weight:row.weight,
+											   vital_capacity:row.vital_capacity,
+											   sit_ups:row.sit_ups,
+											   reach:row.reach,
+											   grade:row.grade,
+											   gender:row.gender,
+											   pull_up:row.pull_up,
+											   eightm_minuite:eightms[0],
+											   eightm_second:eightms[1],
+											   tenm_minuite:tenms[0],
+											   tenm_second:tenms[1]
+											   });
 			} else {
 				$.messager.alert('提示', "请选中要修改成绩的学生", 'info');
 			}

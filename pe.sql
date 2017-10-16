@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : sweet
+Source Server         : mc
 Source Server Version : 50554
 Source Host           : 123.206.214.132:3306
 Source Database       : pe
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50554
 File Encoding         : 65001
 
-Date: 2017-09-11 00:38:21
+Date: 2017-10-16 11:14:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,18 +41,18 @@ CREATE TABLE `a_data` (
 -- ----------------------------
 -- Records of a_data
 -- ----------------------------
-INSERT INTO `a_data` VALUES ('220150925821', '2015', '183', '78.5', '4020', '8.5', '200.5', '-15.0', '', '8\'12\'\'', null, '20', '85', '已审核', '已审核');
-INSERT INTO `a_data` VALUES ('220150925821', '2016', '185', '84.0', '5450', '8.3', '200.5', '-10.0', '10\'22\'\'', '', '22', null, '70', '未审核', '未审核');
+INSERT INTO `a_data` VALUES ('220150925821', '2015', '183', '78.5', '4020', '8.5', '200.5', '-15.0', '9\'11', '8\'12', null, '20', '54', '未审核', '未审核');
+INSERT INTO `a_data` VALUES ('220150925821', '2016', '185', '84.0', '5450', '8.3', '200.5', '-10.0', '9\'11', '8\'8', '22', '8', '71', '未审核', '未审核');
 INSERT INTO `a_data` VALUES ('220150925821', '2017', null, null, null, null, null, null, null, null, null, null, null, '', '');
-INSERT INTO `a_data` VALUES ('220150925822', '2016', '175', '67.0', '4562', '9.3', '150.3', '-20.0', null, '8\'22\'\'', null, '30', '88', '被退回', '未审核');
-INSERT INTO `a_data` VALUES ('220150925823', '2015', '173', '56.0', '13554', '12.5', '152.2', '-38.0', '8\'44\'\'', '', '23', null, '55', '已审核', '已审核');
-INSERT INTO `a_data` VALUES ('220150925823', '2016', '174', '65.0', '5842', '8.9', '150.3', '-16.0', '8\'22\'\'', '', '30', null, '70', '已审核', '已审核');
+INSERT INTO `a_data` VALUES ('220150925822', '2016', '175', '67.0', '4562', '9.3', '150.3', '-20.0', null, '8\'22', null, '30', '88', '被退回', '未审核');
+INSERT INTO `a_data` VALUES ('220150925823', '2015', '173', '56.0', '13554', '12.5', '152.2', '-38.0', '8\'44', '', '23', null, '55', '已审核', '已审核');
+INSERT INTO `a_data` VALUES ('220150925823', '2016', '174', '65.0', '5842', '8.9', '150.3', '-16.0', '8\'22', '', '30', null, '70', '已审核', '已审核');
 INSERT INTO `a_data` VALUES ('220150925823', '2017', null, null, null, null, null, null, null, null, null, null, null, '', '');
-INSERT INTO `a_data` VALUES ('220150925824', '2015', '183', '54.0', '5456', '4.4', '50.0', '10.0', null, '2‘22’‘', '0', '10', '125', '未审核', '未审核');
+INSERT INTO `a_data` VALUES ('220150925824', '2015', '183', '54.0', '5456', '4.4', '50.0', '10.0', null, '2‘22', '0', '10', '125', '未审核', '未审核');
 INSERT INTO `a_data` VALUES ('220150925824', '2017', null, null, null, null, null, null, null, null, null, null, null, '', '');
-INSERT INTO `a_data` VALUES ('220150925853', '2015', '153', '15.0', '5431', '4.3', '20.0', '10.0', null, '5‘22‘’', '0', '10', '123', '未审核', '未审核');
+INSERT INTO `a_data` VALUES ('220150925853', '2015', '153', '15.0', '5431', '4.3', '20.0', '10.0', null, '5‘22', '0', '10', '123', '未审核', '未审核');
 INSERT INTO `a_data` VALUES ('220150925856', '2017', null, null, null, null, null, null, null, null, null, null, null, '', '');
-INSERT INTO `a_data` VALUES ('220150932243', '2015', '153', '13.0', '5621', '131.0', '200.3', '-13.0', '8\'22\'\'', '3', '0', '12', '13', '未审核', '未审核');
+INSERT INTO `a_data` VALUES ('220150932243', '2015', '153', '13.0', '5621', '131.0', '200.3', '-13.0', '8\'22', '3', '0', '12', '13', '未审核', '未审核');
 
 -- ----------------------------
 -- Table structure for a_student
@@ -147,9 +147,9 @@ CREATE TABLE `s_menu` (
 -- ----------------------------
 -- Records of s_menu
 -- ----------------------------
-INSERT INTO `s_menu` VALUES ('2001', '体侧信息', '0', 'getStudentById.do', '1', ',学生,管理员,');
+INSERT INTO `s_menu` VALUES ('2001', '体侧信息', '0', 'getStudentById.do', '1', ',学生,');
 INSERT INTO `s_menu` VALUES ('2002', '教师成绩输入', '0', 'none', '2', ',教师,');
-INSERT INTO `s_menu` VALUES ('2003', '学院成绩输入', '0', 'academyManger.html', '3', ',学院,');
+INSERT INTO `s_menu` VALUES ('2003', '学院成绩输入', '0', 'none', '3', ',学院,');
 INSERT INTO `s_menu` VALUES ('2004', '学院成绩审核', '0', 'checkAcademyManger.ftl', '5', ',学院审核,');
 INSERT INTO `s_menu` VALUES ('2005', '教师成绩审核', '0', 'getCheckList.do', '4', ',教师审核,');
 INSERT INTO `s_menu` VALUES ('2006', '学生信息查询', '0', 'none', '6', ',管理员,');
@@ -162,6 +162,8 @@ INSERT INTO `s_menu` VALUES ('2017', '在读学生', '2006', 'adminManger.html',
 INSERT INTO `s_menu` VALUES ('2018', '管理员成绩审核', '0', 'getAdminCheckList.do', '1', ',管理员,');
 INSERT INTO `s_menu` VALUES ('2019', '大一/大二体侧数据', '2002', 'teacherFreshmanList.do', '2', ',教师,');
 INSERT INTO `s_menu` VALUES ('2020', '大三/大四体侧数据', '2002', 'teacherJuniorManger.html', '3', ',教师,');
+INSERT INTO `s_menu` VALUES ('2021', '大一/大二体侧数据', '2003', 'academyFreshmanManger.html', '2', ',学院,');
+INSERT INTO `s_menu` VALUES ('2022', '大三/大四体侧数据', '2003', 'academyJuniorManger.html', '3', ',学院,');
 
 -- ----------------------------
 -- Table structure for s_user

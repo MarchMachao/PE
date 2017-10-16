@@ -304,7 +304,7 @@ public class TeacherAndAcademyController {
 	}
 
 	/**
-	 * 老师修改成绩
+	 * 教师和学院修改成绩
 	 * 
 	 * @param id
 	 * @param year
@@ -325,11 +325,13 @@ public class TeacherAndAcademyController {
 	@ResponseBody
 	@RequestMapping("updateTeacherAndAcademy")
 	public BaseMsg updateTeacherAndAcademy(String id, Integer year, Integer height, Double weight,
-			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm, String tenm,
-			Integer sit_ups, Integer pull_up, Integer grade, String gender) {
+			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm_minuite, String eightm_second,
+			String tenm_minuite, String tenm_second, Integer sit_ups, Integer pull_up, Integer grade, String gender) {
+		String eight = eightm_minuite + "'" + eightm_second;
+		String ten = tenm_minuite + "'" + tenm_second;
 		try {
 			teacherAndAcademyService.updateTeacherData(id, year, height, weight, vital_capacity, fivem, long_jump,
-					reach, eightm, tenm, sit_ups, pull_up, grade, gender);
+					reach, eight, ten, sit_ups, pull_up, grade, gender);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new BaseMsg(false, "修改成绩失败！");
