@@ -319,10 +319,20 @@
 			if (row) {
 				var eightm = row.eightm;
 				var eightms= new Array(); //定义一数组 
-				eightms=eightm.split("'"); //字符分割
+				if(eightm != null){
+					eightms=eightm.split("'"); //字符分割
+				}else{
+					eightms[0] = null;
+					eightms[1] = null;
+				}
 				var tenm = row.tenm;
 				var tenms= new Array(); //定义一数组 
-				tenms=tenm.split("'"); //字符分割
+				if(tenm != null){
+					tenms=tenm.split("'"); //字符分割
+				}else{
+					tenms[0] = null;
+					tenms[1] = null;
+				}
 // 				$('#editInfoForm').form('clear');
 				$('#addInfo').dialog('open').dialog('center').dialog('setTitle','新增');
 				$('#editInfoForm').form('load',{
@@ -355,10 +365,20 @@
 			if (row) {
 				var eightm = row.eightm;
 				var eightms= new Array(); //定义一数组 
-				eightms=eightm.split("'"); //字符分割
+				if(eightm != null){
+					eightms=eightm.split("'"); //字符分割
+				}else{
+					eightms[0] = null;
+					eightms[1] = null;
+				}
 				var tenm = row.tenm;
 				var tenms= new Array(); //定义一数组 
-				tenms=tenm.split("'"); //字符分割
+				if(tenm != null){
+					tenms=tenm.split("'"); //字符分割
+				}else{
+					tenms[0] = null;
+					tenms[1] = null;
+				}
 // 				$('#editInfoForm').form('clear');
 				$('#addInfo').dialog('open').dialog('center').dialog('setTitle','修改');
 				$('#editInfoForm').form('load',{
