@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -648,6 +649,7 @@ public class ExcelUtils {
 			// 遍历每个Sheet
 			List<User> user = new ArrayList<>();
 			List<Student> student = new ArrayList<>();
+			List<Data> datas = new ArrayList<>();
 			for (int s = 0; s < sheetCount; s++) {
 				Sheet sheet = workbook.getSheetAt(s);
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
@@ -668,12 +670,13 @@ public class ExcelUtils {
 
 					user.add(new User(userName, ShiroUtils.passwdMD5("123456"), nickName, "学生"));
 					student.add(new Student(id, name, gender, school, grade, classes, duration, "正常", "老师"));
-
+					datas.add(new Data(id, Integer.parseInt(StringUtils.yearToString(new Date()))));
 				}
 
 			}
 			userDao.addExcelStudent1(user);
 			userDao.addExcelStudent2(student);
+			userDao.addExcelStudent3(datas);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;

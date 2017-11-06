@@ -2,6 +2,7 @@ package cn.vito.coding.check.mapper;
 
 import java.util.List;
 
+import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.Student;
 import cn.vito.coding.check.po.User;
 import cn.vito.coding.check.po.UserLike;
@@ -80,6 +81,13 @@ public interface UserDao {
 	public void addStudentUser2(Student student);
 
 	/**
+	 * 管理员插入学生用户数据3
+	 * 
+	 * @param data
+	 */
+	public void addStudentUser3(Data data);
+
+	/**
 	 * 管理员删除学生数据
 	 * 
 	 * @param id
@@ -99,5 +107,7 @@ public interface UserDao {
 	public void addExcelStudent1(List<User> user);
 
 	public void addExcelStudent2(List<Student> student);
+
+	public void addExcelStudent3(List<Data> datas);
 
 }

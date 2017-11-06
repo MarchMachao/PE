@@ -105,6 +105,10 @@
 		VALUES(#{id},#{name},#{gender},#{school},#{grade},#{classes},#{duration},#{state},#{teacher})
 	</insert>
 	
+	<insert id="addStudentUser3" parameterType="data">
+		INSERT INTO a_data (id,year) VALUES (#{id},#{year})
+	</insert>
+	
 	<!-- 删除数据 -->
 	<delete id="deleteStudentUser" parameterType="string">
 		DELETE a_student,
@@ -180,6 +184,16 @@
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#{item.id},#{item.name},#{item.gender},#{item.school},#{item.grade},
 			 #{item.classes},#{item.duration},#{item.state},#{item.teacher})
+		</foreach>
+	</insert>
+	
+	<insert id="addExcelStudent3" parameterType="java.util.List">
+		INSERT INTO a_data (id,year) VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.year}
+			)
 		</foreach>
 	</insert>
 	

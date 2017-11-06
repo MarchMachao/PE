@@ -1,5 +1,6 @@
 package cn.vito.coding.check.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.shiro.SecurityUtils;
@@ -7,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.vito.coding.check.mapper.UserDao;
+import cn.vito.coding.check.po.Data;
 import cn.vito.coding.check.po.Student;
 import cn.vito.coding.check.po.User;
 import cn.vito.coding.check.po.UserLike;
 import cn.vito.coding.check.service.UserService;
 import cn.vito.coding.check.utils.ShiroUtils;
+import cn.vito.coding.check.utils.StringUtils;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -65,8 +68,10 @@ public class UserServiceImpl implements UserService {
 			Integer grade, String classes, Integer duration, String state, String teacher) {
 		String nickName = gender;
 		String id = userName;
+		String year = StringUtils.yearToString(new Date());
 		userDao.addStudentUser1(new User(userName, ShiroUtils.passwdMD5(password), nickName, "学生"));
 		userDao.addStudentUser2(new Student(id, gender, name, school, grade, classes, duration, state, teacher));
+		userDao.addStudentUser3(new Data(id, Integer.parseInt(year)));
 	}
 
 	@Override
