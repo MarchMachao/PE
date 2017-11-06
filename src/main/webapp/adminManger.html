@@ -86,9 +86,12 @@
 		<a href="javascript:void(0)" id="export_btn" class="easyui-linkbutton"
 			data-options="iconCls:'icon-redo'"
 			style="float: right; width: 70px; height: 30px; margin-top: 10px; margin-left: 10px;">导出</a>
-		<a href="javascript:void(0)" id="import_btn" class="easyui-linkbutton"
+		<a href="javascript:void(0)" id="import_btn-1" class="easyui-linkbutton"
 			data-options="iconCls:'icon-undo'"
-			style="float: right; width: 70px; height: 30px; margin-top: 10px; margin-left: 10px;">导入</a>
+			style="float: right; width: 80px; height: 30px; margin-top: 10px; margin-left: 10px;">修改导入</a>
+		<a href="javascript:void(0)" id="import_btn-2" class="easyui-linkbutton"
+			data-options="iconCls:'icon-undo'"
+			style="float: right; width: 80px; height: 30px; margin-top: 10px; margin-left: 10px;">新增导入</a>
 	</div>
 	<div class="hr" style="clear: both;"></div>
 	<table id="dg" style="width: 100%; height: auto;"
@@ -200,7 +203,84 @@
 	<div id="dlg-buttons">
 		<a href="#" class="easyui-linkbutton" onclick="save();">保存</a>
 	</div>
-
+	
+	<div id="addInfo-2" class="easyui-dialog" closed="true"
+		buttons="#dlg-buttons-2" title="添加成绩" style="width: 400px; height: 500px;">
+		<form id="editInfoForm-2" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
+			<table cellpadding="5">
+				<tr>
+					<td>学号:</td>
+					<td><input class="easyui-textbox" type="text" name="id" style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>姓名:</td>
+					<td><input class="easyui-textbox" type="text" name="name" style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>性别:</td>
+					<td><input class="easyui-textbox" type="text" name="gender" style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>年级:</td>
+					<td><input class="easyui-textbox" type="text" name="grade" style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>年份:</td>
+					<td><input class="easyui-textbox" type="text" name="year" style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>身高:</td>
+					<td><input class="easyui-textbox" type="text" name="height"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>体重:</td>
+					<td><input class="easyui-textbox" type="text" name="weight"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>肺活量:</td>
+					<td><input class="easyui-textbox" type="text" name="vital_capacity"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>50m:</td>
+					<td><input class="easyui-textbox" type="text" name="fivem"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>立定跳远:</td>
+					<td><input class="easyui-textbox" type="text" name="long_jump"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>坐位体前屈:</td>
+					<td><input class="easyui-textbox" type="text" name="reach"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>800m:</td>
+					<td>
+						<input class="easyui-textbox" type="text" id="eightm_minuite" name="eightm_minuite"  style="width: 85px; height: 32px">分</input>
+						<input class="easyui-textbox" type="text" id="eightm_second" name="eightm_second"  style="width: 85px; height: 32px">秒</input>
+					</td>
+				</tr>
+				<tr>
+					<td>1000m:</td>
+					<td>
+						<input class="easyui-textbox" type="text" id="tenm_minuite" name="tenm_minuite"  style="width: 85px; height: 32px">分</input>
+						<input class="easyui-textbox" type="text" id="tenm_second" name="tenm_second"  style="width: 85px; height: 32px">秒</input>
+					</td>
+				</tr>
+				<tr>
+					<td>仰卧起坐:</td>
+					<td><input class="easyui-textbox" type="text" name="sit_ups"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>引体向上:</td>
+					<td><input class="easyui-textbox" type="text" name="pull_up"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<div id="dlg-buttons-2">
+		<a href="#" class="easyui-linkbutton" onclick="save2();">保存</a>
+	</div>
 	<div id="exportInfo" class="easyui-dialog" closed="true"
 		buttons="#excel-button" title="导出成绩" style="width: 400px; height: 330px;">
 		<form id="exportInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
@@ -259,11 +339,10 @@
 	</div>
 	<div id="excel-button">
 		<a href="javascript:void(0)" id="exportExcel" class="easyui-linkbutton" >导出成绩单</a>
-		<a href="javascript:void(0)" id="downPdf" class="easyui-linkbutton" onclick="">导出名单</a>
 	</div>
 
 	<div id="importInfo" class="easyui-dialog" closed="true"
-		buttons="#import-excel-button" title="导入成绩" style="width: 400px; height: 220px;">
+		buttons="#import-excel-button" title="修改导入成绩" style="width: 400px; height: 220px;">
 		<form id="importInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
 			<table cellpadding="5">
 				<tr>
@@ -285,6 +364,29 @@
 		<a href="javascript:void(0)" id="importExcel" class="easyui-linkbutton" onclick="importExcel();"> 导入成绩单</a>
 	</div>
 	
+	<div id="importInfo-2" class="easyui-dialog" closed="true"
+		buttons="#import-excel-button-2" title="新增导入成绩" style="width: 400px; height: 220px;">
+		<form id="importInfoForm-2" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
+			<table cellpadding="5">
+				<tr>
+					<td>年份:</td>
+					<td><input class="easyui-textbox" type="text"  name="year" style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>成绩表:</td>
+					<td><input class="easyui-filebox" type="text" name="file"  style="width: 200px; height: 32px"></input></td>
+				</tr>
+				<tr>
+					<td>样表:</td>
+					<td><a href="exampleTeacherAndAcademyExcel.do">下载</a></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div id="import-excel-button-2">
+		<a href="javascript:void(0)" id="importExcel-2" class="easyui-linkbutton" onclick="importExcel2();"> 导入成绩单</a>
+	</div>
+	
 	<script type="text/javascript">
 		$(function() {
 			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
@@ -304,9 +406,14 @@
 			$('#exportInfo').dialog('open').dialog('center');
 		})
 		/*导入数据*/
-		$("#import_btn").click(function(){
+		$("#import_btn-1").click(function(){
 			$('#importInfoForm').form('clear');
 			$('#importInfo').dialog('open').dialog('center');
+		})
+		
+		$("#import_btn-2").click(function(){
+			$('#importInfoForm-2').form('clear');
+			$('#importInfo-2').dialog('open').dialog('center');
 		})
 		
 		$("#exportExcel").click(function(){
@@ -322,49 +429,8 @@
 		/*筛选数据结束  */
 		
 		$("#addCustomInfo").click(function() {
-			var row = $('#dg').datagrid('getSelected');
-			if (row) {
-				var eightm = row.eightm;
-				var eightms= new Array(); //定义一数组 
-				if(eightm != null){
-					eightms=eightm.split("'"); //字符分割
-				}else{
-					eightms[0] = null;
-					eightms[1] = null;
-				}
-				var tenm = row.tenm;
-				var tenms= new Array(); //定义一数组 
-				if(tenm != null){
-					tenms=tenm.split("'"); //字符分割
-				}else{
-					tenms[0] = null;
-					tenms[1] = null;
-				}
-// 				$('#editInfoForm').form('clear');
-				$('#addInfo').dialog('open').dialog('center').dialog('setTitle','新增');
-				$('#editInfoForm').form('load',{
-											   id:row.id,
-											   classes:row.classes,
-											   name:row.name,
-											   height:row.height,
-											   fivem:row.fivem,
-											   long_jump:row.long_jump,
-											   year:row.year,
-											   weight:row.weight,
-											   vital_capacity:row.vital_capacity,
-											   sit_ups:row.sit_ups,
-											   reach:row.reach,
-											   grade:row.grade,
-											   gender:row.gender,
-											   pull_up:row.pull_up,
-											   eightm_minuite:eightms[0],
-											   eightm_second:eightms[1],
-											   tenm_minuite:tenms[0],
-											   tenm_second:tenms[1]
-											   });
-			} else {
-				$.messager.alert('提示', "请选中要增加成绩的学生", 'info');
-			}
+			$('#addInfo-2').dialog('open').dialog('center').dialog('setTitle', '添加');
+			$('#editInfoForm-2').form('clear');
 		})
 
 		$("#editCustomInfo").click(function() {
@@ -448,7 +514,21 @@
 			});
 			$('#editInfoForm').submit();
 		}
-
+		function save2() {
+			$('#editInfoForm-2').form({
+				url : 'addOneStudentData.do',
+				onSubmit : function() {
+					return $(this).form('validate');
+				},
+				success : function(data) {
+					var obj = eval("(" + data + ")");
+					$('#addInfo-2').dialog('close');
+					$.messager.alert('提示', obj.content);
+					$('#dg').datagrid('reload');
+				}
+			});
+			$('#editInfoForm-2').submit();
+		}
 		function searchCustomPic(id) {
 			$('#CustomPicDialog').dialog('open');
 			$.get('findCustomPicById.do',{id:id},function(data){
@@ -471,6 +551,22 @@
 				}
 			});
 			$('#importInfoForm').submit();
+		}
+		
+		function importExcel2(){
+			$('#importInfoForm-2').form({
+				url : '',
+				onSubmit : function() {
+					return $(this).form('validate');
+				},
+				success : function(data) {
+					var obj = eval("(" + data + ")");
+					$('#importInfo-2').dialog('close');
+					$.messager.alert('提示', obj.content);
+					$('#dg').datagrid('reload');
+				}
+			});
+			$('#importInfoForm-2').submit();
 		}
 	</script>
 	</body>

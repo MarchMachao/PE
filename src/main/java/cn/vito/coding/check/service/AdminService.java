@@ -73,12 +73,6 @@ public interface AdminService {
 	public void addOneTeacherToStudentData(String studentId, Integer year, String teacher, Integer subjectId,
 			String subjectName);
 
-	/**
-	 * 学生与教师对应关系管理页面导入数据
-	 * 
-	 * @param teacherToStudents
-	 */
-	public void addTeacherToStudentDatas(List<TeacherToStudent> teacherToStudents);
 
 	/**
 	 * 学生与教师对应关系管理页面删除一条数据
@@ -99,4 +93,13 @@ public interface AdminService {
 	 */
 	public void updateTeacherToStudentData(String studentId, Integer year, String teacher, Integer subjectId,
 			String subjectName);
+
+	/**
+	 * 管理员增加学生成绩
+	 * 
+	 * @param data
+	 */
+	public void addOneStudentData(String id, Integer year, Integer height, Double weight, Integer vital_capacity,
+			Double fivem, Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups, Integer pull_up,
+			Integer grade, String gender);
 }

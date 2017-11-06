@@ -733,4 +733,69 @@ public class ExcelUtils {
 		}
 		return true;
 	}
+
+	/**
+	 * 管理员界面新增学生数据
+	 * 
+	 * @param file
+	 * @param year
+	 * @return
+	 */
+	public boolean excelAdminReader(MultipartFile file, int year) {
+		try {
+			InputStream is = file.getInputStream();
+			Workbook workbook = WorkbookFactory.create(is);
+			int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
+			// 遍历每个Sheet
+			List<Data> datas = new ArrayList<>();
+			for (int s = 0; s < sheetCount; s++) {
+				Sheet sheet = workbook.getSheetAt(s);
+				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
+				// 遍历每一行
+				for (int r = 1; r < rowCount; r++) {
+					try {
+						Row row = sheet.getRow(r); // 取出相应的列
+						Cell id = row.getCell(0);
+						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
+						Double weight = Double.parseDouble(row.getCell(7).toString());
+						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
+						Double fivem = Double.parseDouble(row.getCell(9).toString());
+						Double long_jump = Double.parseDouble(row.getCell(10).toString());
+						Double reach = Double.parseDouble(row.getCell(11).toString());
+						String eightm = row.getCell(12).toString();
+						String tenm = row.getCell(13).toString();
+						Integer sit_ups = (int) Double.parseDouble(
+								StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
+						Integer pull_up = (int) Double.parseDouble(
+								StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
+
+						Student student = studentDao.findStudentById(id.toString());
+
+						double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
+								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
+
+						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+								reach, eightm, tenm, sit_ups, pull_up, score, "已审核", "已审核");
+						datas.add(data);
+					} catch (NumberFormatException e) {
+						continue;
+					}
+				}
+			}
+			adminDao.addListStudentDatas(datas);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+			return false;
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

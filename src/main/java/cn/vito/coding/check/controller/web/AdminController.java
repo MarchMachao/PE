@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.log4j.lf5.util.StreamUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -309,6 +310,66 @@ public class AdminController {
 			StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
 		} else {
 			response.setStatus(404);
+		}
+	}
+
+	/**
+	 * 管理员增加学生数据
+	 * 
+	 * @param id
+	 * @param year
+	 * @param height
+	 * @param weight
+	 * @param vital_capacity
+	 * @param fivem
+	 * @param long_jump
+	 * @param reach
+	 * @param eightm
+	 * @param tenm
+	 * @param sit_ups
+	 * @param pull_up
+	 * @param grade
+	 * @param gender
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("addOneStudentData")
+	public BaseMsg addOneStudentData(String id, Integer year, Integer height, Double weight, Integer vital_capacity,
+			Double fivem, Double long_jump, Double reach, String eightm_minuite, String eightm_second,
+			String tenm_minuite, String tenm_second, Integer sit_ups, Integer pull_up, Integer grade, String gender) {
+		String eightm = eightm_minuite + "'" + eightm_second;
+		String tenm = tenm_minuite + "'" + tenm_second;
+		try {
+			adminService.addOneStudentData(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
+					tenm, sit_ups, pull_up, grade, gender);
+		} catch (DuplicateKeyException e) {
+			return new BaseMsg(false, "已有该条数据！");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new BaseMsg(false, "失败！请检查");
+		}
+
+		return new BaseMsg(true, "增加成功！");
+	}
+
+	/**
+	 * 管理员上传新增的学生成绩数据
+	 * 
+	 * @param file
+	 * @param year
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("uploadStudentsDatasExcel")
+	public BaseMsg uploadStudentsDatasExcel(MultipartFile file, Integer year) {
+		String FileName = file.getOriginalFilename();
+		String prefix = FileName.substring(FileName.lastIndexOf(".") + 1);
+		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
+			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
+		} else if (excelUtils.excelAdminReader(file, year)) {
+			return new BaseMsg(true, "上传成功！");
+		} else {
+			return new BaseMsg(false, "上传失败！");
 		}
 	}
 }

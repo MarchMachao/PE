@@ -217,4 +217,33 @@
 		where studentid=#{studentId} and year=#{year}
 	</update>
 	
+	<insert id="addOneStudentData" parameterType="Data">
+		INSERT INTO a_data VALUES (#{id},#{year},#{height},#{weight},#{vital_capacity}, #{fivem},#{long_jump},
+		#{reach},#{eightm},#{tenm},#{sit_ups},#{pull_up},#{score},#{first_check},#{second_check})
+	</insert>
+	
+	<insert id="addListStudentDatas" parameterType="java.util.List">
+		INSERT INTO a_data (id,year,height,weight,vital_capacity, fivem,long_jump,
+		reach,eightm,tenm,sit_ups,pull_up,score,first_check,second_check) VALUES 
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.year},
+			#{item.height},
+			#{item.weight},
+			#{item.vital_capacity},
+			#{item.fivem},
+			#{item.long_jump},
+			#{item.reach},
+			#{item.eightm},
+			#{item.tenm},
+			#{item.sit_ups},
+			#{item.pull_up},
+			#{item.score},
+			#{item.first_check},
+			#{first_check},
+			#{second_check}
+			)
+		</foreach>
+	</insert>
 </mapper>

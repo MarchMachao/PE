@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.log4j.lf5.util.StreamUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -332,11 +333,12 @@ public class TeacherAndAcademyController {
 		try {
 			teacherAndAcademyService.updateTeacherData(id, year, height, weight, vital_capacity, fivem, long_jump,
 					reach, eight, ten, sit_ups, pull_up, grade, gender);
+		} catch (DuplicateKeyException e) {
+			return new BaseMsg(false, "已有该条数据");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new BaseMsg(false, "修改成绩失败！");
 		}
-
 		return new BaseMsg(true, "修改成绩成功！");
 	}
 

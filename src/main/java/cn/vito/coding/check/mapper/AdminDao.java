@@ -71,4 +71,18 @@ public interface AdminDao {
 	 * @param teacherToStudent
 	 */
 	public void updateTeacherToStudentData(TeacherToStudent teacherToStudent);
+
+	/**
+	 * 管理员增加学生成绩
+	 * 
+	 * @param data
+	 */
+	public void addOneStudentData(Data data);
+
+	/**
+	 * 批量增加学生成绩
+	 * 
+	 * @param datas
+	 */
+	public void addListStudentDatas(List<Data> datas);
 }

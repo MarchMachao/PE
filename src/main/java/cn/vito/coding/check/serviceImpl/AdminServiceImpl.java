@@ -59,12 +59,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void addTeacherToStudentDatas(List<TeacherToStudent> teacherToStudents) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void deleteTeacherToStudentData(String studentId, Integer year) {
 		TeacherToStudent teacherToStudent = new TeacherToStudent();
 		teacherToStudent.setstudentId(studentId);
@@ -77,6 +71,16 @@ public class AdminServiceImpl implements AdminService {
 	public void updateTeacherToStudentData(String id, Integer year, String teacher, Integer subjectId,
 			String subjectName) {
 		adminDao.updateTeacherToStudentData(new TeacherToStudent(id, year, teacher, subjectId, subjectName));
+	}
+
+	@Override
+	public void addOneStudentData(String id, Integer year, Integer height, Double weight, Integer vital_capacity,
+			Double fivem, Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups,
+			Integer pull_up, Integer grade, String gender) {
+		double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem, long_jump, reach,
+				eightm, tenm, sit_ups, pull_up);
+		adminDao.addOneStudentData(new Data(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
+				tenm, sit_ups, pull_up, score, "已审核", "已审核"));
 	}
 
 }
