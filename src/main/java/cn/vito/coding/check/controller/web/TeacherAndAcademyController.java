@@ -175,7 +175,7 @@ public class TeacherAndAcademyController {
 			Integer year, String subjectname) throws FileNotFoundException, IOException {
 		String teacher = userService.getUserByUserName(userService.getCurrentUserName()).getNickName();
 		excelUtils.outputTeacherFreshmanExcel(id, name, school, teacher, year, subjectname);
-		File file = new File("/home/page/excel/pe.xls");
+		File file = new File("/home/page/excel/pe1.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
@@ -198,7 +198,7 @@ public class TeacherAndAcademyController {
 			Integer year) throws FileNotFoundException, IOException {
 
 		excelUtils.outputTeacherExcel(id, name, school, "学院", year);
-		File file = new File("/home/page/excel/pe.xls");
+		File file = new File("/home/page/excel/pe2.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
@@ -221,7 +221,7 @@ public class TeacherAndAcademyController {
 		String userName = userService.getCurrentUserName();
 		String school = userService.getUserByUserName(userName).getNickName();
 		excelUtils.outputAcademyFreshmanExcel(id, name, school, year);
-		File file = new File("/home/page/excel/pe.xls");
+		File file = new File("/home/page/excel/pe3.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
@@ -244,7 +244,7 @@ public class TeacherAndAcademyController {
 		String userName = userService.getCurrentUserName();
 		String school = userService.getUserByUserName(userName).getNickName();
 		excelUtils.outputAcademyExcel(id, name, school, year);
-		File file = new File("/home/page/excel/pe.xls");
+		File file = new File("/home/page/excel/pe4.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());

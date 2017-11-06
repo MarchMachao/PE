@@ -54,7 +54,7 @@ public class PDFController {
 			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
 		String teacher = userService.getUserByUserName(userService.getCurrentUserName()).getNickName();
 		pdfUtils.toTeacherFreshmanPdf(id, name, school, teacher, year, subjectname);
-		File file = new File("/home/page/pdf/Test.pdf");
+		File file = new File("/home/page/pdf/Test1.pdf");
 		if (file.exists()) {
 			response.setContentType("application/octet-stream; charset=utf-8");
 			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
@@ -85,7 +85,7 @@ public class PDFController {
 			throws IOException, TemplateException, SAXException, ParserConfigurationException, DocumentException {
 
 		pdfUtils.toTeacherPdf(id, name, school, "学院", year);
-		File file = new File("/home/page/pdf/Test.pdf");
+		File file = new File("/home/page/pdf/Test2.pdf");
 		if (file.exists()) {
 			response.setContentType("application/octet-stream; charset=utf-8");
 			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
@@ -116,7 +116,7 @@ public class PDFController {
 		String userName = userService.getCurrentUserName();
 		String school = userService.getUserByUserName(userName).getNickName();
 		pdfUtils.toAcademyFreshmanPdf(id, name, school, year);
-		File file = new File("/home/page/pdf/Test.pdf");
+		File file = new File("/home/page/pdf/Test3.pdf");
 		if (file.exists()) {
 			response.setContentType("application/octet-stream; charset=utf-8");
 			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
@@ -145,7 +145,7 @@ public class PDFController {
 		String userName = userService.getCurrentUserName();
 		String school = userService.getUserByUserName(userName).getNickName();
 		pdfUtils.toAcademyPdf(id, name, school, year);
-		File file = new File("/home/page/pdf/Test.pdf");
+		File file = new File("/home/page/pdf/Test4.pdf");
 		if (file.exists()) {
 			response.setContentType("application/octet-stream; charset=utf-8");
 			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());

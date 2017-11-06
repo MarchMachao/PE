@@ -98,7 +98,7 @@ public class AdminController {
 	public void downTeacherExcel(HttpServletResponse response, String id, String name, String school, String teacher,
 			Integer year) throws FileNotFoundException, IOException {
 		excelUtils.outputTeacherExcel(id, name, school, teacher, year);
-		File file = new File("/home/page/excel/pe.xls");
+		File file = new File("/home/page/excel/pe2.xls");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
 		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());

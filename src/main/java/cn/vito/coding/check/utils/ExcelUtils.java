@@ -161,7 +161,7 @@ public class ExcelUtils {
 		}
 		// 第六步，将文件存到指定位置
 		try {
-			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe.xls");
+			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe1.xls");
 			wb.write(fout);
 			fout.close();
 		} catch (Exception e) {
@@ -273,7 +273,7 @@ public class ExcelUtils {
 		}
 		// 第六步，将文件存到指定位置
 		try {
-			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe.xls");
+			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe2.xls");
 			wb.write(fout);
 			fout.close();
 		} catch (Exception e) {
@@ -386,7 +386,7 @@ public class ExcelUtils {
 		}
 		// 第六步，将文件存到指定位置
 		try {
-			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe.xls");
+			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe3.xls");
 			wb.write(fout);
 			fout.close();
 		} catch (Exception e) {
@@ -497,7 +497,7 @@ public class ExcelUtils {
 		}
 		// 第六步，将文件存到指定位置
 		try {
-			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe.xls");
+			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe4.xls");
 			wb.write(fout);
 			fout.close();
 		} catch (Exception e) {
