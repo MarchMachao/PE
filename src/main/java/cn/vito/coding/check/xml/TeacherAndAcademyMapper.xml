@@ -63,6 +63,41 @@
 		limit #{page},#{rows}
 	</select>
 	
+	<!-- 教师页面查询大一、大二的数据量 -->
+	<select id="countFreshmanTeacherData" parameterType="TeacherAndAcademyLike" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			a_data,
+			(SELECT
+				stu.id,
+				stu. NAME,
+				stu.gender,
+				stu.school,
+				stu.grade,
+				stu.classes,
+				stu.duration,
+				stu.state,
+				stu.teacher as flag,
+				tea.teacher,
+				tea.subjectid,
+				tea.subjectname
+			FROM
+				a_student stu
+			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+			) teaToStu
+		WHERE
+			a_data.id = teaToStu.id
+		AND teaToStu.state != '已毕业'
+		AND teaToStu.flag != '学院'
+		AND teaToStu.teacher = #{teacher}
+		AND teaToStu.subjectname = #{subjectname}
+		AND a_data.id LIKE '%${id}%'
+		AND teaToStu. NAME LIKE '%${name}%'
+		AND teaToStu.school LIKE '%${school}%'
+		AND a_data. YEAR LIKE '%${year}%'
+	</select>
+	
 	<!-- 根据老师姓名大一大二课程列表 -->
 	<select id="teacherFreshmanList" parameterType="String" resultType="String">
 		SELECT
@@ -117,6 +152,23 @@
 			a_data.year DESC,
 			a_data.id
 		limit #{page},#{rows}
+	</select>
+	
+	<!-- 教师页面中查询大三大四的数据量 -->
+	<select id="countJuniorTeacherData" parameterType="TeacherAndAcademyLike" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_student.teacher = '学院'
+		AND a_data.id LIKE '%${id}%'
+		AND a_student.name LIKE '%${name}%'
+		AND a_student.school LIKE '%${school}%'
+		AND a_data.year LIKE '%${year}%'
 	</select>
 	
 	<!-- 教师页面导出大一、大二数据Excel -->
@@ -212,35 +264,61 @@
 	
 	<!-- 学院页面查询大三，大四的数据 -->
 	<select id="findAcademyData" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
-		select 	a_data.id,
-				a_student.name,
-				a_student.gender,
-				a_student.school,
-				a_student.grade,
-				a_student.classes,
-				a_student.duration,
-				a_student.state,
-				a_student.teacher,
-				a_data.year,
-				a_data.height,
-				a_data.weight,
-				a_data.vital_capacity,
-				a_data.fivem,
-				a_data.long_jump,
-				a_data.reach,
-				a_data.eightm,
-				a_data.tenm,
-				a_data.sit_ups,
-				a_data.pull_up,
-				a_data.score,
-				a_data.first_check,
-				a_data.second_check
-		from a_data,a_student 
-		where a_data.id = a_student.id and a_student.state != '已毕业' and a_student.teacher = '学院'
-			 and a_data.id like '%${id}%' and a_student.name like '%${name}%' and  a_student.school = #{school}
-			 and a_data.year like '%${year}%'
-		order by a_data.year DESC,a_data.id 
-		limit #{page},#{rows}
+		SELECT
+			a_data.id,
+			a_student. NAME,
+			a_student.gender,
+			a_student.school,
+			a_student.grade,
+			a_student.classes,
+			a_student.duration,
+			a_student.state,
+			a_student.teacher,
+			a_data. YEAR,
+			a_data.height,
+			a_data.weight,
+			a_data.vital_capacity,
+			a_data.fivem,
+			a_data.long_jump,
+			a_data.reach,
+			a_data.eightm,
+			a_data.tenm,
+			a_data.sit_ups,
+			a_data.pull_up,
+			a_data.score,
+			a_data.first_check,
+			a_data.second_check
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_student.teacher = '学院'
+		AND a_data.id LIKE '%${id}%'
+		AND a_student. NAME LIKE '%${name}%'
+		AND a_student.school = #{school}
+		AND a_data. YEAR LIKE '%${year}%'
+		ORDER BY
+			a_data. YEAR DESC,
+			a_data.id
+		LIMIT #{page},#{rows}
+	</select>
+	
+	<!-- 学院页面查询大三，大四的数据量 -->
+	<select id="countAcademyData" parameterType="TeacherAndAcademyLike" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_student.teacher = '学院'
+		#AND a_data.id LIKE '%${id}%'
+		#AND a_student. NAME LIKE '%${name}%'
+		#AND a_data. YEAR LIKE '%${year}%'
 	</select>
 	
 	<!-- 学院页面查询大一，大二的数据 -->
@@ -274,6 +352,23 @@
 			 and a_data.year like '%${year}%'
 		order by a_data.year DESC,a_data.id 
 		limit #{page},#{rows}
+	</select>
+	
+	<!-- 学院页面查询大一，大二的数据量 -->
+	<select id="countAcademyFreshmanData" parameterType="TeacherAndAcademyLike" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_student.teacher != '学院'
+		AND a_data.id LIKE '%${id}%'
+		AND a_student. NAME LIKE '%${name}%'
+		AND a_student.school = #{school}
+		AND a_data. YEAR LIKE '%${year}%'
 	</select>
 	
 	<!-- 学院页面查询大一、大二的数据Excel -->

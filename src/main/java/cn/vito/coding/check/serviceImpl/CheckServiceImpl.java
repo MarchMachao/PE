@@ -94,26 +94,22 @@ public class CheckServiceImpl implements CheckService {
 
 	@Override
 	public int countCheckByTeacher(String teacher) {
-		// TODO Auto-generated method stub
-		return 0;
+		return checkDao.countCheckByTeacher(teacher);
 	}
 
 	@Override
 	public int countCheckBySchool(String school) {
-		// TODO Auto-generated method stub
-		return 0;
+		return checkDao.countCheckBySchool(school);
 	}
 
 	@Override
 	public int countAdminCheckByTeacher(String teacher) {
-		// TODO Auto-generated method stub
-		return 0;
+		return checkDao.countAdminCheckByTeacher(teacher);
 	}
 
 	@Override
 	public int countAdminCheckBySchool(String school) {
-		// TODO Auto-generated method stub
-		return 0;
+		return checkDao.countAdminCheckBySchool(school);
 	}
 
 }

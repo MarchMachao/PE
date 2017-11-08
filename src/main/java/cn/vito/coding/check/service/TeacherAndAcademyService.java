@@ -87,4 +87,37 @@ public interface TeacherAndAcademyService {
 			Double fivem, Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups, Integer pull_up,
 			Integer grade, String gender);
 
+	/**
+	 * 教师页面查询大一、大二的数据量
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public int countFreshmanTeacherData(String id, String name, String school, String teacher, Integer year,
+			String subjectname);
+
+	/**
+	 * 教师页面中查询大三大四的数据量
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public int countJuniorTeacherData(String id, String name, String school, Integer year);
+
+	/**
+	 * 学院页面查询大三，大四的数据量
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public int countAcademyData(String id, String name, String school, String teacher, Integer year);
+
+	/**
+	 * 学院页面查询大一，大二的数据量
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public int countAcademyFreshmanData(String id, String name, String school, Integer year);
+
 }

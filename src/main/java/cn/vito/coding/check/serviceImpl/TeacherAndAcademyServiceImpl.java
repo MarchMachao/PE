@@ -62,4 +62,26 @@ public class TeacherAndAcademyServiceImpl implements TeacherAndAcademyService {
 				.findAcademyFreshmanData(new TeacherAndAcademyLike(id, name, school, year, page, rows));
 	}
 
+	@Override
+	public int countFreshmanTeacherData(String id, String name, String school, String teacher, Integer year,
+			String subjectname) {
+		return teacherAndAcademyDao
+				.countFreshmanTeacherData(new TeacherAndAcademyLike(id, name, school, teacher, year, subjectname));
+	}
+
+	@Override
+	public int countJuniorTeacherData(String id, String name, String school, Integer year) {
+		return teacherAndAcademyDao.countJuniorTeacherData(new TeacherAndAcademyLike(id, name, school, year));
+	}
+
+	@Override
+	public int countAcademyData(String id, String name, String school, String teacher, Integer year) {
+		return teacherAndAcademyDao.countAcademyData(new TeacherAndAcademyLike(id, name, school, teacher, year));
+	}
+
+	@Override
+	public int countAcademyFreshmanData(String id, String name, String school, Integer year) {
+		return teacherAndAcademyDao.countAcademyFreshmanData(new TeacherAndAcademyLike(id, name, school, year));
+	}
+
 }

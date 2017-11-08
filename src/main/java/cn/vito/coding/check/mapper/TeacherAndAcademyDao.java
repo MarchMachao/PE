@@ -102,4 +102,35 @@ public interface TeacherAndAcademyDao {
 	 */
 	public void updateTeacherData(Data data);
 
+	/**
+	 * 教师页面查询大一、大二的数据量
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public int countFreshmanTeacherData(TeacherAndAcademyLike teacherAndAcademyLike);
+
+	/**
+	 * 教师页面中查询大三大四的数据量
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public int countJuniorTeacherData(TeacherAndAcademyLike teacherAndAcademyLike);
+
+	/**
+	 * 学院页面查询大三，大四的数据量
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public int countAcademyData(TeacherAndAcademyLike teacherAndAcademyLike);
+
+	/**
+	 * 学院页面查询大一，大二的数据量
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public int countAcademyFreshmanData(TeacherAndAcademyLike teacherAndAcademyLike);
 }

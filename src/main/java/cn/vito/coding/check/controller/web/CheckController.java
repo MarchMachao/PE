@@ -63,7 +63,7 @@ public class CheckController {
 	public DataGrideRow<TeacherAndAcademy> getCheckByTeacher(@RequestParam(defaultValue = "1") String teacher, int page,
 			int rows) {
 		List<TeacherAndAcademy> checks = checkService.findCheckByTeacher(teacher, page, rows);
-		return new DataGrideRow<>(checks.size(), checks);
+		return new DataGrideRow<>(checkService.countCheckByTeacher(teacher), checks);
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class CheckController {
 		String userName = userService.getCurrentUserName();
 		String school = userService.getUserByUserName(userName).getNickName();
 		List<TeacherAndAcademy> checkSchool = checkService.findCheckBySchool(school, page, rows);
-		return new DataGrideRow<>(checkSchool.size(), checkSchool);
+		return new DataGrideRow<>(checkService.countCheckBySchool(school), checkSchool);
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class CheckController {
 	public DataGrideRow<TeacherAndAcademy> getAdminCheckBySchool(@RequestParam(defaultValue = "1") String school,
 			int page, int rows) {
 		List<TeacherAndAcademy> checks = checkService.findAdminCheckBySchool(school, page, rows);
-		return new DataGrideRow<>(checks.size(), checks);
+		return new DataGrideRow<>(checkService.countAdminCheckBySchool(school), checks);
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class CheckController {
 	public DataGrideRow<TeacherAndAcademy> getAdminCheckByTeacher(@RequestParam(defaultValue = "1") String teacher,
 			int page, int rows) {
 		List<TeacherAndAcademy> checks = checkService.findAdminCheckByTeacher(teacher, page, rows);
-		return new DataGrideRow<>(checks.size(), checks);
+		return new DataGrideRow<>(checkService.countAdminCheckByTeacher(teacher), checks);
 	}
 
 	/**
