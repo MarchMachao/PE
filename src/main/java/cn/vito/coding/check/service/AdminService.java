@@ -26,6 +26,13 @@ public interface AdminService {
 	 */
 	public List<TeacherAndAcademy> findAdminData(String id, String name, String school, String teacher, Integer year,
 			int page, int rows);
+	
+	/**
+	 * 查询未毕业学生的信息数据量
+	 * 
+	 * @return
+	 */
+	public int countAdminDatas();
 
 	/**
 	 * 查询所已毕业有学生的信息
@@ -34,6 +41,13 @@ public interface AdminService {
 	 */
 	public List<TeacherAndAcademy> findAdminGraduateData(String id, String name, String school, String teacher,
 			Integer year, int page, int rows);
+
+	/**
+	 * 查询已毕业学生信息数据量
+	 * 
+	 * @return
+	 */
+	public int countAdminGraduateDatas();
 
 	/**
 	 * 修改教师页面的数据
@@ -60,6 +74,13 @@ public interface AdminService {
 	public List<TeacherToStudent> findTeachersToStudentData(String studentId, String school, Integer year,
 			String teacher,
 			Integer subjectId, String subjectName, int page, int rows);
+
+	/**
+	 * 查询学生与老师对应关系数据的量
+	 * 
+	 * @return
+	 */
+	public int countTeacherToStudent();
 
 	/**
 	 * 学生与教师对应关系管理页面增加一条数据

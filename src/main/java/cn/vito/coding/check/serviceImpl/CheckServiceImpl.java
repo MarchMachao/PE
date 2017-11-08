@@ -92,4 +92,28 @@ public class CheckServiceImpl implements CheckService {
 		checkDao.updateAdminSchoolStateNo(school);
 	}
 
+	@Override
+	public int countCheckByTeacher(String teacher) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int countCheckBySchool(String school) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int countAdminCheckByTeacher(String teacher) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int countAdminCheckBySchool(String school) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

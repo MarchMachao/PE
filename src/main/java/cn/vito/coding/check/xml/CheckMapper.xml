@@ -39,6 +39,16 @@
 		limit #{page},#{rows}
 	</select>
 	
+	<!-- 根据不同的学院，查询不同的审核所有未审核的数据量-->
+	<select id="countCheckBySchool" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM a_data t1,
+			a_student t2 WHERE t1.id = t2.id
+		AND t2.state != '已毕业'
+		AND t2.teacher = '学院'
+		AND t1.first_check = '未审核'
+		AND t2.school = #{value}
+	</select>
+	
 	<!-- 学院页面通过审核 -->
 	<update id="checkPass" parameterType="String">
 		UPDATE a_data t1
@@ -110,6 +120,16 @@
 			    AND a_student.teacher = #{teacher}
 			ORDER BY a_data.`year`
 			limit #{page},#{rows}
+	</select>
+	
+	<!-- 根据老师姓名查询学生信息数据量 -->
+	<select id="countCheckByTeacher" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM a_data t1,
+			a_student t2 WHERE t1.id = t2.id
+		AND t2.state != '已毕业'
+		AND t2.teacher != '学院'
+		AND t1.first_check = '未审核'
+		AND t2.teacher = #{value}
 	</select>
 	
 	<!-- 教师更新未审核状态已审核 -->
@@ -219,6 +239,19 @@
 		limit #{page},#{rows}
 	</select>
 	
+	<!-- 管理员根据不同的学院，查询不同的审核所有未审核的数据量 -->
+	<select id="countAdminCheckBySchool" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM a_data t1,
+			a_student t2
+		WHERE
+			t1.id = t2.id
+		AND t2.state != '已毕业'
+		AND t2.teacher = '学院'
+		AND t1.first_check = '已审核'
+		AND t2.school = #{value}
+		AND t1.second_check = '未审核'
+	</select>
+	
 	<!-- 管理员根据老师姓名查询学生信息 -->
 	<select id="findAdminCheckByTeacher" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
 		SELECT
@@ -266,6 +299,35 @@
 		ORDER BY
 			a_data.`year`
 		limit #{page},#{rows}
+	</select>
+	
+	<!-- 管理员根据老师姓名查询学生信息数据量 -->
+	<select id="countAdminCheckByTeacher" parameterType="String" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			a_data,
+			(
+				SELECT
+					stu.id,
+					stu. NAME,
+					stu.school,
+					stu.state,
+					stu.teacher AS flag,
+					tea.teacher,
+					tea.subjectid,
+					tea.subjectname
+				FROM
+					a_student stu
+				LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+			) teaToStu
+		WHERE
+			a_data.id = teaToStu.id
+		AND teaToStu.state != '已毕业'
+		AND teaToStu.flag != '学院'
+		AND a_data.first_check = '已审核'
+		AND a_data.second_check = '未审核' 
+		AND teaToStu.teacher = #{value}
 	</select>
 	
 	<!-- 管理员更新教师未审核状态已审核 -->

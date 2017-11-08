@@ -23,11 +23,25 @@ public interface AdminDao {
 	public List<TeacherAndAcademy> findAdminData(TeacherAndAcademyLike teacherLike);
 
 	/**
+	 * 查询未毕业学生的信息数据量
+	 * 
+	 * @return
+	 */
+	public int countAdminDatas();
+
+	/**
 	 * 查询所已毕业有学生的信息
 	 * 
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findAdminGraduateData(TeacherAndAcademyLike teacherLike);
+
+	/**
+	 * 查询已毕业学生信息数据量
+	 * 
+	 * @return
+	 */
+	public int countAdminGraduateDatas();
 
 	/**
 	 * 修改页面的数据
@@ -43,6 +57,13 @@ public interface AdminDao {
 	 * @return
 	 */
 	public List<TeacherToStudent> findTeachersToStudentData(TeacherToStudent teacherToStudent);
+
+	/**
+	 * 查询学生与老师对应关系数据的量
+	 * 
+	 * @return
+	 */
+	public int countTeacherToStudent();
 
 	/**
 	 * 学生与教师对应关系管理页面增加一条数据

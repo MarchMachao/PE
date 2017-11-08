@@ -64,6 +64,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public int countStudents() {
+		return userDao.countStudents();
+	}
+
+	@Override
 	public void addStudentUser(String userName, String password, String name, String gender, String school,
 			Integer grade, String classes, Integer duration, String state, String teacher) {
 		String nickName = gender;

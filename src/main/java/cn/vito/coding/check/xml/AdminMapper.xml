@@ -46,6 +46,10 @@
 		limit #{page},#{rows}
 	</select>
 	
+	<!-- 查询未毕业学生的数据量 -->
+	<select id="countAdminDatas" resultType="int">
+		select count(*) from a_data,a_student WHERE a_data.id = a_student.id AND a_student.state!='已毕业'
+	</select>
 	
 	<!-- 管理员页面查询已毕业所有的数据 -->
 	<select id="findAdminGraduateData" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
@@ -87,6 +91,11 @@
 			a_data.year DESC,
 			a_data.id
 		limit #{page},#{rows}
+	</select>
+	
+	<!-- 查询已毕业学生的数据量 -->
+	<select id="countAdminGraduateDatas" resultType="int">
+		select count(*) from a_data,a_student WHERE a_data.id = a_student.id AND a_student.state='已毕业'
 	</select>
 
 	<!-- 修改管理员页面的数据 -->
@@ -172,6 +181,15 @@
 			b. YEAR DESC,
 			a.id
 		LIMIT #{page},#{rows}
+	</select>
+	
+	<!-- 查询学生与教师对应关系的数据量 -->
+	<select id="countTeacherToStudent" resultType="int">
+		select count(*) from a_student a
+		LEFT JOIN a_teacher b ON a.id = b.studentid
+		WHERE
+			a.state != '已毕业'
+		AND a.teacher ='老师'
 	</select>
 	
 	<!-- 学生与教师对应关系管理页面增加一条数据 -->

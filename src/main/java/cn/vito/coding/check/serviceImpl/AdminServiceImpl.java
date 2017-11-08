@@ -26,6 +26,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public int countAdminDatas() {
+		return adminDao.countAdminDatas();
+	}
+
+	@Override
 	public void updateAdminData(String id, Integer year, Integer height, Double weight, Integer vital_capacity,
 			Double fivem, Double long_jump, Double reach, String eightm, String tenm, Integer sit_ups, Integer pull_up,
 			Integer grade, String gender) {
@@ -44,11 +49,21 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
+	public int countAdminGraduateDatas() {
+		return adminDao.countAdminGraduateDatas();
+	}
+
+	@Override
 	public List<TeacherToStudent> findTeachersToStudentData(String studentId, String school, Integer year,
 			String teacher,
 			Integer subjectId, String subjectName, int page, int rows) {
 		return adminDao.findTeachersToStudentData(
 				new TeacherToStudent(studentId, school, year, teacher, subjectId, subjectName, page, rows));
+	}
+
+	@Override
+	public int countTeacherToStudent() {
+		return adminDao.countTeacherToStudent();
 	}
 
 	@Override
@@ -82,5 +97,4 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.addOneStudentData(new Data(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
 				tenm, sit_ups, pull_up, score, "已审核", "已审核"));
 	}
-
 }

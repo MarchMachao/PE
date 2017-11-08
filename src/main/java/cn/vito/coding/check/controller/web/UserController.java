@@ -119,7 +119,7 @@ public class UserController {
 	public DataGrideRow<UserLike> getStudentUser(String name, String school, Integer grade, String state,
 			String teacher, int page, int rows) {
 		List<UserLike> list = userService.findStudentUser(name, school, grade, state, teacher, page, rows);
-		return new DataGrideRow<>(list.size(), list);
+		return new DataGrideRow<>(userService.countStudents(), list);
 	}
 
 	/**

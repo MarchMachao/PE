@@ -67,6 +67,13 @@ public interface UserDao {
 	public List<UserLike> findStudentUser(UserLike userLike);
 
 	/**
+	 * 查询学生用户数量
+	 * 
+	 * @return
+	 */
+	public int countStudents();
+
+	/**
 	 * 管理员插入学生用户数据1
 	 * 
 	 * @param user

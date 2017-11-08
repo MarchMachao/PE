@@ -90,6 +90,13 @@ public interface UserService {
 			int page, int rows);
 
 	/**
+	 * 查询学生用户数量
+	 * 
+	 * @return
+	 */
+	public int countStudents();
+
+	/**
 	 * 管理员，插入学生数据
 	 * 
 	 * @param userName

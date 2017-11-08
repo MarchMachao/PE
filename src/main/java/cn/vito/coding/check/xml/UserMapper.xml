@@ -21,9 +21,9 @@
 		limit #{page},#{rows}
 	</select>
 	
-	<!-- 查询所有的用户数据总数量 -->
+	<!-- 查询所有的教工（非学生）用户数据总数量 -->
 	<select id="count" resultType="int">
-		select count(*) from s_user
+		select count(*) from s_user WHERE role!='学生'
 	</select>
 	
 	<!-- 更新学生的密码 -->
@@ -90,6 +90,10 @@
 		  t1.userName
 		limit #{page},#{rows}
 		
+	</select>
+	
+	<select id="countStudents" resultType="int">
+		select count(*) from s_user WHERE role='学生'
 	</select>
 	
 	<!-- 插入数据 -->

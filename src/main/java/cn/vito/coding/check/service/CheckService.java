@@ -122,4 +122,36 @@ public interface CheckService {
 	 * @param teacher
 	 */
 	public void updateAdminSchoolStateNo(String school);
+
+	/**
+	 * 审核的教师列表的学生数据量
+	 * 
+	 * @param teacher
+	 * @return
+	 */
+	public int countCheckByTeacher(String teacher);
+
+	/**
+	 * 学院审核。根据不同学院查询不同的信息的数据量
+	 * 
+	 * @param school
+	 * @return
+	 */
+	public int countCheckBySchool(String school);
+
+	/**
+	 * 管理员审核的教师列表的学生数据量
+	 * 
+	 * @param teacher
+	 * @return
+	 */
+	public int countAdminCheckByTeacher(String teacher);
+
+	/**
+	 * 管理员审核的学院列表的学生数据 量
+	 * 
+	 * @param school
+	 * @return
+	 */
+	public int countAdminCheckBySchool(String school);
 }

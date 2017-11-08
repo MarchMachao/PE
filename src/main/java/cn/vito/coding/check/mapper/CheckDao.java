@@ -30,6 +30,14 @@ public interface CheckDao {
 	public List<TeacherAndAcademy> findCheckByTeacher(TeacherAndAcademyLike teacherAndAcademyLike);
 
 	/**
+	 * 审核的教师列表的学生数据量
+	 * 
+	 * @param teacher
+	 * @return
+	 */
+	public int countCheckByTeacher(String teacher);
+
+	/**
 	 * 教师审核，更新状态数据已审核
 	 * 
 	 * @param teacher
@@ -50,6 +58,14 @@ public interface CheckDao {
 	 * @return
 	 */
 	public List<TeacherAndAcademy> findCheckBySchool(CheckAcademy checkAcademy);
+
+	/**
+	 * 学院审核。根据不同学院查询不同的信息的数据量
+	 * 
+	 * @param school
+	 * @return
+	 */
+	public int countCheckBySchool(String school);
 
 	/**
 	 * 学院审核，更新状态数据已审核
@@ -88,6 +104,14 @@ public interface CheckDao {
 	public List<TeacherAndAcademy> findAdminCheckByTeacher(TeacherAndAcademyLike teacherAndAcademyLike);
 
 	/**
+	 * 管理员审核的教师列表的学生数据量
+	 * 
+	 * @param teacher
+	 * @return
+	 */
+	public int countAdminCheckByTeacher(String teacher);
+
+	/**
 	 * 管理员审核的学院列表的学生数据
 	 * 
 	 * @param teacherAndAcademyLike
@@ -95,6 +119,13 @@ public interface CheckDao {
 	 */
 	public List<TeacherAndAcademy> findAdminCheckBySchool(CheckAcademy checkAcademy);
 
+	/**
+	 * 管理员审核的学院列表的学生数据 量
+	 * 
+	 * @param school
+	 * @return
+	 */
+	public int countAdminCheckBySchool(String school);
 	/**
 	 * 管理员更新教师状态数据已审核
 	 * 
