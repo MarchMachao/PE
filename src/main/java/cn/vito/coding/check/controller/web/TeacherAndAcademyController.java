@@ -65,7 +65,8 @@ public class TeacherAndAcademyController {
 		String teacher = userService.getUserByUserName(userService.getCurrentUserName()).getNickName();
 		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findFreshmanTeacherData(id, name, school, teacher,
 				year, subjectname, page, rows);
-		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+		int count = teacherAndAcademyService.countFreshmanTeacherData(id, name, school, teacher, year, subjectname);
+		return new DataGrideRow<TeacherAndAcademy>(count, teachers);
 	}
 
 	/**
@@ -106,11 +107,12 @@ public class TeacherAndAcademyController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "findJuniorData")
-	public DataGrideRow<TeacherAndAcademy> findJuniorData(@RequestParam(defaultValue = "1") String id, String name,
-			String school, String teacher, Integer year, int page, int rows) {
+	public DataGrideRow<TeacherAndAcademy> findJuniorData(String id, String name, String school, String teacher,
+			Integer year, @RequestParam(defaultValue = "1") int page, int rows) {
 		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findJuniorTeacherData(id, name, school, year, page,
 				rows);
-		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+		int count = teacherAndAcademyService.countJuniorTeacherData(id, name, school, year);
+		return new DataGrideRow<TeacherAndAcademy>(count, teachers);
 	}
 
 	/**
@@ -126,13 +128,14 @@ public class TeacherAndAcademyController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "findAcademyFreshmanData")
-	public DataGrideRow<TeacherAndAcademy> findAcademyFreshmanData(@RequestParam(defaultValue = "1") String id,
-			String name, Integer year, int page, int rows) {
+	public DataGrideRow<TeacherAndAcademy> findAcademyFreshmanData(String id, String name, Integer year,
+			@RequestParam(defaultValue = "1") int page, int rows) {
 		String userName = userService.getCurrentUserName();
 		String school = userService.getUserByUserName(userName).getNickName();
 		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findAcademyFreshmanData(id, name, school, year,
 				page, rows);
-		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+		int count = teacherAndAcademyService.countAcademyFreshmanData(id, userName, school, year);
+		return new DataGrideRow<TeacherAndAcademy>(count, teachers);
 	}
 
 	/**
@@ -149,13 +152,14 @@ public class TeacherAndAcademyController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "getAcademyData")
-	public DataGrideRow<TeacherAndAcademy> findAcaData(@RequestParam(defaultValue = "1") String id, String name,
-			Integer year, int page, int rows) {
+	public DataGrideRow<TeacherAndAcademy> findAcaData(String id, String name, Integer year,
+			@RequestParam(defaultValue = "1") int page, int rows) {
 		String userName = userService.getCurrentUserName();
 		String school = userService.getUserByUserName(userName).getNickName();
 		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findAcademyData(id, name, school, null, year, page,
 				rows);
-		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+		int count = teacherAndAcademyService.countAcademyData(id, userName, school, null, year);
+		return new DataGrideRow<TeacherAndAcademy>(count, teachers);
 	}
 
 	/**

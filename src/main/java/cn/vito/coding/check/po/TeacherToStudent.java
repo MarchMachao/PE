@@ -31,6 +31,16 @@ public class TeacherToStudent {
 		this.subjectName = subjectName;
 	}
 
+	public TeacherToStudent(String studentId, String school, Integer year, String teacher, Integer subjectId,
+			String subjectName) {
+		this.studentId = studentId;
+		this.school = school;
+		this.year = year;
+		this.teacher = teacher;
+		this.subjectId = subjectId;
+		this.subjectName = subjectName;
+	}
+
 	public TeacherToStudent(String studentId, String name, String gender, Integer grade, String school, Integer year,
 			String teacher, Integer subjectId, String subjectName) {
 		this.studentId = studentId;

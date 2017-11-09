@@ -60,7 +60,8 @@ public class AdminController {
 	public DataGrideRow<TeacherAndAcademy> findStuData(String id, String name, String school, String teacher,
 			Integer year, @RequestParam(defaultValue = "1") int page, int rows) {
 		List<TeacherAndAcademy> teachers = adminService.findAdminData(id, name, school, teacher, year, page, rows);
-		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+		return new DataGrideRow<TeacherAndAcademy>(adminService.countAdminDatas(id, name, school, teacher, year),
+				teachers);
 	}
 
 	/**
@@ -80,7 +81,8 @@ public class AdminController {
 	public DataGrideRow<TeacherAndAcademy> findAdminData(String id, String name, String school, String teacher,
 			Integer year, @RequestParam(defaultValue = "1") int page, int rows) {
 		List<TeacherAndAcademy> teachers = adminService.findAdminGraduateData(id, name, school, teacher, year, page, rows);
-		return new DataGrideRow<TeacherAndAcademy>(teachers.size(), teachers);
+		return new DataGrideRow<TeacherAndAcademy>(
+				adminService.countAdminGraduateDatas(id, name, school, teacher, year), teachers);
 	}
 
 	/**
@@ -207,7 +209,9 @@ public class AdminController {
 			int rows) {
 		List<TeacherToStudent> teacherToStudents = adminService.findTeachersToStudentData(studentId, school, year,
 				teacher, subjectId, subjectName, page, rows);
-		return new DataGrideRow<TeacherToStudent>(adminService.countTeacherToStudent(), teacherToStudents);
+		return new DataGrideRow<TeacherToStudent>(
+				adminService.countTeacherToStudent(studentId, school, year, teacher, subjectId, subjectName),
+				teacherToStudents);
 	}
 
 	/**

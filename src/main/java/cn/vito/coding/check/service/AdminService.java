@@ -32,7 +32,7 @@ public interface AdminService {
 	 * 
 	 * @return
 	 */
-	public int countAdminDatas();
+	public int countAdminDatas(String id, String name, String school, String teacher, Integer year);
 
 	/**
 	 * 查询所已毕业有学生的信息
@@ -47,7 +47,7 @@ public interface AdminService {
 	 * 
 	 * @return
 	 */
-	public int countAdminGraduateDatas();
+	public int countAdminGraduateDatas(String studentId, String name, String school, String teacher, Integer year);
 
 	/**
 	 * 修改教师页面的数据
@@ -80,7 +80,8 @@ public interface AdminService {
 	 * 
 	 * @return
 	 */
-	public int countTeacherToStudent();
+	public int countTeacherToStudent(String studentId, String school, Integer year,
+			String teacher, Integer subjectId, String subjectName);
 
 	/**
 	 * 学生与教师对应关系管理页面增加一条数据

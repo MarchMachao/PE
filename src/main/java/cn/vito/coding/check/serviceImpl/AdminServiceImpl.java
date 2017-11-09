@@ -26,8 +26,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int countAdminDatas() {
-		return adminDao.countAdminDatas();
+	public int countAdminDatas(String id, String name, String school, String teacher, Integer year) {
+		return adminDao.countAdminDatas(new TeacherAndAcademyLike(id, name, school, teacher, year));
 	}
 
 	@Override
@@ -49,21 +49,22 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int countAdminGraduateDatas() {
-		return adminDao.countAdminGraduateDatas();
+	public int countAdminGraduateDatas(String studentId, String name, String school, String teacher, Integer year) {
+		return adminDao.countAdminGraduateDatas(new TeacherAndAcademyLike(studentId, name, school, teacher, year));
 	}
 
 	@Override
 	public List<TeacherToStudent> findTeachersToStudentData(String studentId, String school, Integer year,
-			String teacher,
-			Integer subjectId, String subjectName, int page, int rows) {
+			String teacher, Integer subjectId, String subjectName, int page, int rows) {
 		return adminDao.findTeachersToStudentData(
 				new TeacherToStudent(studentId, school, year, teacher, subjectId, subjectName, page, rows));
 	}
 
 	@Override
-	public int countTeacherToStudent() {
-		return adminDao.countTeacherToStudent();
+	public int countTeacherToStudent(String studentId, String school, Integer year,
+			String teacher, Integer subjectId, String subjectName) {
+		return adminDao
+				.countTeacherToStudent(new TeacherToStudent(studentId, school, year, teacher, subjectId, subjectName));
 	}
 
 	@Override

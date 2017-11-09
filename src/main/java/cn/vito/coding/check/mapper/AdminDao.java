@@ -27,7 +27,7 @@ public interface AdminDao {
 	 * 
 	 * @return
 	 */
-	public int countAdminDatas();
+	public int countAdminDatas(TeacherAndAcademyLike teacherAndAcademyLike);
 
 	/**
 	 * 查询所已毕业有学生的信息
@@ -41,7 +41,7 @@ public interface AdminDao {
 	 * 
 	 * @return
 	 */
-	public int countAdminGraduateDatas();
+	public int countAdminGraduateDatas(TeacherAndAcademyLike teacherAndAcademyLike);
 
 	/**
 	 * 修改页面的数据
@@ -63,7 +63,7 @@ public interface AdminDao {
 	 * 
 	 * @return
 	 */
-	public int countTeacherToStudent();
+	public int countTeacherToStudent(TeacherToStudent teacherToStudent);
 
 	/**
 	 * 学生与教师对应关系管理页面增加一条数据

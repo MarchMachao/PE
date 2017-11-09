@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.vito.coding.check.mapper.AdminDao;
-import cn.vito.coding.check.mapper.StudentDao;
 import cn.vito.coding.check.mapper.TeacherAndAcademyDao;
 import cn.vito.coding.check.mapper.UserDao;
 import cn.vito.coding.check.po.Data;
@@ -45,9 +44,6 @@ public class ExcelUtils {
 
 	@Autowired
 	private TeacherAndAcademyDao teacherAndAcademyDao;
-
-	@Autowired
-	private StudentDao studentDao;
 
 	@Autowired
 	private UserDao userDao;
@@ -527,6 +523,8 @@ public class ExcelUtils {
 						Row row = sheet.getRow(r); // 取出相应的列
 
 						Cell id = row.getCell(0);
+						String gender = row.getCell(2).toString();
+						Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
 						Double weight = Double.parseDouble(row.getCell(7).toString());
 						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
@@ -540,9 +538,8 @@ public class ExcelUtils {
 						Integer pull_up = (int) Double.parseDouble(
 								StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
 
-						Student student = studentDao.findStudentById(id.toString());
 
-						double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
+						double score = ComputeScore.score(grade, gender, height, weight,
 								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
 						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
@@ -592,6 +589,8 @@ public class ExcelUtils {
 						if (!row.getCell(3).toString().equals(school)) {
 							continue;
 						}
+						String gender = row.getCell(2).toString();
+						Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
 						Double weight = Double.parseDouble(row.getCell(7).toString());
 						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
@@ -605,9 +604,8 @@ public class ExcelUtils {
 						Integer pull_up = (int) Double.parseDouble(
 								StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
 
-						Student student = studentDao.findStudentById(id.toString());
 
-						double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
+						double score = ComputeScore.score(grade, gender, height, weight,
 								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
 						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
@@ -756,6 +754,8 @@ public class ExcelUtils {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
 						Cell id = row.getCell(0);
+						String gender = row.getCell(2).toString();
+						Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
 						Double weight = Double.parseDouble(row.getCell(7).toString());
 						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
@@ -769,9 +769,8 @@ public class ExcelUtils {
 						Integer pull_up = (int) Double.parseDouble(
 								StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
 
-						Student student = studentDao.findStudentById(id.toString());
 
-						double score = ComputeScore.score(student.getGrade(), student.getGender(), height, weight,
+						double score = ComputeScore.score(grade, gender, height, weight,
 								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
 						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,

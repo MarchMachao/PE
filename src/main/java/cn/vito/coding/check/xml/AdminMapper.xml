@@ -47,8 +47,20 @@
 	</select>
 	
 	<!-- 查询未毕业学生的数据量 -->
-	<select id="countAdminDatas" resultType="int">
-		select count(*) from a_data,a_student WHERE a_data.id = a_student.id AND a_student.state!='已毕业'
+	<select id="countAdminDatas" parameterType="TeacherAndAcademyLike" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_data.id LIKE '%${id}%'
+		AND a_student.name LIKE '%${name}%'
+		AND a_student.school LIKE '%${school}%'
+		AND a_student.teacher LIKE '%${teacher}%'
+		AND a_data.year LIKE '%${year}%'
 	</select>
 	
 	<!-- 管理员页面查询已毕业所有的数据 -->
@@ -94,8 +106,19 @@
 	</select>
 	
 	<!-- 查询已毕业学生的数据量 -->
-	<select id="countAdminGraduateDatas" resultType="int">
-		select count(*) from a_data,a_student WHERE a_data.id = a_student.id AND a_student.state='已毕业'
+	<select id="countAdminGraduateDatas" parameterType="TeacherAndAcademyLike" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state = '已毕业'
+		AND a_student.name LIKE '%${name}%'
+		AND a_student.school LIKE '%${school}%'
+		AND a_student.teacher LIKE '%${teacher}%'
+		AND a_data.year LIKE '%${year}%'
 	</select>
 
 	<!-- 修改管理员页面的数据 -->
@@ -168,7 +191,7 @@
 		<if test="year!=null">
 			AND b.YEAR LIKE '%${year}%'
 		</if>
-		<if test="teacher!=null">
+		<if test="teacher!=null and teacher!=''">
 			AND b.teacher LIKE '%${teacher}%'
 		</if>
 		<if test="subjectId!=null">
@@ -184,12 +207,26 @@
 	</select>
 	
 	<!-- 查询学生与教师对应关系的数据量 -->
-	<select id="countTeacherToStudent" resultType="int">
+	<select id="countTeacherToStudent" parameterType="TeacherToStudent" resultType="int">
 		select count(*) from a_student a
 		LEFT JOIN a_teacher b ON a.id = b.studentid
 		WHERE
 			a.state != '已毕业'
 		AND a.teacher ='老师'
+		AND	a.id LIKE '%${studentId}%'
+		AND a.school LIKE '%${school}%'
+		<if test="year!=null">
+			AND b.YEAR LIKE '%${year}%'
+		</if>
+		<if test="teacher!=null and teacher!=''">
+			AND b.teacher LIKE '%${teacher}%'
+		</if>
+		<if test="subjectId!=null">
+			AND b.subjectid LIKE '%${subjectId}%'
+		</if>
+		<if test="subjectName!=null">
+			AND b.subjectname LIKE '%${subjectName}%'
+		</if>
 	</select>
 	
 	<!-- 学生与教师对应关系管理页面增加一条数据 -->
@@ -259,8 +296,7 @@
 			#{item.pull_up},
 			#{item.score},
 			#{item.first_check},
-			#{first_check},
-			#{second_check}
+			#{item.second_check}
 			)
 		</foreach>
 	</insert>
