@@ -109,6 +109,7 @@
 			tea.teacher = #{value}
 		AND stu.teacher != '学院'
 		AND stu.state != '已毕业'
+		GROUP BY tea.subjectname
 	</select>
 	
 	<!-- 教师页面中查询大三大四的数据 -->
