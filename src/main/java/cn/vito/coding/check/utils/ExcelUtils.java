@@ -518,13 +518,13 @@ public class ExcelUtils {
 				Sheet sheet = workbook.getSheetAt(s);
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
 				// 遍历每一行
-				for (int r = 1; r < rowCount; r++) {
+				for (int r = 4; r < rowCount; r++) {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
 
-						Cell id = row.getCell(0);
-						String gender = row.getCell(2).toString();
-						Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
+						Cell id = row.getCell(1);
+						String gender = row.getCell(3).toString();
+						Integer grade = (int) Double.parseDouble(row.getCell(5).toString());
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
 						Double weight = Double.parseDouble(row.getCell(7).toString());
 						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
@@ -581,16 +581,16 @@ public class ExcelUtils {
 				Sheet sheet = workbook.getSheetAt(s);
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
 				// 遍历每一行
-				for (int r = 1; r < rowCount; r++) {
+				for (int r = 4; r < rowCount; r++) {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
 
-						Cell id = row.getCell(0);
-						if (!row.getCell(3).toString().equals(school)) {
+						Cell id = row.getCell(1);
+						if (!row.getCell(4).toString().equals(school)) {
 							continue;
 						}
-						String gender = row.getCell(2).toString();
-						Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
+						String gender = row.getCell(3).toString();
+						Integer grade = (int) Double.parseDouble(row.getCell(5).toString());
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
 						Double weight = Double.parseDouble(row.getCell(7).toString());
 						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
@@ -750,11 +750,11 @@ public class ExcelUtils {
 				Sheet sheet = workbook.getSheetAt(s);
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
 				// 遍历每一行
-				for (int r = 1; r < rowCount; r++) {
+				for (int r = 4; r < rowCount; r++) {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
-						Cell id = row.getCell(0);
-						String gender = row.getCell(2).toString();
+						Cell id = row.getCell(1);
+						String gender = row.getCell(3).toString();
 						Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
 						Double weight = Double.parseDouble(row.getCell(7).toString());
