@@ -15,13 +15,21 @@ import cn.vito.coding.check.po.StudentAndItsTeacher;
 public interface StudentDao {
 
 	/**
-	 * 根据用户登录账号获取用户信息
+	 * 根据学生登录账号获取学生基本信息
 	 * 
 	 * @param userName
 	 *            用户名
 	 * @return user对象
 	 */
-	public StudentAndItsTeacher findStudentById(String id);
+	public Student findStudentById(String id);
+
+	/**
+	 * 根据学生登录账号获取师生绑定信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public StudentAndItsTeacher findStudentToTeacherById(String id);
 
 	/**
 	 * 查询所有的data数据

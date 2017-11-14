@@ -62,10 +62,10 @@
             </li>
             <#if item.teacher != "学院">
 				<li class="col-md-6">
-	                <span class="part2-title">课程名：</span><span>${item.subjectName}</span>
+	                <span class="part2-title">课程名：</span><span>${teacher.subjectName}</span>
 	            </li>
 	            <li class="col-md-6">
-	                <span class="part2-title">课程教师：</span><span>${item.newTeacher}</span>
+	                <span class="part2-title">课程教师：</span><span>${teacher.newTeacher}</span>
 	            </li>
 			</#if>
             

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.vito.coding.check.po.Data;
+import cn.vito.coding.check.po.Student;
+import cn.vito.coding.check.po.StudentAndItsTeacher;
 import cn.vito.coding.check.service.StudentService;
 import cn.vito.coding.check.service.UserService;
 import cn.vito.coding.check.vo.BaseMsg;
@@ -29,7 +31,12 @@ public class StudentController {
 
 	@RequestMapping(value = "getStudentById")
 	public String findStudentById(ModelMap modelMap) {
-		modelMap.addAttribute("item", studentService.findStudentById(userService.getCurrentUserName()));
+		String id = userService.getCurrentUserName();
+		Student s = studentService.findStudentById(id);
+		StudentAndItsTeacher s2 = studentService.findStudentToTeacherById(id);
+		System.out.println(s);
+		modelMap.addAttribute("item", s);
+		modelMap.addAttribute("teacher", s2);
 		return "student.ftl";
 	}
 

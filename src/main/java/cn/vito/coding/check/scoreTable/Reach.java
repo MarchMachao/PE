@@ -9,6 +9,8 @@ import cn.vito.coding.check.utils.StringUtils;
  *
  */
 public class Reach {
+	public static void main(String[] args) {
+	}
 
 	public static int reaches(String gender, int grade, double reach) {
 		String g = StringUtils.gradeIntToString(grade);

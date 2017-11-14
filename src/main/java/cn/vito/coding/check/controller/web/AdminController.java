@@ -159,13 +159,15 @@ public class AdminController {
 			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm_minuite,
 			String eightm_second, String tenm_minuite, String tenm_second, Integer sit_ups, Integer pull_up,
 			Integer grade, String gender) {
+		System.out.println("eightm_minuite:" + eightm_minuite + "eightm_second:" + eightm_second);
+		System.out.println("tenm_minuite:" + tenm_minuite + "tenm_second:" + tenm_second);
 		try {
 			String eightm="";
 			String tenm = "";
-			if (StringUtils.isEmpty(eightm_minuite) && StringUtils.isEmpty(eightm_second)) {
+			if (!StringUtils.isEmpty(eightm_minuite) && !StringUtils.isEmpty(eightm_second)) {
 				eightm = eightm_minuite + "'" + eightm_second;
 			} 
-			if (StringUtils.isEmpty(tenm_minuite) && StringUtils.isEmpty(tenm_second)) {
+			if (!StringUtils.isEmpty(tenm_minuite) && !StringUtils.isEmpty(tenm_second)) {
 				tenm = tenm_minuite + "'" + tenm_second;
 			}
 			adminService.updateAdminData(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,

@@ -4,7 +4,7 @@ import cn.vito.coding.check.utils.StringUtils;
 
 public class EightMeters {
 	public static void main(String[] args) {
-		String string = "3'78";
+		String string = "";
 		int grade = 2015;
 		System.out.println(eightGirl(grade, string));
 	}

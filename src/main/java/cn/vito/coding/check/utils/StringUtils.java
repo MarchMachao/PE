@@ -121,16 +121,15 @@ public class StringUtils {
 	 */
 	public static int timeToInt(String s) {
 		if (isEmpty(s)) {
-			return 0;
+			return 999;
 		}
-		String string = "";
-		for (int i = 0; i < s.length(); i++) {
-			char sChar = s.charAt(i);
-			if (Character.isDigit(sChar)) {
-				string += String.valueOf(sChar);
-			}
+		String[] strings = s.split("'");
+		int value = 0;
+		if (strings[1].length() == 1) {
+			value = Integer.parseInt(strings[0] + '0' + strings[1]);
+		} else {
+			value = Integer.parseInt(strings[0] + strings[1]);
 		}
-		int value = Integer.parseInt(string);
 		return value;
 	}
 

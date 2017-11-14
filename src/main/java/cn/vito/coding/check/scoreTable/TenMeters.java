@@ -4,7 +4,7 @@ import cn.vito.coding.check.utils.StringUtils;
 
 public class TenMeters {
 	public static void main(String[] args) {
-		String string = "3'78";
+		String string = "4'04";
 		int grade = 2015;
 		System.out.println(tenBoy(grade, string));
 	}

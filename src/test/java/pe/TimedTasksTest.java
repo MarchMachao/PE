@@ -9,9 +9,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.vito.coding.check.po.StudentAndItsTeacher;
-import cn.vito.coding.check.service.StudentService;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-context.xml" })
 @Transactional
@@ -22,10 +19,10 @@ public class TimedTasksTest {
 
 	@Test
 	public void test() {
-		StudentService studentService = ctx.getBean(StudentService.class);
-		StudentAndItsTeacher studentAndItsTeacher = studentService
-				.findStudentById("220150925821");
-		System.out.println(studentAndItsTeacher);
+		// StudentService studentService = ctx.getBean(StudentService.class);
+		// StudentAndItsTeacher studentAndItsTeacher = studentService
+		// .findStudentById("220150925821");
+		// System.out.println(studentAndItsTeacher);
 	}
 
 }

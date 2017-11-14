@@ -37,7 +37,7 @@ public class AdminServiceImpl implements AdminService {
 		double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem, long_jump, reach,
 				eightm, tenm, sit_ups, pull_up);
 		adminDao.updateAdminData(new Data(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
-				tenm, sit_ups, pull_up, score, "未审核", "未审核"));
+				tenm, sit_ups, pull_up, score, "已审核", "已审核"));
 
 	}
 

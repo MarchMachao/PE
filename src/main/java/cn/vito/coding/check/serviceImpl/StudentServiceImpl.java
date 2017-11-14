@@ -18,8 +18,13 @@ public class StudentServiceImpl implements StudentService {
 	private StudentDao studentDao;
 
 	@Override
-	public StudentAndItsTeacher findStudentById(String id) {
+	public Student findStudentById(String id) {
 		return studentDao.findStudentById(id);
+	}
+
+	@Override
+	public StudentAndItsTeacher findStudentToTeacherById(String id) {
+		return studentDao.findStudentToTeacherById(id);
 	}
 
 	@Override
