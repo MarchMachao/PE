@@ -60,9 +60,9 @@ public class EightMeters {
 		} else {
 			if (sitNum <= 316) {
 				return 100;
-			} else if (sitNum > 316 && sitNum <= 323) {
+			} else if (sitNum > 316 && sitNum <= 322) {
 				return 95;
-			} else if (sitNum > 323 && sitNum <= 328) {
+			} else if (sitNum > 322 && sitNum <= 328) {
 				return 90;
 			} else if (sitNum > 328 && sitNum <= 335) {
 				return 85;

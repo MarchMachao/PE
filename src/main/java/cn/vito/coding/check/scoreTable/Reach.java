@@ -52,8 +52,10 @@ public class Reach {
 					return 30;
 				} else if (reach >= -0.3 && reach < 0.7) {
 					return 20;
-				} else {
+				} else if (reach >= -1.3 && reach < -0.3) {
 					return 10;
+				} else {
+					return 0;
 				}
 			} else {
 				if (reach >= 25.1) {
@@ -94,8 +96,10 @@ public class Reach {
 					return 30;
 				} else if (reach >= 0.2 && reach < 1.2) {
 					return 20;
-				} else {
+				} else if (reach >= -0.8 && reach < 0.2) {
 					return 10;
+				} else {
+					return 0;
 				}
 			}
 		} else {
@@ -138,8 +142,10 @@ public class Reach {
 					return 30;
 				} else if (reach >= 2.8 && reach < 3.6) {
 					return 20;
-				} else {
+				} else if (reach >= 2.0 && reach < 2.8) {
 					return 10;
+				} else {
+					return 0;
 				}
 			} else {
 				if (reach >= 26.3) {
@@ -180,8 +186,10 @@ public class Reach {
 					return 30;
 				} else if (reach >= 3.3 && reach < 4.1) {
 					return 20;
-				} else {
+				} else if (reach >= 2.5 && reach < 3.3) {
 					return 10;
+				} else {
+					return 0;
 				}
 			}
 

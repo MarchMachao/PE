@@ -52,8 +52,10 @@ public class VitalCapacity {
 					return 30;
 				} else if (vital_capacity >= 2460 && vital_capacity < 2620) {
 					return 20;
-				} else {
+				} else if (vital_capacity >= 2300 && vital_capacity < 2460){
 					return 10;
+				}else {
+					return 0;
 				}
 			} else {
 				if (vital_capacity >= 5140) {
@@ -94,8 +96,10 @@ public class VitalCapacity {
 					return 30;
 				} else if (vital_capacity >= 2520 && vital_capacity < 2690) {
 					return 20;
-				} else {
+				} else if (vital_capacity >= 2350 && vital_capacity < 2520){
 					return 10;
+				}else {
+					return 0;
 				}
 			}
 		} else {
@@ -138,8 +142,10 @@ public class VitalCapacity {
 					return 30;
 				} else if (vital_capacity >= 1840 && vital_capacity < 1880) {
 					return 20;
-				} else {
+				} else if (vital_capacity >= 1800 && vital_capacity < 1840){
 					return 10;
+				}else {
+					return 0;
 				}
 			} else {
 				if (vital_capacity >= 3450) {
@@ -170,18 +176,20 @@ public class VitalCapacity {
 					return 64;
 				} else if (vital_capacity >= 2150 && vital_capacity < 2250) {
 					return 62;
-				} else if (vital_capacity >= 2010 && vital_capacity < 2150) {
+				} else if (vital_capacity >= 2050 && vital_capacity < 2150) {
 					return 60;
-				} else if (vital_capacity >= 1970 && vital_capacity < 2010) {
+				} else if (vital_capacity >= 2010 && vital_capacity < 2050) {
 					return 50;
-				} else if (vital_capacity >= 1930 && vital_capacity < 1970) {
+				} else if (vital_capacity >= 1970 && vital_capacity < 2010) {
 					return 40;
-				} else if (vital_capacity >= 1890 && vital_capacity < 1930) {
+				} else if (vital_capacity >= 1930 && vital_capacity < 1970) {
 					return 30;
-				} else if (vital_capacity >= 1850 && vital_capacity < 1890) {
+				} else if (vital_capacity >= 1890 && vital_capacity < 1930) {
 					return 20;
-				} else {
+				} else if (vital_capacity >= 1850 && vital_capacity < 1890){
 					return 10;
+				}else {
+					return 0;
 				}
 			}
 		}
