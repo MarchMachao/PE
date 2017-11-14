@@ -25,6 +25,7 @@ import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.po.TeacherToStudent;
 import cn.vito.coding.check.service.AdminService;
 import cn.vito.coding.check.utils.ExcelUtils;
+import cn.vito.coding.check.utils.StringUtils;
 import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
 import freemarker.template.TemplateException;
@@ -124,8 +125,12 @@ public class AdminController {
 		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
 			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
 		} else {
-			excelUtils.excelTeachersReader(file, year);
-			return new BaseMsg(true, "上传成绩成功！");
+			if (excelUtils.excelAdminUpdateReader(file, year)) {
+				return new BaseMsg(true, "上传成绩成功！");
+			} else {
+				return new BaseMsg(true, "上传成绩失败！");
+			}
+
 		}
 	}
 
@@ -151,16 +156,27 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping("updateAdmin")
 	public BaseMsg updateTeacherAndAcademy(String id, Integer year, Integer height, Double weight,
-			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm, String tenm,
-			Integer sit_ups, Integer pull_up, Integer grade, String gender) {
+			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm_minuite,
+			String eightm_second, String tenm_minuite, String tenm_second, Integer sit_ups, Integer pull_up,
+			Integer grade, String gender) {
 		try {
+			String eightm="";
+			String tenm = "";
+			if (StringUtils.isEmpty(eightm_minuite) && StringUtils.isEmpty(eightm_second)) {
+				eightm = eightm_minuite + "'" + eightm_second;
+			} 
+			if (StringUtils.isEmpty(tenm_minuite) && StringUtils.isEmpty(tenm_second)) {
+				tenm = tenm_minuite + "'" + tenm_second;
+			}
 			adminService.updateAdminData(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
 					tenm, sit_ups, pull_up, grade, gender);
+		} catch (DuplicateKeyException e) {
+			e.printStackTrace();
+			return new BaseMsg(false, "已存在该条数据！");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new BaseMsg(false, "修改失败!");
 		}
-
 		return new BaseMsg(true, "修改成功!");
 	}
 
@@ -341,8 +357,14 @@ public class AdminController {
 	public BaseMsg addOneStudentData(String id, Integer year, Integer height, Double weight, Integer vital_capacity,
 			Double fivem, Double long_jump, Double reach, String eightm_minuite, String eightm_second,
 			String tenm_minuite, String tenm_second, Integer sit_ups, Integer pull_up, Integer grade, String gender) {
-		String eightm = eightm_minuite + "'" + eightm_second;
-		String tenm = tenm_minuite + "'" + tenm_second;
+		String eightm = "";
+		String tenm = "";
+		if (StringUtils.isEmpty(eightm_minuite) && StringUtils.isEmpty(eightm_second)) {
+			eightm = eightm_minuite + "'" + eightm_second;
+		}
+		if (StringUtils.isEmpty(tenm_minuite) && StringUtils.isEmpty(tenm_second)) {
+			tenm = tenm_minuite + "'" + tenm_second;
+		}
 		try {
 			adminService.addOneStudentData(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
 					tenm, sit_ups, pull_up, grade, gender);

@@ -92,9 +92,14 @@ public interface UserService {
 	/**
 	 * 查询学生用户数量
 	 * 
+	 * @param name
+	 * @param school
+	 * @param grade
+	 * @param state
+	 * @param teacher
 	 * @return
 	 */
-	public int countStudents();
+	public int countStudents(String name, String school, Integer grade, String state, String teacher);
 
 	/**
 	 * 管理员，插入学生数据

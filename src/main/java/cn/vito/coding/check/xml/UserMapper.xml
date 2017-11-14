@@ -92,8 +92,20 @@
 		
 	</select>
 	
-	<select id="countStudents" resultType="int">
-		select count(*) from s_user WHERE role='学生'
+	<select id="countStudents" parameterType="UserLike" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			s_user t1,
+			a_student t2
+		WHERE
+			  t1.userName = t2.id
+		  AND t1.role = '学生'
+		  AND t2.name LIKE '%${name}%'
+		  AND t2.school LIKE '%${school}%'
+		  AND t2.grade LIKE '%${grade}%'
+		  AND t2.teacher LIKE '%${teacher}%'
+		  AND t2.state LIKE '%${state}%'
 	</select>
 	
 	<!-- 插入数据 -->

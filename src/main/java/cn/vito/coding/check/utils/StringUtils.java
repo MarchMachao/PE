@@ -18,7 +18,7 @@ public class StringUtils {
 	 * @return 是返回true,不是返回false
 	 */
 	public static boolean isEmpty(String str) {
-		return str == null || str.length() == 0 || str.equals("null");
+		return str == null || str.length() == 0 || str.equals("null") || str.equals("");
 	}
 
 	/**

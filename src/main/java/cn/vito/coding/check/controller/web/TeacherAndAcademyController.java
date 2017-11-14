@@ -26,6 +26,7 @@ import cn.vito.coding.check.po.TeacherAndAcademy;
 import cn.vito.coding.check.service.TeacherAndAcademyService;
 import cn.vito.coding.check.service.UserService;
 import cn.vito.coding.check.utils.ExcelUtils;
+import cn.vito.coding.check.utils.StringUtils;
 import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
 import freemarker.template.TemplateException;
@@ -332,11 +333,17 @@ public class TeacherAndAcademyController {
 	public BaseMsg updateTeacherAndAcademy(String id, Integer year, Integer height, Double weight,
 			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm_minuite, String eightm_second,
 			String tenm_minuite, String tenm_second, Integer sit_ups, Integer pull_up, Integer grade, String gender) {
-		String eight = eightm_minuite + "'" + eightm_second;
-		String ten = tenm_minuite + "'" + tenm_second;
+		String eightm="";
+		String tenm = "";
+		if (StringUtils.isEmpty(eightm_minuite) && StringUtils.isEmpty(eightm_second)) {
+			eightm = eightm_minuite + "'" + eightm_second;
+		} 
+		if (StringUtils.isEmpty(tenm_minuite) && StringUtils.isEmpty(tenm_second)) {
+			tenm = tenm_minuite + "'" + tenm_second;
+		}
 		try {
 			teacherAndAcademyService.updateTeacherData(id, year, height, weight, vital_capacity, fivem, long_jump,
-					reach, eight, ten, sit_ups, pull_up, grade, gender);
+					reach, eightm, tenm, sit_ups, pull_up, grade, gender);
 		} catch (DuplicateKeyException e) {
 			return new BaseMsg(false, "已有该条数据");
 		} catch (Exception e) {

@@ -35,6 +35,14 @@ public class UserLike {
 		this.rows = rows;
 	}
 
+	public UserLike(String name, String school, Integer grade, String state, String teacher) {
+		this.name = name;
+		this.school = school;
+		this.grade = grade;
+		this.state = state;
+		this.teacher = teacher;
+	}
+
 	public UserLike(String name, String school, Integer grade, String state, String teacher, int page, int rows) {
 		this.name = name;
 		this.school = school;

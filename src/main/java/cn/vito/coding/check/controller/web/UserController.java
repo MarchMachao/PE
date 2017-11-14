@@ -119,7 +119,7 @@ public class UserController {
 	public DataGrideRow<UserLike> getStudentUser(String name, String school, Integer grade, String state,
 			String teacher, int page, int rows) {
 		List<UserLike> list = userService.findStudentUser(name, school, grade, state, teacher, page, rows);
-		return new DataGrideRow<>(userService.countStudents(), list);
+		return new DataGrideRow<>(userService.countStudents(name, school, grade, state, teacher), list);
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class UserController {
 	}
 
 	/**
-	 * 管理员Excel导入成绩
+	 * 学生用户管理的Excel表格的导入
 	 * 
 	 * @param file
 	 * @return
@@ -196,7 +196,6 @@ public class UserController {
 	public BaseMsg uploadTeachersAndAcademyExcel(MultipartFile file) {
 		String FileName = file.getOriginalFilename();
 		String prefix = FileName.substring(FileName.lastIndexOf(".") + 1);
-		System.out.println("-------------!!!!!-------");
 		if (!(prefix.equals("xls") | prefix.equals("xlsx"))) {
 			return new BaseMsg(false, "上传的文件不是Excel类型，请检查后重新上传！");
 		} else {

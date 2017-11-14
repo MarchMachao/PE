@@ -69,9 +69,10 @@ public interface UserDao {
 	/**
 	 * 查询学生用户数量
 	 * 
+	 * @param userlike
 	 * @return
 	 */
-	public int countStudents();
+	public int countStudents(UserLike userLike);
 
 	/**
 	 * 管理员插入学生用户数据1

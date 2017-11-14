@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.vito.coding.check.mapper.UserDao;
 import cn.vito.coding.check.po.Data;
@@ -64,11 +65,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int countStudents() {
-		return userDao.countStudents();
+	public int countStudents(String name, String school, Integer grade, String state, String teacher) {
+		return userDao.countStudents(new UserLike(name, school, grade, state, teacher));
 	}
 
 	@Override
+	@Transactional(rollbackFor = Exception.class)
 	public void addStudentUser(String userName, String password, String name, String gender, String school,
 			Integer grade, String classes, Integer duration, String state, String teacher) {
 		String nickName = gender;

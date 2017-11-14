@@ -20,6 +20,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.vito.coding.check.mapper.AdminDao;
@@ -635,10 +636,9 @@ public class ExcelUtils {
 	 * 学生用户管理的Excel表格的导入
 	 * 
 	 * @param file
-	 * @param year
-	 * @param school
 	 * @return
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	public boolean excelStudentReader(MultipartFile file) {
 		try {
 			InputStream is = file.getInputStream();
@@ -733,7 +733,7 @@ public class ExcelUtils {
 	}
 
 	/**
-	 * 管理员界面新增学生数据
+	 * 管理员界面新增学生成绩数据
 	 * 
 	 * @param file
 	 * @param year
@@ -792,6 +792,67 @@ public class ExcelUtils {
 			e.printStackTrace();
 			return false;
 		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 管理员修改导入成绩
+	 * 
+	 * @param file
+	 * @param year
+	 * @return boolean
+	 */
+	public boolean excelAdminUpdateReader(MultipartFile file, int year) {
+		try {
+			InputStream is = file.getInputStream();
+			Workbook workbook = WorkbookFactory.create(is);
+			int sheetCount = workbook.getNumberOfSheets(); // Sheet的数量
+			// 遍历每个Sheet
+			for (int s = 0; s < sheetCount; s++) {
+				Sheet sheet = workbook.getSheetAt(s);
+				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
+				// 遍历每一行
+				for (int r = 4; r < rowCount; r++) {
+					try {
+						Row row = sheet.getRow(r); // 取出相应的列
+
+						Cell id = row.getCell(1);
+						String gender = row.getCell(3).toString();
+						Integer grade = (int) Double.parseDouble(row.getCell(5).toString());
+						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
+						Double weight = Double.parseDouble(row.getCell(7).toString());
+						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
+						Double fivem = Double.parseDouble(row.getCell(9).toString());
+						Double long_jump = Double.parseDouble(row.getCell(10).toString());
+						Double reach = Double.parseDouble(row.getCell(11).toString());
+						String eightm = row.getCell(12).toString();
+						String tenm = row.getCell(13).toString();
+						Integer sit_ups = (int) Double.parseDouble(
+								StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
+						Integer pull_up = (int) Double.parseDouble(
+								StringUtils.isEmpty(row.getCell(15).toString()) ? "0" : row.getCell(15).toString());
+
+						double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem,
+								long_jump, reach, eightm, tenm, sit_ups, pull_up);
+
+						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+								reach, eightm, tenm, sit_ups, pull_up, score, "已审核", "已审核");
+						teacherAndAcademyDao.updateTeacherData(data);
+					} catch (NumberFormatException e) {
+						continue;
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		} catch (EncryptedDocumentException e) {
+			e.printStackTrace();
+			return false;
+		} catch (InvalidFormatException e) {
 			e.printStackTrace();
 			return false;
 		}

@@ -35,22 +35,25 @@
 		<thead>
 			<tr>
 				<th data-options="field:'id',width:100,align:'center'">学号</th>
-				<th data-options="field:'name',width:80,align:'center'">姓名</th>
-				<th data-options="field:'school',width:140,align:'center'">学院</th>
+				<th data-options="field:'name',width:75,align:'center'">姓名</th>
+				<th data-options="field:'gender',width:40,align:'center'">性别</th>
+				<th data-options="field:'grade',width:60,align:'center'">年级</th>
+				<th data-options="field:'school',width:150,align:'center'">学院</th>
 				<th data-options="field:'year',width:70,align:'center'">年份</th>
-				<th data-options="field:'height',width:70,align:'center'">身高</th>
-				<th data-options="field:'weight',width:70,align:'center'">体重</th>
-				<th data-options="field:'vital_capacity',width:90,align:'center'">肺活量</th>
+				<th data-options="field:'height',width:80,align:'center'">身高</th>
+				<th data-options="field:'weight',width:80,align:'center'">体重</th>
+				<th data-options="field:'vital_capacity',width:80,align:'center'">肺活量</th>
 				<th data-options="field:'fivem',width:80,align:'center'">50m</th>
-				<th data-options="field:'long_jump',width:90,align:'center'">立定跳远</th>
-				<th data-options="field:'reach',width:90,align:'center'">坐位体前屈</th>
-				<th data-options="field:'eightm',width:90,align:'center'">800m</th>
-				<th data-options="field:'tenm',width:90,align:'center'">1000m</th>
-				<th data-options="field:'sit_ups',width:90,align:'center'">仰卧起坐</th>
-				<th data-options="field:'pull_up',width:90,align:'center'">引体向上</th>
-				<th data-options="field:'score',width:90,align:'center'">评分</th>
-				<th data-options="field:'first_check',width:90,align:'center'">审核</th>
-				<th data-options="field:'second_check',width:90,align:'center'">上级审核</th>
+				<th data-options="field:'long_jump',width:80,align:'center'">立定跳远</th>
+				<th data-options="field:'reach',width:80,align:'center'">坐位体前屈</th>
+				<th data-options="field:'eightm',width:80,align:'center'">800m</th>
+				<th data-options="field:'tenm',width:80,align:'center'">1000m</th>
+				<th data-options="field:'sit_ups',width:80,align:'center'">仰卧起坐</th>
+				<th data-options="field:'pull_up',width:80,align:'center'">引体向上</th>
+				<th data-options="field:'score',width:80,align:'center'">评分</th>
+				<th data-options="field:'state',width:80,align:'center'">备注</th>
+				<th data-options="field:'first_check',width:80,align:'center'">第一级审核</th>
+				<th data-options="field:'second_check',width:80,align:'center'">第二级审核</th>
 	</table>
 	<div id="tb" style="width: auto;">
 		<a href="javascript:void(0)" id="okCheck" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
