@@ -134,7 +134,7 @@ public class TeacherAndAcademyController {
 		String school = userService.getUserByUserName(userName).getNickName();
 		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findAcademyFreshmanData(id, name, school, year,
 				page, rows);
-		int count = teacherAndAcademyService.countAcademyFreshmanData(id, userName, school, year);
+		int count = teacherAndAcademyService.countAcademyFreshmanData(id, name, school, year);
 		return new DataGrideRow<TeacherAndAcademy>(count, teachers);
 	}
 
@@ -158,7 +158,7 @@ public class TeacherAndAcademyController {
 		String school = userService.getUserByUserName(userName).getNickName();
 		List<TeacherAndAcademy> teachers = teacherAndAcademyService.findAcademyData(id, name, school, null, year, page,
 				rows);
-		int count = teacherAndAcademyService.countAcademyData(id, userName, school, null, year);
+		int count = teacherAndAcademyService.countAcademyData(id, name, school, null, year);
 		return new DataGrideRow<TeacherAndAcademy>(count, teachers);
 	}
 
