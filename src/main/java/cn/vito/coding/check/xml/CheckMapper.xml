@@ -78,21 +78,28 @@
 	<!-- 教师状态列表 -->
 	<select id="findCheckList" resultType="TeacherAndAcademy">
 		SELECT
-			c.teacher,
-			a.first_check
+			*
 		FROM
-			a_data a,
-			a_student b,
-			a_teacher c
-		WHERE
-			a.id = b.id
-		AND a.id = c.studentid
-		AND b.id = c.studentid
-		AND b.state != '已毕业'
-		AND b.teacher != '学院'
-		AND a.`year`=c.`year`
+			(
+				SELECT
+					c.teacher,
+					a.first_check
+				FROM
+					a_data a,
+					a_student b,
+					a_teacher c
+				WHERE
+					a.id = b.id
+				AND a.id = c.studentid
+				AND b.id = c.studentid
+				AND b.state != '已毕业'
+				AND b.teacher != '学院'
+				AND a.`year` = c.`year`
+				ORDER BY
+					a.first_check DESC
+			) state
 		GROUP BY
-			c.teacher
+			state.teacher
 	</select>
 	
 	<!-- 根据老师姓名查询学生信息 -->
@@ -194,38 +201,53 @@
 	<!-- 管理员的学院状态列表 -->
 	<select id="findSchoolCheckList" resultType="TeacherAndAcademy">
 		SELECT
-			a_student.school,
-			a_data.second_check
+			*
 		FROM
-			a_data,
-			a_student
-		WHERE
-			a_data.id = a_student.id
-		AND a_student.state != '已毕业'
-		AND a_student.teacher = '学院'
-    	AND a_data.first_check = '已审核'
+			(
+				SELECT
+					a_student.school,
+					a_data.second_check
+				FROM
+					a_data,
+					a_student
+				WHERE
+					a_data.id = a_student.id
+				AND a_student.state != '已毕业'
+				AND a_student.teacher = '学院'
+				AND a_data.first_check = '已审核'
+				ORDER BY
+					a_data.second_check DESC
+			) state
 		GROUP BY
-			a_student.school
+			state.school
 	</select>
 	
 	<!-- 管理员的教师状态列表 -->
 	<select id="findTeacherCheckList" resultType="TeacherAndAcademy">
 		SELECT
-			c.teacher,
-			a.second_check
+			*
 		FROM
-			a_data a,
-			a_student b,
-			a_teacher c
-		WHERE
-			a.id = b.id
-		AND a.id = c.studentid
-		AND b.id = c.studentid
-		AND b.state != '已毕业'
-		AND b.teacher != '学院'
-		AND a.`year`=c.`year`
+			(
+				SELECT
+					c.teacher,
+					a.second_check
+				FROM
+					a_data a,
+					a_student b,
+					a_teacher c
+				WHERE
+					a.id = b.id
+				AND a.id = c.studentid
+				AND b.id = c.studentid
+				AND b.state != '已毕业'
+				AND b.teacher != '学院'
+				AND a.first_check='已审核'
+				AND a.`year`=c.`year`
+				ORDER BY
+					a.second_check DESC
+			) state
 		GROUP BY
-			c.teacher
+			state.teacher
 	</select>
 	
 	<!-- 管理员根据不同的学院，查询不同的审核所有未审核的数据-->
