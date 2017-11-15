@@ -8,8 +8,11 @@
 		SELECT
 			t1.id,
 			t2. NAME,
+			t2.gender,
+			t2.grade,
 			t2.school,
 			t2.teacher,
+			t2.state,
 			t1. YEAR,
 			t1.height,
 			t1.weight,
@@ -87,6 +90,7 @@
 		AND b.id = c.studentid
 		AND b.state != '已毕业'
 		AND b.teacher != '学院'
+		AND a.`year`=c.`year`
 		GROUP BY
 			c.teacher
 	</select>
@@ -96,6 +100,9 @@
 		SELECT
 			a_data.id,
 			a_student. NAME,
+			a_student.gender,
+			a_student.grade,
+			a_student.state,
 			a_student.school,
 			a_student.teacher,
 			a_data. YEAR,
@@ -124,6 +131,7 @@
 		AND a_student.teacher != '学院'
 		AND a_data.first_check = '未审核'
 		AND a_teacher.teacher = #{teacher}
+		AND a_teacher.`year`=a_data.`year`
 		ORDER BY
 			a_data.`year`
 		LIMIT #{page},#{rows}
@@ -145,29 +153,42 @@
 		AND a_student.teacher != '学院'
 		AND a_data.first_check = '未审核'
 		AND a_teacher.teacher = #{value}
+		AND a_teacher.`year`=a_data.`year`
 	</select>
 	
 	<!-- 教师更新未审核状态已审核 -->
 	<update id="updateState" parameterType="String">
-		UPDATE a_data t1
-		 	LEFT JOIN a_student t2 ON t1.id = t2.id
-	 	<set>
+		UPDATE a_data t1,
+			a_student t2,
+			a_teacher t3
+		<set>
 			t1.first_check = '已审核'
-	 	</set>
-		WHERE t2.teacher = #{teacher}
-			AND t1.first_check = '未审核'
+		</set>
+		WHERE
+			t1.id = t2.id
+		AND t1.id = t3.studentid
+		AND t2.id = t3.studentid
+		AND t3.teacher = #{value}
+		AND t1.first_check = '未审核'
+		AND t3.`year`=t1.`year`
 	</update>
 	
 	
 	<!-- 教师更新未审核状态为被退回 -->
 	<update id="updateStateNo" parameterType="String">
-		UPDATE a_data t1
-		 	LEFT JOIN a_student t2 ON t1.id = t2.id
-	 	<set>
+		UPDATE a_data t1,
+			a_student t2,
+			a_teacher t3
+		<set>
 			t1.first_check = '被退回'
-	 	</set>
-		WHERE t2.teacher = #{teacher}
-			AND t1.first_check = '未审核'
+		</set>
+		WHERE
+			t1.id = t2.id
+		AND t1.id = t3.studentid
+		AND t2.id = t3.studentid
+		AND t3.teacher = #{value}
+		AND t1.first_check = '未审核'
+		AND t3.`year`=t1.`year`
 	</update>
 	
 	<!-- 管理员的学院状态列表 -->
@@ -190,31 +211,21 @@
 	<!-- 管理员的教师状态列表 -->
 	<select id="findTeacherCheckList" resultType="TeacherAndAcademy">
 		SELECT
-			teaToStu.teacher,
-			a_data.second_check
+			c.teacher,
+			a.second_check
 		FROM
-			a_data,
-			(
-				SELECT
-					stu.id,
-					stu. NAME,
-					stu.school,
-					stu.state,
-					stu.teacher AS flag,
-					tea.teacher,
-					tea.subjectid,
-					tea.subjectname
-				FROM
-					a_student stu
-				LEFT JOIN a_teacher tea ON stu.id = tea.studentid
-			) teaToStu
+			a_data a,
+			a_student b,
+			a_teacher c
 		WHERE
-			a_data.id = teaToStu.id
-		AND teaToStu.state != '已毕业'
-		AND teaToStu.flag != '学院'
-		AND a_data.first_check = '已审核'
+			a.id = b.id
+		AND a.id = c.studentid
+		AND b.id = c.studentid
+		AND b.state != '已毕业'
+		AND b.teacher != '学院'
+		AND a.`year`=c.`year`
 		GROUP BY
-			teaToStu.teacher
+			c.teacher
 	</select>
 	
 	<!-- 管理员根据不同的学院，查询不同的审核所有未审核的数据-->
@@ -222,8 +233,11 @@
 		SELECT
 			t1.id,
 			t2. NAME,
+			t2.gender,
+			t2.grade,
 			t2.school,
 			t2.teacher,
+			t2.state,
 			t1. YEAR,
 			t1.height,
 			t1.weight,
@@ -271,9 +285,12 @@
 	<select id="findAdminCheckByTeacher" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
 		SELECT
 			a_data.id,
-			teaToStu. NAME,
-			teaToStu.school,
-			teaToStu.teacher,
+			a_student. NAME,
+			a_student.gender,
+			a_student.grade,
+			a_student.state,
+			a_student.school,
+			a_student.teacher,
 			a_data. YEAR,
 			a_data.height,
 			a_data.weight,
@@ -290,30 +307,21 @@
 			a_data.second_check
 		FROM
 			a_data,
-			(
-				SELECT
-					stu.id,
-					stu. NAME,
-					stu.school,
-					stu.state,
-					stu.teacher AS flag,
-					tea.teacher,
-					tea.subjectid,
-					tea.subjectname
-				FROM
-					a_student stu
-				LEFT JOIN a_teacher tea ON stu.id = tea.studentid
-			) teaToStu
+			a_student,
+			a_teacher
 		WHERE
-			a_data.id = teaToStu.id
-		AND teaToStu.state != '已毕业'
-		AND teaToStu.flag != '学院'
+			a_data.id = a_student.id
+		and a_data.id= a_teacher.studentid
+		AND a_student.id=a_teacher.studentid
+		AND a_student.state != '已毕业'
+		AND a_student.teacher != '学院'
 		AND a_data.first_check = '已审核'
 		AND a_data.second_check = '未审核'
-		AND teaToStu.teacher = #{teacher}
+		AND a_teacher.teacher = #{teacher}
+		AND a_teacher.`year`=a_data.`year`
 		ORDER BY
 			a_data.`year`
-		limit #{page},#{rows}
+		LIMIT #{page},#{rows}
 	</select>
 	
 	<!-- 管理员根据老师姓名查询学生信息数据量 -->
@@ -322,84 +330,55 @@
 			count(*)
 		FROM
 			a_data,
-			(
-				SELECT
-					stu.id,
-					stu. NAME,
-					stu.school,
-					stu.state,
-					stu.teacher AS flag,
-					tea.teacher,
-					tea.subjectid,
-					tea.subjectname
-				FROM
-					a_student stu
-				LEFT JOIN a_teacher tea ON stu.id = tea.studentid
-			) teaToStu
+			a_student,
+			a_teacher
 		WHERE
-			a_data.id = teaToStu.id
-		AND teaToStu.state != '已毕业'
-		AND teaToStu.flag != '学院'
+			a_data.id = a_student.id
+		and a_data.id= a_teacher.studentid
+		AND a_student.id=a_teacher.studentid
+		AND a_student.state != '已毕业'
+		AND a_student.teacher != '学院'
 		AND a_data.first_check = '已审核'
-		AND a_data.second_check = '未审核' 
-		AND teaToStu.teacher = #{value}
+		AND a_data.second_check = '未审核'
+		AND a_teacher.teacher = #{value}
+		AND a_teacher.`year`=a_data.`year`
 	</select>
 	
 	<!-- 管理员更新教师未审核状态已审核 -->
 	<update id="updateAdminTeacherStateOk" parameterType="String">
 		UPDATE a_data t1,
-		   (
-			SELECT
-				stu.id,
-				stu. NAME,
-				stu.school,
-				stu.state,
-				stu.teacher AS flag,
-				tea.teacher,
-				tea.subjectid,
-				tea.subjectname
-			FROM
-				a_student stu
-			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
-		   ) t2
-		<set> 
+			a_student t2,
+			a_teacher t3
+		<set>
 			t1.second_check = '已审核'
 		</set>
 		WHERE
 			t1.id = t2.id
-		AND t2.teacher = #{teacher}
-		AND t2.flag = '老师'
+		AND t1.id = t3.studentid
+		AND t2.id = t3.studentid
+		AND t3.teacher = #{value}
 		AND t1.first_check = '已审核'
 		AND t1.second_check = '未审核'
+		AND t3.`year`=t1.`year`
 	</update>
 	
 	
 	<!-- 管理员更新教师未审核状态为被退回 -->
 	<update id="updateAdminTeacherStateNo" parameterType="String">
 		UPDATE a_data t1,
-		   (
-			SELECT
-				stu.id,
-				stu. NAME,
-				stu.school,
-				stu.state,
-				stu.teacher AS flag,
-				tea.teacher,
-				tea.subjectid,
-				tea.subjectname
-			FROM
-				a_student stu
-			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
-		   ) t2
-		<set> 
+			a_student t2,
+			a_teacher t3
+		<set>
 			t1.second_check = '被退回'
 		</set>
 		WHERE
 			t1.id = t2.id
-		AND t2.teacher = #{teacher}
-		AND t2.flag = '老师'
+		AND t1.id = t3.studentid
+		AND t2.id = t3.studentid
+		AND t3.teacher = #{value}
 		AND t1.first_check = '已审核'
 		AND t1.second_check = '未审核'
+		AND t3.`year`=t1.`year`
 	</update>
 	
 	<!-- 管理员更新学院未审核状态已审核 -->

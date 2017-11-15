@@ -30,28 +30,31 @@
 			a_data.second_check
 		FROM
 			a_data,
-			(SELECT
-				stu.id,
-				stu. NAME,
-				stu.gender,
-				stu.school,
-				stu.grade,
-				stu.classes,
-				stu.duration,
-				stu.state,
-				stu.teacher as flag,
-				tea.teacher,
-				tea.subjectid,
-				tea.subjectname
-			FROM
-				a_student stu
-			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+			(
+				SELECT
+			stu.id,
+			stu. NAME,
+			stu.gender,
+			stu.school,
+			stu.grade,
+			stu.classes,
+			stu.duration,
+			stu.state,
+			stu.teacher AS flag,
+			tea.`year`,
+			tea.teacher,
+			tea.subjectid,
+			tea.subjectname
+		FROM
+			a_student stu
+		LEFT JOIN a_teacher tea ON stu.id = tea.studentid
 			) teaToStu
 		WHERE
 			a_data.id = teaToStu.id
 		AND teaToStu.state != '已毕业'
 		AND teaToStu.flag != '学院'
 		AND teaToStu.teacher = #{teacher}
+		AND teaToStu.`year`=a_data.`year`
 		AND teaToStu.subjectname = #{subjectname}
 		AND a_data.id LIKE '%${id}%'
 		AND teaToStu. NAME LIKE '%${name}%'
@@ -60,7 +63,7 @@
 		ORDER BY
 			a_data. YEAR DESC,
 			a_data.id
-		limit #{page},#{rows}
+		LIMIT #{page},#{rows}
 	</select>
 	
 	<!-- 教师页面查询大一、大二的数据量 -->
@@ -69,28 +72,31 @@
 			count(*)
 		FROM
 			a_data,
-			(SELECT
-				stu.id,
-				stu. NAME,
-				stu.gender,
-				stu.school,
-				stu.grade,
-				stu.classes,
-				stu.duration,
-				stu.state,
-				stu.teacher as flag,
-				tea.teacher,
-				tea.subjectid,
-				tea.subjectname
-			FROM
-				a_student stu
-			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+			(
+				SELECT
+			stu.id,
+			stu. NAME,
+			stu.gender,
+			stu.school,
+			stu.grade,
+			stu.classes,
+			stu.duration,
+			stu.state,
+			stu.teacher AS flag,
+			tea.`year`,
+			tea.teacher,
+			tea.subjectid,
+			tea.subjectname
+		FROM
+			a_student stu
+		LEFT JOIN a_teacher tea ON stu.id = tea.studentid
 			) teaToStu
 		WHERE
 			a_data.id = teaToStu.id
 		AND teaToStu.state != '已毕业'
 		AND teaToStu.flag != '学院'
 		AND teaToStu.teacher = #{teacher}
+		AND teaToStu.`year`=a_data.`year`
 		AND teaToStu.subjectname = #{subjectname}
 		AND a_data.id LIKE '%${id}%'
 		AND teaToStu. NAME LIKE '%${name}%'
@@ -199,28 +205,31 @@
 			a_data.second_check
 		FROM
 			a_data,
-			(SELECT
-				stu.id,
-				stu. NAME,
-				stu.gender,
-				stu.school,
-				stu.grade,
-				stu.classes,
-				stu.duration,
-				stu.state,
-				stu.teacher as flag,
-				tea.teacher,
-				tea.subjectid,
-				tea.subjectname
-			FROM
-				a_student stu
-			LEFT JOIN a_teacher tea ON stu.id = tea.studentid
+			(
+				SELECT
+			stu.id,
+			stu. NAME,
+			stu.gender,
+			stu.school,
+			stu.grade,
+			stu.classes,
+			stu.duration,
+			stu.state,
+			stu.teacher AS flag,
+			tea.`year`,
+			tea.teacher,
+			tea.subjectid,
+			tea.subjectname
+		FROM
+			a_student stu
+		LEFT JOIN a_teacher tea ON stu.id = tea.studentid
 			) teaToStu
 		WHERE
 			a_data.id = teaToStu.id
 		AND teaToStu.state != '已毕业'
 		AND teaToStu.flag != '学院'
 		AND teaToStu.teacher = #{teacher}
+		AND teaToStu.`year`=a_data.`year`
 		AND teaToStu.subjectname = #{subjectname}
 		AND a_data.id LIKE '%${id}%'
 		AND teaToStu. NAME LIKE '%${name}%'

@@ -135,6 +135,8 @@
 	
 		var content = "";
 		for(var i = 0; i < data.length; i++) {
+			var eightmtemp = (data[i].eightm == null) ? "" : data[i].eightm;
+			var tenmstemp = (data[i].tenm == null) ? "" : data[i].tenm;
 			var sit_upstemp = (data[i].sit_ups == null) ? "" : data[i].sit_ups;
 			var pull_upstemp = (data[i].pull_up == null) ? "" : data[i].pull_up;
 			content += "<tr>" +
@@ -145,8 +147,8 @@
 				"   <td>" + data[i].fivem + "</td>" +
 				"   <td>" + data[i].long_jump + "</td>" +
 				"   <td>" + data[i].reach + "</td>" +
-				"   <td>" + data[i].eightm + "</td>" +
-				"   <td>" + data[i].tenm + "</td>" +
+				"   <td>" + eightmtemp + "</td>" +
+				"   <td>" + tenmstemp + "</td>" +
 				"   <td>" + sit_upstemp + "</td>" +
 				"   <td>" + pull_upstemp + "</td>" +
 				"   <td>" + data[i].score + "</td>" +
