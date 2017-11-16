@@ -532,8 +532,16 @@ public class ExcelUtils {
 						Double fivem = Double.parseDouble(row.getCell(9).toString());
 						Double long_jump = Double.parseDouble(row.getCell(10).toString());
 						Double reach = Double.parseDouble(row.getCell(11).toString());
-						String eightm = row.getCell(12).toString();
-						String tenm = row.getCell(13).toString();
+						String eightm = "";
+						String tenm = "";
+						try {
+							eightm = row.getCell(12).toString();
+						} catch (NullPointerException e) {
+						}
+						try {
+							tenm = row.getCell(13).toString();
+						} catch (NullPointerException e) {
+						}
 						Integer sit_ups = (int) Double.parseDouble(
 								StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
 						Integer pull_up = (int) Double.parseDouble(
@@ -598,8 +606,16 @@ public class ExcelUtils {
 						Double fivem = Double.parseDouble(row.getCell(9).toString());
 						Double long_jump = Double.parseDouble(row.getCell(10).toString());
 						Double reach = Double.parseDouble(row.getCell(11).toString());
-						String eightm = row.getCell(12).toString();
-						String tenm = row.getCell(13).toString();
+						String eightm = "";
+						String tenm = "";
+						try {
+							eightm = row.getCell(12).toString();
+						} catch (NullPointerException e) {
+						}
+						try {
+							tenm = row.getCell(13).toString();
+						} catch (NullPointerException e) {
+						}
 						Integer sit_ups = (int) Double.parseDouble(
 								StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
 						Integer pull_up = (int) Double.parseDouble(
@@ -750,20 +766,29 @@ public class ExcelUtils {
 				Sheet sheet = workbook.getSheetAt(s);
 				int rowCount = sheet.getPhysicalNumberOfRows(); // 获取总行数
 				// 遍历每一行
+
 				for (int r = 4; r < rowCount; r++) {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
 						Cell id = row.getCell(1);
 						String gender = row.getCell(3).toString();
-						Integer grade = (int) Double.parseDouble(row.getCell(4).toString());
+						Integer grade = (int) Double.parseDouble(row.getCell(5).toString());
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
 						Double weight = Double.parseDouble(row.getCell(7).toString());
 						Integer vital_capacity = (int) Double.parseDouble(row.getCell(8).toString());
 						Double fivem = Double.parseDouble(row.getCell(9).toString());
 						Double long_jump = Double.parseDouble(row.getCell(10).toString());
 						Double reach = Double.parseDouble(row.getCell(11).toString());
-						String eightm = row.getCell(12).toString();
-						String tenm = row.getCell(13).toString();
+						String eightm = "";
+						String tenm = "";
+						try {
+							eightm = row.getCell(12).toString();
+						} catch (NullPointerException e) {
+						}
+						try {
+							tenm = row.getCell(13).toString();
+						} catch (NullPointerException e) {
+						}
 						Integer sit_ups = (int) Double.parseDouble(
 								StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
 						Integer pull_up = (int) Double.parseDouble(
@@ -828,8 +853,16 @@ public class ExcelUtils {
 						Double fivem = Double.parseDouble(row.getCell(9).toString());
 						Double long_jump = Double.parseDouble(row.getCell(10).toString());
 						Double reach = Double.parseDouble(row.getCell(11).toString());
-						String eightm = row.getCell(12).toString();
-						String tenm = row.getCell(13).toString();
+						String eightm = "";
+						String tenm = "";
+						try {
+							eightm = row.getCell(12).toString();
+						} catch (NullPointerException e) {
+						}
+						try {
+							tenm = row.getCell(13).toString();
+						} catch (NullPointerException e) {
+						}
 						Integer sit_ups = (int) Double.parseDouble(
 								StringUtils.isEmpty(row.getCell(14).toString()) ? "0" : row.getCell(14).toString());
 						Integer pull_up = (int) Double.parseDouble(

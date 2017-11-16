@@ -53,8 +53,9 @@
 						<label>角&nbsp;&nbsp;色:&nbsp;&nbsp;&nbsp;</label>
 						<select class="easyui-combobox" name="role" style="width:70%" panelHeight="auto"  required="true">
 							<option value="教师">教师</option>
-							<option value="体育部">体育部</option>
+							<option value="教师审核">体育部</option>
 							<option value="学院">学院</option>
+							<option value="学院审核">学院审核</option>
 							<option value="管理员">管理员</option>
 						</select>
 					</div>
@@ -94,7 +95,7 @@
 				if(row) {
 					$('#dlg').dialog('open').dialog('center').dialog('setTitle', '修改信息');
 					$('#fm').form('load', row);
-					url = 'updateUserByName.do?userName=' + row.userName;
+					url = 'updateUserByName.do';
 				}
 			}
 
