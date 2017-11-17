@@ -16,7 +16,7 @@
         .b-wrapper ul{margin-left: 115px;}
         .b-wrapper li{font-size: 18px; color: #333; padding-left: 15px;}
         .part{margin-top: 20px; padding-left: 20px;}
-        .part2-title{display: inline-block; width: 230px;}
+        .part2-title{display: inline-block; width: 150px;}
         .line{display: block; width: 90%; margin: 20px auto; height: 0; border: none; border-top: 1px solid #c2daee;}
         .part3 ul{width: 80%;}
         .btn-wrapper{padding-right: 15%; margin-top: 50px;}
@@ -70,7 +70,9 @@
 			</#if>
             
             <li class="col-md-6">
-            	<span class="part2-title"><a href="javascript:changeClass1();" >修改班级</a></span>
+            	<span class="part2-title">
+<!--             		<a href="javascript:changeClass1();" >修改班级</a> -->
+            	</span>
             	<span class=""><a href="#" data-toggle="modal" data-target="#myModal">修改密码</a></span>
             </li>
         </ul>
