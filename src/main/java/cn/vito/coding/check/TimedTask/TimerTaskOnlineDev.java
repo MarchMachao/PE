@@ -86,11 +86,11 @@ public class TimerTaskOnlineDev {
 	 */
 	@Scheduled(cron = "0 0 3 1 * ?")
 	public void exportDatabaseTool() {
-		// String hostIP = "localhost";
-		String hostIP = "123.206.214.132";
+		String hostIP = "localhost";
+		// String hostIP = "123.206.214.132";
 		String userName = "root";
-		// String password = "root";
-		String password = "machao911214";
+		String password = "root";
+		// String password = "machao911214";
 		String savePath = "/home/page/backup";
 		String fileName = StringUtils.dateToString(new Date()) + "pe.sql";
 		String databaseName = "pe";
