@@ -78,11 +78,6 @@
 				</select>
 			</div>
 			<div class="paraDiv">
-				<span class="paraName">教师:</span> <input class="easyui-textbox"
-					id="teacher" name="teacher"
-					style="width: 100px; height: 32px; marin-top: 10px;">
-			</div>
-			<div class="paraDiv">
 				<span class="paraName">年份:</span> <input class="easyui-textbox"
 					id="year" name="year"
 					style="width: 100px; height: 32px; marin-top: 10px;">
@@ -260,10 +255,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>教师:</td>
-					<td><input class="easyui-textbox" type="text" id="Exteacher" name="teacher"  style="width: 200px; height: 32px"></input></td>
-				</tr>
-				<tr>
 					<td>年份:</td>
 					<td><input class="easyui-textbox" type="text" id="ExYear" name="year" style="width: 200px; height: 32px"></input></td>
 				</tr>
@@ -272,32 +263,9 @@
 	</div>
 	<div id="excel-button">
 		<a href="javascript:void(0)" id="exportExcel" class="easyui-linkbutton" >导出成绩单</a>
-		<a href="javascript:void(0)" id="downPdf" class="easyui-linkbutton" onclick="">导出名单</a>
+<!-- 		<a href="javascript:void(0)" id="downPdf" class="easyui-linkbutton" onclick="">导出名单</a> -->
 	</div>
 
-	<div id="importInfo" class="easyui-dialog" closed="true"
-		buttons="#import-excel-button" title="导入成绩" style="width: 400px; height: 220px;">
-		<form id="importInfoForm" method="post" enctype="multipart/form-data" style="margin:0;padding:10px 40px">
-			<table cellpadding="5">
-				<tr>
-					<td>年份:</td>
-					<td><input class="easyui-textbox" type="text"  name="year" style="width: 200px; height: 32px"></input></td>
-				</tr>
-				<tr>
-					<td>成绩表:</td>
-					<td><input class="easyui-filebox" type="text" name="file"  style="width: 200px; height: 32px"></input></td>
-				</tr>
-				<tr>
-					<td>样表:</td>
-					<td><a href="">下载</a></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	<div id="import-excel-button">
-		<a href="javascript:void(0)" id="importExcel" class="easyui-linkbutton" onclick="importExcel();"> 导入成绩单</a>
-	</div>
-	
 	<script type="text/javascript">
 		$(function() {
 			var pager = $('#dg').datagrid().datagrid('getPager'); // get the pager of datagrid
@@ -326,10 +294,9 @@
 			var id = $("#ExId").val();
 			var name = $("#ExName").val();
 			var school = $("#ExSchool").combobox("getValue");
-			var teacher = $("#Exteacher").val();
 			var year = $("#ExYear").val();
-			location.href = "downAdminExcel.do?id=" + id
-			+ "&name=" + name + "&school=" + school+"&teacher=" + teacher+"&year=" + year; 
+			location.href = "outputAdminGraduateDatasExcel.do?id=" + id
+			+ "&name=" + name + "&school=" + school + "&year=" + year; 
 			$('#exportInfo').dialog('close');
 		})
 		/*筛选数据结束  */
@@ -415,13 +382,11 @@
 			var name = $("#name").val();
 			var id = $("#id").val();
 			var school = $("#school").combobox("getValue");
-			var teacher = $("#teacher").val();
 			var year = $("#year").val();
 			$('#dg').datagrid('load', {
 				name : name,
 				id : id,
 				school : school,
-				teacher : teacher,
 				year : year
 			});
 		}

@@ -20,14 +20,14 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDao adminDao;
 
 	@Override
-	public List<TeacherAndAcademy> findAdminData(String id, String name, String school, String teacher, Integer year,
+	public List<TeacherAndAcademy> findAdminData(String id, String name, String school, Integer year,
 			int page, int rows) {
-		return adminDao.findAdminData(new TeacherAndAcademyLike(id, name, school, teacher, year, page, rows));
+		return adminDao.findAdminData(new TeacherAndAcademyLike(id, name, school, year, page, rows));
 	}
 
 	@Override
-	public int countAdminDatas(String id, String name, String school, String teacher, Integer year) {
-		return adminDao.countAdminDatas(new TeacherAndAcademyLike(id, name, school, teacher, year));
+	public int countAdminDatas(String id, String name, String school, Integer year) {
+		return adminDao.countAdminDatas(new TeacherAndAcademyLike(id, name, school, year));
 	}
 
 	@Override
@@ -42,15 +42,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<TeacherAndAcademy> findAdminGraduateData(String studentId, String name, String school, String teacher,
+	public List<TeacherAndAcademy> findAdminGraduateData(String studentId, String name, String school,
 			Integer year, int page, int rows) {
 		return adminDao
-				.findAdminGraduateData(new TeacherAndAcademyLike(studentId, name, school, teacher, year, page, rows));
+				.findAdminGraduateData(new TeacherAndAcademyLike(studentId, name, school, year, page, rows));
 	}
 
 	@Override
-	public int countAdminGraduateDatas(String studentId, String name, String school, String teacher, Integer year) {
-		return adminDao.countAdminGraduateDatas(new TeacherAndAcademyLike(studentId, name, school, teacher, year));
+	public int countAdminGraduateDatas(String studentId, String name, String school, Integer year) {
+		return adminDao.countAdminGraduateDatas(new TeacherAndAcademyLike(studentId, name, school, year));
 	}
 
 	@Override

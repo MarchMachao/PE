@@ -24,7 +24,7 @@ public interface AdminService {
 	 * @param rows
 	 * @return
 	 */
-	public List<TeacherAndAcademy> findAdminData(String id, String name, String school, String teacher, Integer year,
+	public List<TeacherAndAcademy> findAdminData(String id, String name, String school, Integer year,
 			int page, int rows);
 	
 	/**
@@ -32,14 +32,14 @@ public interface AdminService {
 	 * 
 	 * @return
 	 */
-	public int countAdminDatas(String id, String name, String school, String teacher, Integer year);
+	public int countAdminDatas(String id, String name, String school, Integer year);
 
 	/**
 	 * 查询所已毕业有学生的信息
 	 * 
 	 * @return
 	 */
-	public List<TeacherAndAcademy> findAdminGraduateData(String id, String name, String school, String teacher,
+	public List<TeacherAndAcademy> findAdminGraduateData(String id, String name, String school,
 			Integer year, int page, int rows);
 
 	/**
@@ -47,7 +47,7 @@ public interface AdminService {
 	 * 
 	 * @return
 	 */
-	public int countAdminGraduateDatas(String studentId, String name, String school, String teacher, Integer year);
+	public int countAdminGraduateDatas(String studentId, String name, String school, Integer year);
 
 	/**
 	 * 修改教师页面的数据

@@ -248,4 +248,14 @@ public class TeacherAndAcademy {
 		this.second_check = second_check;
 	}
 
+	@Override
+	public String toString() {
+		return "TeacherAndAcademy [id=" + id + ", name=" + name + ", gender=" + gender + ", school=" + school
+				+ ", grade=" + grade + ", classes=" + classes + ", duration=" + duration + ", state=" + state
+				+ ", teacher=" + teacher + ", year=" + year + ", height=" + height + ", weight=" + weight
+				+ ", vital_capacity=" + vital_capacity + ", fivem=" + fivem + ", long_jump=" + long_jump + ", reach="
+				+ reach + ", eightm=" + eightm + ", tenm=" + tenm + ", sit_ups=" + sit_ups + ", pull_up=" + pull_up
+				+ ", score=" + score + ", first_check=" + first_check + ", second_check=" + second_check + "]";
+	}
+
 }

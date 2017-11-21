@@ -126,28 +126,28 @@ public class ExcelUtils {
 			row.createCell(1).setCellValue(teacherAndAcademyss.getName());
 			row.createCell(2).setCellValue(teacherAndAcademyss.getGender());
 			row.createCell(3).setCellValue(teacherAndAcademyss.getSchool());
-			row.createCell(4)
-					.setCellValue(teacherAndAcademyss.getGrade() == null ? ' ' : teacherAndAcademyss.getGrade());
+			row.createCell(4).setCellValue(teacherAndAcademyss.getGrade());
 			row.createCell(5).setCellValue(teacherAndAcademyss.getClasses());
-			row.createCell(6).setCellValue(teacherAndAcademyss.getYear() == null ? ' ' : teacherAndAcademyss.getYear());
-			row.createCell(7)
-					.setCellValue(teacherAndAcademyss.getHeight() == null ? ' ' : teacherAndAcademyss.getHeight());
-			row.createCell(8)
-					.setCellValue(teacherAndAcademyss.getWeight() == null ? ' ' : teacherAndAcademyss.getWeight());
-			row.createCell(9).setCellValue(
-					teacherAndAcademyss.getVital_capacity() == null ? ' ' : teacherAndAcademyss.getVital_capacity());
-			row.createCell(10)
-					.setCellValue(teacherAndAcademyss.getFivem() == null ? ' ' : teacherAndAcademyss.getFivem());
+			row.createCell(6).setCellValue(
+					teacherAndAcademyss.getYear() == null ? "" : teacherAndAcademyss.getYear().toString());
+			row.createCell(7).setCellValue(
+					teacherAndAcademyss.getHeight() == null ? "" : teacherAndAcademyss.getHeight().toString());
+			row.createCell(8).setCellValue(
+					teacherAndAcademyss.getWeight() == null ? "" : teacherAndAcademyss.getWeight().toString());
+			row.createCell(9).setCellValue(teacherAndAcademyss.getVital_capacity() == null ? ""
+					: teacherAndAcademyss.getVital_capacity().toString());
+			row.createCell(10).setCellValue(
+					teacherAndAcademyss.getFivem() == null ? "" : teacherAndAcademyss.getFivem().toString());
 			row.createCell(11).setCellValue(
-					teacherAndAcademyss.getLong_jump() == null ? ' ' : teacherAndAcademyss.getLong_jump());
-			row.createCell(12)
-					.setCellValue(teacherAndAcademyss.getReach() == null ? ' ' : teacherAndAcademyss.getReach());
-			row.createCell(13).setCellValue(teacherAndAcademyss.getEightm());
-			row.createCell(14).setCellValue(teacherAndAcademyss.getTenm());
-			row.createCell(15)
-					.setCellValue(teacherAndAcademyss.getSit_ups() == null ? ' ' : teacherAndAcademyss.getSit_ups());
-			row.createCell(16)
-					.setCellValue(teacherAndAcademyss.getPull_up() == null ? ' ' : teacherAndAcademyss.getPull_up());
+					teacherAndAcademyss.getLong_jump() == null ? "" : teacherAndAcademyss.getLong_jump().toString());
+			row.createCell(12).setCellValue(
+					teacherAndAcademyss.getReach() == null ? "" : teacherAndAcademyss.getReach().toString());
+			row.createCell(13).setCellValue(teacherAndAcademyss.getEightm().toString());
+			row.createCell(14).setCellValue(teacherAndAcademyss.getTenm().toString());
+			row.createCell(15).setCellValue(
+					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
+			row.createCell(16).setCellValue(
+					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
 			row.createCell(17)
 					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
 
@@ -161,6 +161,7 @@ public class ExcelUtils {
 			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe1.xls");
 			wb.write(fout);
 			fout.close();
+			wb.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -238,28 +239,28 @@ public class ExcelUtils {
 			row.createCell(1).setCellValue(teacherAndAcademyss.getName());
 			row.createCell(2).setCellValue(teacherAndAcademyss.getGender());
 			row.createCell(3).setCellValue(teacherAndAcademyss.getSchool());
-			row.createCell(4)
-					.setCellValue(teacherAndAcademyss.getGrade() == null ? ' ' : teacherAndAcademyss.getGrade());
+			row.createCell(4).setCellValue(teacherAndAcademyss.getGrade());
 			row.createCell(5).setCellValue(teacherAndAcademyss.getClasses());
-			row.createCell(6).setCellValue(teacherAndAcademyss.getYear() == null ? ' ' : teacherAndAcademyss.getYear());
-			row.createCell(7)
-					.setCellValue(teacherAndAcademyss.getHeight() == null ? ' ' : teacherAndAcademyss.getHeight());
-			row.createCell(8)
-					.setCellValue(teacherAndAcademyss.getWeight() == null ? ' ' : teacherAndAcademyss.getWeight());
-			row.createCell(9).setCellValue(
-					teacherAndAcademyss.getVital_capacity() == null ? ' ' : teacherAndAcademyss.getVital_capacity());
-			row.createCell(10)
-					.setCellValue(teacherAndAcademyss.getFivem() == null ? ' ' : teacherAndAcademyss.getFivem());
+			row.createCell(6).setCellValue(
+					teacherAndAcademyss.getYear() == null ? "" : teacherAndAcademyss.getYear().toString());
+			row.createCell(7).setCellValue(
+					teacherAndAcademyss.getHeight() == null ? "" : teacherAndAcademyss.getHeight().toString());
+			row.createCell(8).setCellValue(
+					teacherAndAcademyss.getWeight() == null ? "" : teacherAndAcademyss.getWeight().toString());
+			row.createCell(9).setCellValue(teacherAndAcademyss.getVital_capacity() == null ? ""
+					: teacherAndAcademyss.getVital_capacity().toString());
+			row.createCell(10).setCellValue(
+					teacherAndAcademyss.getFivem() == null ? "" : teacherAndAcademyss.getFivem().toString());
 			row.createCell(11).setCellValue(
-					teacherAndAcademyss.getLong_jump() == null ? ' ' : teacherAndAcademyss.getLong_jump());
-			row.createCell(12)
-					.setCellValue(teacherAndAcademyss.getReach() == null ? ' ' : teacherAndAcademyss.getReach());
+					teacherAndAcademyss.getLong_jump() == null ? "" : teacherAndAcademyss.getLong_jump().toString());
+			row.createCell(12).setCellValue(
+					teacherAndAcademyss.getReach() == null ? "" : teacherAndAcademyss.getReach().toString());
 			row.createCell(13).setCellValue(teacherAndAcademyss.getEightm());
 			row.createCell(14).setCellValue(teacherAndAcademyss.getTenm());
-			row.createCell(15)
-					.setCellValue(teacherAndAcademyss.getSit_ups() == null ? ' ' : teacherAndAcademyss.getSit_ups());
-			row.createCell(16)
-					.setCellValue(teacherAndAcademyss.getPull_up() == null ? ' ' : teacherAndAcademyss.getPull_up());
+			row.createCell(15).setCellValue(
+					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
+			row.createCell(16).setCellValue(
+					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
 			row.createCell(17)
 					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
 
@@ -273,6 +274,7 @@ public class ExcelUtils {
 			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe2.xls");
 			wb.write(fout);
 			fout.close();
+			wb.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -351,28 +353,28 @@ public class ExcelUtils {
 			row.createCell(1).setCellValue(teacherAndAcademyss.getName());
 			row.createCell(2).setCellValue(teacherAndAcademyss.getGender());
 			row.createCell(3).setCellValue(teacherAndAcademyss.getSchool());
-			row.createCell(4)
-					.setCellValue(teacherAndAcademyss.getGrade() == null ? ' ' : teacherAndAcademyss.getGrade());
+			row.createCell(4).setCellValue(teacherAndAcademyss.getGrade());
 			row.createCell(5).setCellValue(teacherAndAcademyss.getClasses());
-			row.createCell(6).setCellValue(teacherAndAcademyss.getYear() == null ? ' ' : teacherAndAcademyss.getYear());
-			row.createCell(7)
-					.setCellValue(teacherAndAcademyss.getHeight() == null ? ' ' : teacherAndAcademyss.getHeight());
-			row.createCell(8)
-					.setCellValue(teacherAndAcademyss.getWeight() == null ? ' ' : teacherAndAcademyss.getWeight());
-			row.createCell(9).setCellValue(
-					teacherAndAcademyss.getVital_capacity() == null ? ' ' : teacherAndAcademyss.getVital_capacity());
-			row.createCell(10)
-					.setCellValue(teacherAndAcademyss.getFivem() == null ? ' ' : teacherAndAcademyss.getFivem());
+			row.createCell(6).setCellValue(
+					teacherAndAcademyss.getYear() == null ? "" : teacherAndAcademyss.getYear().toString());
+			row.createCell(7).setCellValue(
+					teacherAndAcademyss.getHeight() == null ? "" : teacherAndAcademyss.getHeight().toString());
+			row.createCell(8).setCellValue(
+					teacherAndAcademyss.getWeight() == null ? "" : teacherAndAcademyss.getWeight().toString());
+			row.createCell(9).setCellValue(teacherAndAcademyss.getVital_capacity() == null ? ""
+					: teacherAndAcademyss.getVital_capacity().toString());
+			row.createCell(10).setCellValue(
+					teacherAndAcademyss.getFivem() == null ? "" : teacherAndAcademyss.getFivem().toString());
 			row.createCell(11).setCellValue(
-					teacherAndAcademyss.getLong_jump() == null ? ' ' : teacherAndAcademyss.getLong_jump());
-			row.createCell(12)
-					.setCellValue(teacherAndAcademyss.getReach() == null ? ' ' : teacherAndAcademyss.getReach());
+					teacherAndAcademyss.getLong_jump() == null ? "" : teacherAndAcademyss.getLong_jump().toString());
+			row.createCell(12).setCellValue(
+					teacherAndAcademyss.getReach() == null ? "" : teacherAndAcademyss.getReach().toString());
 			row.createCell(13).setCellValue(teacherAndAcademyss.getEightm());
 			row.createCell(14).setCellValue(teacherAndAcademyss.getTenm());
-			row.createCell(15)
-					.setCellValue(teacherAndAcademyss.getSit_ups() == null ? ' ' : teacherAndAcademyss.getSit_ups());
-			row.createCell(16)
-					.setCellValue(teacherAndAcademyss.getPull_up() == null ? ' ' : teacherAndAcademyss.getPull_up());
+			row.createCell(15).setCellValue(
+					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
+			row.createCell(16).setCellValue(
+					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
 			row.createCell(17)
 					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
 
@@ -386,6 +388,7 @@ public class ExcelUtils {
 			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe3.xls");
 			wb.write(fout);
 			fout.close();
+			wb.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -462,30 +465,30 @@ public class ExcelUtils {
 			row.createCell(1).setCellValue(teacherAndAcademyss.getName());
 			row.createCell(2).setCellValue(teacherAndAcademyss.getGender());
 			row.createCell(3).setCellValue(teacherAndAcademyss.getSchool());
-			row.createCell(4)
-					.setCellValue(teacherAndAcademyss.getGrade() == null ? ' ' : teacherAndAcademyss.getGrade());
+			row.createCell(4).setCellValue(teacherAndAcademyss.getGrade());
 			row.createCell(5).setCellValue(teacherAndAcademyss.getClasses());
-			row.createCell(6).setCellValue(teacherAndAcademyss.getYear() == null ? ' ' : teacherAndAcademyss.getYear());
-			row.createCell(7)
-					.setCellValue(teacherAndAcademyss.getHeight() == null ? ' ' : teacherAndAcademyss.getHeight());
-			row.createCell(8)
-					.setCellValue(teacherAndAcademyss.getWeight() == null ? ' ' : teacherAndAcademyss.getWeight());
-			row.createCell(9).setCellValue(
-					teacherAndAcademyss.getVital_capacity() == null ? ' ' : teacherAndAcademyss.getVital_capacity());
-			row.createCell(10)
-					.setCellValue(teacherAndAcademyss.getFivem() == null ? ' ' : teacherAndAcademyss.getFivem());
+			row.createCell(6).setCellValue(
+					teacherAndAcademyss.getYear() == null ? "" : teacherAndAcademyss.getYear().toString());
+			row.createCell(7).setCellValue(
+					teacherAndAcademyss.getHeight() == null ? "" : teacherAndAcademyss.getHeight().toString());
+			row.createCell(8).setCellValue(
+					teacherAndAcademyss.getWeight() == null ? "" : teacherAndAcademyss.getWeight().toString());
+			row.createCell(9).setCellValue(teacherAndAcademyss.getVital_capacity() == null ? ""
+					: teacherAndAcademyss.getVital_capacity().toString());
+			row.createCell(10).setCellValue(
+					teacherAndAcademyss.getFivem() == null ? "" : teacherAndAcademyss.getFivem().toString());
 			row.createCell(11).setCellValue(
-					teacherAndAcademyss.getLong_jump() == null ? ' ' : teacherAndAcademyss.getLong_jump());
-			row.createCell(12)
-					.setCellValue(teacherAndAcademyss.getReach() == null ? ' ' : teacherAndAcademyss.getReach());
+					teacherAndAcademyss.getLong_jump() == null ? "" : teacherAndAcademyss.getLong_jump().toString());
+			row.createCell(12).setCellValue(
+					teacherAndAcademyss.getReach() == null ? "" : teacherAndAcademyss.getReach().toString());
 			row.createCell(13).setCellValue(teacherAndAcademyss.getEightm());
 			row.createCell(14).setCellValue(teacherAndAcademyss.getTenm());
-			row.createCell(15)
-					.setCellValue(teacherAndAcademyss.getSit_ups() == null ? ' ' : teacherAndAcademyss.getSit_ups());
-			row.createCell(16)
-					.setCellValue(teacherAndAcademyss.getPull_up() == null ? ' ' : teacherAndAcademyss.getPull_up());
-			row.createCell(17)
-					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
+			row.createCell(15).setCellValue(
+					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
+			row.createCell(16).setCellValue(
+					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
+			row.createCell(17).setCellValue(
+					teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState().toString());
 
 			// row.createCell((short) 2).setCellValue((double) stu.getAge());
 			// cell = row.createCell((short) 3);
@@ -497,6 +500,7 @@ public class ExcelUtils {
 			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe4.xls");
 			wb.write(fout);
 			fout.close();
+			wb.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -547,8 +551,8 @@ public class ExcelUtils {
 						} catch (Exception e) {
 						}
 
-						double score = ComputeScore.score(grade, gender, height, weight,
-								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
+						double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem,
+								long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
 						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
 								reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
@@ -620,8 +624,8 @@ public class ExcelUtils {
 						} catch (Exception e) {
 						}
 
-						double score = ComputeScore.score(grade, gender, height, weight,
-								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
+						double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem,
+								long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
 						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
 								reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
@@ -728,7 +732,6 @@ public class ExcelUtils {
 					Integer subjectId = (int) Double.parseDouble(row.getCell(2).toString());
 					String subjectName = row.getCell(3).toString();
 
-
 					teacherToStudents.add(new TeacherToStudent(studentId, year, teacher, subjectId, subjectName));
 				}
 			}
@@ -791,8 +794,8 @@ public class ExcelUtils {
 							pull_up = (int) Double.parseDouble(row.getCell(15).toString());
 						} catch (Exception e) {
 						}
-						double score = ComputeScore.score(grade, gender, height, weight,
-								vital_capacity, fivem, long_jump, reach, eightm, tenm, sit_ups, pull_up);
+						double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem,
+								long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
 						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
 								reach, eightm, tenm, sit_ups, pull_up, score, "已审核", "已审核");
@@ -886,5 +889,243 @@ public class ExcelUtils {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * 管理员导出未毕业数据Excel
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 */
+	public void outputAdminDatasExcel(String id, String name, String school, Integer year) {
+		// 第一步，创建一个webbook，对应一个Excel文件
+		HSSFWorkbook wb = new HSSFWorkbook();
+		// 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+		HSSFSheet sheet = wb.createSheet("sheet1");
+		// 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+		HSSFRow row = sheet.createRow(0);
+		// 第四步，创建单元格，并设置值表头 设置表头居中
+		// HSSFCellStyle style = wb.createCellStyle();
+		// style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+
+		HSSFCell cell = row.createCell(0);
+		cell.setCellValue("学号");
+		// cell.setCellStyle(style);
+		cell = row.createCell(1);
+		cell.setCellValue("姓名");
+		cell = row.createCell(2);
+		cell.setCellValue("性别");
+		// cell.setCellStyle(style);
+		cell = row.createCell(3);
+		cell.setCellValue("院系");
+		cell = row.createCell(4);
+		cell.setCellValue("年级");
+		cell = row.createCell(5);
+		cell.setCellValue("班级");
+		// cell.setCellStyle(style);
+		cell = row.createCell(6);
+		cell.setCellValue("年份");
+		cell = row.createCell(7);
+		cell.setCellValue("身高");
+		cell = row.createCell(8);
+		cell.setCellValue("体重");
+		cell = row.createCell(9);
+		cell.setCellValue("肺活量");
+		cell = row.createCell(10);
+		cell.setCellValue("50m跑");
+		cell = row.createCell(11);
+		cell.setCellValue("立定跳远");
+		cell = row.createCell(12);
+		cell.setCellValue("坐位前屈");
+		cell = row.createCell(13);
+		cell.setCellValue("800米跑");
+		cell = row.createCell(14);
+		cell.setCellValue("1000m跑");
+		cell = row.createCell(15);
+		cell.setCellValue("一分钟仰卧起坐");
+		cell = row.createCell(16);
+		cell.setCellValue("引体向上");
+		cell = row.createCell(17);
+		cell.setCellValue("分数");
+		cell = row.createCell(18);
+		cell.setCellValue("备注");
+
+		// // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
+		List<TeacherAndAcademy> teacherAndAcademys = adminDao
+				.outputAdminDatasExcel(new TeacherAndAcademyLike(id, name, school, year));
+
+		for (int i = 0; i < teacherAndAcademys.size(); i++) {
+			row = sheet.createRow((int) i + 1);
+			TeacherAndAcademy teacherAndAcademyss = teacherAndAcademys.get(i);
+			System.out.println(teacherAndAcademyss);
+			if (teacherAndAcademyss.getLong_jump() == null) {
+				System.out.println("Long_jump() == null is true");
+			} else {
+				System.out.println("Long_jump() == null is false");
+			}
+			// 第四步，创建单元格，并设置值
+			row.createCell(0).setCellValue(teacherAndAcademyss.getId());
+			row.createCell(1).setCellValue(teacherAndAcademyss.getName());
+			row.createCell(2).setCellValue(teacherAndAcademyss.getGender());
+			row.createCell(3).setCellValue(teacherAndAcademyss.getSchool());
+			row.createCell(4).setCellValue(teacherAndAcademyss.getGrade());
+			row.createCell(5).setCellValue(teacherAndAcademyss.getClasses());
+			row.createCell(6).setCellValue(
+					teacherAndAcademyss.getYear() == null ? "" : teacherAndAcademyss.getYear().toString());
+			row.createCell(7).setCellValue(
+					teacherAndAcademyss.getHeight() == null ? "" : teacherAndAcademyss.getHeight().toString());
+			row.createCell(8).setCellValue(
+					teacherAndAcademyss.getWeight() == null ? "" : teacherAndAcademyss.getWeight().toString());
+			row.createCell(9).setCellValue(teacherAndAcademyss.getVital_capacity() == null ? ""
+					: teacherAndAcademyss.getVital_capacity().toString());
+			row.createCell(10).setCellValue(
+					teacherAndAcademyss.getFivem() == null ? "" : teacherAndAcademyss.getFivem().toString());
+			row.createCell(11).setCellValue(
+					teacherAndAcademyss.getLong_jump() == null ? "" : teacherAndAcademyss.getLong_jump().toString());
+			row.createCell(12).setCellValue(
+					teacherAndAcademyss.getReach() == null ? "" : teacherAndAcademyss.getReach().toString());
+			row.createCell(13).setCellValue(teacherAndAcademyss.getEightm());
+			row.createCell(14).setCellValue(teacherAndAcademyss.getTenm());
+			row.createCell(15).setCellValue(
+					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
+			row.createCell(16).setCellValue(
+					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
+			row.createCell(17).setCellValue(
+					teacherAndAcademyss.getScore() == null ? "" : teacherAndAcademyss.getScore().toString());
+			row.createCell(18)
+					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
+
+			// row.createCell((short) 2).setCellValue((double) stu.getAge());
+			// cell = row.createCell((short) 3);
+			// cell.setCellValue(new
+			// SimpleDateFormat("yyyy-mm-dd").format(stu.getBirth()));
+		}
+		// 第六步，将文件存到指定位置
+		try {
+			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe5.xls");
+			wb.write(fout);
+			fout.close();
+			wb.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 管理员导出已毕业数据Excel
+	 * 
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 */
+	public void outputAdminGraduateDatasExcel(String id, String name, String school, Integer year) {
+		// 第一步，创建一个webbook，对应一个Excel文件
+		HSSFWorkbook wb = new HSSFWorkbook();
+		// 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+		HSSFSheet sheet = wb.createSheet("sheet1");
+		// 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+		HSSFRow row = sheet.createRow(0);
+		// 第四步，创建单元格，并设置值表头 设置表头居中
+		// HSSFCellStyle style = wb.createCellStyle();
+		// style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+
+		HSSFCell cell = row.createCell(0);
+		cell.setCellValue("学号");
+		// cell.setCellStyle(style);
+		cell = row.createCell(1);
+		cell.setCellValue("姓名");
+		cell = row.createCell(2);
+		cell.setCellValue("性别");
+		// cell.setCellStyle(style);
+		cell = row.createCell(3);
+		cell.setCellValue("院系");
+		cell = row.createCell(4);
+		cell.setCellValue("年级");
+		cell = row.createCell(5);
+		cell.setCellValue("班级");
+		// cell.setCellStyle(style);
+		cell = row.createCell(6);
+		cell.setCellValue("年份");
+		cell = row.createCell(7);
+		cell.setCellValue("身高");
+		cell = row.createCell(8);
+		cell.setCellValue("体重");
+		cell = row.createCell(9);
+		cell.setCellValue("肺活量");
+		cell = row.createCell(10);
+		cell.setCellValue("50m跑");
+		cell = row.createCell(11);
+		cell.setCellValue("立定跳远");
+		cell = row.createCell(12);
+		cell.setCellValue("坐位前屈");
+		cell = row.createCell(13);
+		cell.setCellValue("800米跑");
+		cell = row.createCell(14);
+		cell.setCellValue("1000m跑");
+		cell = row.createCell(15);
+		cell.setCellValue("一分钟仰卧起坐");
+		cell = row.createCell(16);
+		cell.setCellValue("引体向上");
+		cell = row.createCell(17);
+		cell.setCellValue("分数");
+		cell = row.createCell(18);
+		cell.setCellValue("备注");
+
+		// // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
+		List<TeacherAndAcademy> teacherAndAcademys = adminDao
+				.outputAdminGraduateDatasExcel(new TeacherAndAcademyLike(id, name, school, year));
+
+		for (int i = 0; i < teacherAndAcademys.size(); i++) {
+			row = sheet.createRow((int) i + 1);
+			TeacherAndAcademy teacherAndAcademyss = teacherAndAcademys.get(i);
+			// 第四步，创建单元格，并设置值
+			row.createCell(0).setCellValue(teacherAndAcademyss.getId());
+			row.createCell(1).setCellValue(teacherAndAcademyss.getName());
+			row.createCell(2).setCellValue(teacherAndAcademyss.getGender());
+			row.createCell(3).setCellValue(teacherAndAcademyss.getSchool());
+			row.createCell(4).setCellValue(teacherAndAcademyss.getGrade());
+			row.createCell(5).setCellValue(teacherAndAcademyss.getClasses());
+			row.createCell(6).setCellValue(
+					teacherAndAcademyss.getYear() == null ? "" : teacherAndAcademyss.getYear().toString());
+			row.createCell(7).setCellValue(
+					teacherAndAcademyss.getHeight() == null ? "" : teacherAndAcademyss.getHeight().toString());
+			row.createCell(8).setCellValue(
+					teacherAndAcademyss.getWeight() == null ? "" : teacherAndAcademyss.getWeight().toString());
+			row.createCell(9).setCellValue(teacherAndAcademyss.getVital_capacity() == null ? ""
+					: teacherAndAcademyss.getVital_capacity().toString());
+			row.createCell(10).setCellValue(
+					teacherAndAcademyss.getFivem() == null ? "" : teacherAndAcademyss.getFivem().toString());
+			row.createCell(11).setCellValue(
+					teacherAndAcademyss.getLong_jump() == null ? "" : teacherAndAcademyss.getLong_jump().toString());
+			row.createCell(12).setCellValue(
+					teacherAndAcademyss.getReach() == null ? "" : teacherAndAcademyss.getReach().toString());
+			row.createCell(13).setCellValue(teacherAndAcademyss.getEightm());
+			row.createCell(14).setCellValue(teacherAndAcademyss.getTenm());
+			row.createCell(15).setCellValue(
+					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
+			row.createCell(16).setCellValue(
+					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
+			row.createCell(17).setCellValue(
+					teacherAndAcademyss.getScore() == null ? "" : teacherAndAcademyss.getScore().toString());
+			row.createCell(18).setCellValue(
+					teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState().toString());
+
+			// row.createCell((short) 2).setCellValue((double) stu.getAge());
+			// cell = row.createCell((short) 3);
+			// cell.setCellValue(new
+			// SimpleDateFormat("yyyy-mm-dd").format(stu.getBirth()));
+		}
+		// 第六步，将文件存到指定位置
+		try {
+			FileOutputStream fout = new FileOutputStream("/home/page/excel/pe6.xls");
+			wb.write(fout);
+			fout.close();
+			wb.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

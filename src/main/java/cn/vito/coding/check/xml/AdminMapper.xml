@@ -38,7 +38,6 @@
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
 		AND a_student.school LIKE '%${school}%'
-		AND a_student.teacher LIKE '%${teacher}%'
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,
@@ -59,8 +58,48 @@
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
 		AND a_student.school LIKE '%${school}%'
-		AND a_student.teacher LIKE '%${teacher}%'
 		AND a_data.year LIKE '%${year}%'
+	</select>
+	
+	<!-- 管理员页面查询未毕业所有的数据 excel输出-->
+	<select id="outputAdminDatasExcel" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
+		SELECT
+			a_data.id,
+			a_student.name,
+			a_student.gender,
+			a_student.school,
+			a_student.grade,
+			a_student.classes,
+			a_student.duration,
+			a_student.state,
+			a_student.teacher,
+			a_data.year,
+			a_data.height,
+			a_data.weight,
+			a_data.vital_capacity,
+			a_data.fivem,
+			a_data.long_jump,
+			a_data.reach,
+			a_data.eightm,
+			a_data.tenm,
+			a_data.sit_ups,
+			a_data.pull_up,
+			a_data.score,
+			a_data.first_check,
+			a_data.second_check
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state != '已毕业'
+		AND a_data.id LIKE '%${id}%'
+		AND a_student.name LIKE '%${name}%'
+		AND a_student.school LIKE '%${school}%'
+		AND a_data.year LIKE '%${year}%'
+		ORDER BY
+			a_data.year DESC,
+			a_data.id
 	</select>
 	
 	<!-- 管理员页面查询已毕业所有的数据 -->
@@ -95,9 +134,9 @@
 		WHERE
 			a_data.id = a_student.id
 		AND a_student.state = '已毕业'
+		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
 		AND a_student.school LIKE '%${school}%'
-		AND a_student.teacher LIKE '%${teacher}%'
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,
@@ -115,10 +154,51 @@
 		WHERE
 			a_data.id = a_student.id
 		AND a_student.state = '已毕业'
+		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
 		AND a_student.school LIKE '%${school}%'
-		AND a_student.teacher LIKE '%${teacher}%'
 		AND a_data.year LIKE '%${year}%'
+	</select>
+	
+	<!-- 管理员页面查询已毕业所有的数据 -->
+	<select id="outputAdminGraduateDatasExcel" parameterType="TeacherAndAcademyLike" resultType="TeacherAndAcademy">
+		SELECT
+			a_data.id,
+			a_student. NAME,
+			a_student.gender,
+			a_student.school,
+			a_student.grade,
+			a_student.classes,
+			a_student.duration,
+			a_student.state,
+			a_student.teacher,
+			a_data. YEAR,
+			a_data.height,
+			a_data.weight,
+			a_data.vital_capacity,
+			a_data.fivem,
+			a_data.long_jump,
+			a_data.reach,
+			a_data.eightm,
+			a_data.tenm,
+			a_data.sit_ups,
+			a_data.pull_up,
+			a_data.score,
+			a_data.first_check,
+			a_data.second_check
+		FROM
+			a_data,
+			a_student
+		WHERE
+			a_data.id = a_student.id
+		AND a_student.state = '已毕业'
+		AND a_data.id LIKE '%${id}%'
+		AND a_student.name LIKE '%${name}%'
+		AND a_student.school LIKE '%${school}%'
+		AND a_data.year LIKE '%${year}%'
+		ORDER BY
+			a_data.year DESC,
+			a_data.id
 	</select>
 
 	<!-- 修改管理员页面的数据 -->

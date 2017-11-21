@@ -58,10 +58,10 @@ public class AdminController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "getAdminData")
-	public DataGrideRow<TeacherAndAcademy> findStuData(String id, String name, String school, String teacher,
+	public DataGrideRow<TeacherAndAcademy> findStuData(String id, String name, String school,
 			Integer year, @RequestParam(defaultValue = "1") int page, int rows) {
-		List<TeacherAndAcademy> teachers = adminService.findAdminData(id, name, school, teacher, year, page, rows);
-		return new DataGrideRow<TeacherAndAcademy>(adminService.countAdminDatas(id, name, school, teacher, year),
+		List<TeacherAndAcademy> teachers = adminService.findAdminData(id, name, school, year, page, rows);
+		return new DataGrideRow<TeacherAndAcademy>(adminService.countAdminDatas(id, name, school, year),
 				teachers);
 	}
 
@@ -79,11 +79,11 @@ public class AdminController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "getAdminGraduateData")
-	public DataGrideRow<TeacherAndAcademy> findAdminData(String id, String name, String school, String teacher,
+	public DataGrideRow<TeacherAndAcademy> findAdminData(String id, String name, String school,
 			Integer year, @RequestParam(defaultValue = "1") int page, int rows) {
-		List<TeacherAndAcademy> teachers = adminService.findAdminGraduateData(id, name, school, teacher, year, page, rows);
+		List<TeacherAndAcademy> teachers = adminService.findAdminGraduateData(id, name, school, year, page, rows);
 		return new DataGrideRow<TeacherAndAcademy>(
-				adminService.countAdminGraduateDatas(id, name, school, teacher, year), teachers);
+				adminService.countAdminGraduateDatas(id, name, school, year), teachers);
 	}
 
 	/**
@@ -399,5 +399,48 @@ public class AdminController {
 		} else {
 			return new BaseMsg(false, "上传失败！");
 		}
+	}
+
+	/**
+	 * 管理员导出未毕业数据excel
+	 * 
+	 * @param response
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "outputAdminDatasExcel")
+	public void outputAdminDatasExcel(HttpServletResponse response, String id, String name, String school, Integer year)
+			throws FileNotFoundException, IOException {
+		excelUtils.outputAdminDatasExcel(id, name, school, year);
+		File file = new File("/home/page/excel/pe5.xls");
+		response.setContentType("application/octet-stream; charset=utf-8");
+		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
+	}
+
+	/**
+	 * 管理员导出未毕业数据excel
+	 * 
+	 * @param response
+	 * @param id
+	 * @param name
+	 * @param school
+	 * @param year
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "outputAdminGraduateDatasExcel")
+	public void outputAdminGraduateDatasExcel(HttpServletResponse response, String id, String name, String school,
+			Integer year)
+			throws FileNotFoundException, IOException {
+		excelUtils.outputAdminGraduateDatasExcel(id, name, school, year);
+		File file = new File("/home/page/excel/pe6.xls");
+		response.setContentType("application/octet-stream; charset=utf-8");
+		response.setHeader("Content-Disposition", "attachment; filename=" + file.getName());
+		StreamUtils.copyThenClose(new FileInputStream(file), response.getOutputStream());
 	}
 }

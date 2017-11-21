@@ -106,4 +106,20 @@ public interface AdminDao {
 	 * @param datas
 	 */
 	public void addListStudentDatas(List<Data> datas);
+
+	/**
+	 * 管理员导出未毕业学生到excel
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public List<TeacherAndAcademy> outputAdminDatasExcel(TeacherAndAcademyLike teacherAndAcademyLike);
+
+	/**
+	 * 管理员导出已毕业学生到excel
+	 * 
+	 * @param teacherAndAcademyLike
+	 * @return
+	 */
+	public List<TeacherAndAcademy> outputAdminGraduateDatasExcel(TeacherAndAcademyLike teacherAndAcademyLike);
 }
