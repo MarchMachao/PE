@@ -112,6 +112,8 @@ public class ExcelUtils {
 		cell = row.createCell(16);
 		cell.setCellValue("引体向上");
 		cell = row.createCell(17);
+		cell.setCellValue("分数");
+		cell = row.createCell(18);
 		cell.setCellValue("备注");
 
 		// // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
@@ -148,7 +150,9 @@ public class ExcelUtils {
 					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
 			row.createCell(16).setCellValue(
 					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
-			row.createCell(17)
+			row.createCell(17).setCellValue(
+					teacherAndAcademyss.getScore() == null ? "" : teacherAndAcademyss.getScore().toString());
+			row.createCell(18)
 					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
 
 			// row.createCell((short) 2).setCellValue((double) stu.getAge());
@@ -225,6 +229,8 @@ public class ExcelUtils {
 		cell = row.createCell(16);
 		cell.setCellValue("引体向上");
 		cell = row.createCell(17);
+		cell.setCellValue("分数");
+		cell = row.createCell(18);
 		cell.setCellValue("备注");
 
 		// // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
@@ -261,7 +267,9 @@ public class ExcelUtils {
 					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
 			row.createCell(16).setCellValue(
 					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
-			row.createCell(17)
+			row.createCell(17).setCellValue(
+					teacherAndAcademyss.getScore() == null ? "" : teacherAndAcademyss.getScore().toString());
+			row.createCell(18)
 					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
 
 			// row.createCell((short) 2).setCellValue((double) stu.getAge());
@@ -339,6 +347,8 @@ public class ExcelUtils {
 		cell = row.createCell(16);
 		cell.setCellValue("引体向上");
 		cell = row.createCell(17);
+		cell.setCellValue("分数");
+		cell = row.createCell(18);
 		cell.setCellValue("备注");
 
 		// // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
@@ -375,7 +385,9 @@ public class ExcelUtils {
 					teacherAndAcademyss.getSit_ups() == null ? "" : teacherAndAcademyss.getSit_ups().toString());
 			row.createCell(16).setCellValue(
 					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
-			row.createCell(17)
+			row.createCell(17).setCellValue(
+					teacherAndAcademyss.getScore() == null ? "" : teacherAndAcademyss.getScore().toString());
+			row.createCell(18)
 					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
 
 			// row.createCell((short) 2).setCellValue((double) stu.getAge());
@@ -451,6 +463,8 @@ public class ExcelUtils {
 		cell = row.createCell(16);
 		cell.setCellValue("引体向上");
 		cell = row.createCell(17);
+		cell.setCellValue("分数");
+		cell = row.createCell(18);
 		cell.setCellValue("备注");
 
 		// // 第五步，写入实体数据 实际应用中这些数据从数据库得到，
@@ -488,7 +502,9 @@ public class ExcelUtils {
 			row.createCell(16).setCellValue(
 					teacherAndAcademyss.getPull_up() == null ? "" : teacherAndAcademyss.getPull_up().toString());
 			row.createCell(17).setCellValue(
-					teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState().toString());
+					teacherAndAcademyss.getScore() == null ? "" : teacherAndAcademyss.getScore().toString());
+			row.createCell(18)
+					.setCellValue(teacherAndAcademyss.getState().equals("正常") ? "" : teacherAndAcademyss.getState());
 
 			// row.createCell((short) 2).setCellValue((double) stu.getAge());
 			// cell = row.createCell((short) 3);
@@ -959,12 +975,6 @@ public class ExcelUtils {
 		for (int i = 0; i < teacherAndAcademys.size(); i++) {
 			row = sheet.createRow((int) i + 1);
 			TeacherAndAcademy teacherAndAcademyss = teacherAndAcademys.get(i);
-			System.out.println(teacherAndAcademyss);
-			if (teacherAndAcademyss.getLong_jump() == null) {
-				System.out.println("Long_jump() == null is true");
-			} else {
-				System.out.println("Long_jump() == null is false");
-			}
 			// 第四步，创建单元格，并设置值
 			row.createCell(0).setCellValue(teacherAndAcademyss.getId());
 			row.createCell(1).setCellValue(teacherAndAcademyss.getName());
