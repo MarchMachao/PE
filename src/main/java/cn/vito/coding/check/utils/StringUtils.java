@@ -126,9 +126,9 @@ public class StringUtils {
 		String[] strings = s.split("'");
 		int value = 0;
 		if (strings[1].length() == 1) {
-			value = Integer.parseInt(strings[0] + '0' + strings[1]);
+			value = Integer.parseInt(strings[0] + '0' + strings[1].substring(0, 2));
 		} else {
-			value = Integer.parseInt(strings[0] + strings[1]);
+			value = Integer.parseInt(strings[0] + strings[1].substring(0, 2));
 		}
 		return value;
 	}

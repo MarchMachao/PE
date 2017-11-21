@@ -28,6 +28,7 @@
 	<import resource="classpath:mybatis.xml"/>
 	<import resource="classpath:shiro.xml"/>
 	
+	<!-- 定时任务相关配置 -->
 	<task:annotation-driven scheduler="qbScheduler" mode="proxy" />
 	<task:scheduler id="qbScheduler" pool-size="10" />
 
