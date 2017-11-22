@@ -74,4 +74,11 @@ public class Extras extends Student {
 		this.rows = rows;
 	}
 
+	@Override
+	public String toString() {
+		return "Extras [id=" + id + ", year=" + year + ", extra=" + extra + ", page=" + page + ", rows=" + rows
+				+ ", toString()=" + super.toString() + "]";
+	}
+
+
 }

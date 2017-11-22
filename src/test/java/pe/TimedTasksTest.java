@@ -1,5 +1,7 @@
 package pe;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.vito.coding.check.po.Extras;
 import cn.vito.coding.check.service.ExtrasService;
 import cn.vito.coding.check.serviceImpl.ExtrasServiceImpl;
 
@@ -26,7 +29,8 @@ public class TimedTasksTest {
 		ExtrasService extrasService = ctx.getBean(ExtrasServiceImpl.class);
 		// StudentAndItsTeacher studentAndItsTeacher = studentService
 		// .findStudentById("220150925821");
-		// extrasService.findStudentExtras(new Extras(id, year, extra));
+		List<Extras> list = extrasService.findStudentExtras(new Extras(null, null, null, 1, 100));
+		System.out.println(list.get(0).getGender());
 		// System.out.println(studentAndItsTeacher);
 	}
 
