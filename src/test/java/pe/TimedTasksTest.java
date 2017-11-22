@@ -9,7 +9,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.vito.coding.check.utils.ExcelUtils;
+import cn.vito.coding.check.service.ExtrasService;
+import cn.vito.coding.check.serviceImpl.ExtrasServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-context.xml" })
@@ -22,10 +23,10 @@ public class TimedTasksTest {
 	@Test
 	public void test() {
 		// StudentService studentService = ctx.getBean(StudentService.class);
-		ExcelUtils excelUtils = ctx.getBean(ExcelUtils.class);
+		ExtrasService extrasService = ctx.getBean(ExtrasServiceImpl.class);
 		// StudentAndItsTeacher studentAndItsTeacher = studentService
 		// .findStudentById("220150925821");
-		excelUtils.outputAdminDatasExcel("320130901041", null, "草地农业科技学院", null);
+		// extrasService.findStudentExtras(new Extras(id, year, extra));
 		// System.out.println(studentAndItsTeacher);
 	}
 

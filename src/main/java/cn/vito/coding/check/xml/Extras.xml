@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vito.coding.check.mapper.ExtrasDao">
+
+	<select id="findStudentExtras" parameterType="Extras" resultType="Extras">
+		SELECT
+			a.id,
+			a.`name`,
+			a.gender,
+			a.grade,
+			a.school,
+			a.state,
+			b.`year`,
+			b.extra
+		FROM
+			a_student a,
+			a_extras b
+		WHERE
+			a.id = b.id
+		<if test="id != null and id != ''">
+			AND a.id LIKE CONCAT('%',#{id},'%')
+		</if>
+		<if test="name != null and name != ''">
+			AND a.`name` LIKE CONCAT('%',#{name},'%')
+		</if>
+		<if test="school != null and school != ''">
+			AND a.school = #{school}
+		</if>
+		<if test="year != null and year != ''">
+			AND b.`year` = #{year}
+		</if>
+		ORDER BY
+			a.id
+		LIMIT #{page},#{rows}
+	</select>
+	
+	<select id="countStudentExtras" parameterType="Extras" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			a_student a,
+			a_extras b
+		WHERE
+			a.id = b.id
+		<if test="id != null and id != ''">
+			AND a.id LIKE CONCAT('%',#{id},'%')
+		</if>
+		<if test="name != null and name != ''">
+			AND a.`name` LIKE CONCAT('%',#{name},'%')
+		</if>
+		<if test="school != null and school != ''">
+			AND a.school = #{school}
+		</if>
+		<if test="year != null and year != ''">
+			AND b.`year` = #{year}
+		</if>
+	</select>
+
+</mapper>
