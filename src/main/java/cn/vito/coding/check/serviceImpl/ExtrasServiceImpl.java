@@ -25,4 +25,19 @@ public class ExtrasServiceImpl implements ExtrasService {
 		return extrasDao.countStudentExtras(extras);
 	}
 
+	@Override
+	public void addOneExtra(String id, Integer year, Double extra) {
+		extrasDao.addOneExtra(new Extras(id, year, extra));
+	}
+
+	@Override
+	public void updateExtras(String id, Integer year, Double extra) {
+		extrasDao.updateExtras(new Extras(id, year, extra));
+	}
+
+	@Override
+	public void deleteExtras(String id, Integer year) {
+		extrasDao.deleteExtras(new Extras(id, year));
+	}
+
 }

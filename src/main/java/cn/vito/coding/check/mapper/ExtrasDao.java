@@ -27,4 +27,25 @@ public interface ExtrasDao {
 	 * @return
 	 */
 	public int countStudentExtras(Extras extras);
+
+	/**
+	 * 增加一条附加分数据
+	 * 
+	 * @param extras
+	 */
+	public void addOneExtra(Extras extras);
+
+	/**
+	 * 修改一条附加分数据
+	 * 
+	 * @param extras
+	 */
+	public void updateExtras(Extras extras);
+
+	/**
+	 * 删除一条附加分数据
+	 * 
+	 * @param extras
+	 */
+	public void deleteExtras(Extras extras);
 }

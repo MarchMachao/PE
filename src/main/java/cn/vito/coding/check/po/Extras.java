@@ -18,6 +18,12 @@ public class Extras extends Student {
 		super();
 	}
 
+	public Extras(String id, Integer year) {
+		super();
+		this.id = id;
+		this.year = year;
+	}
+
 	public Extras(String id, Integer year, Double extra) {
 		super();
 		this.id = id;
@@ -34,10 +40,12 @@ public class Extras extends Student {
 		this.rows = rows;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.vito.coding.check.mapper.ExtrasDao">
-
+	
+	<!-- 查询学生附加分 -->
 	<select id="findStudentExtras" parameterType="Extras" resultType="Extras">
 		SELECT
 			a.id,
@@ -31,9 +32,13 @@
 		</if>
 		ORDER BY
 			a.id
-		LIMIT #{page},#{rows}
+		<if test="page !=null and page != ''">
+			LIMIT #{page},#{rows}
+		</if>
+		
 	</select>
 	
+	<!-- 查询学生附加分数据量 -->
 	<select id="countStudentExtras" parameterType="Extras" resultType="int">
 		SELECT
 			count(*)
@@ -56,4 +61,41 @@
 		</if>
 	</select>
 
+	<!--增加一条附加分数据 -->
+	<insert id="addOneExtra" parameterType="Extras">
+		INSERT INTO a_extras (id,`year`,extra) 
+		VALUES(#{id},#{year},#{extra})
+	</insert>
+	
+	<!-- 批量增加附加分数据 -->
+	<insert id="addExtrasExcel" parameterType="List">
+		INSERT INTO a_extras (id,`year`,extra) 
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.year},
+			#{item.extra}
+			)
+		</foreach> 
+	</insert>
+	
+	<!-- 修改附加分数据 -->
+	<update id="updateExtras" parameterType="Extras">
+		UPDATE a_extras
+		<set>
+			<if test="year != null and year != ''">
+				year=#{year},
+			</if>
+			<if test="extra != null and extra !=''">
+				extra=#{extra}
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+	
+	<!-- 删除一条附加分数据 -->
+	<delete id="deleteExtras" parameterType="Extras">
+		delete from a_extras where id=#{id} and year=#{year}
+	</delete>
 </mapper>
