@@ -2,6 +2,8 @@ package cn.vito.coding.check.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import cn.vito.coding.check.po.Extras;
 
 public interface ExtrasService {
@@ -47,4 +49,20 @@ public interface ExtrasService {
 	 * @param year
 	 */
 	public void deleteExtras(String id, Integer year);
+
+	/**
+	 * Excel附加分新增导入
+	 * 
+	 * @param file
+	 * @param year
+	 * @return
+	 */
+	public boolean excelExtrasInsertReader(MultipartFile file, int year);
+
+	/**
+	 * 附加分Excel导出
+	 * 
+	 * @param extras
+	 */
+	public void outputExtrasExcel(Extras extras);
 }

@@ -81,7 +81,9 @@
 			  t1.userName = t2.id
 		  AND t1.role = '学生'
 		  AND t2.name LIKE '%${name}%'
-		  AND t2.school LIKE '%${school}%'
+		  <if test="school != null and school != ''">
+			  AND t2.school = #{school}
+		  </if>
 		  AND t2.grade LIKE '%${grade}%'
 		  AND t2.teacher LIKE '%${teacher}%'
 		  AND t2.state LIKE '%${state}%'
@@ -102,7 +104,9 @@
 			  t1.userName = t2.id
 		  AND t1.role = '学生'
 		  AND t2.name LIKE '%${name}%'
-		  AND t2.school LIKE '%${school}%'
+		  <if test="school != null and school != ''">
+			  AND t2.school = #{school}
+		  </if>
 		  AND t2.grade LIKE '%${grade}%'
 		  AND t2.teacher LIKE '%${teacher}%'
 		  AND t2.state LIKE '%${state}%'

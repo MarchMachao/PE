@@ -58,7 +58,9 @@
 		AND teaToStu.subjectname = #{subjectname}
 		AND a_data.id LIKE '%${id}%'
 		AND teaToStu. NAME LIKE '%${name}%'
-		AND teaToStu.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND teaToStu.school = #{school}
+		</if>
 		AND a_data. YEAR LIKE '%${year}%'
 		ORDER BY
 			a_data. YEAR DESC,
@@ -100,7 +102,9 @@
 		AND teaToStu.subjectname = #{subjectname}
 		AND a_data.id LIKE '%${id}%'
 		AND teaToStu. NAME LIKE '%${name}%'
-		AND teaToStu.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND teaToStu.school = #{school}
+		</if>
 		AND a_data. YEAR LIKE '%${year}%'
 	</select>
 	
@@ -153,7 +157,9 @@
 		AND a_student.teacher = '学院'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a_student.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,
@@ -174,7 +180,9 @@
 		AND a_student.teacher = '学院'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a_student.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 	</select>
 	
@@ -233,7 +241,9 @@
 		AND teaToStu.subjectname = #{subjectname}
 		AND a_data.id LIKE '%${id}%'
 		AND teaToStu. NAME LIKE '%${name}%'
-		AND teaToStu.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND teaToStu.school = #{school}
+		</if>
 		AND a_data. YEAR LIKE '%${year}%'
 		ORDER BY
 			a_data. YEAR DESC,
@@ -275,7 +285,9 @@
 		AND a_student.teacher = '学院'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND teaToStu.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,

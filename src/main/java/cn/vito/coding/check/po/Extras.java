@@ -11,8 +11,8 @@ public class Extras extends Student {
 	private String id;
 	private Integer year;
 	private Double extra;
-	private int page;
-	private int rows;
+	private Integer page;
+	private Integer rows;
 
 	public Extras() {
 		super();
@@ -31,7 +31,7 @@ public class Extras extends Student {
 		this.extra = extra;
 	}
 
-	public Extras(String id, Integer year, Double extra, int page, int rows) {
+	public Extras(String id, Integer year, Double extra, Integer page, Integer rows) {
 		super();
 		this.id = id;
 		this.year = year;
@@ -66,19 +66,19 @@ public class Extras extends Student {
 		this.extra = extra;
 	}
 
-	public int getPage() {
+	public Integer getPage() {
 		return page;
 	}
 
-	public void setPage(int page) {
+	public void setPage(Integer page) {
 		this.page = page;
 	}
 
-	public int getRows() {
+	public Integer getRows() {
 		return rows;
 	}
 
-	public void setRows(int rows) {
+	public void setRows(Integer rows) {
 		this.rows = rows;
 	}
 

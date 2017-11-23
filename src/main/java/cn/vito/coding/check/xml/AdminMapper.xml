@@ -37,7 +37,9 @@
 		AND a_student.state != '已毕业'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a_student.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,
@@ -57,7 +59,9 @@
 		AND a_student.state != '已毕业'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a_student.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 	</select>
 	
@@ -95,7 +99,9 @@
 		AND a_student.state != '已毕业'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a_student.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,
@@ -136,7 +142,9 @@
 		AND a_student.state = '已毕业'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a_student.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,
@@ -156,7 +164,9 @@
 		AND a_student.state = '已毕业'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a_student.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 	</select>
 	
@@ -194,7 +204,9 @@
 		AND a_student.state = '已毕业'
 		AND a_data.id LIKE '%${id}%'
 		AND a_student.name LIKE '%${name}%'
-		AND a_student.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a_student.school = #{school}
+		</if>
 		AND a_data.year LIKE '%${year}%'
 		ORDER BY
 			a_data.year DESC,
@@ -267,7 +279,9 @@
 			a.state != '已毕业'
 		AND a.teacher ='老师'
 		AND	a.id LIKE '%${studentId}%'
-		AND a.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a.school = #{school}
+		</if>
 		<if test="year!=null">
 			AND b.YEAR LIKE '%${year}%'
 		</if>
@@ -294,7 +308,9 @@
 			a.state != '已毕业'
 		AND a.teacher ='老师'
 		AND	a.id LIKE '%${studentId}%'
-		AND a.school LIKE '%${school}%'
+		<if test="school != null and school != ''">
+			AND a.school = #{school}
+		</if>
 		<if test="year!=null">
 			AND b.YEAR LIKE '%${year}%'
 		</if>

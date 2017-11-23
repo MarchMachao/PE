@@ -31,6 +31,7 @@
 			AND b.`year` = #{year}
 		</if>
 		ORDER BY
+			b.year DESC,
 			a.id
 		<if test="page !=null and page != ''">
 			LIMIT #{page},#{rows}
@@ -65,6 +66,7 @@
 	<insert id="addOneExtra" parameterType="Extras">
 		INSERT INTO a_extras (id,`year`,extra) 
 		VALUES(#{id},#{year},#{extra})
+		ON DUPLICATE KEY UPDATE extra=#{extra}
 	</insert>
 	
 	<!-- 批量增加附加分数据 -->
@@ -84,14 +86,11 @@
 	<update id="updateExtras" parameterType="Extras">
 		UPDATE a_extras
 		<set>
-			<if test="year != null and year != ''">
-				year=#{year},
-			</if>
 			<if test="extra != null and extra !=''">
 				extra=#{extra}
 			</if>
 		</set>
-		WHERE id=#{id}
+		WHERE id=#{id} and year=#{year}
 	</update>
 	
 	<!-- 删除一条附加分数据 -->
