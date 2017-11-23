@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.vito.coding.check.mapper.StudentDao">
 
+	<resultMap type="DataAndExtra" id="resultDataAndExtra">
+		<association property="data" javaType="Data">
+			<id property="id" column="id"/>
+			<result property="year" column="year"/>
+			<result property="height" column="height"/>
+			<result property="weight" column="weight"/>
+			<result property="vital_capacity" column="vital_capacity"/>
+			<result property="fivem" column="fivem"/>
+			<result property="long_jump" column="long_jump"/>
+			<result property="reach" column="reach"/>
+			<result property="eightm" column="eightm"/>
+			<result property="tenm" column="tenm"/>
+			<result property="sit_ups" column="sit_ups"/>
+			<result property="pull_up" column="pull_up"/>
+			<result property="score" column="score"/>
+		</association>
+		<association property="extras" javaType="Extras">
+			<id property="id" column="id"/>
+			<result property="year" column="year"/>
+			<result property="extra" column="extra"/>
+		</association>
+	</resultMap>
+	
 	<!-- 根据学号查询学生的数据 -->
 	<select id="findStudentById" parameterType="String" resultType="Student">
 		SELECT
@@ -36,10 +59,34 @@
 
 	<!-- 查询数据 -->	
 	
-	<select id="findAllDataById" parameterType="String" resultType="data">
-		select * from a_data where a_data.id = #{value} and a_data.first_check="已审核" and a_data.second_check="已审核" 
-		order by a_data.year
+	<select id="findAllDataById" parameterType="String" resultMap="resultDataAndExtra">
+		SELECT
+			a.id,
+			a.`year`,
+			a.height,
+			a.weight,
+			a.vital_capacity,
+			a.fivem,
+			a.long_jump,
+			a.reach,
+			a.eightm,
+			a.tenm,
+			a.sit_ups,
+			a.pull_up,
+			a.score,
+			b.extra
+		FROM
+			a_data a
+		LEFT JOIN a_extras b ON a.id = b.id
+		AND a.`year`=b.`year`
+		WHERE
+		a.id = #{value}
+		AND a.first_check = "已审核"
+		AND a.second_check = "已审核"
+		ORDER BY
+			a.`year`
 	</select>
+	
 	
 	<!-- 更新班级信息 -->
 	<update id="updateData" parameterType="Student">

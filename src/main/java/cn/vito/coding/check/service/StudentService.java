@@ -2,7 +2,7 @@ package cn.vito.coding.check.service;
 
 import java.util.List;
 
-import cn.vito.coding.check.po.Data;
+import cn.vito.coding.check.po.DataAndExtra;
 import cn.vito.coding.check.po.Student;
 import cn.vito.coding.check.po.StudentAndItsTeacher;
 
@@ -36,7 +36,7 @@ public interface StudentService {
 	 * 
 	 * @return
 	 */
-	public List<Data> findAllDataById(String id);
+	public List<DataAndExtra> findAllDataById(String id);
 
 	/**
 	 * 更新学生班级信息

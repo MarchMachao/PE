@@ -95,7 +95,8 @@
 				<th>1000m</th>
 				<th>一分钟仰卧起坐</th>
 				<th>引体向上</th>
-				<th>评分</th>
+				<th>标准分</th>
+				<th>附加分</th>
 		  </tr>
 		</table>
 	</div>
@@ -137,23 +138,24 @@
 	
 		var content = "";
 		for(var i = 0; i < data.length; i++) {
-			var eightmtemp = (data[i].eightm == null) ? "" : data[i].eightm;
-			var tenmstemp = (data[i].tenm == null) ? "" : data[i].tenm;
-			var sit_upstemp = (data[i].sit_ups == null) ? "" : data[i].sit_ups;
-			var pull_upstemp = (data[i].pull_up == null) ? "" : data[i].pull_up;
+			var eightmtemp = (data[i].data.eightm == null) ? "" : data[i].data.eightm;
+			var tenmstemp = (data[i].data.tenm == null) ? "" : data[i].data.tenm;
+			var sit_upstemp = (data[i].data.sit_ups == null) ? "" : data[i].data.sit_ups;
+			var pull_upstemp = (data[i].data.pull_up == null) ? "" : data[i].data.pull_up;
 			content += "<tr>" +
-				"   <td>" + data[i].year + "</td>" +
-				"   <td>" + data[i].height + "</td>" +
-				"   <td>" + data[i].weight + "</td>" +
-				"   <td>" + data[i].vital_capacity + "</td>" +
-				"   <td>" + data[i].fivem + "</td>" +
-				"   <td>" + data[i].long_jump + "</td>" +
-				"   <td>" + data[i].reach + "</td>" +
+				"   <td>" + data[i].data.year + "</td>" +
+				"   <td>" + data[i].data.height + "</td>" +
+				"   <td>" + data[i].data.weight + "</td>" +
+				"   <td>" + data[i].data.vital_capacity + "</td>" +
+				"   <td>" + data[i].data.fivem + "</td>" +
+				"   <td>" + data[i].data.long_jump + "</td>" +
+				"   <td>" + data[i].data.reach + "</td>" +
 				"   <td>" + eightmtemp + "</td>" +
 				"   <td>" + tenmstemp + "</td>" +
 				"   <td>" + sit_upstemp + "</td>" +
 				"   <td>" + pull_upstemp + "</td>" +
-				"   <td>" + data[i].score + "</td>" +
+				"   <td>" + data[i].data.score + "</td>" +
+				"   <td>" + data[i].extras.extra + "</td>" +
 				"</tr>";
 		}
 		$grid.append(content);

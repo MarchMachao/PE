@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.vito.coding.check.mapper.StudentDao;
-import cn.vito.coding.check.po.Data;
+import cn.vito.coding.check.po.DataAndExtra;
 import cn.vito.coding.check.po.Student;
 import cn.vito.coding.check.po.StudentAndItsTeacher;
 import cn.vito.coding.check.service.StudentService;
@@ -28,8 +28,14 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Data> findAllDataById(String id) {
-		return studentDao.findAllDataById(id);
+	public List<DataAndExtra> findAllDataById(String id) {
+		List<DataAndExtra> DataAndExtraList = studentDao.findAllDataById(id);
+		for (int i = 0; i < DataAndExtraList.size(); i++) {
+			if (DataAndExtraList.get(i).getExtras().getExtra() == null) {
+				DataAndExtraList.get(i).getExtras().setExtra(0d);
+			}
+		}
+		return DataAndExtraList;
 	}
 
 	@Override

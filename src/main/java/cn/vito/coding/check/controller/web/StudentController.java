@@ -8,7 +8,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.vito.coding.check.po.Data;
+import cn.vito.coding.check.po.DataAndExtra;
 import cn.vito.coding.check.po.Student;
 import cn.vito.coding.check.po.StudentAndItsTeacher;
 import cn.vito.coding.check.service.StudentService;
@@ -42,7 +42,7 @@ public class StudentController {
 
 	@ResponseBody
 	@RequestMapping(value = "getAllDataById")
-	public List<Data> findDataById() {
+	public List<DataAndExtra> findDataById() {
 		return studentService.findAllDataById(userService.getCurrentUserName());
 	}
 	
