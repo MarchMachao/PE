@@ -92,7 +92,7 @@
 	<update id="updateData" parameterType="Student">
 		update a_student
 		<set>
-			<if test="classes!=null">
+			<if test="classes != null and classes != ''">
 				classes = #{classes},
 			</if>
 		</set>
