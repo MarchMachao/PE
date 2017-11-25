@@ -13,7 +13,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -543,7 +542,12 @@ public class ExcelUtils {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
 
-						Cell id = row.getCell(1);
+						String id = null;
+						try {
+							id = row.getCell(1).toString();
+						} catch (NullPointerException e) {
+							continue;
+						}
 						String gender = row.getCell(3).toString();
 						Integer grade = (int) Double.parseDouble(row.getCell(5).toString().substring(0, 4));
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
@@ -570,7 +574,7 @@ public class ExcelUtils {
 						double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem,
 								long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
-						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+						Data data = new Data(id, year, height, weight, vital_capacity, fivem, long_jump,
 								reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
 						teacherAndAcademyDao.updateTeacherData(data);
 					} catch (NumberFormatException e) {
@@ -613,7 +617,12 @@ public class ExcelUtils {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
 
-						Cell id = row.getCell(1);
+						String id = null;
+						try {
+							id = row.getCell(1).toString();
+						} catch (NullPointerException e) {
+							continue;
+						}
 						if (!row.getCell(4).toString().equals(school)) {
 							continue;
 						}
@@ -643,7 +652,7 @@ public class ExcelUtils {
 						double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem,
 								long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
-						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+						Data data = new Data(id, year, height, weight, vital_capacity, fivem, long_jump,
 								reach, eightm, tenm, sit_ups, pull_up, score, "未审核", "未审核");
 						teacherAndAcademyDao.updateTeacherData(data);
 					} catch (NumberFormatException e) {
@@ -787,7 +796,12 @@ public class ExcelUtils {
 				for (int r = 4; r < rowCount; r++) {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
-						Cell id = row.getCell(1);
+						String id = null;
+						try {
+							id = row.getCell(1).toString();
+						} catch (NullPointerException e) {
+							continue;
+						}
 						String gender = row.getCell(3).toString();
 						Integer grade = (int) Double.parseDouble(row.getCell(5).toString().substring(0, 4));
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
@@ -813,7 +827,7 @@ public class ExcelUtils {
 						double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem,
 								long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
-						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+						Data data = new Data(id, year, height, weight, vital_capacity, fivem, long_jump,
 								reach, eightm, tenm, sit_ups, pull_up, score, "已审核", "已审核");
 						datas.add(data);
 					} catch (NumberFormatException e) {
@@ -858,8 +872,12 @@ public class ExcelUtils {
 				for (int r = 4; r < rowCount; r++) {
 					try {
 						Row row = sheet.getRow(r); // 取出相应的列
-
-						Cell id = row.getCell(1);
+						String id = null;
+						try {
+							id = row.getCell(1).toString();
+						} catch (NullPointerException e) {
+							continue;
+						}
 						String gender = row.getCell(3).toString();
 						Integer grade = (int) Double.parseDouble(row.getCell(5).toString().substring(0, 4));
 						Integer height = (int) Double.parseDouble(row.getCell(6).toString());
@@ -885,7 +903,7 @@ public class ExcelUtils {
 						double score = ComputeScore.score(grade, gender, height, weight, vital_capacity, fivem,
 								long_jump, reach, eightm, tenm, sit_ups, pull_up);
 
-						Data data = new Data(id.toString(), year, height, weight, vital_capacity, fivem, long_jump,
+						Data data = new Data(id, year, height, weight, vital_capacity, fivem, long_jump,
 								reach, eightm, tenm, sit_ups, pull_up, score, "已审核", "已审核");
 						teacherAndAcademyDao.updateTeacherData(data);
 					} catch (NumberFormatException e) {
