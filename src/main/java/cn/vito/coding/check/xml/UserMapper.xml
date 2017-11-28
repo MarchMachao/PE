@@ -116,17 +116,24 @@
 	<insert id="addStudentUser1" parameterType="user">
 		insert into
 			s_user(userName,password,nickName,role) 
-		VALUES(#{userName},#{password},#{nickName},#{role});
+		VALUES(#{userName},#{password},#{nickName},#{role})
+		ON DUPLICATE KEY UPDATE
+		password=#{password}, nickName=#{nickName}, role=#{role}
 	</insert>
 	
 	<insert id="addStudentUser2" parameterType="student">
 		insert into
 			a_student(id,name,gender, school, grade,classes,duration,state,teacher) 
 		VALUES(#{id},#{name},#{gender},#{school},#{grade},#{classes},#{duration},#{state},#{teacher})
+		ON DUPLICATE KEY UPDATE
+		name=#{name}, gender=#{gender}, school=#{school}, grade=#{grade}, classes=#{classes}, 
+		duration=#{duration}, state=#{state}, teacher=#{teacher}
 	</insert>
 	
 	<insert id="addStudentUser3" parameterType="data">
 		INSERT INTO a_data (id,year) VALUES (#{id},#{year})
+		ON DUPLICATE KEY UPDATE
+		id=#{id}, year=#{year}
 	</insert>
 	
 	<!-- 删除数据 -->
@@ -187,7 +194,6 @@
 	
 	
 	<!-- 导入Excel表格 -->
-	
 	<insert id="addExcelStudent1" parameterType="java.util.List">
 		insert into
 			s_user(userName,password,nickName,role)
@@ -195,6 +201,8 @@
 		<foreach collection="list" item="item" index="index" separator=",">
 			(#{item.userName},#{item.password},#{item.nickName},#{item.role})
 		</foreach>
+		ON DUPLICATE KEY UPDATE
+		password=values(password), nickName=values(nickName), role=values(role)
 	</insert>
 	
 	<insert id="addExcelStudent2" parameterType="java.util.List">
@@ -205,6 +213,9 @@
 			(#{item.id},#{item.name},#{item.gender},#{item.school},#{item.grade},
 			 #{item.classes},#{item.duration},#{item.state},#{item.teacher})
 		</foreach>
+		ON DUPLICATE KEY UPDATE
+		name=values(name), gender=values(gender), school=values(school), grade=values(grade), 
+		classes=values(classes), duration=values(duration), state=values(state), teacher=values(teacher)
 	</insert>
 	
 	<insert id="addExcelStudent3" parameterType="java.util.List">
@@ -215,6 +226,8 @@
 			#{item.year}
 			)
 		</foreach>
+		ON DUPLICATE KEY UPDATE
+		name=values(id), gender=values(year)
 	</insert>
 	
 </mapper>

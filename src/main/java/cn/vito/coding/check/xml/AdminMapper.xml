@@ -329,6 +329,7 @@
 	<insert id="addOneTeacherToStudentData" parameterType="TeacherToStudent">
 		insert into a_teacher (studentid,year,teacher,subjectid,subjectname) 
 		values (#{studentId},#{year},#{teacher},#{subjectId},#{subjectName})
+		ON DUPLICATE KEY UPDATE teacher=#{teacher}, subjectId=#{subjectId}, subjectName=#{subjectName}
 	</insert>
 	
 	<!-- 学生与教师对应关系管理页面导入数据 -->
@@ -343,7 +344,11 @@
 			#{item.subjectId},
 			#{item.subjectName}
 			)
-		</foreach> 
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+		teacher = values(teacher),
+		subjectid = values(subjectid),
+		subjectname = values(subjectname)
 	</insert>
 	
 	<!-- 学生与教师对应关系管理页面删除数据 -->
@@ -371,6 +376,20 @@
 	<insert id="addOneStudentData" parameterType="Data">
 		INSERT INTO a_data VALUES (#{id},#{year},#{height},#{weight},#{vital_capacity}, #{fivem},#{long_jump},
 		#{reach},#{eightm},#{tenm},#{sit_ups},#{pull_up},#{score},#{first_check},#{second_check})
+		ON DUPLICATE KEY UPDATE
+		height = #{height},
+		weight = #{weight},
+		vital_capacity = #{vital_capacity},
+		fivem = #{fivem},
+		long_jump = #{long_jump},
+		reach = #{reach},
+		eightm = #{eightm},
+		tenm = #{tenm),
+		sit_ups = #{sit_ups},
+		pull_up = #{pull_up},
+		score = #{score},
+		first_check = #{first_check},
+		second_check = #{second_check}
 	</insert>
 	
 	<insert id="addListStudentDatas" parameterType="java.util.List">
@@ -395,5 +414,19 @@
 			#{item.second_check}
 			)
 		</foreach>
+		ON DUPLICATE KEY UPDATE
+		height = values(height),
+		weight = values(weight),
+		vital_capacity = values(vital_capacity),
+		fivem = values(fivem),
+		long_jump = values(long_jump),
+		reach = values(reach),
+		eightm = values(eightm),
+		tenm = values(tenm),
+		sit_ups = values(sit_ups),
+		pull_up = values(pull_up),
+		score = values(score),
+		first_check = values(first_check),
+		second_check = values(second_check)
 	</insert>
 </mapper>
