@@ -374,7 +374,9 @@
 	</update>
 	
 	<insert id="addOneStudentData" parameterType="Data">
-		INSERT INTO a_data VALUES (#{id},#{year},#{height},#{weight},#{vital_capacity}, #{fivem},#{long_jump},
+		INSERT INTO a_data (id,year,height,weight,vital_capacity, fivem,long_jump,
+		reach,eightm,tenm,sit_ups,pull_up,score,first_check,second_check)
+		VALUES (#{id},#{year},#{height},#{weight},#{vital_capacity}, #{fivem},#{long_jump},
 		#{reach},#{eightm},#{tenm},#{sit_ups},#{pull_up},#{score},#{first_check},#{second_check})
 		ON DUPLICATE KEY UPDATE
 		height = #{height},
@@ -384,7 +386,7 @@
 		long_jump = #{long_jump},
 		reach = #{reach},
 		eightm = #{eightm},
-		tenm = #{tenm),
+		tenm = #{tenm},
 		sit_ups = #{sit_ups},
 		pull_up = #{pull_up},
 		score = #{score},
