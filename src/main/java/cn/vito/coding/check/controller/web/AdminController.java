@@ -26,6 +26,7 @@ import cn.vito.coding.check.po.TeacherToStudent;
 import cn.vito.coding.check.service.AdminService;
 import cn.vito.coding.check.utils.ExcelUtils;
 import cn.vito.coding.check.utils.StringUtils;
+import cn.vito.coding.check.utils.ValidaterUtil;
 import cn.vito.coding.check.vo.BaseMsg;
 import cn.vito.coding.check.vo.DataGrideRow;
 import freemarker.template.TemplateException;
@@ -159,16 +160,44 @@ public class AdminController {
 			Integer vital_capacity, Double fivem, Double long_jump, Double reach, String eightm_minuite,
 			String eightm_second, String tenm_minuite, String tenm_second, Integer sit_ups, Integer pull_up,
 			Integer grade, String gender) {
-		System.out.println("eightm_minuite:" + eightm_minuite + "eightm_second:" + eightm_second);
-		System.out.println("tenm_minuite:" + tenm_minuite + "tenm_second:" + tenm_second);
+		if (!ValidaterUtil.checkHeight(height)) {
+			return new BaseMsg(false, "身高超出正常范围");
+		}
+		if (!ValidaterUtil.checkWeight(weight)) {
+			return new BaseMsg(false, "体重超出正常范围");
+		}
+		if (!ValidaterUtil.checkVital_capacity(vital_capacity)) {
+			return new BaseMsg(false, "肺活量超出正常范围");
+		}
+		if (!ValidaterUtil.checkFivem(fivem)) {
+			return new BaseMsg(false, "50m超出正常范围");
+		}
+		if (!ValidaterUtil.checkLong_jump(long_jump)) {
+			return new BaseMsg(false, "跳远超出正常范围");
+		}
+		if (!ValidaterUtil.checkReach(reach)) {
+			return new BaseMsg(false, "坐位体前屈超出正常范围");
+		}
 		try {
 			String eightm="";
 			String tenm = "";
 			if (!StringUtils.isEmpty(eightm_minuite) && !StringUtils.isEmpty(eightm_second)) {
 				eightm = eightm_minuite + "'" + eightm_second;
+				if (!ValidaterUtil.checkRunningTime(eightm)) {
+					return new BaseMsg(false, "800m超出正常范围");
+				}
+				if (!ValidaterUtil.checkSit_ups(sit_ups)) {
+					return new BaseMsg(false, "仰卧起坐超出正常范围");
+				}
 			} 
 			if (!StringUtils.isEmpty(tenm_minuite) && !StringUtils.isEmpty(tenm_second)) {
 				tenm = tenm_minuite + "'" + tenm_second;
+				if (!ValidaterUtil.checkRunningTime(tenm)) {
+					return new BaseMsg(false, "1000m超出正常范围");
+				}
+				if (!ValidaterUtil.checkPull_up(pull_up)) {
+					return new BaseMsg(false, "引体向上超出正常范围");
+				}
 			}
 			adminService.updateAdminData(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
 					tenm, sit_ups, pull_up, grade, gender);
@@ -359,15 +388,45 @@ public class AdminController {
 	public BaseMsg addOneStudentData(String id, Integer year, Integer height, Double weight, Integer vital_capacity,
 			Double fivem, Double long_jump, Double reach, String eightm_minuite, String eightm_second,
 			String tenm_minuite, String tenm_second, Integer sit_ups, Integer pull_up, Integer grade, String gender) {
-		String eightm = "";
-		String tenm = "";
-		if (StringUtils.isEmpty(eightm_minuite) && StringUtils.isEmpty(eightm_second)) {
-			eightm = eightm_minuite + "'" + eightm_second;
+		if (!ValidaterUtil.checkHeight(height)) {
+			return new BaseMsg(false, "身高超出正常范围");
 		}
-		if (StringUtils.isEmpty(tenm_minuite) && StringUtils.isEmpty(tenm_second)) {
-			tenm = tenm_minuite + "'" + tenm_second;
+		if (!ValidaterUtil.checkWeight(weight)) {
+			return new BaseMsg(false, "体重超出正常范围");
+		}
+		if (!ValidaterUtil.checkVital_capacity(vital_capacity)) {
+			return new BaseMsg(false, "肺活量超出正常范围");
+		}
+		if (!ValidaterUtil.checkFivem(fivem)) {
+			return new BaseMsg(false, "50m超出正常范围");
+		}
+		if (!ValidaterUtil.checkLong_jump(long_jump)) {
+			return new BaseMsg(false, "跳远超出正常范围");
+		}
+		if (!ValidaterUtil.checkReach(reach)) {
+			return new BaseMsg(false, "坐位体前屈超出正常范围");
 		}
 		try {
+			String eightm = "";
+			String tenm = "";
+			if (!StringUtils.isEmpty(eightm_minuite) && !StringUtils.isEmpty(eightm_second)) {
+				eightm = eightm_minuite + "'" + eightm_second;
+				if (!ValidaterUtil.checkRunningTime(eightm)) {
+					return new BaseMsg(false, "800m超出正常范围");
+				}
+				if (!ValidaterUtil.checkSit_ups(sit_ups)) {
+					return new BaseMsg(false, "仰卧起坐超出正常范围");
+				}
+			}
+			if (!StringUtils.isEmpty(tenm_minuite) && !StringUtils.isEmpty(tenm_second)) {
+				tenm = tenm_minuite + "'" + tenm_second;
+				if (!ValidaterUtil.checkRunningTime(tenm)) {
+					return new BaseMsg(false, "1000m超出正常范围");
+				}
+				if (!ValidaterUtil.checkPull_up(pull_up)) {
+					return new BaseMsg(false, "引体向上超出正常范围");
+				}
+			}
 			adminService.addOneStudentData(id, year, height, weight, vital_capacity, fivem, long_jump, reach, eightm,
 					tenm, sit_ups, pull_up, grade, gender);
 		} catch (DuplicateKeyException e) {
