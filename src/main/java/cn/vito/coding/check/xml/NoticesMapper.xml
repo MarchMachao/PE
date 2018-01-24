@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.vito.coding.check.mapper.NoticesDao">
+	
+	<!--增加一条通知 -->
+	<insert id="addOneNotice" parameterType="Notice">
+		INSERT INTO a_notices (text,date,valid) VALUES (#{text},#{date},#{valid})
+	</insert>
+	
+	<!--删除一条通知 -->
+	<delete id="deleteNotice" parameterType="int">
+		delete from a_notices where id=#{value}
+	</delete>
+
+	<!-- 修改通知 -->
+	<update id="updateNotice" parameterType="Notice">
+		update a_notices
+		<set>
+			<if test="text != null and text !=''">
+				text=#{text}
+			</if>
+			<if test="date != null and date !=''">
+				date=#{date}
+			</if>
+			<if test="valid != null and valid !=''">
+				valid=#{valid}
+			</if>
+			<if test="roles != null and roles !=''">
+				roles=#{roles}
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<!-- 获取全部通知 -->
+	<select id="getAllNotices" parameterType="Notice" resultType="Notice">
+		select id, text, date, valid, roles from a_notices order by id LIMIT #{page},#{rows}
+	</select>
+
+	<!-- 获取最新的通知 -->
+	<select id="getLatestNotice" parameterType="String" resultType="Notice">
+		SELECT
+			id,
+			text,
+			date,
+			valid,
+			roles
+		FROM
+			a_notices
+		WHERE
+			id = (
+				SELECT
+					MAX(id)
+				FROM
+					a_notices
+				WHERE
+					roles LIKE '%,${value},%'
+				AND valid = 1
+			)
+	</select>
+</mapper>
