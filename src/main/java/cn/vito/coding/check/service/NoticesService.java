@@ -36,6 +36,14 @@ public interface NoticesService {
 	public List<Notice> getAllNotices(Notice notice);
 
 	/**
+	 * 获取所有通知的数量
+	 * 
+	 * @param notice
+	 * @return
+	 */
+	public int getAllNoticesCount(Notice notice);
+
+	/**
 	 * 获取最新通知
 	 * 
 	 * @param roles

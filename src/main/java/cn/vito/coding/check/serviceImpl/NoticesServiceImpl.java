@@ -40,4 +40,9 @@ public class NoticesServiceImpl implements NoticesService {
 		return noticesDao.getLatestNotice(roles);
 	}
 
+	@Override
+	public int getAllNoticesCount(Notice notice) {
+		return noticesDao.getAllNoticesCount(notice);
+	}
+
 }

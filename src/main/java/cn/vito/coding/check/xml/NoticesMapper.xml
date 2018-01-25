@@ -37,6 +37,10 @@
 		select id, text, date, valid, roles from a_notices order by id LIMIT #{page},#{rows}
 	</select>
 
+	<!-- 获取全部通知的数量-->
+	<select id="getAllNoticesCount" parameterType="Notice" resultType="int">
+		select count(*) from a_notices order by id LIMIT #{page},#{rows}
+	</select>
 	<!-- 获取最新的通知 -->
 	<select id="getLatestNotice" parameterType="String" resultType="Notice">
 		SELECT
