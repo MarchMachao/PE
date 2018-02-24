@@ -4,7 +4,7 @@
 	
 	<!--增加一条通知 -->
 	<insert id="addOneNotice" parameterType="Notice">
-		INSERT INTO a_notices (text,date,valid) VALUES (#{text},#{date},#{valid})
+		INSERT INTO a_notices (text,date,valid,roles) VALUES (#{text},#{date},#{valid},#{roles})
 	</insert>
 	
 	<!--删除一条通知 -->
@@ -17,16 +17,16 @@
 		update a_notices
 		<set>
 			<if test="text != null and text !=''">
-				text=#{text}
+				text=#{text},
 			</if>
 			<if test="date != null and date !=''">
-				date=#{date}
+				date=#{date},
 			</if>
 			<if test="valid != null and valid !=''">
-				valid=#{valid}
+				valid=#{valid},
 			</if>
-			<if test="roles != null and roles !=''">
-				roles=#{roles}
+			<if test="roles != null and roles !=',null,'">
+				roles=#{roles},
 			</if>
 		</set>
 		where id=#{id}
@@ -38,8 +38,8 @@
 	</select>
 
 	<!-- 获取全部通知的数量-->
-	<select id="getAllNoticesCount" parameterType="Notice" resultType="int">
-		select count(*) from a_notices order by id LIMIT #{page},#{rows}
+	<select id="getAllNoticesCount" resultType="int">
+		select count(*) from a_notices
 	</select>
 	<!-- 获取最新的通知 -->
 	<select id="getLatestNotice" parameterType="String" resultType="Notice">

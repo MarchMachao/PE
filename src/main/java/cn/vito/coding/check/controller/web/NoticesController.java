@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.vito.coding.check.po.Notice;
@@ -33,9 +32,10 @@ public class NoticesController {
 
 	@ResponseBody
 	@RequestMapping("addOneNotice")
-	public BaseMsg addOneNotice(String text, String roles) {
+	public BaseMsg addOneNotice(String text, Boolean valid, String roles) {
 		Date date = new Date();
-		noticesService.addOneNotice(new Notice(text, StringUtils.dateToString(date), true, roles));
+		roles = ',' + roles + ',';
+		noticesService.addOneNotice(new Notice(text, StringUtils.dateToString(date), valid, roles));
 		return new BaseMsg(true, "添加成功！");
 	}
 
@@ -48,18 +48,19 @@ public class NoticesController {
 	
 	@ResponseBody
 	@RequestMapping("updateNotice")
-	public BaseMsg updateNotice(String text, Boolean valid, String roles) {
+	public BaseMsg updateNotice(Integer id, String text, Boolean valid, String roles) {
 		Date date = new Date();
-		noticesService.updateNotice(new Notice(text, StringUtils.dateToString(date), valid, roles));
+		roles = ',' + roles + ',';
+		noticesService.updateNotice(new Notice(id, text, StringUtils.dateToString(date), valid, roles));
 		return new BaseMsg(true, "更新成功！");
 	}
 
 	@ResponseBody
 	@RequestMapping("getAllNotices")
-	public DataGrideRow<Notice> getAllNotices(@RequestParam(defaultValue = "1") int page, int rows) {
+	public DataGrideRow<Notice> getAllNotices(int page, int rows) {
 		Notice notice = new Notice(null, null, null, null, page, rows);
 		List<Notice> notices = noticesService.getAllNotices(notice);
-		int count = noticesService.getAllNoticesCount(notice);
+		int count = noticesService.getAllNoticesCount();
 		return new DataGrideRow<Notice>(count, notices);
 	}
 
@@ -68,6 +69,9 @@ public class NoticesController {
 	public Notice getLatestNotice() {
 		String userName = userService.getCurrentUserName();
 		String roles = userService.getUserByUserName(userName).getRole();
-		return noticesService.getLatestNotice(roles);
+		Notice notice = noticesService.getLatestNotice(roles);
+		String text = notice.getText().replaceAll("\n", "<br/>");
+		notice.setText(text);
+		return notice;
 	}
 }

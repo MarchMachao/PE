@@ -41,8 +41,8 @@ public class NoticesServiceImpl implements NoticesService {
 	}
 
 	@Override
-	public int getAllNoticesCount(Notice notice) {
-		return noticesDao.getAllNoticesCount(notice);
+	public int getAllNoticesCount() {
+		return noticesDao.getAllNoticesCount();
 	}
 
 }

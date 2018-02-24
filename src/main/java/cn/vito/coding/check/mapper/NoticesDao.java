@@ -41,7 +41,7 @@ public interface NoticesDao {
 	 * @param notice
 	 * @return
 	 */
-	public int getAllNoticesCount(Notice notice);
+	public int getAllNoticesCount();
 
 	/**
 	 * 获取最新通知

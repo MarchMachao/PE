@@ -2,6 +2,7 @@ package cn.vito.coding.check.po;
 
 public class Notice {
 
+	private int id;
 	private String text;
 	private String date;
 	private Boolean valid;
@@ -10,6 +11,14 @@ public class Notice {
 	private int rows;
 
 	public Notice() {
+	}
+
+	public Notice(int id, String text, String date, Boolean valid, String roles) {
+		this.id = id;
+		this.text = text;
+		this.date = date;
+		this.valid = valid;
+		this.roles = roles;
 	}
 
 	public Notice(String text, String date, Boolean valid, String roles) {
@@ -26,6 +35,24 @@ public class Notice {
 		this.roles = roles;
 		this.page = (page - 1) * rows;
 		this.rows = rows;
+	}
+
+	public Notice(int id, String text, String date, Boolean valid, String roles, int page, int rows) {
+		this.id = id;
+		this.text = text;
+		this.date = date;
+		this.valid = valid;
+		this.roles = roles;
+		this.page = (page - 1) * rows;
+		this.rows = rows;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getText() {

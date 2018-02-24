@@ -18,6 +18,11 @@
        folder instead of downloading all of them to reduce the load. -->
 		<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 		<link rel="icon" href="images/pe.png" type="image/x-icon"/>
+		<!-- jQuery 2.2.3 -->
+		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+		<!-- AdminLTE App -->
+		<script src="dist/js/app.min.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<style>
 			#webcontent {
 				width: 100%;
@@ -131,10 +136,23 @@
 			<div class="control-sidebar-bg"></div>
 		</div>
 		<!-- ./wrapper -->
-		<!-- jQuery 2.2.3 -->
-		<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
-		<!-- AdminLTE App -->
-		<script src="dist/js/app.min.js"></script>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">通知</h4>
+		      </div>
+			      <div id="modal-body" class="modal-body">
+			      	
+			      </div>
+			      <div class="modal-footer">
+			        <button id="closebtn" class="btn btn-primary" data-dismiss="modal">关闭</button>
+			      </div>
+		    </div>
+		  </div>
+		</div>
+		
 		<script type="text/javascript">
 			$("#webcontent").attr("height", $(window).height()- 55);
 			window.onresize = function() {
@@ -153,6 +171,16 @@
 					$("#webcontent").attr("src", url);
 				}
 			})
+			
+			$.post("getLatestNotice.do",
+				{},
+				function(data){
+					if(data.length!=0){
+						$("#modal-body").append(data.text);
+						$('#myModal').modal('show');
+					}
+				}
+			)
 		</script>
 	</body>
 
